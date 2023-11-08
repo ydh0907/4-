@@ -1,9 +1,7 @@
 {
-    "name": "CW",
-    "rootNamespace": "Karin",
-    "references": [
-        "GUID:d015bb82311280c439111dc2aa2b63bc"
-    ],
+    "name": "Karin.Pooling",
+    "rootNamespace": "Karin.PoolingSystem",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
