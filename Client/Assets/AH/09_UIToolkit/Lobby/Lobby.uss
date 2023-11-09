@@ -1,0 +1,11 @@
+.container {
+    flex-grow: 1;
+}
+
+.title-txt {
+    font-size: 180px;
+    -unity-text-align: upper-center;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
+    -unity-font-definition: initial;
+    top: 50px;
+}

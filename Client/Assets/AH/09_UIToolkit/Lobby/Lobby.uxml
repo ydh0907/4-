@@ -1,6 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="container" style="flex-grow: 1;">
-        <ui:Label tabindex="-1" text="Sparkling Splash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" style="font-size: 200px; -unity-text-align: upper-center;" />
-        <ui:VisualElement style="flex-grow: 1;" />
+    <Style src="project://database/Assets/AH/09_UIToolkit/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=239daa97be206bb45b8985b74d03c919&amp;type=3#Lobby" />
+    <ui:VisualElement name="container" class="container">
+        <ui:Label tabindex="-1" text="Sparkling Splash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" />
+        <ui:VisualElement name="middle-container" style="height: 820px; flex-direction: row;">
+            <ui:VisualElement name="playGameContainer" style="flex-grow: 1; flex-direction: column-reverse;">
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
