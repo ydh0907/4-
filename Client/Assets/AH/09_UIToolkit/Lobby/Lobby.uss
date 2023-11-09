@@ -25,6 +25,7 @@
     border-right-color: rgba(255, 255, 255, 0);
     border-top-color: rgba(255, 255, 255, 0);
     border-bottom-color: rgba(255, 255, 255, 0);
+    text-shadow: 5px 2px 0 rgba(255, 178, 51, 0.7);
 }
 
 .button:hover {

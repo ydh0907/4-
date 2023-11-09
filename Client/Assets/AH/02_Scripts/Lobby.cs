@@ -1,5 +1,6 @@
 using Codice.CM.Client.Differences;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,8 @@ namespace AH {
 
         private TextField _inputJoinCode;
 
+        private Label _waringTxt;
+
         private Button _createGame;
         private Button _enterGame;
         private Button _settingWindow;
@@ -17,6 +20,7 @@ namespace AH {
         private string _joincode;
         [SerializeField] private string _testCode;
 
+
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
         }
@@ -24,6 +28,7 @@ namespace AH {
             var root = _uiDocument.rootVisualElement;
 
             _inputJoinCode = root.Q<TextField>("joincode-input");
+            _waringTxt = root.Q<Label>("waring-txt");
 
             _inputJoinCode.RegisterCallback<ChangeEvent<string>>(HandleJoinCodeChanged); // 입력하는 값이 변경될 때마다 호출됨
             root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
@@ -43,6 +48,7 @@ namespace AH {
                 Debug.Log("enter");
             }
             else {
+                StartCoroutine(DisplayWaring());
                 Debug.Log("값을 다시 입력해주세요..");
             }
         }
@@ -51,6 +57,13 @@ namespace AH {
         }
         private void ExitGame(ClickEvent evt) { // exit
             Application.Quit();
+        }
+
+        IEnumerator DisplayWaring() {
+            _waringTxt.text = "코드가 맞지 않습니다. 다시 작성해주세요";
+            yield return new WaitForSeconds(2f);
+            _waringTxt.text = "";
+            yield return null;
         }
     }
 }
