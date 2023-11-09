@@ -12,7 +12,7 @@ namespace GM
         private Transform spawnPos;
         private float currentTime = 0;
 
-        private void Awake()
+        private void Start()
         {
             spawnPos = GetComponentInChildren<Transform>();
         }
@@ -26,7 +26,6 @@ namespace GM
 
                 currentTime = 0;
             }
-            Debug.Log((int)currentTime);
         }
     }
 }
