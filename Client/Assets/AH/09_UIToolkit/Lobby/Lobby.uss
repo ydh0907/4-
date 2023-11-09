@@ -1,0 +1,44 @@
+.container {
+    flex-grow: 1;
+}
+
+.title-txt {
+    font-size: 180px;
+    -unity-text-align: upper-center;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
+    -unity-font-definition: initial;
+    top: 50px;
+}
+
+.button {
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/BTN_A3.png?fileID=21300000&guid=864f00a7055893d45b093ac179e35237&type=3#BTN_A3');
+    background-color: rgba(255, 255, 255, 0);
+    width: 400px;
+    height: 80px;
+    margin-bottom: 60px;
+    margin-left: 100px;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
+    -unity-font-definition: initial;
+    font-size: 30px;
+    margin-right: 100px;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    text-shadow: 5px 2px 0 rgba(255, 178, 51, 0.7);
+}
+
+.button:hover {
+    font-size: 35px;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
+    -unity-font-definition: initial;
+}
+
+.button #unity-text-input {
+    background-color: rgba(255, 255, 255, 0);
+    -unity-text-align: middle-center;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
