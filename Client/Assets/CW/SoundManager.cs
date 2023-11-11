@@ -7,17 +7,15 @@ namespace Karin
     {
         NONE = 0,
         WALK,
-        RUN,
         DEAD,
         BACKSOUND,
         ATTACKFORWARD,
         ATTACKBACK,
         HIT,
         REVIVE,
-        GAMEEND,
+        GAMEENDWIN,
+        GAMEENDLOSE,
         GAMESTART,
-        TIMER,
-        COUNTDOWN,
         CLICKSOUND,
     }
 
@@ -26,17 +24,15 @@ namespace Karin
     {
 
         [SerializeField] private AudioClip Walk;
-        [SerializeField] private AudioClip Run;
         [SerializeField] private AudioClip Dead;
         [SerializeField] private AudioClip BackSound;
         [SerializeField] private AudioClip AttackForward;
         [SerializeField] private AudioClip AttackBack;
         [SerializeField] private AudioClip Hit;
         [SerializeField] private AudioClip Revive;
-        [SerializeField] private AudioClip GameEnd;
+        [SerializeField] private AudioClip GameEndWin;
+        [SerializeField] private AudioClip GameEndLose;
         [SerializeField] private AudioClip GameStart;
-        [SerializeField] private AudioClip Timer;
-        [SerializeField] private AudioClip CountDown;
         [SerializeField] private AudioClip ClickSound;
 
         private AudioSource _audioSource;
@@ -53,43 +49,37 @@ namespace Karin
                 case Sound.NONE:
                     Debug.LogWarning("None Is Not Sound");
                     break;
-                case Sound.WALK:
+                case Sound.WALK: //함
                     _audioSource.PlayOneShot(Walk);
                     break;
-                case Sound.RUN:
-                    _audioSource.PlayOneShot(Run);
-                    break;
-                case Sound.DEAD:
+                case Sound.DEAD: //함
                     _audioSource.PlayOneShot(Dead);
                     break;
-                case Sound.BACKSOUND:
+                case Sound.BACKSOUND: //
                     _audioSource.PlayOneShot(BackSound);
                     break;
-                case Sound.ATTACKFORWARD:
+                case Sound.ATTACKFORWARD: //함
                     _audioSource.PlayOneShot(AttackForward);
                     break;
-                case Sound.ATTACKBACK:
+                case Sound.ATTACKBACK: // 함
                     _audioSource.PlayOneShot(AttackBack);
                     break;
-                case Sound.HIT:
+                case Sound.HIT: // 함
                     _audioSource.PlayOneShot(Hit);
                     break;
-                case Sound.REVIVE:
+                case Sound.REVIVE: // 함
                     _audioSource.PlayOneShot(Revive);
                     break;
-                case Sound.GAMEEND:
-                    _audioSource.PlayOneShot(GameEnd);
+                case Sound.GAMEENDWIN: // 함
+                    _audioSource.PlayOndeShot(GameEndWin); 
                     break;
-                case Sound.GAMESTART:
+                case Sound.GAMEENDLOSE: // 함
+                    _audioSource.PlayOneShot(GameEndLose);
+                    break;
+                case Sound.GAMESTART: //
                     _audioSource.PlayOneShot(GameStart);
                     break;
-                case Sound.TIMER:
-                    _audioSource.PlayOneShot(Timer);
-                    break;
-                case Sound.COUNTDOWN:
-                    _audioSource.PlayOneShot(CountDown);
-                    break;
-                case Sound.CLICKSOUND:
+                case Sound.CLICKSOUND: //
                     _audioSource.PlayOneShot(ClickSound);
                     break;
                 default:
