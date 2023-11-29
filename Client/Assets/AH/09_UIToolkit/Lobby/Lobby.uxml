@@ -3,17 +3,17 @@
     <ui:VisualElement name="container" class="container">
         <ui:Label tabindex="-1" text="Sparkling Splash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" />
         <ui:VisualElement name="middlecontainer" style="flex-grow: 1; height: 50%; align-items: center; justify-content: center;">
-            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="waring-txt" style="font-size: 100px; color: rgb(255, 56, 56); -unity-text-align: middle-center; -unity-font-style: bold; -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=d4b37a5f4aa58b247bb3a9cc57fbf9aa&amp;type=3#NotInter-Regular&apos;); text-shadow: 5px 2px 0 rgba(143, 13, 0, 0.7);" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="waring-txt" style="font-size: 100px; color: rgb(255, 56, 56); -unity-text-align: middle-center; -unity-font-style: bold; -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=630f7ad1107ef3f409dae609a2dc5193&amp;type=3#NotInter-Regular&apos;); text-shadow: 5px 2px 0 rgba(143, 13, 0, 0.7); width: 70%;" />
         </ui:VisualElement>
         <ui:VisualElement name="low-container" style="height: 820px; flex-direction: row;">
-            <ui:VisualElement name="play-game-content" style="flex-grow: 1; flex-direction: column-reverse;">
-                <ui:Button text="Enter" parse-escape-sequences="true" display-tooltip-when-elided="true" name="enter-btn" class="button" />
-                <ui:Button text="Create" parse-escape-sequences="true" display-tooltip-when-elided="true" name="create-btn" class="button" />
-                <ui:TextField picking-mode="Ignore" value="filler text" name="joincode-input" class="button" />
+            <ui:VisualElement name="playgame-content" style="flex-grow: 1; flex-direction: column; justify-content: flex-end;">
+                <ui:TextField picking-mode="Ignore" value="JOIN CODE" name="joincode-input" class="button" />
+                <ui:Button text="CREATE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="create-btn" class="button" />
+                <ui:Button text="ENTER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="enter-btn" class="button" />
             </ui:VisualElement>
-            <ui:VisualElement name="system-content" style="flex-grow: 1; flex-direction: column-reverse; align-items: flex-end;">
-                <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit-btn" class="button" />
-                <ui:Button text="Setting" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" class="button" />
+            <ui:VisualElement name="system-content" style="flex-grow: 1; flex-direction: column; align-items: flex-end; justify-content: flex-end;">
+                <ui:Button text="SETTING" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" class="button" />
+                <ui:Button text="EXIT" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit-btn" class="button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
