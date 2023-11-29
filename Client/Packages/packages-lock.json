@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.burst": {
-      "version": "1.8.10",
+      "version": "1.8.7",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -54,8 +54,8 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.ide.visualstudio": "2.0.22",
-        "com.unity.ide.rider": "3.0.26",
+        "com.unity.ide.visualstudio": "2.0.18",
+        "com.unity.ide.rider": "3.0.24",
         "com.unity.ide.vscode": "1.2.5",
         "com.unity.editorcoroutines": "1.0.0",
         "com.unity.performance.profile-analyzer": "1.2.2",
@@ -64,7 +64,7 @@
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.26",
+      "version": "3.0.24",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -73,7 +73,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
+      "version": "2.0.18",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -136,7 +136,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.authentication": {
-      "version": "2.7.2",
+      "version": "2.7.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -148,7 +148,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
-      "version": "1.12.0",
+      "version": "1.10.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -191,13 +191,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.wire": {
-      "version": "1.2.2",
+      "version": "1.2.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.services.core": "1.11.0",
+        "com.unity.services.core": "1.10.1",
         "com.unity.nuget.newtonsoft-json": "3.2.1",
-        "com.unity.services.authentication": "2.7.2"
+        "com.unity.services.authentication": "2.6.1"
       },
       "url": "https://packages.unity.com"
     },

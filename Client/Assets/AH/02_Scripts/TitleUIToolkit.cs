@@ -2,10 +2,11 @@ using Codice.CM.Client.Differences;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace AH {
-    public class Lobby : MonoBehaviour {
+    public class TitleUIToolkit : MonoBehaviour {
         private UIDocument _uiDocument;
 
         private TextField _inputJoinCode;
@@ -41,11 +42,12 @@ namespace AH {
             _joincode = evt.newValue;
         }
         private void HandleCreateRoom(ClickEvent evt) { // host
-            Debug.Log("create");
+            Debug.Log("CREATE");
         }
         private void HandleEnterRoom(ClickEvent evt) { // client
             if(_joincode != null && _joincode == _testCode) { // 여기에 서버에서 받은 joincode 값을 비교해서 들어갈 수 있게 해준다
-                Debug.Log("enter");
+                SceneManager.LoadScene("Ingame_AH");
+                //Debug.Log("ENTER");
             }
             else {
                 StartCoroutine(DisplayWaring());
@@ -53,14 +55,15 @@ namespace AH {
             }
         }
         private void OpenSettingWindow(ClickEvent evt) { // setting
-            Debug.Log("setting");
+            Debug.Log("SETTING");
         }
         private void ExitGame(ClickEvent evt) { // exit
             Application.Quit();
+            Debug.Log("QUIT");
         }
 
         IEnumerator DisplayWaring() {
-            _waringTxt.text = "코드가 맞지 않습니다. 다시 작성해주세요";
+            _waringTxt.text = "값을 다시 입력해주세요";
             yield return new WaitForSeconds(2f);
             _waringTxt.text = "";
             yield return null;
