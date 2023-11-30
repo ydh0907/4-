@@ -1,7 +1,9 @@
 {
     "name": "CW",
-    "rootNamespace": "CW",
-    "references": [],
+    "rootNamespace": "Karin",
+    "references": [
+        "GUID:d015bb82311280c439111dc2aa2b63bc"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
