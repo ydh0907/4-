@@ -1,0 +1,7 @@
+.count-txt {
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
+    font-size: 350px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}

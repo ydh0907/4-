@@ -10,17 +10,10 @@ namespace AH {
         private UIDocument _uiDocument;
 
         private TextField _inputJoinCode;
-
         private Label _waringTxt;
-
-        private Button _createGame;
-        private Button _enterGame;
-        private Button _settingWindow;
-        private Button _exit;
-
         private string _joincode;
-        [SerializeField] private string _testCode;
 
+        [SerializeField] private string _testCode;
 
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
@@ -43,8 +36,8 @@ namespace AH {
         }
         private void HandleCreateRoom(ClickEvent evt) { // host
             Debug.Log("CREATE");
-        }
-        private void HandleEnterRoom(ClickEvent evt) { // client
+        } // host
+        private void HandleEnterRoom(ClickEvent evt) { 
             if(_joincode != null && _joincode == _testCode) { // 여기에 서버에서 받은 joincode 값을 비교해서 들어갈 수 있게 해준다
                 SceneManager.LoadScene("Ingame_AH");
                 //Debug.Log("ENTER");
@@ -53,7 +46,7 @@ namespace AH {
                 StartCoroutine(DisplayWaring());
                 Debug.Log("값을 다시 입력해주세요..");
             }
-        }
+        } // client
         private void OpenSettingWindow(ClickEvent evt) { // setting
             Debug.Log("SETTING");
         }

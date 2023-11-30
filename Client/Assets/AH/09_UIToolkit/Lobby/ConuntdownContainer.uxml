@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="conuntdown-container" style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.59); width: 100%; height: 100%;">
-        <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="count-txt" style="color: rgb(255, 255, 255); -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&amp;guid=88c2af26a84302f48b28f9eb26d75e7a&amp;type=3#PyeongChangPeace-Bold&apos;); font-size: 350px;" />
-    </ui:VisualElement>
-</ui:UXML>

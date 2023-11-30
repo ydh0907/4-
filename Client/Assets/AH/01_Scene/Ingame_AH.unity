@@ -319,6 +319,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1023692797}
   - component: {fileID: 1023692798}
+  - component: {fileID: 1023692800}
+  - component: {fileID: 1023692799}
   m_Layer: 0
   m_Name: UIDocument
   m_TagString: Untagged
@@ -357,6 +359,33 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 11e0ed6a63aa99d4cb32011a74f8066b, type: 3}
   m_SortingOrder: 0
+--- !u!114 &1023692799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023692796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a271334acdc4f6e4795759a775a8fcb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1023692800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023692796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d6c93b2d8f733498748e70b5d1c773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countDownPanel: {fileID: 9197481963319205126, guid: d254694b1adf5e641a92580a821e7b48, type: 3}
+  hostLobbyPanel: {fileID: 9197481963319205126, guid: e4d2b4c6150600646b5e4fd0e5beec50, type: 3}
+  clientLobbyPanel: {fileID: 9197481963319205126, guid: cc03807d703732540b0468539f9db0a0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
