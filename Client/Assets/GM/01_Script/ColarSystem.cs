@@ -6,8 +6,9 @@ namespace GM
 {
     public class ColarSystem : MonoBehaviour
     {
+        [SerializeField]
+        private float rushDecreaseCloarAmount = 1;
         private float currentColarAmount = 1000;
-        private float ruxhDecreaseCloarAmount = 1;
         private Coroutine rushCrountine;
 
         private void Update()
@@ -34,7 +35,7 @@ namespace GM
         {
             while (true)
             {
-                OnDamage(currentColarAmount);
+                OnDamage(rushDecreaseCloarAmount);
                 yield return new WaitForSeconds(0.1f);
             }
         }

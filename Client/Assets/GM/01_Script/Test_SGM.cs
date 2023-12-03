@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GM
 {
-    public class Test : MonoBehaviour
+    public class Test_SGM : MonoBehaviour
     {
         SpawnPolarBear polarBear;
         ColarSystem colarSystem;

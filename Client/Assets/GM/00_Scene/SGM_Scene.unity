@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5981024f428590c40851e59bc556ee54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  polarBearPrefab: {fileID: 6924886645854957537, guid: 8d412ad50eadc254fa110718889765e9, type: 3}
+  polarBearPrefab: {fileID: 5027594605603978577, guid: e01ff56f10360c349a6d2fbb0babb46f, type: 3}
   spawnDistance: 100
 --- !u!1 &1759686542
 GameObject:
