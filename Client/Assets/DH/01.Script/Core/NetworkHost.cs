@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DH
 {
@@ -10,15 +10,28 @@ namespace DH
         public static NetworkHost Instance = null;
 
         private bool? isConnect = null;
+        private bool connectFlag = false;
         public bool IsConnect => NetworkManager.Singleton.IsConnectedClient;
 
-        public Action OnConnectFailed = null;
-        public Action OnConnectSucceed = null;
+        public UnityEvent onConnectFailed = new();
+        public UnityEvent onConnectSucceed = new();
+
+        public UnityEvent onDisconnected = new();
 
         private void Awake()
         {
             if (Instance != null) enabled = false;
             Instance = this;
+        }
+
+        private void Update()
+        {
+            if (isConnect == null && connectFlag && !IsConnect)
+            {
+                OnDisconnected();
+            }
+
+            connectFlag = IsConnect;
         }
 
         public void StartConnect()
@@ -34,15 +47,34 @@ namespace DH
 
             if (isConnect == true)
             {
-                OnConnectSucceed?.Invoke();
                 OnConnected();
             }
-            else OnConnectFailed.Invoke();
+            else OnConnectFailed();
         }
 
         private void OnConnected()
         {
+            isConnect = null;
+            connectFlag = true;
             LoadSceneManager.Instance.LoadScene(1);
+
+            onConnectSucceed?.Invoke();
+        }
+
+        private void OnConnectFailed()
+        {
+            isConnect = null;
+            connectFlag = false;
+
+            onConnectFailed?.Invoke();
+        }
+
+        private void OnDisconnected()
+        {
+            isConnect = null;
+            connectFlag = false;
+
+            onDisconnected?.Invoke();
         }
     }
 }

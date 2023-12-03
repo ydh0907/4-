@@ -183,7 +183,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 283431833}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 1245906103676024313, guid: 0fc413b641630b749842489d1b1842dc, type: 3}
     Prefabs:
       NetworkPrefabsLists: []
     TickRate: 30
@@ -785,6 +785,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac8b3addc9a5934ca1947c62830dd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onConnectFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onConnectSucceed:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1261383231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,6 +806,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f904cdcac1ec24daf92e22b3143c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onConnectFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  onConnectSucceed:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1261383232
 MonoBehaviour:
   m_ObjectHideFlags: 0
