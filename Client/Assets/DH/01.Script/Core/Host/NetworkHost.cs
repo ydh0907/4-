@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace DH
 {
@@ -11,7 +12,7 @@ namespace DH
 
         private bool? isConnect = null;
         private bool connectFlag = false;
-        public bool IsConnect => NetworkManager.Singleton.IsConnectedClient;
+        public bool IsConnect => NetworkManager.Singleton.IsHost;
 
         public UnityEvent onConnectFailed = new();
         public UnityEvent onConnectSucceed = new();
@@ -56,7 +57,13 @@ namespace DH
         {
             isConnect = null;
             connectFlag = true;
-            LoadSceneManager.Instance.LoadScene(1);
+            LoadSceneManager.Instance.LoadScene(1, () =>
+            {
+                GameObject hostManager = new GameObject("HostManager");
+                hostManager.AddComponent<NetworkObject>();
+                hostManager.AddComponent<NetworkHostManager>();
+                hostManager.AddComponent<NetworkHostConnectManager>();
+            });
 
             onConnectSucceed?.Invoke();
         }
@@ -73,6 +80,9 @@ namespace DH
         {
             isConnect = null;
             connectFlag = false;
+
+            if(SceneManager.GetActiveScene().buildIndex > 0)
+                LoadSceneManager.Instance.LoadScene(0);
 
             onDisconnected?.Invoke();
         }

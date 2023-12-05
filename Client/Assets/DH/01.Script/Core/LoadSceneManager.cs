@@ -17,12 +17,12 @@ namespace DH
 
         public void LoadScene(int id)
         {
-            SceneManager.LoadSceneAsync(id);
+            SceneManager.LoadScene(id);
         }
 
         public void LoadScene(string name)
         {
-            SceneManager.LoadSceneAsync(name);
+            SceneManager.LoadScene(name);
         }
 
         public void LoadScene(int id, Action callback)
