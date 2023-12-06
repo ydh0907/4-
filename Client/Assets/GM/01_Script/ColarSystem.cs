@@ -11,11 +11,6 @@ namespace GM
         private float currentColarAmount = 1000;
         private Coroutine rushCrountine;
 
-        private void Update()
-        {
-            Debug.Log(currentColarAmount);
-        }
-
         public void OnDamage(float damage)
         {
             currentColarAmount -= damage;
