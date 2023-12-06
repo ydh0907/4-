@@ -30,10 +30,10 @@ namespace DH
         {
             while (NetworkHostConnectManager.Instance.isHandlingConnect) yield return null;
 
-            NetworkObject host
+            //NetworkObject host
             foreach(ulong id in NetworkHostConnectManager.Instance.users)
             {
-                NetworkManager.Singleton.GetComponent<>
+                //NetworkManager.Singleton.GetComponent<>
             }
 
             onGameStart?.Invoke();
