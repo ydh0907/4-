@@ -1,0 +1,24 @@
+.basePlayer {
+    width: 300px;
+    height: 80px;
+    margin-top: 80px;
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/Button_Small_A.png?fileID=21300000&guid=5ed7b78422faa044695989e1108c5d63&type=3#Button_Small_A');
+    flex-direction: row;
+    align-items: center;
+}
+
+.playerIcon {
+    height: 80px;
+    width: 80px;
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/Info.png?fileID=21300000&guid=c0d66557e6e886446b2af17220906a63&type=3#Info');
+    background-color: rgb(0, 0, 0);
+}
+
+.playerName-txt {
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    -unity-font: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=630f7ad1107ef3f409dae609a2dc5193&type=3#NotInter-Regular');
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    flex-grow: 1;
+}

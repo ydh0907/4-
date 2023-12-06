@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,7 +12,7 @@ namespace AH {
         [SerializeField] private VisualTreeAsset hostLobbyPanel;
         [SerializeField] private VisualTreeAsset clientLobbyPanel;
 
-        private bool isHost = false;
+        private bool isHost = true;
         private string _joinCode = "1234"; // 이 값은 server에서 받는다
 
         private bool isReady = false;
@@ -25,7 +26,7 @@ namespace AH {
             _container = root.Q<VisualElement>("lobby-container");
 
             if(isHost) { // 이 값은 server에서 받는다
-                HostLobbyPanel();
+                HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
             else {
                 ClientLobbyPanel();
@@ -43,10 +44,16 @@ namespace AH {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
-            clientPanel.Q<Button>("ready-btn");
+            clientPanel.Q<Button>("ready-btn").RegisterCallback<ClickEvent>(HandleReadyGame);
         }
+
+
         private void HaneldStartGame(ClickEvent evt) {
-            Debug.Log("STAET GAEM");
+            _container.Clear();
+            Counter();
+        }
+        private void HandleReadyGame(ClickEvent evt) {
+
         }
 
         private void Counter() {
@@ -54,8 +61,7 @@ namespace AH {
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
 
-            _counter.CountDown(countText);
-
+            _counter.CountDown(countText); // 값 변경
         }
     }
 }

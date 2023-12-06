@@ -11,11 +11,14 @@ namespace AH {
             StartCoroutine(RoutineCountDown(countText, startCount));
         }
         IEnumerator RoutineCountDown(Label countText, int time) {
-            while (true) {
+            int count = 4;
+            while(count > 0) {
+                Debug.Log(count);
                 countText.text = time.ToString();
-                if(time <= 0){
+                /*if(time <= 0){
                     break;
-                } 
+                } */
+                count--;
                 time--;
                 yield return new WaitForSeconds(1);
             }
