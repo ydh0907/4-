@@ -10,6 +10,8 @@ namespace DH
     {
         public static NetworkHost Instance = null;
 
+        [SerializeField] private GameObject NetworkGameManager;
+
         private bool? isConnect = null;
         private bool connectFlag = false;
         public bool IsConnect => NetworkManager.Singleton.IsHost;
@@ -59,10 +61,7 @@ namespace DH
             connectFlag = true;
             LoadSceneManager.Instance.LoadScene(1, () =>
             {
-                GameObject hostManager = new GameObject("HostManager");
-                hostManager.AddComponent<NetworkObject>();
-                hostManager.AddComponent<NetworkHostManager>();
-                hostManager.AddComponent<NetworkHostConnectManager>();
+                StartCoroutine(WaitSpawnManager());
             });
 
             onConnectSucceed?.Invoke();
@@ -85,6 +84,13 @@ namespace DH
                 LoadSceneManager.Instance.LoadScene(0);
 
             onDisconnected?.Invoke();
+        }
+
+        private IEnumerator WaitSpawnManager()
+        {
+            yield return new WaitWhile(() => NetworkManager.Singleton);
+
+            Instantiate(NetworkGameManager, Vector3.zero, Quaternion.identity).GetComponent<NetworkObject>().Spawn();
         }
     }
 }

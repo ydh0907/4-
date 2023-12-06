@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,6 +37,8 @@ namespace DH
 
         public void StartConnect()
         {
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.Unicode.GetBytes(GameManager.Instance.nickname);
+
             isConnect = NetworkManager.Singleton.StartClient();
 
             StartCoroutine(WaitConnect());
@@ -56,7 +59,6 @@ namespace DH
         {
             isConnect = null;
             connectFlag = true;
-            LoadSceneManager.Instance.LoadScene(1);
 
             onConnectSucceed?.Invoke();
         }
