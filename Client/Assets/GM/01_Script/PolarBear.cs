@@ -11,7 +11,7 @@ namespace GM
 
         private void Start()
         {
-            Destroy(gameObject, 20f);
+            Destroy(gameObject, 2f);
         }
 
         private void Update()
