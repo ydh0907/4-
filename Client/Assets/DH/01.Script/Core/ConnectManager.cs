@@ -4,9 +4,9 @@ using TMPro;
 
 namespace DH
 {
-    public class GameManager : MonoBehaviour
+    public class ConnectManager : MonoBehaviour
     {
-        public static GameManager Instance;
+        public static ConnectManager Instance;
 
         private NetworkHost m_NetworkHost;
         private NetworkClient m_NetworkClient;

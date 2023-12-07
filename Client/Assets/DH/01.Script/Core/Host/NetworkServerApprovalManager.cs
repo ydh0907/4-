@@ -6,13 +6,15 @@ using UnityEngine;
 
 namespace DH
 {
-    public class NetworkServerConnectManager : NetworkBehaviour
+    public class NetworkServerApprovalManager : NetworkBehaviour
     {
-        public static NetworkServerConnectManager Instance = null;
+        public static NetworkServerApprovalManager Instance = null;
 
-        public Dictionary<ulong, string> users = new();
+        private PlayerDictionary<PlayerInfo> players => NetworkGameManager.Instance.players;
 
         public bool isHandlingConnect = false;
+
+        public bool ApprovalShutdown = false;
 
         private void Start()
         {
@@ -20,11 +22,8 @@ namespace DH
 
             if (IsHost)
             {
-                users.Add(NetworkManager.Singleton.LocalClientId, GameManager.Instance.nickname);
-            }
+                players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
 
-            if (IsServer)
-            {
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;
             }
@@ -42,11 +41,19 @@ namespace DH
 
         private void ConnectApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
+            if (ApprovalShutdown)
+            {
+                response.Approved = false;
+                return;
+            }
+
+            isHandlingConnect = true;
+
             string nickname = Encoding.Unicode.GetString(request.Payload);
 
-            if(users.Count < 4)
+            if(players.Count < 4)
             {
-                users.Add(request.ClientNetworkId, nickname);
+                players.Add(request.ClientNetworkId, new PlayerInfo(request.ClientNetworkId, nickname));
                 Debug.Log(nickname + ":" + request.ClientNetworkId + " Connected");
 
                 response.Approved = true;
@@ -59,21 +66,18 @@ namespace DH
                 response.Approved = false;
             }
 
-            Debug.Log("Current User :");
-
-            foreach (var user in users)
-            {
-                Debug.Log(user.Key + ":" + user.Value);
-            }
+            isHandlingConnect = false;
+            Debug.Log("Current User :" + players.Count);
         }
 
         private void DisconnectHandling(ulong id)
         {
             isHandlingConnect = true;
 
-            users.Remove(id);
+            players.Remove(id);
 
             isHandlingConnect = false;
+            Debug.Log("Current User :" + players.Count);
         }
     }
 }
