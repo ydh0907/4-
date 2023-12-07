@@ -18,7 +18,12 @@ namespace DH
         {
             Instance = this;
 
-            if (NetworkManager.Singleton.IsServer)
+            if (IsHost)
+            {
+                users.Add(NetworkManager.Singleton.LocalClientId, GameManager.Instance.nickname);
+            }
+
+            if (IsServer)
             {
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;

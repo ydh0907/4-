@@ -28,7 +28,7 @@ namespace DH
         public void StartClient()
         {
             nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
-            IP = GameObject.Find("IPInput").GetComponent<InputField>().text;
+            IP = GameObject.Find("IPInput").GetComponent<TMP_InputField>().text;
 
             if (nickname.Length < 1) nickname = "Unknown";
 

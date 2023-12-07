@@ -12,6 +12,7 @@ namespace DH
     {
         public static NetworkGameManager Instance = null;
 
+        [SerializeField] private GameObject Player;
         public UnityEvent onGameStart = new();
         public UnityEvent onGameEnded = new();
 
@@ -38,9 +39,11 @@ namespace DH
         {
             while (NetworkServerConnectManager.Instance.isHandlingConnect) yield return null;
 
-            foreach(ulong id in NetworkServerConnectManager.Instance.users.Keys)
+            foreach(var info in NetworkServerConnectManager.Instance.users)
             {
-                NetworkObject.SpawnAsPlayerObject(id);
+                GameObject player = Instantiate(Player, Vector3.zero, Quaternion.identity);
+                player.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.Key);
+                player.name = info.Value;
             }
 
             onGameStart?.Invoke();
