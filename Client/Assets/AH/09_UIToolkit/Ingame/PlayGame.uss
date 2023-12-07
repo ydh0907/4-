@@ -22,3 +22,36 @@
     -unity-text-align: middle-center;
     flex-grow: 1;
 }
+
+.runningStats {
+    width: 100px;
+    height: 600px;
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/32%20Light.png?fileID=21300000&guid=a689281f545979940b5cedad12ec31a8&type=3#32 Light');
+    margin-bottom: 60px;
+    margin-left: 60px;
+}
+
+.smallIcon {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 240px;
+    transition-duration: 0.2s;
+}
+
+.largeIcon {
+    width: 300px;
+    height: 300px;
+    bottom: 30px;
+    margin-right: 40px;
+    transition-duration: 0.2s;
+}
+
+.largeIcon:hover {
+    translate: -245px -155px;
+    scale: 0.7 0.7;
+}
+
+.smallIcon:hover {
+    translate: 245px 155px;
+    scale: 1.3 1.3;
+}
