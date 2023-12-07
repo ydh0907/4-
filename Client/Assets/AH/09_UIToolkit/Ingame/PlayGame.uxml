@@ -1,30 +1,33 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/PlayGame.uss?fileID=7433441132597879392&amp;guid=f7851507cebef19478ee356d8cb53083&amp;type=3#PlayGame" />
-    <ui:VisualElement name="container" style="flex-grow: 1; justify-content: space-between; align-items: flex-end;">
-        <ui:VisualElement name="player-border" style="height: 20%; flex-direction: row; justify-content: space-around; width: 100%;">
+    <ui:VisualElement name="container" style="flex-grow: 1; justify-content: space-between; align-items: stretch;">
+        <ui:VisualElement name="players-border" style="height: 20%; flex-direction: row; justify-content: space-around; width: 100%;">
             <ui:VisualElement name="player" class="basePlayer">
-                <ui:VisualElement name="playerIcon" class="playerIcon" />
-                <ui:Label tabindex="-1" text="NAME" parse-escape-sequences="true" display-tooltip-when-elided="true" name="playerName-txt" class="playerName-txt" />
+                <ui:VisualElement name="beverageIcon" class="playerIcon" />
+                <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
             </ui:VisualElement>
             <ui:VisualElement name="player" class="basePlayer">
-                <ui:VisualElement name="playerIcon" class="playerIcon" />
-                <ui:Label tabindex="-1" text="NAME" parse-escape-sequences="true" display-tooltip-when-elided="true" name="playerName-txt" class="playerName-txt" />
+                <ui:VisualElement name="beverageIcon" class="playerIcon" />
+                <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
             </ui:VisualElement>
             <ui:VisualElement name="timer" style="width: 550px; height: 200px; background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/Button_Small_A.png?fileID=21300000&amp;guid=5ed7b78422faa044695989e1108c5d63&amp;type=3#Button_Small_A&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); align-items: center; justify-content: center;">
                 <ui:Label tabindex="-1" text="5 : 00" parse-escape-sequences="true" display-tooltip-when-elided="true" name="time-txt" style="color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 110px; -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=630f7ad1107ef3f409dae609a2dc5193&amp;type=3#NotInter-Regular&apos;); -unity-font-style: bold;" />
             </ui:VisualElement>
             <ui:VisualElement name="player" class="basePlayer">
-                <ui:VisualElement name="playerIcon" class="playerIcon" />
-                <ui:Label tabindex="-1" text="NAME" parse-escape-sequences="true" display-tooltip-when-elided="true" name="playerName-txt" class="playerName-txt" />
+                <ui:VisualElement name="beverageIcon" class="playerIcon" />
+                <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
             </ui:VisualElement>
             <ui:VisualElement name="player" class="basePlayer">
-                <ui:VisualElement name="playerIcon" class="playerIcon" />
-                <ui:Label tabindex="-1" text="NAME" parse-escape-sequences="true" display-tooltip-when-elided="true" name="playerName-txt" class="playerName-txt" />
+                <ui:VisualElement name="beverageIcon" class="playerIcon" />
+                <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="itemIcon-border" style="width: 920px; height: 433px; flex-direction: row;">
-            <ui:VisualElement name="bareHandedAttack" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/Missions.png?fileID=21300000&amp;guid=b52130bb79a23344aa8c335cecb91eb0&amp;type=3#Missions&apos;);" />
-            <ui:VisualElement name="mantosAttack" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/Add%20Icon.png?fileID=21300000&amp;guid=25534d7e0c9de5646aee54d576a28388&amp;type=3#Add Icon&apos;);" />
+        <ui:VisualElement name="playerData" style="flex-grow: 1; justify-content: space-between; flex-direction: row; align-items: flex-end;">
+            <ui:VisualElement name="runningStats" style="width: 100px; height: 600px; background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/32.png?fileID=21300000&amp;guid=dcdc43f7a0ad67b4ab3e3db38233dfae&amp;type=3#32&apos;); margin-bottom: 60px; margin-left: 60px;" />
+            <ui:VisualElement name="itemIcon-border" style="width: 600px; height: 433px; flex-direction: row; align-items: center; justify-content: space-around;">
+                <ui:VisualElement name="bareHandedAttack" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/Missions.png?fileID=21300000&amp;guid=b52130bb79a23344aa8c335cecb91eb0&amp;type=3#Missions&apos;); width: 200px; height: 200px;" />
+                <ui:VisualElement name="mantosAttack" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/Add%20Icon.png?fileID=21300000&amp;guid=25534d7e0c9de5646aee54d576a28388&amp;type=3#Add Icon&apos;); width: 300px; height: 300px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
