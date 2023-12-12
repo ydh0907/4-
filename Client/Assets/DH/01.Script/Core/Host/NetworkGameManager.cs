@@ -17,7 +17,7 @@ namespace DH
         public UnityEvent onGameEnded = new();
         public UnityEvent<Dictionary<ulong, PlayerInfo>> onPlayerValueChanged = new();
 
-        public PlayerDictionary<PlayerInfo> players = new();
+        public NetworkVariable<PlayerDictionary<PlayerInfo>> players = new();
 
         public override void OnNetworkSpawn()
         {
@@ -28,16 +28,7 @@ namespace DH
         }
 
         public void StartGame()
-        {
-            SetPlayerListClientRpc(players);
-
-            StartCoroutine(Starting());
-        }
-
-        [ClientRpc]
-        private void SetPlayerListClientRpc(PlayerDictionary<PlayerInfo> players)
-        {
-            this.players = players;
+        {StartCoroutine(Starting());
         }
 
         private IEnumerator Starting()
@@ -45,7 +36,7 @@ namespace DH
             while (NetworkServerApprovalManager.Instance.isHandlingConnect) yield return null;
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
-            foreach (var info in players.GetDummy().Values)
+            foreach (var info in players.Value.GetDummy().Values)
             {
                 GameObject player = Instantiate(Player, Vector3.zero, Quaternion.identity);
                 player.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ID);
@@ -72,86 +63,7 @@ namespace DH
 
         private void DisconnectAll()
         {
-            //
-        }
-    }
-
-    public enum Cola
-    {
-        CocaCola,
-        Sprite,
-        DrPepper,
-        Pepsi
-    }
-
-    public struct PlayerInfo
-    {
-        public ulong ID;
-        public string Nickname;
-        public Cola Cola;
-        public int Kill;
-        public int Death;
-
-        public PlayerInfo(ulong ID, string Nickname)
-        {
-            this.ID = ID;
-            this.Nickname = Nickname;
-            Cola = Cola.CocaCola;
-            Kill = 0;
-            Death = 0;
-        }
-
-        public PlayerInfo(ulong ID, string Nickname, Cola Cola)
-        {
-            this.ID = ID;
-            this.Nickname = Nickname;
-            this.Cola = Cola;
-            Kill = 0;
-            Death = 0;
-        }
-    }
-
-    public class PlayerDictionary<Value>
-    {
-        private Dictionary<ulong, Value> players;
-
-        public Action<Dictionary<ulong, Value>> onValueChanged = null;
-
-        public int Count => players.Count;
-
-        public void Add(ulong key, Value value)
-        {
-            players.Add(key, value);
-            onValueChanged?.Invoke(players);
-        }
-
-        public void Remove(ulong key)
-        {
-            players.Remove(key);
-            onValueChanged?.Invoke(players);
-        }
-
-        public void Set(ulong key, Value value)
-        {
-            players[key] = value;
-            onValueChanged?.Invoke(players);
-        }
-
-        public Dictionary<ulong, Value> GetDummy()
-        {
-            Dictionary<ulong, Value> dummy = new();
-
-            foreach(var player in players)
-            {
-                dummy[player.Key] = player.Value;
-            }
-
-            return dummy;
-        }
-
-        public bool ContainsKey(ulong key)
-        {
-            return players.ContainsKey(key);
+            NetworkManager.Singleton.Shutdown();
         }
     }
 }

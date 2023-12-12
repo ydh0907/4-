@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        private PlayerDictionary<PlayerInfo> players => NetworkGameManager.Instance.players;
+        private PlayerDictionary<PlayerInfo> players => NetworkGameManager.Instance.players.Value;
 
         public bool isHandlingConnect = false;
 

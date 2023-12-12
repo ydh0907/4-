@@ -892,7 +892,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1261383228}
-  - component: {fileID: 1261383229}
   - component: {fileID: 1261383231}
   - component: {fileID: 1261383230}
   - component: {fileID: 1261383232}
@@ -918,20 +917,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1261383229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261383227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80fbfdd9eb3b2cf4ba33af1048aa16a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nickname: Unknown
-  IP: 127.0.0.1
 --- !u!114 &1261383230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,7 +1055,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1261383229}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DH.GameManager, DH
         m_MethodName: StartClient
         m_Mode: 1
@@ -1596,7 +1581,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1261383229}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DH.GameManager, DH
         m_MethodName: StartHost
         m_Mode: 1
