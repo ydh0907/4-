@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,7 +10,7 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        private PlayerDictionary<PlayerInfo> players => NetworkGameManager.Instance.players.Value;
+        private List<PlayerInfo> players => NetworkGameManager.Instance.players.Value;
 
         public bool isHandlingConnect = false;
 
@@ -20,7 +22,8 @@ namespace DH
 
             if (IsHost)
             {
-                players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
+                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
+                new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname);
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;
@@ -51,7 +54,7 @@ namespace DH
 
             if(players.Count < 4)
             {
-                players.Add(request.ClientNetworkId, new PlayerInfo(request.ClientNetworkId, nickname));
+                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
                 Debug.Log(nickname + ":" + request.ClientNetworkId + " Connected");
 
                 response.Approved = true;
@@ -72,7 +75,13 @@ namespace DH
         {
             isHandlingConnect = true;
 
-            players.Remove(id);
+            foreach (PlayerInfo player in players)
+            {
+                if(player.ID == id)
+                {
+                    players.Remove(player);
+                }
+            }
 
             isHandlingConnect = false;
             Debug.Log("Current User :" + players.Count);
