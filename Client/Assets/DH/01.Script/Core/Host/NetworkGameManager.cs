@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -17,7 +16,7 @@ namespace DH
         public UnityEvent onGameEnded = new();
         public UnityEvent<Dictionary<ulong, PlayerInfo>> onPlayerValueChanged = new();
 
-        public NetworkVariable<PlayerDictionary<PlayerInfo>> players = new();
+        public NetworkVariable<List<PlayerInfo>> players = new();
 
         public override void OnNetworkSpawn()
         {
@@ -36,7 +35,7 @@ namespace DH
             while (NetworkServerApprovalManager.Instance.isHandlingConnect) yield return null;
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
-            foreach (var info in players.Value.GetDummy().Values)
+            foreach (var info in players.Value)
             {
                 GameObject player = Instantiate(Player, Vector3.zero, Quaternion.identity);
                 player.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ID);
