@@ -71,7 +71,7 @@ namespace Karin
                     _audioSource.PlayOneShot(Revive);
                     break;
                 case Sound.GAMEENDWIN: // วิ
-                    _audioSource.PlayOndeShot(GameEndWin); 
+                    _audioSource.PlayOneShot(GameEndWin); 
                     break;
                 case Sound.GAMEENDLOSE: // วิ
                     _audioSource.PlayOneShot(GameEndLose);
