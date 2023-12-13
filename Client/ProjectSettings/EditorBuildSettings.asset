@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/DH/00.Scene/DH_Lobby.unity
-    guid: 56273d015e6d27647b3248c813e0e000
+    path: Assets/HB/00.Scene/HB_Lobby.unity
+    guid: bbef3a9bc0f9ca54491c4b70c7294af7
   - enabled: 1
-    path: Assets/DH/00.Scene/DH_Game.unity
-    guid: 119191c8ce7247a4786a97625231fd34
+    path: Assets/HB/00.Scene/HB_Game.unity
+    guid: ba4488305c6900e4db37d411e1d3781f
   m_configObjects: {}
