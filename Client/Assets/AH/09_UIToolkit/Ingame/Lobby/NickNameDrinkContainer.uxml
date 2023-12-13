@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=cd80b79b037fb024297b55feaf002c51&amp;type=3#Lobby" />
+    <ui:VisualElement name="border" style="height: 250px; flex-direction: row; width: 100%;">
+        <ui:VisualElement name="nickname-border" style="flex-grow: 1; width: 50%; align-items: center; justify-content: center;">
+            <ui:Label tabindex="-1" text="이름 : " parse-escape-sequences="true" display-tooltip-when-elided="true" name="nickname-txt" style="font-size: 100px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="drink-border" style="width: 50%; justify-content: center; flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

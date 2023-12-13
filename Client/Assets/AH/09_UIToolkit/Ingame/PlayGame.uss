@@ -46,12 +46,12 @@
     transition-duration: 0.2s;
 }
 
-.largeIcon:hover {
+.largeIcon.toSmall {
     translate: -245px -155px;
     scale: 0.7 0.7;
 }
 
-.smallIcon:hover {
+.smallIcon.toLarge {
     translate: 245px 155px;
     scale: 1.3 1.3;
 }
