@@ -37,7 +37,7 @@ namespace DH
 
         public void StartConnect()
         {
-            NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.Unicode.GetBytes(GameManager.Instance.nickname);
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.Unicode.GetBytes(ConnectManager.Instance.nickname);
 
             isConnect = NetworkManager.Singleton.StartClient();
 
