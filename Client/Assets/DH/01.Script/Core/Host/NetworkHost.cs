@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace DH
     public class NetworkHost : MonoBehaviour
     {
         public static NetworkHost Instance = null;
+
+        [SerializeField] private GameObject NetworkGameManager;
 
         private bool? isConnect = null;
         private bool connectFlag = false;
@@ -37,9 +40,19 @@ namespace DH
 
         public void StartConnect()
         {
+            NetworkManager.Singleton.ConnectionApprovalCallback += HostApproval;
+
             isConnect = NetworkManager.Singleton.StartHost();
 
             StartCoroutine(WaitConnect());
+        }
+
+        private void HostApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+        {
+            response.Approved = true;
+            response.CreatePlayerObject = false;
+
+            NetworkManager.Singleton.ConnectionApprovalCallback -= HostApproval;
         }
 
         private IEnumerator WaitConnect()
@@ -59,10 +72,7 @@ namespace DH
             connectFlag = true;
             LoadSceneManager.Instance.LoadScene(1, () =>
             {
-                GameObject hostManager = new GameObject("HostManager");
-                hostManager.AddComponent<NetworkObject>();
-                hostManager.AddComponent<NetworkHostManager>();
-                hostManager.AddComponent<NetworkHostConnectManager>();
+                Instantiate(NetworkGameManager, Vector3.zero, Quaternion.identity).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
             });
 
             onConnectSucceed?.Invoke();
