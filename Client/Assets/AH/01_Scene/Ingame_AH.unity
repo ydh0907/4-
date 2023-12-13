@@ -383,9 +383,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d6c93b2d8f733498748e70b5d1c773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownPanel: {fileID: 9197481963319205126, guid: d254694b1adf5e641a92580a821e7b48, type: 3}
+  deadCountDownPanel: {fileID: 9197481963319205126, guid: 36ec50e6a9338e649adff1b1380981de, type: 3}
+  countDownPanel: {fileID: 9197481963319205126, guid: 09b06c68b4b0c9f4bb5a9be1deaee09e, type: 3}
   hostLobbyPanel: {fileID: 9197481963319205126, guid: e4d2b4c6150600646b5e4fd0e5beec50, type: 3}
   clientLobbyPanel: {fileID: 9197481963319205126, guid: cc03807d703732540b0468539f9db0a0, type: 3}
+  basicPanel: {fileID: 9197481963319205126, guid: 11e0ed6a63aa99d4cb32011a74f8066b, type: 3}
+  playPanel: {fileID: 9197481963319205126, guid: eeb08b3e61be8fe4d96d92e59e5877b8, type: 3}
+  isHost: 0
+  nickName: 
+  drinkName: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

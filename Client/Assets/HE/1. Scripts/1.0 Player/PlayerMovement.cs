@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsJumping { get; private set; }
 
     #region INPUT PARAMETERS
-    public Vector3 _moveInput;
+    [HideInInspector] public Vector3 _moveInput;
     #endregion
 
     #region CHECK PARAMETERS
@@ -48,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
         // Handle Run
         if (CanRun())
         {
-            // 조금 신경 쓰이지만 일단 해보자...
             Run(LERP_AMOUNT);
         }
     }
@@ -66,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
             Jump();
         }
-        #endregion]
+        #endregion
     }
 
     // Movement Methods
@@ -94,20 +93,25 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CanRun()
     {
-        if (/*만약 러쉬중이 아닐때*/ !PlayerDamageble.IsFainting)
+        if (/*만약 러쉬중이 아닐때*/ !PlayerDamageble.IsGroggying)
         {
             return true;
         }
         else
+        {
+            RB.velocity = new Vector3(0f, RB.velocity.y, 0f); // 
             return false;
+        }
     }
 
     private bool CanJump()
     {
-        if (IsGounded() && !PlayerDamageble.IsFainting)
+        if (IsGounded() && !PlayerDamageble.IsGroggying)
             return true;
         else
+        {
             return false;
+        }
     }
 
     private bool IsGounded()
@@ -119,7 +123,9 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
         else
+        {
             return false;
+        }
     }
 
     #region EDITOR METHODS
