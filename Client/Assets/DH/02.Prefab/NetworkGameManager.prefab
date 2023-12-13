@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5644638189037844168}
   - component: {fileID: 2421843235834462775}
-  - component: {fileID: 8145308096761649233}
-  - component: {fileID: 6900242271990827423}
+  - component: {fileID: 2270475447441844036}
+  - component: {fileID: 444015820450112367}
   - component: {fileID: 8090593027356916809}
   m_Layer: 0
   m_Name: NetworkGameManager
@@ -55,7 +55,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &8145308096761649233
+--- !u!114 &2270475447441844036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,13 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1245906103676024313, guid: 35fc9d4cbb784a34388942a57bc6829c, type: 3}
-  onGameStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onGameEnded:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6900242271990827423
+--- !u!114 &444015820450112367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,10 +77,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2714208593251620132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede130ff097becd49a5b4633675c3d08, type: 3}
+  m_Script: {fileID: 11500000, guid: 03436d2a3b7cf56468e86f0b45739da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isHandlingConnect: 0
+  ApprovalShutdown: 0
 --- !u!114 &8090593027356916809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +94,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609ffd2f07cb8154fb6f56bf999b6624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 300

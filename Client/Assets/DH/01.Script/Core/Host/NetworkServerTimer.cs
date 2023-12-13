@@ -18,13 +18,11 @@ namespace DH
             Instance = this;
 
             base.OnNetworkSpawn();
-            NetworkGameManager.Instance.onGameStart.AddListener(StartTimer);
         }
 
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
-            NetworkGameManager.Instance.onGameStart.RemoveListener(StartTimer);
         }
 
         public void StartTimer()
@@ -42,7 +40,7 @@ namespace DH
             {
                 timer = 0;
 
-                //
+                NetworkGameManager.Instance.GameEnd();
             }
         }
     }

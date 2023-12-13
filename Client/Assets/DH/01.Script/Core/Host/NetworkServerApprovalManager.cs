@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,25 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        private List<PlayerInfo> players => NetworkGameManager.Instance.players.Value;
+        public List<PlayerInfo> players => NetworkGameManager.Instance.players;
 
         public bool isHandlingConnect = false;
 
         public bool ApprovalShutdown = false;
 
-        private void Start()
+        private void Awake()
         {
             Instance = this;
+        }
 
-            if (IsHost)
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (IsServer)
             {
                 players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
-                new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname);
+                UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;
@@ -33,6 +39,7 @@ namespace DH
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
+
             if (NetworkManager.Singleton)
             {
                 NetworkManager.Singleton.ConnectionApprovalCallback -= ConnectApproval;
@@ -52,14 +59,15 @@ namespace DH
 
             string nickname = Encoding.Unicode.GetString(request.Payload);
 
-            if(players.Count < 4)
+            if (players.Count < 4)
             {
-                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
+                players.Add(new PlayerInfo(request.ClientNetworkId, nickname));
                 Debug.Log(nickname + ":" + request.ClientNetworkId + " Connected");
 
                 response.Approved = true;
                 response.CreatePlayerObject = false;
             }
+
             else
             {
                 Debug.Log(nickname + ":" + request.ClientNetworkId + " Approval Failed");
@@ -68,14 +76,15 @@ namespace DH
             }
 
             isHandlingConnect = false;
-            Debug.Log("Current User :" + players.Count);
+
+            UserLog();
         }
 
         private void DisconnectHandling(ulong id)
         {
             isHandlingConnect = true;
 
-            foreach (PlayerInfo player in players)
+            foreach(var player in players)
             {
                 if(player.ID == id)
                 {
@@ -84,7 +93,20 @@ namespace DH
             }
 
             isHandlingConnect = false;
-            Debug.Log("Current User :" + players.Count);
+
+            UserLog();
+        }
+
+        private void UserLog()
+        {
+            string log = "";
+
+            foreach (var player in players)
+            {
+                log += player.ID.ToString() + " : " + player.Nickname + "\n";
+            }
+
+            Debug.Log(log);
         }
     }
 }
