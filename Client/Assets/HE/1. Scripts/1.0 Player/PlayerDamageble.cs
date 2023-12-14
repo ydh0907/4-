@@ -4,47 +4,39 @@ using UnityEngine;
 
 public class PlayerDamageble : MonoBehaviour, IDamageble
 {
-
-    public bool IsFainting { get; private set; } //
-
+    public bool IsGroggying { get; private set; }
 
     private PlayerMovement PlayerMovement;
-    private PlayerKnockback PlayerKnockback;
 
     public int CurrentHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public int MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     [SerializeField] private float _faintTime;
-    [SerializeField] private float _resurrectionTime;
 
     private void Awake()
     {
         PlayerMovement = GetComponent<PlayerMovement>();
-        PlayerKnockback = GetComponent<PlayerKnockback>();    
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            StartCoroutine(nameof(GroggyAction));
+        }
     }
 
     public void Damage(int damageAmount, Vector3 hitDirection)
     {
-        StartCoroutine(nameof(Faint));
-        PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x);
+        // StartCoroutine(nameof(FaintAction));
     }
 
-    public void Die()
-    {
-        Debug.Log("die");
-        StartCoroutine(nameof(Resurrection));
-    }
+    public void Die() { } // 사용 안 함
 
-    IEnumerator Resurrection()
+    IEnumerator GroggyAction()
     {
-        yield return new WaitForSeconds(_resurrectionTime);
-        Debug.Log("부활");
-    }
-
-    IEnumerator Faint()
-    {
-        IsFainting = true;
+        IsGroggying = true;
         yield return new WaitForSeconds(_faintTime);
-        IsFainting = false;
+        IsGroggying = false;
     }
 }

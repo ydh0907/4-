@@ -1,68 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace DH
 {
     public class NetworkGameManager : NetworkBehaviour
     {
-        public static NetworkGameManager Instance = null;
+        public static NetworkGameManager Instance;
 
         [SerializeField] private GameObject Player;
-        public UnityEvent onGameStart = new();
-        public UnityEvent onGameEnded = new();
-        public UnityEvent<Dictionary<ulong, PlayerInfo>> onPlayerValueChanged = new();
 
-        public NetworkVariable<List<PlayerInfo>> players = new();
+        public List<PlayerInfo> players = new();
+
+        public Action onGameStarted = null;
+        public Action onGameEnded = null;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         public override void OnNetworkSpawn()
         {
-            Instance = this;
+            if (!IsServer) return;
 
             base.OnNetworkSpawn();
-            GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(StartGame);
+
+            GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(GameStart);
+            GameObject.Find("EndButton").GetComponent<Button>().onClick.AddListener(GameEnd);
         }
 
-        public void StartGame()
-        {StartCoroutine(Starting());
-        }
-
-        private IEnumerator Starting()
+        public void GameStart()
         {
-            while (NetworkServerApprovalManager.Instance.isHandlingConnect) yield return null;
-            NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
+            if (!IsServer) return;
 
-            foreach (var info in players.Value)
+            foreach(var player in players)
             {
-                GameObject player = Instantiate(Player, Vector3.zero, Quaternion.identity);
-                player.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ID);
+                Instantiate(Player).GetComponent<NetworkObject>().SpawnAsPlayerObject(player.ID);
             }
 
-            onGameStart?.Invoke();
+            GetComponent<NetworkServerTimer>().StartTimer();
+
+            onGameStarted?.Invoke();
         }
 
-        [ServerRpc]
-        public void EndGameServerRpc()
+        public void GameEnd()
         {
+            if (!IsServer) return;
+
+            NetworkManager.Singleton.Shutdown();
+
             onGameEnded?.Invoke();
-
-            EndCallClientRpc();
-
-            DisconnectAll();
         }
 
         [ClientRpc]
-        private void EndCallClientRpc()
+        public void EndClientRpc()
         {
-            onGameEnded?.Invoke();
-        }
 
-        private void DisconnectAll()
-        {
-            NetworkManager.Singleton.Shutdown();
         }
     }
 }
