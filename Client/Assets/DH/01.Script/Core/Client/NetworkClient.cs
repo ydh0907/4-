@@ -11,7 +11,6 @@ namespace DH
         public static NetworkClient Instance = null;
 
         private bool? isConnect = null;
-        private bool connectFlag = false;
         public bool IsConnect => NetworkManager.Singleton.IsConnectedClient;
 
         public UnityEvent onConnectFailed = new();
@@ -25,19 +24,9 @@ namespace DH
             Instance = this;
         }
 
-        private void Update()
-        {
-            if(isConnect == null && connectFlag && !IsConnect)
-            {
-                OnDisconnected();
-            }
-
-            connectFlag = IsConnect;
-        }
-
         public void StartConnect()
         {
-            NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.Unicode.GetBytes(ConnectManager.Instance.nickname);
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo());
 
             isConnect = NetworkManager.Singleton.StartClient();
 
@@ -58,7 +47,6 @@ namespace DH
         private void OnConnected()
         {
             isConnect = null;
-            connectFlag = true;
 
             onConnectSucceed?.Invoke();
         }
@@ -66,7 +54,6 @@ namespace DH
         private void OnConnectFailed()
         {
             isConnect = null;
-            connectFlag = false;
 
             onConnectFailed?.Invoke();
         }
@@ -74,7 +61,6 @@ namespace DH
         private void OnDisconnected()
         {
             isConnect = null;
-            connectFlag = false;
 
             onDisconnected?.Invoke();
         }

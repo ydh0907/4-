@@ -61,10 +61,9 @@ namespace DH
         [ClientRpc]
         public void GameEndClientRpc()
         {
-            NetworkManager.Singleton.DisconnectClient(NetworkManager.Singleton.LocalClientId);
+            NetworkManager.Singleton.Shutdown();
 
-            Destroy(NetworkManager.gameObject);
-            Destroy();
+            onGameEnded?.Invoke();
         }
     }
 }

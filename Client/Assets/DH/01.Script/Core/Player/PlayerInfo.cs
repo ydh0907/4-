@@ -24,12 +24,21 @@ namespace DH
 
         public PlayerInfo() { }
 
-        public PlayerInfo(ulong ID, string Nickname)
+        public PlayerInfo(ulong ID, string Nickname, Cola Cola)
         {
             this.ID = ID;
             this.Nickname = Nickname;
+            this.Cola = Cola;
 
-            if(Nickname == null) Nickname = "";
+            if(this.Nickname == null) this.Nickname = "";
+        }
+
+        public PlayerInfo(string Nickname, Cola Cola)
+        {
+            this.Nickname = Nickname;
+            this.Cola = Cola;
+
+            if (this.Nickname == null) this.Nickname = "";
         }
     }
 }

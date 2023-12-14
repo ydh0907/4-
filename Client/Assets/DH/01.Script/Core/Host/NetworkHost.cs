@@ -14,7 +14,6 @@ namespace DH
         [SerializeField] private GameObject NetworkGameManager;
 
         private bool? isConnect = null;
-        private bool connectFlag = false;
         public bool IsConnect => NetworkManager.Singleton.IsHost;
 
         public UnityEvent onConnectFailed = new();
@@ -26,16 +25,6 @@ namespace DH
         {
             if (Instance != null) enabled = false;
             Instance = this;
-        }
-
-        private void Update()
-        {
-            if (isConnect == null && connectFlag && !IsConnect)
-            {
-                OnDisconnected();
-            }
-
-            connectFlag = IsConnect;
         }
 
         public void StartConnect()
@@ -69,11 +58,8 @@ namespace DH
         private void OnConnected()
         {
             isConnect = null;
-            connectFlag = true;
-            LoadSceneManager.Instance.LoadScene(1, () =>
-            {
-                Instantiate(NetworkGameManager, Vector3.zero, Quaternion.identity).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
-            });
+
+            LoadSceneManager.Instance.LoadScene(2);
 
             onConnectSucceed?.Invoke();
         }
@@ -81,20 +67,8 @@ namespace DH
         private void OnConnectFailed()
         {
             isConnect = null;
-            connectFlag = false;
 
             onConnectFailed?.Invoke();
-        }
-
-        private void OnDisconnected()
-        {
-            isConnect = null;
-            connectFlag = false;
-
-            if(SceneManager.GetActiveScene().buildIndex > 0)
-                LoadSceneManager.Instance.LoadScene(0);
-
-            onDisconnected?.Invoke();
         }
     }
 }

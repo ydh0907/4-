@@ -12,7 +12,7 @@ namespace DH
         private NetworkClient m_NetworkClient;
 
         public string nickname = "Unknown";
-        public string IP = "127.0.0.1";
+        public Cola cola = Cola.CocaCola;
 
         private void Awake()
         {
@@ -28,7 +28,6 @@ namespace DH
         public void StartClient()
         {
             nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
-            IP = GameObject.Find("IPInput").GetComponent<TMP_InputField>().text;
 
             if (nickname.Length < 1) nickname = "Unknown";
 
@@ -38,16 +37,10 @@ namespace DH
         public void StartHost()
         {
             nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
-            IP = "127.0.0.1";
 
             if (nickname.Length < 1) nickname = "Unknown";
 
             m_NetworkHost.StartConnect();
-        }
-
-        public string GetUserName()
-        {
-            return nickname;
         }
     }
 }
