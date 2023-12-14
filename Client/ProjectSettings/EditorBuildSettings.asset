@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/DH/00.Scene/DH_Lobby.unity
+    path: Assets/DH/00.Scene/DH_Title.unity
     guid: 56273d015e6d27647b3248c813e0e000
   - enabled: 1
     path: Assets/DH/00.Scene/DH_Game.unity

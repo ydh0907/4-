@@ -51,15 +51,20 @@ namespace DH
         {
             if (!IsServer) return;
 
+            GameEndClientRpc();
+
             NetworkManager.Singleton.Shutdown();
 
             onGameEnded?.Invoke();
         }
 
         [ClientRpc]
-        public void EndClientRpc()
+        public void GameEndClientRpc()
         {
+            NetworkManager.Singleton.DisconnectClient(NetworkManager.Singleton.LocalClientId);
 
+            Destroy(NetworkManager.gameObject);
+            Destroy();
         }
     }
 }
