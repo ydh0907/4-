@@ -55,5 +55,11 @@ namespace DH
 
             onGameEnded?.Invoke();
         }
+
+        [ClientRpc]
+        public void EndClientRpc()
+        {
+
+        }
     }
 }
