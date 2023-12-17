@@ -30,7 +30,7 @@ namespace DH
             base.OnNetworkSpawn();
 
             GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(GameStart);
-            GameObject.Find("EndButton").GetComponent<Button>().onClick.AddListener(GameEnd);
+            GameObject.Find("EndButton").GetComponent<Button>().onClick.AddListener(ServerGameEnd);
         }
 
         public void GameStart()
@@ -47,19 +47,32 @@ namespace DH
             onGameStarted?.Invoke();
         }
 
-        public void GameEnd()
+        public void ServerGameEnd()
         {
             if (!IsServer) return;
 
+            GameEndClientRpc();
+
+            foreach(var player in players)
+            {
+                NetworkManager.Singleton.DisconnectClient(player.ID);
+            }
+            players.Clear();
+
             NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
 
             onGameEnded?.Invoke();
+
+            LoadSceneManager.Instance.LoadScene(1);
         }
 
         [ClientRpc]
-        public void EndClientRpc()
+        public void GameEndClientRpc()
         {
+            NetworkManager.Singleton.Shutdown();
 
+            onGameEnded?.Invoke();
         }
     }
 }
