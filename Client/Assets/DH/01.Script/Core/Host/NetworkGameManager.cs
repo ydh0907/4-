@@ -29,11 +29,11 @@ namespace DH
 
             base.OnNetworkSpawn();
 
-            GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(GameStart);
+            GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(ServerGameStart);
             GameObject.Find("EndButton").GetComponent<Button>().onClick.AddListener(ServerGameEnd);
         }
 
-        public void GameStart()
+        public void ServerGameStart()
         {
             if (!IsServer) return;
 
