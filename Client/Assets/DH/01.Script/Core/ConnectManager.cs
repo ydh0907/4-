@@ -16,7 +16,7 @@ namespace DH
 
         private void Awake()
         {
-            if (Instance != null) Destroy(gameObject);
+            if (Instance != null) Destroy(Instance);
             Instance = this;
 
             m_NetworkHost = GetComponent<NetworkHost>();

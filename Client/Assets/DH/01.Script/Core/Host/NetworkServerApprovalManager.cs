@@ -89,7 +89,7 @@ namespace DH
 
             Cola cola = (Cola)BitConverter.ToUInt32(payload, process);
             process += sizeof(int);
-            string nickname = Encoding.UTF8.GetString(payload, process, payload.Length - process);
+            string nickname = Encoding.Unicode.GetString(payload, process, payload.Length - process);
 
             return new PlayerInfo(NetworkManager.Singleton.LocalClientId, nickname, cola);
         }
@@ -139,7 +139,7 @@ namespace DH
 
             foreach (var player in players)
             {
-                log += player.ID.ToString() + " : " + player.Nickname + "\n";
+                log += player.ID.ToString() + " : " + player.Nickname + " : " + player.Cola.ToString() + "\n";
             }
 
             Debug.Log(log);

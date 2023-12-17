@@ -59,7 +59,7 @@ namespace DH
         {
             isConnect = null;
 
-            LoadSceneManager.Instance.LoadScene(2);
+            LoadSceneManager.Instance.LoadScene(2, () => Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId));
 
             onConnectSucceed?.Invoke();
         }

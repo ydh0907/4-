@@ -26,7 +26,7 @@ namespace DH
 
         public void StartConnect()
         {
-            NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo());
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo(ConnectManager.Instance.nickname, ConnectManager.Instance.cola));
 
             isConnect = NetworkManager.Singleton.StartClient();
 

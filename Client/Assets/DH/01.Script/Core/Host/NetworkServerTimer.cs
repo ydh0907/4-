@@ -40,7 +40,7 @@ namespace DH
             {
                 timer.Value = 0;
 
-                NetworkGameManager.Instance.GameEnd();
+                NetworkGameManager.Instance.ServerGameEnd();
             }
         }
     }
