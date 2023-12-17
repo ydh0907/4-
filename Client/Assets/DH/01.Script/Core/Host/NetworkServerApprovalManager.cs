@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace DH
 {
@@ -10,20 +12,25 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        private List<PlayerInfo> players => NetworkGameManager.Instance.players.Value;
+        public List<PlayerInfo> players => NetworkGameManager.Instance.players;
 
         public bool isHandlingConnect = false;
 
         public bool ApprovalShutdown = false;
 
-        private void Start()
+        private void Awake()
         {
             Instance = this;
+        }
 
-            if (IsHost)
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (IsServer)
             {
-                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
-                new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname);
+                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola));
+                UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;
@@ -33,6 +40,7 @@ namespace DH
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
+
             if (NetworkManager.Singleton)
             {
                 NetworkManager.Singleton.ConnectionApprovalCallback -= ConnectApproval;
@@ -50,41 +58,91 @@ namespace DH
 
             isHandlingConnect = true;
 
-            string nickname = Encoding.Unicode.GetString(request.Payload);
+            PlayerInfo info = ReadApprovalData(request.Payload);
 
-            if(players.Count < 4)
+            if (players.Count < 4)
             {
-                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname));
-                Debug.Log(nickname + ":" + request.ClientNetworkId + " Connected");
+                players.Add(new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola));
+                OnValueChangedClientRpc();
+
+                Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Connected");
 
                 response.Approved = true;
                 response.CreatePlayerObject = false;
             }
+
             else
             {
-                Debug.Log(nickname + ":" + request.ClientNetworkId + " Approval Failed");
+                Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Approval Failed");
 
                 response.Approved = false;
             }
 
             isHandlingConnect = false;
-            Debug.Log("Current User :" + players.Count);
+
+            UserLog();
+        }
+
+        public static PlayerInfo ReadApprovalData(byte[] payload)
+        {
+            int process = 0;
+
+            Cola cola = (Cola)BitConverter.ToUInt32(payload, process);
+            process += sizeof(int);
+            string nickname = Encoding.Unicode.GetString(payload, process, payload.Length - process);
+
+            return new PlayerInfo(NetworkManager.Singleton.LocalClientId, nickname, cola);
+        }
+
+        public static byte[] WriteApprovalData(PlayerInfo info)
+        {
+            int process = 0;
+            byte[] buffer = new byte[256];
+
+            Buffer.BlockCopy(BitConverter.GetBytes((int)info.Cola), 0, buffer, 0, 4);
+            process += sizeof(int);
+            process += Encoding.Unicode.GetBytes(info.Nickname, 0, info.Nickname.Length, buffer, 0 + process);
+
+            byte[] sender = new byte[process];
+            Buffer.BlockCopy(buffer, 0, sender, 0, process);
+
+            return sender;
         }
 
         private void DisconnectHandling(ulong id)
         {
             isHandlingConnect = true;
 
-            foreach (PlayerInfo player in players)
+            foreach(var player in players)
             {
                 if(player.ID == id)
                 {
                     players.Remove(player);
+                    OnValueChangedClientRpc();
                 }
             }
 
             isHandlingConnect = false;
-            Debug.Log("Current User :" + players.Count);
+
+            UserLog();
+        }
+
+        [ClientRpc]
+        private void OnValueChangedClientRpc()
+        {
+
+        }
+
+        private void UserLog()
+        {
+            string log = "";
+
+            foreach (var player in players)
+            {
+                log += player.ID.ToString() + " : " + player.Nickname + " : " + player.Cola.ToString() + "\n";
+            }
+
+            Debug.Log(log);
         }
     }
 }

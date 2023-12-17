@@ -9,7 +9,7 @@ namespace DH
     {
         public static NetworkServerTimer Instance;
 
-        [SerializeField] private float timer = 300;
+        [SerializeField] private NetworkVariable<float> timer = new(300);
 
         public bool Active { get; private set; }
 
@@ -18,13 +18,11 @@ namespace DH
             Instance = this;
 
             base.OnNetworkSpawn();
-            NetworkGameManager.Instance.onGameStart.AddListener(StartTimer);
         }
 
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
-            NetworkGameManager.Instance.onGameStart.RemoveListener(StartTimer);
         }
 
         public void StartTimer()
@@ -36,13 +34,13 @@ namespace DH
         {
             if (!Active || !IsHost) return;
 
-            timer -= Time.deltaTime;
+            timer.Value -= Time.deltaTime;
 
-            if(timer < 0)
+            if(timer.Value < 0)
             {
-                timer = 0;
+                timer.Value = 0;
 
-                //
+                NetworkGameManager.Instance.ServerGameEnd();
             }
         }
     }
