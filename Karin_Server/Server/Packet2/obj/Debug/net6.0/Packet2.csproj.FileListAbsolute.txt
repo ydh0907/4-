@@ -1,0 +1,15 @@
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.AssemblyInfoInputs.cache
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.AssemblyInfo.cs
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.csproj.CoreCompileInputs.cache
+C:\GitFork\4-\Karin_Server\Server\Packet2\bin\Debug\net6.0\Packet2.deps.json
+C:\GitFork\4-\Karin_Server\Server\Packet2\bin\Debug\net6.0\Packet2.dll
+C:\GitFork\4-\Karin_Server\Server\Packet2\bin\Debug\net6.0\Packet2.pdb
+C:\GitFork\4-\Karin_Server\Server\Packet2\bin\Debug\net6.0\Karin.Network2.dll
+C:\GitFork\4-\Karin_Server\Server\Packet2\bin\Debug\net6.0\Karin.Network2.pdb
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.csproj.AssemblyReference.cache
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.csproj.CopyComplete
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.dll
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\refint\Packet2.dll
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\Packet2.pdb
+C:\GitFork\4-\Karin_Server\Server\Packet2\obj\Debug\net6.0\ref\Packet2.dll
