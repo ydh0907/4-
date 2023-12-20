@@ -48,19 +48,21 @@ public class PlayerWeaponState : MonoBehaviour
     {
         IDamageble iDamageble = other.gameObject.GetComponent<IDamageble>();
 
+        Vector2 hitDirection = other.gameObject.transform.position - transform.position;
+
         if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
         {
-            Vector2 hitDirection = other.gameObject.transform.position - transform.position;
-            hitDirection.Normalize();
             iDamageble.Damage(_attackDamageAmount, hitDirection);
-            PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x);
         }
 
         else if (other.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
         {
+            hitDirection.Normalize();
+            PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x);
 
         }
     }
 
     // ㅔ미지를 불 ㅒ 자시노 함께 ㅇㅇ 맞은 사람이 ㅐ린 사람을 저장 di 함수 실행할 ㅒ 마지막으로 ㅐ린 사람에게 점수 부여
+    // 멘토스 상태면 ㅔ미지만 바뀜 코ㅡ 수정
 }
