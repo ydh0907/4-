@@ -1,8 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="RoomListBox" src="project://database/Assets/AH/09_UIToolkit/InputData/RoomListBox.uxml?fileID=9197481963319205126&amp;guid=3ca77dd058f3e0643ae68bb54842bfb2&amp;type=3#RoomListBox" />
     <Style src="project://database/Assets/AH/09_UIToolkit/InputData/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
     <ui:VisualElement name="container" style="flex-grow: 1; align-items: center;">
         <ui:VisualElement name="border" style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: center;">
-            <ui:ScrollView name="roomList" class="roomList" />
+            <ui:ScrollView name="roomList" elasticity="0.91" elastic-animation-interval-ms="71" vertical-scroller-visibility="AlwaysVisible" scroll-deceleration-rate="100" mode="Vertical" class="roomList" style="flex-direction: column;">
+                <ui:Instance template="RoomListBox" name="RoomListBox" />
+            </ui:ScrollView>
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="refresh-btn" style="position: absolute; align-items: flex-end; left: 1390px; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/World.png?fileID=21300000&amp;guid=cb0be92a1645a7c48a26aa4a8ebdb7d8&amp;type=3#World&apos;); width: 150px; height: 150px; top: 80px;" />
         </ui:VisualElement>
         <ui:Button text="들어가기" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="enterRoom-btn" class="button" />

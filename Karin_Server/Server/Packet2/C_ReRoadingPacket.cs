@@ -11,7 +11,7 @@ namespace Packets
     {
         public override ushort ID => (ushort)PacketID.C_ReRoadingPacket;
 
-        public List<Room> Rooms = new();
+        public List<Room> Rooms = new List<Room>();
 
         public override void Deserialize(ArraySegment<byte> buffer)
         {
@@ -19,7 +19,6 @@ namespace Packets
 
             process += sizeof(ushort);
             process += sizeof(ushort);
-
 
             process += PacketUtillity.ReadListData<Room>(buffer, process, out this.Rooms);
         }
