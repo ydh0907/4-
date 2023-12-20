@@ -45,7 +45,7 @@ namespace TestClient
             });
         }
 
-        public void DisConnectServer()
+        public void DisconnectServer()
         {
             serverSession.Close();
         }
