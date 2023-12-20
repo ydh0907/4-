@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3993385357
+  GlobalObjectIdHash: 2123201272
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06307add88c9cc146b5d4b4fbaa65f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1245906103676024313, guid: 35fc9d4cbb784a34388942a57bc6829c, type: 3}
+  Player: {fileID: 3062054992082327368, guid: cc971c4c339f8c54ba9d10c3bdf34327, type: 3}
 --- !u!114 &444015820450112367
 MonoBehaviour:
   m_ObjectHideFlags: 0
