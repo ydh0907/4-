@@ -31,7 +31,13 @@ public class PlayerWeaponState : MonoBehaviour
 
     private void SetToMentosState()
     {
-        _attackDamageAmount = mentosDamageAmount;
+        if (CanChangeToMentosState())
+        {
+            _attackDamageAmount = mentosDamageAmount;
+        }
+        else
+            //_attackDamageAmount = 주먹 ㅔ미니;
+            Debug.Log("dfs");
     }
 
     private bool CanChangeToMentosState()
@@ -47,7 +53,6 @@ public class PlayerWeaponState : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamageble iDamageble = other.gameObject.GetComponent<IDamageble>();
-
         Vector2 hitDirection = other.gameObject.transform.position - transform.position;
 
         if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
@@ -58,8 +63,7 @@ public class PlayerWeaponState : MonoBehaviour
         else if (other.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
         {
             hitDirection.Normalize();
-            PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x);
-
+            PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x); // 실행 하는지 확인 피ㅣㄹ요
         }
     }
 
