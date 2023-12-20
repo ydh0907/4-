@@ -9,15 +9,18 @@ public class PlayerMovement : MonoBehaviour
 
     #region COMPONENTS
     public Rigidbody RB { get; private set; }
+    public Animator Animator { get; private set; }
     #endregion
 
-    private PlayerDamageble PlayerDamageble; //
+    private PlayerDamageble PlayerDamageble; 
+    private DrinkDamageble DrinkDamageble;
 
     #region STATE PARAMETERS
     private const float LERP_AMOUNT = 1f;
     #endregion
 
     public bool IsJumping { get; private set; }
+    public bool IsRushing { get; private set; } 
 
     #region INPUT PARAMETERS
     [HideInInspector] public Vector3 _moveInput;
@@ -39,8 +42,10 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         RB = GetComponent<Rigidbody>();
+        Animator = GetComponent<Animator>();
 
         PlayerDamageble = GetComponent<PlayerDamageble>();
+        DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
     }
 
     private void FixedUpdate()
@@ -65,7 +70,18 @@ public class PlayerMovement : MonoBehaviour
 
             Jump();
         }
+
+        // rush
+        if (CanRush())
+        {
+            Rush();
+        }
         #endregion
+    }
+
+    private void LateUpdate()
+    {
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
     }
 
     // Movement Methods
@@ -73,10 +89,31 @@ public class PlayerMovement : MonoBehaviour
     private void Run(float lerpAmount)
     {
         Vector3 moveDirection = _moveInput.normalized;
-        float targetSpeed = moveDirection.magnitude * Data.runMaxSpeed;
+        float targetSpeed;
+
+        if (IsRushing)
+            targetSpeed = moveDirection.magnitude * Data.rushMaxSpeed;
+        else
+            targetSpeed = moveDirection.magnitude * Data.runMaxSpeed;
+
         targetSpeed = Mathf.Lerp(RB.velocity.magnitude, targetSpeed, lerpAmount);
 
         RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+
+        // Rotation
+        if (moveDirection != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
+        }
+
+        Animator.SetFloat("AnimationSpeed", targetSpeed);
+    }
+    #endregion
+
+    #region Rush METHODS
+    private void Rush()
+    {
+        DrinkDamageble.StartRush();
     }
     #endregion
 
@@ -93,13 +130,25 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CanRun()
     {
-        if (/*만약 러쉬중이 아닐때*/ !PlayerDamageble.IsGroggying)
+        if (!PlayerDamageble.IsGroggying)
+            return true;
+        else
         {
+            RB.velocity = new Vector3(0f, RB.velocity.y, 0f);
+            return false;
+        }
+    }
+
+    private bool CanRush()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            IsRushing = true;
             return true;
         }
         else
         {
-            RB.velocity = new Vector3(0f, RB.velocity.y, 0f); // 
+            IsRushing = false;
             return false;
         }
     }
