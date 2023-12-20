@@ -1331,7 +1331,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 21
+  killCount:
+    m_InternalValue: -2
   <MaxHealth>k__BackingField: 100
   OnHealthChanged:
     m_PersistentCalls:
