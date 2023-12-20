@@ -1,15 +1,17 @@
 ﻿using Karin.Network;
 using Packets;
 using System.Net;
+using UnityEngine;
 
 namespace TestClient
 {
-    internal class Program
+    internal class Program : MonoBehaviour
     {
         public static Connector connector;
         public static ServerSession serverSession;
 
-        static void Main(string[] args)
+        [ContextMenu("Server")]
+        private async void ServerConnect()
         {
             IPAddress ipAddress = IPAddress.Parse("172.31.3.130");
             IPEndPoint endPoint = new IPEndPoint(ipAddress, 8081);
@@ -18,11 +20,11 @@ namespace TestClient
             connector = new Connector(endPoint, serverSession);
             connector.StartConnect(endPoint);
 
-            while (true)
-            {
+            //while (true)
+            //{
 
 
-            }
+            //}
 
         }
 
