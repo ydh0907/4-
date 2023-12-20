@@ -93,6 +93,26 @@ namespace TestClient
             serverSession.Send(packet.Serialize());
         }
 
+        [ContextMenu("Delete")]
+        public void Delete()
+        {
+            StartCoroutine(DeleteTest());
+        }
+
+        public IEnumerator DeleteTest()
+        {
+            StartCoroutine("ServerConnect");
+
+            yield return new WaitWhile(() => !connect);
+            Debug.Log("connect");
+
+            S_RoomDeletePacket packet = new S_RoomDeletePacket();
+            packet.roomName = "a";
+            packet.makerName = "b";
+
+            serverSession.Send(packet.Serialize());
+        }
+
         [ContextMenu("Room")]
         public List<Room> Roomtest()
         {
