@@ -92,7 +92,7 @@ namespace AH {
             if (!IsInData()) { // 데이터가 다 들어 있다면
                 return;
             }
-            //VisualElement createRoomList = CreateRoomList();
+            CreateRoomList();
             for (int i = 0; i < createRoomList.childCount; i++) {
                 if (createRoomList[i] as Button != null) {
                     roomList.Add(createRoomList[i] as Button);
@@ -106,7 +106,7 @@ namespace AH {
                 }
             });
         }
-        private VisualElement CreateRoomList() {
+        private void CreateRoomList() {
             var template = createRoomTemplate.Instantiate().Q<VisualElement>("container");
 
             root.Clear();
@@ -127,12 +127,11 @@ namespace AH {
 
                 createRoomList.Add(roomBoxTemplate);
             }
-
-            return createRoomList;
         }
 
         private void HandleRefresh(ClickEvent evt) {
             createRoomCount = Random.Range(0, 8);
+            CreateRoomList();
         }
         private void HandleEnterRoom(ClickEvent evt) {
             if(lastChoose != null) {
