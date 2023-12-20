@@ -39,6 +39,9 @@ namespace TestServer
 
             packetFactories.Add((ushort)PacketID.S_ReRoadingPacket, PacketUtillity.CreatePacket<S_ReRoadingPacket>);
             packetHandlers.Add((ushort)PacketID.S_ReRoadingPacket, PacketHandler.S_ReRoadingPacket);
+
+            packetFactories.Add((ushort)PacketID.S_RoomDeletePacket, PacketUtillity.CreatePacket<S_RoomDeletePacket>);
+            packetHandlers.Add((ushort)PacketID.S_RoomDeletePacket, PacketHandler.S_RoomDeletePacket);
         }
 
         public void HandlePacket(Session session, ArraySegment<byte> buffer)
