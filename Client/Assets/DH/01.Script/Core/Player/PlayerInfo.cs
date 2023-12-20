@@ -31,6 +31,7 @@ namespace DH
         public ulong ID = 0;
         public string Nickname = "";
         public Cola Cola = Cola.CocaCola;
+        public Char Char = Char.Beach;
         public int Kill = 0;
         public int Death = 0;
 
