@@ -52,12 +52,17 @@ namespace TestClient
             testaction?.Invoke();
         }
 
-        public void Create()
+        public void Create(string roomName, string playerName)
         {
-            StartCoroutine(CreateTest());
+            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, 1));
         }
 
-        public IEnumerator CreateTest()
+        public void UpdateRoom(string roomName, string playerName, int playerCount)
+        {
+            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, playerCount));
+        }
+
+        public IEnumerator SendRoomUpdatePacket(string roomName, string playerName, int playerCount)
         {
             StartCoroutine("ServerConnect");
 
@@ -73,10 +78,10 @@ namespace TestClient
 
         public void Reload(Action<List<Room>> callback)
         {
-            StartCoroutine(ReLoadTest(callback));
+            StartCoroutine(Reloading(callback));
         }
 
-        public IEnumerator ReLoadTest(Action<List<Room>> callback)
+        public IEnumerator Reloading(Action<List<Room>> callback)
         {
             StartCoroutine("ServerConnect");
 
