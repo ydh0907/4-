@@ -28,6 +28,49 @@
     font-size: 40px;
     -unity-font-style: bold;
     margin-bottom: 40px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-circ;
+}
+
+.button:hover {
+    scale: 1.2 1.2;
+}
+
+.drink-content {
+    height: 200px;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.39);
+    margin-top: 65px;
+}
+
+.player-content {
+    background-color: rgba(0, 0, 0, 0.39);
+    margin-top: 120px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.backToTitle-btn {
+    width: 100px;
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/Left%20BTN.png?fileID=21300000&guid=2f5621ced47967649819ed28fc802c35&type=3#Left BTN');
+    background-color: rgba(188, 188, 188, 0);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    height: 100px;
+    margin-top: 37px;
+    margin-right: 35px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-cubic;
+}
+
+.backToTitle-btn:hover {
+    scale: 1.2 1.2;
 }
 
 .playerdata-btn {
@@ -45,6 +88,11 @@
     margin-bottom: 20px;
     margin-top: 20px;
     margin-left: 20px;
+    background-color: rgb(0, 0, 0);
+}
+
+.playerdata-btn.notChoose {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.39);
 }
 
 .drink-btn {
@@ -58,6 +106,11 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    background-color: rgb(0, 0, 0);
+}
+
+.drink-btn.notChoose {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.39);
 }
 
 .roomList {
@@ -65,4 +118,42 @@
     height: 750px;
     background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/32%20Light.png?fileID=21300000&guid=a689281f545979940b5cedad12ec31a8&type=3#32 Light');
     top: 20px;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.roomConatiner {
+    height: 150px;
+    width: 1033px;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.27);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.roomList > #unity-content-and-vertical-scroll-container > Scroller {
+    align-self: auto;
+    min-width: 50px;
+}
+
+.roomList > #unity-content-and-vertical-scroll-container > Scroller > #unity-low-button {
+    width: 100%;
+    height: 6%;
+}
+
+.roomList > #unity-content-and-vertical-scroll-container > Scroller > #unity-high-button {
+    width: 100%;
+    height: 6%;
+}
+
+.roomList > #unity-content-and-vertical-scroll-container > Scroller > #unity-slider {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.roomList > #unity-content-and-vertical-scroll-container > Scroller > #unity-slider > VisualElement > #unity-drag-container > #unity-dragger {
+    width: 100%;
 }
