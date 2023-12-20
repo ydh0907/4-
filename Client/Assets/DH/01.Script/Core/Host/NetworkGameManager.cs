@@ -52,11 +52,6 @@ namespace DH
             if (!IsServer) return;
 
             GameEndClientRpc();
-
-            foreach(var player in players)
-            {
-                NetworkManager.Singleton.DisconnectClient(player.ID);
-            }
             players.Clear();
 
             NetworkManager.Singleton.Shutdown();
@@ -71,8 +66,11 @@ namespace DH
         public void GameEndClientRpc()
         {
             NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
 
             onGameEnded?.Invoke();
+
+            LoadSceneManager.Instance.LoadScene(1);
         }
     }
 }
