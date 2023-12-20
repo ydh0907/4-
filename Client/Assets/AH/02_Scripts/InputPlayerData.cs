@@ -22,6 +22,8 @@ namespace AH {
 
         private int createRoomCount = 0;
 
+        VisualElement createRoomList;
+
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
         }
@@ -90,7 +92,7 @@ namespace AH {
             if (!IsInData()) { // 데이터가 다 들어 있다면
                 return;
             }
-            VisualElement createRoomList = CreateRoomList();
+            //VisualElement createRoomList = CreateRoomList();
             for (int i = 0; i < createRoomList.childCount; i++) {
                 if (createRoomList[i] as Button != null) {
                     roomList.Add(createRoomList[i] as Button);
@@ -115,7 +117,7 @@ namespace AH {
 
             createRoomCount = Random.Range(0, 8);
 
-            var createRoomList = template.Q<VisualElement>("unity-content-container");
+            createRoomList = template.Q<VisualElement>("unity-content-container");
             for (int i = 0; i < createRoomCount; i++) { // 생성할 roomBox의 개수 및 생성
                 var roomBoxTemplate = roomListBox.Instantiate().Q<VisualElement>("roomListBox");
 
