@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,6 @@ namespace DH
         [SerializeField] private GameObject NetworkGameManager;
 
         private bool? isConnect = null;
-        private bool connectFlag = false;
         public bool IsConnect => NetworkManager.Singleton.IsHost;
 
         public UnityEvent onConnectFailed = new();
@@ -28,19 +28,11 @@ namespace DH
             Instance = this;
         }
 
-        private void Update()
-        {
-            if (isConnect == null && connectFlag && !IsConnect)
-            {
-                OnDisconnected();
-            }
-
-            connectFlag = IsConnect;
-        }
-
         public void StartConnect()
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += HostApproval;
+
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("127.0.0.0", (ushort)9070, "0.0.0.0");
 
             isConnect = NetworkManager.Singleton.StartHost();
 
@@ -69,11 +61,8 @@ namespace DH
         private void OnConnected()
         {
             isConnect = null;
-            connectFlag = true;
-            LoadSceneManager.Instance.LoadScene(1, () =>
-            {
-                Instantiate(NetworkGameManager, Vector3.zero, Quaternion.identity).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
-            });
+
+            LoadSceneManager.Instance.LoadScene(2, () => Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId));
 
             onConnectSucceed?.Invoke();
         }
@@ -81,20 +70,8 @@ namespace DH
         private void OnConnectFailed()
         {
             isConnect = null;
-            connectFlag = false;
 
             onConnectFailed?.Invoke();
-        }
-
-        private void OnDisconnected()
-        {
-            isConnect = null;
-            connectFlag = false;
-
-            if(SceneManager.GetActiveScene().buildIndex > 0)
-                LoadSceneManager.Instance.LoadScene(0);
-
-            onDisconnected?.Invoke();
         }
     }
 }

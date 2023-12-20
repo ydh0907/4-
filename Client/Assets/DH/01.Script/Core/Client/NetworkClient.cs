@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Text;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,7 +12,6 @@ namespace DH
         public static NetworkClient Instance = null;
 
         private bool? isConnect = null;
-        private bool connectFlag = false;
         public bool IsConnect => NetworkManager.Singleton.IsConnectedClient;
 
         public UnityEvent onConnectFailed = new();
@@ -25,20 +25,12 @@ namespace DH
             Instance = this;
         }
 
-        private void Update()
+        public void StartConnect(string Address)
         {
-            if(isConnect == null && connectFlag && !IsConnect)
-            {
-                OnDisconnected();
-            }
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo(ConnectManager.Instance.nickname, ConnectManager.Instance.cola));
 
-            connectFlag = IsConnect;
-        }
-
-        public void StartConnect()
-        {
-            NetworkManager.Singleton.NetworkConfig.ConnectionData = Encoding.Unicode.GetBytes(ConnectManager.Instance.nickname);
-
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(Address, (ushort)9070, "0.0.0.0");
+            
             isConnect = NetworkManager.Singleton.StartClient();
 
             StartCoroutine(WaitConnect());
@@ -58,7 +50,6 @@ namespace DH
         private void OnConnected()
         {
             isConnect = null;
-            connectFlag = true;
 
             onConnectSucceed?.Invoke();
         }
@@ -66,7 +57,6 @@ namespace DH
         private void OnConnectFailed()
         {
             isConnect = null;
-            connectFlag = false;
 
             onConnectFailed?.Invoke();
         }
@@ -74,7 +64,6 @@ namespace DH
         private void OnDisconnected()
         {
             isConnect = null;
-            connectFlag = false;
 
             onDisconnected?.Invoke();
         }

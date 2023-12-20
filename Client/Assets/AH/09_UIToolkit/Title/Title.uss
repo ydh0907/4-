@@ -28,6 +28,7 @@
     border-bottom-color: rgba(255, 255, 255, 0);
     transition-timing-function: ease-out-circ;
     transition-duration: 0.2s;
+    color: rgb(255, 255, 255);
 }
 
 .title-button:hover {
