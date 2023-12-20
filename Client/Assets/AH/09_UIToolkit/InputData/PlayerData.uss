@@ -122,15 +122,55 @@
     justify-content: center;
 }
 
-.roomConatiner {
+.roomContainer {
     height: 150px;
-    width: 1033px;
+    width: 100%;
     flex-direction: row;
     margin-top: 15px;
     margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0.27);
     justify-content: space-between;
     align-items: center;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+    border-top-width: 12px;
+    border-right-width: 12px;
+    border-bottom-width: 12px;
+    border-left-width: 12px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.roomContainer.choose {
+    border-left-color: rgb(255, 100, 100);
+    border-right-color: rgb(255, 100, 100);
+    border-top-color: rgb(255, 100, 100);
+    border-bottom-color: rgb(255, 100, 100);
+}
+
+.refresh-btn {
+    position: absolute;
+    align-items: flex-end;
+    left: 1347px;
+    background-color: rgba(188, 188, 188, 0);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/World.png?fileID=21300000&guid=cb0be92a1645a7c48a26aa4a8ebdb7d8&type=3#World');
+    width: 100px;
+    height: 100px;
+    top: 111px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-circ;
+}
+
+.refresh-btn:hover {
+    scale: 1.2 1.2;
 }
 
 .roomList > #unity-content-and-vertical-scroll-container > Scroller {
