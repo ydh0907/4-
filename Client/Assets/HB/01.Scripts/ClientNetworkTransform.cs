@@ -18,19 +18,5 @@ namespace HB
         {
             return false;
         }
-
-        protected override void Update()
-        {
-            CanCommitToTransform = IsOwner;
-            base.Update(); 
-
-            if (NetworkManager.IsConnectedClient || NetworkManager.IsListening)
-            {
-                if (CanCommitToTransform)
-                {
-                    TryCommitTransformToServer(transform, NetworkManager.LocalTime.Time);
-                }
-            }
-        }
     }
 }
