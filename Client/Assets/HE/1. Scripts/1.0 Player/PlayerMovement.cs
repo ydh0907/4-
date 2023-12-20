@@ -48,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
         DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
     }
 
+    private void Start()
+    {
+
+        RB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
+
     private void FixedUpdate()
     {
         // Handle Run
@@ -77,8 +83,6 @@ public class PlayerMovement : MonoBehaviour
             Rush();
         }
         #endregion
-
-        RB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     // Movement Methods
