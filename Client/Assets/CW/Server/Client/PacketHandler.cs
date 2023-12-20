@@ -15,7 +15,7 @@ namespace TestClient
         public static void C_ReRoadingPacket(Session session, Packet packet)
         {
             C_ReRoadingPacket c_ReRoadingPacket = packet as C_ReRoadingPacket;
-            Program.Rooms = c_ReRoadingPacket.Rooms;
+            Program.Instance.Rooms = c_ReRoadingPacket.Rooms;
             Program.Instance.reload = true;
             Program.Instance.DisConnectServer();
         }
