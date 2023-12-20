@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createRoomTemplate: {fileID: 9197481963319205126, guid: b9c6056f44d13aa4ba1181c50c125620, type: 3}
+  roomListBox: {fileID: 9197481963319205126, guid: 3ca77dd058f3e0643ae68bb54842bfb2, type: 3}
 --- !u!1 &882907878
 GameObject:
   m_ObjectHideFlags: 0
