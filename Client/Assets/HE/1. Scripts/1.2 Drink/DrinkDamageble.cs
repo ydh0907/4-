@@ -23,7 +23,6 @@ public class DrinkDamageble : MonoBehaviour, IDamageble
     public void Damage(int damageAmount, Vector3 hitDirection)
     {
         CurrentHealth -= damageAmount;
-        Debug.Log("데미지를 입ㅇㅆ어");
 
         if (CurrentHealth <= 200)
         {
@@ -31,8 +30,25 @@ public class DrinkDamageble : MonoBehaviour, IDamageble
         }
     }
 
+    public void StartRush()
+    {
+         StartCoroutine(nameof(RushDamage));
+        // CurrentHealth--;
+    }
+
     public void Die()
     {
         PlayerDamageble.Die();
+    }
+
+    IEnumerator RushDamage()
+    {
+        CurrentHealth--;
+
+        if (CurrentHealth <= 200)
+        {
+            Die();
+        }
+        yield return null;
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 namespace DH
@@ -12,11 +11,11 @@ namespace DH
         private NetworkClient m_NetworkClient;
 
         public string nickname = "Unknown";
-        public string IP = "127.0.0.1";
+        public Cola cola = Cola.CocaCola;
 
         private void Awake()
         {
-            if (Instance != null) Destroy(gameObject);
+            if (Instance != null) Destroy(Instance);
             Instance = this;
 
             m_NetworkHost = GetComponent<NetworkHost>();
@@ -25,29 +24,22 @@ namespace DH
             DontDestroyOnLoad(gameObject);
         }
 
-        public void StartClient()
+        public void StartClient(string Address)
         {
             nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
-            IP = GameObject.Find("IPInput").GetComponent<TMP_InputField>().text;
 
             if (nickname.Length < 1) nickname = "Unknown";
 
-            m_NetworkClient.StartConnect();
+            m_NetworkClient.StartConnect(Address);
         }
 
         public void StartHost()
         {
             nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
-            IP = "127.0.0.1";
 
             if (nickname.Length < 1) nickname = "Unknown";
 
             m_NetworkHost.StartConnect();
-        }
-
-        public string GetUserName()
-        {
-            return nickname;
         }
     }
 }

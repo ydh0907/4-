@@ -46,5 +46,10 @@ namespace DH
 
             callback?.Invoke();
         }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Karin.Network2">
+      <HintPath>..\Karin.Network2\bin\Debug\net6.0\Karin.Network2.dll</HintPath>
+    </Reference>
+    <Reference Include="Packet2">
+      <HintPath>..\Packet2\bin\Debug\net6.0\Packet2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+
+</Project>

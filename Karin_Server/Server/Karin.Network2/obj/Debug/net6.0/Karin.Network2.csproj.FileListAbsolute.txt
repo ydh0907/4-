@@ -1,0 +1,11 @@
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\bin\Debug\net6.0\Karin.Network2.deps.json
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\bin\Debug\net6.0\Karin.Network2.dll
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\bin\Debug\net6.0\Karin.Network2.pdb
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\Karin.Network2.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\Karin.Network2.AssemblyInfoInputs.cache
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\Karin.Network2.AssemblyInfo.cs
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\Karin.Network2.csproj.CoreCompileInputs.cache
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\Karin.Network2.dll
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\refint\Karin.Network2.dll
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\Karin.Network2.pdb
+C:\GitFork\4-\Karin_Server\Server\Karin.Network2\obj\Debug\net6.0\ref\Karin.Network2.dll
