@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GM
 {
-    public class MapManager : MonoBehaviour
+    public class MapManager : MonoSingleton<MapManager>
     {
         [SerializeField] private List<Transform> spawnPoints;
 
