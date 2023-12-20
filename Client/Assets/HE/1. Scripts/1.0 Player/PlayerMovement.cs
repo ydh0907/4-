@@ -77,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
             Rush();
         }
         #endregion
+
+        RB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     // Movement Methods
