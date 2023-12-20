@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06307add88c9cc146b5d4b4fbaa65f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 3062054992082327368, guid: cc971c4c339f8c54ba9d10c3bdf34327, type: 3}
+  Player: {fileID: 8637493282298108973, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
 --- !u!114 &444015820450112367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,4 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609ffd2f07cb8154fb6f56bf999b6624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 300
+  timer:
+    m_InternalValue: 300
