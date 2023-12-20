@@ -14,11 +14,24 @@ namespace DH
         Pepsi
     }
 
+    public enum Char
+    {
+        Football,
+        Beach,
+        Business,
+        Disco,
+        Farmer,
+        Police,
+        Soccer,
+        Thief,
+    }
+
     public class PlayerInfo
     {
         public ulong ID = 0;
         public string Nickname = "";
         public Cola Cola = Cola.CocaCola;
+        public Char Char = Char.Beach;
         public int Kill = 0;
         public int Death = 0;
 

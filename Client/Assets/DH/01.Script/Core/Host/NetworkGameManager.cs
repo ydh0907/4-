@@ -37,9 +37,21 @@ namespace DH
         {
             if (!IsServer) return;
 
+            NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
+
+            List<Vector3> temp = new List<Vector3>();
+
             foreach(var player in players)
             {
-                Instantiate(Player).GetComponent<NetworkObject>().SpawnAsPlayerObject(player.ID);
+                Vector3 rand = GM.MapManager.Instance.GetSpawnPosition();
+
+                while(temp.Contains(rand))
+                    rand = GM.MapManager.Instance.GetSpawnPosition();
+
+                GameObject p = Instantiate(Player, rand, Quaternion.identity);
+                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.ID);
+
+                temp.Add(rand);
             }
 
             GetComponent<NetworkServerTimer>().StartTimer();

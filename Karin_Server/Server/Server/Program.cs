@@ -8,7 +8,7 @@ namespace TestServer
     internal class Program
     {
         public static Listener listener;
-        public static List<Room> Rooms = new();
+        public static List<Room> Rooms = new List<Room>();
 
         static void Main(string[] args)
         {
@@ -21,7 +21,7 @@ namespace TestServer
                 listener.StartAccept(onAccepted);
             }
 
-            while(true)
+            while (true)
             {
 
             }
