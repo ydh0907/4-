@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -10,6 +11,8 @@ namespace DH
         public static NetworkServerTimer Instance;
 
         [SerializeField] private NetworkVariable<float> timer = new(300);
+
+        public Action onTimerEnd = null;
 
         public bool Active { get; private set; }
 
@@ -40,6 +43,7 @@ namespace DH
             {
                 timer.Value = 0;
 
+                onTimerEnd?.Invoke();
                 NetworkGameManager.Instance.ServerGameEnd();
             }
         }

@@ -45,38 +45,41 @@ namespace TestClient
             });
         }
 
-        public void DisConnectServer(Action testaction = null)
+        public void DisconnectServer()
         {
             serverSession.Close();
-
-            testaction?.Invoke();
         }
 
-        public void Create()
+        public void Create(string roomName, string playerName)
         {
-            StartCoroutine(CreateTest());
+            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, 1));
         }
 
-        public IEnumerator CreateTest()
+        public void UpdateRoom(string roomName, string playerName, int playerCount)
+        {
+            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, (ushort)playerCount));
+        }
+
+        public IEnumerator SendRoomUpdatePacket(string roomName, string playerName, ushort playerCount)
         {
             StartCoroutine("ServerConnect");
 
             yield return new WaitUntil(() => connect);
 
             S_RoomCreatePacket packet = new S_RoomCreatePacket();
-            packet.roomName = "a";
-            packet.makerName = "b";
-            packet.playerCount = 1;
+            packet.roomName = roomName;
+            packet.makerName = playerName;
+            packet.playerCount = playerCount;
 
             serverSession.Send(packet.Serialize());
         }
 
         public void Reload(Action<List<Room>> callback)
         {
-            StartCoroutine(ReLoadTest(callback));
+            StartCoroutine(Reloading(callback));
         }
 
-        public IEnumerator ReLoadTest(Action<List<Room>> callback)
+        public IEnumerator Reloading(Action<List<Room>> callback)
         {
             StartCoroutine("ServerConnect");
 
