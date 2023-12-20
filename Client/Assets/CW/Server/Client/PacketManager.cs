@@ -2,6 +2,7 @@
 using Packets;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace TestClient
 {
@@ -48,7 +49,6 @@ namespace TestClient
             // [ Size ] [ ID ] [ Data ] [ ... ]
 
             ushort packetID = PacketUtillity.ReadPacketID(buffer);
-
             if (packetFactories.ContainsKey(packetID))
             {
                 Packet packet = packetFactories[packetID]?.Invoke(buffer);

@@ -16,9 +16,9 @@ namespace Packets
         public override ushort Deserialize(ArraySegment<byte> buffer, int offset)
         {
             ushort process = 0;
-            process += PacketUtillity.ReadStringData(buffer, offset, out roomName);
-            process += PacketUtillity.ReadStringData(buffer, offset, out makerName);
-            process += PacketUtillity.ReadUShortData(buffer, offset, out playerCount);
+            process += PacketUtillity.ReadStringData(buffer, offset + process, out roomName);
+            process += PacketUtillity.ReadStringData(buffer, offset + process, out makerName);
+            process += PacketUtillity.ReadUShortData(buffer, offset + process, out playerCount);
 
             return process;
         }
@@ -26,9 +26,10 @@ namespace Packets
         public override ushort Serialize(ArraySegment<byte> buffer, int offset)
         {
             ushort process = 0;
-            process += PacketUtillity.AppendStringData(roomName, buffer, offset);
-            process += PacketUtillity.AppendStringData(makerName, buffer, offset);
-            process += PacketUtillity.AppendUShortData(playerCount, buffer, offset);
+
+            process += PacketUtillity.AppendStringData(roomName, buffer, offset + process);
+            process += PacketUtillity.AppendStringData(makerName, buffer, offset + process);
+            process += PacketUtillity.AppendUShortData(playerCount, buffer, offset + process);
 
             return process;
         }
