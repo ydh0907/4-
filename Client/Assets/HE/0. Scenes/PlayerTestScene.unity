@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 323279692}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: -7.97, y: 1.5, z: -9.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -682,6 +682,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2048752487394272885, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
+      propertyPath: m_Name
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 8637493282298108973, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_Name
       value: BeachGuy
@@ -692,15 +696,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.287
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5.22
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalRotation.x
@@ -708,7 +712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalRotation.z
@@ -720,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

@@ -814,6 +814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6549443859893699448}
   - component: {fileID: 7908220834866389762}
+  - component: {fileID: 9059328199317896495}
   m_Layer: 0
   m_Name: Collidr
   m_TagString: Untagged
@@ -830,7 +831,7 @@ Transform:
   m_GameObject: {fileID: 6645369324763592304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0046, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -859,6 +860,33 @@ CapsuleCollider:
   m_Height: 0.13
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: -0.00043196976}
+--- !u!54 &9059328199317896495
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645369324763592304}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &6695965463709106807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8977181268269844119}
   - component: {fileID: 5965587675086484081}
+  - component: {fileID: 1798387927980006375}
   - component: {fileID: 3445164348561149405}
   - component: {fileID: 5055354573460058493}
   - component: {fileID: 7949805777960892174}
@@ -1194,6 +1223,20 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1798387927980006375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637493282298108973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7386b431facb8864a89d8aa3e771b2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackRefillTime: 5
+  _attackSpeed: 2
 --- !u!114 &3445164348561149405
 MonoBehaviour:
   m_ObjectHideFlags: 0
