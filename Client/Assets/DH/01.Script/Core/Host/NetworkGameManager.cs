@@ -12,6 +12,7 @@ namespace DH
         public static NetworkGameManager Instance;
 
         [SerializeField] private GameObject Player;
+        [SerializeField] private List<Transform> Spawns = new List<Transform>();
 
         public List<PlayerInfo> players = new();
 
@@ -37,9 +38,19 @@ namespace DH
         {
             if (!IsServer) return;
 
+            List<int> temp = new List<int>();
+
             foreach(var player in players)
             {
-                Instantiate(Player).GetComponent<NetworkObject>().SpawnAsPlayerObject(player.ID);
+                int rand = UnityEngine.Random.Range(0, Spawns.Count);
+
+                while(temp.Contains(rand))
+                    rand = UnityEngine.Random.Range(0, Spawns.Count);
+
+                GameObject p = Instantiate(Player, Spawns[rand].position, Quaternion.identity);
+                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.ID);
+
+                temp.Add(rand);
             }
 
             GetComponent<NetworkServerTimer>().StartTimer();

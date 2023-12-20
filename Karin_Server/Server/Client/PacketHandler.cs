@@ -14,7 +14,6 @@ namespace TestClient
         public static void C_ReRoadingPacket(Session session, Packet packet)
         {
             C_ReRoadingPacket c_ReRoadingPacket = packet as C_ReRoadingPacket;
-            Console.WriteLine(c_ReRoadingPacket.Rooms.Count);
             // 방정보 공유 .Rooms
         }
     }
