@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using DH;
 
 namespace HB
 {
@@ -72,5 +73,7 @@ namespace HB
                 _isDead = true;
             }
         }
+
+        NetworkServerTimer networkServerTimer = new NetworkServerTimer();
     }
 }
