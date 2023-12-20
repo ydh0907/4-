@@ -20,7 +20,7 @@ public class PlayerDamageble : MonoBehaviour, IDamageble
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && !IsGroggying)
         {
             StartCoroutine(nameof(GroggyAction));
         }
@@ -28,10 +28,13 @@ public class PlayerDamageble : MonoBehaviour, IDamageble
 
     public void Damage(int damageAmount, Vector3 hitDirection)
     {
-        // StartCoroutine(nameof(FaintAction));
+        // StartCoroutine(nameof(GroggyAction));
     }
 
-    public void Die() { } // 사용 안 함
+    public void Die()
+    {
+        Debug.Log("d");
+    }
 
     IEnumerator GroggyAction()
     {

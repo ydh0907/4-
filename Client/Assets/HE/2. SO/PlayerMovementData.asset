@@ -16,6 +16,8 @@ MonoBehaviour:
   gravityScale: 8.154943
   fallGravityMult: 1
   runMaxSpeed: 9.8
+  rushMaxSpeed: 18
   jumpHeight: 10
   jumpTimeToApex: 0.5
   jumpForce: 40
+  rotationFactorPerFrame: 15

@@ -20,12 +20,20 @@ public class PlayerMovementData : ScriptableObject
 
     [Space(20)]
 
+    [Header("Rush")]
+    public float rushMaxSpeed;
+
+    [Space(20)]
+
     [Header("Jump")]
     [Tooltip("최대 점프 높이")]
     public float jumpHeight;
     [Tooltip("최대 점프 높이까지 도달하는 시간")]
     public float jumpTimeToApex; 
     [HideInInspector] public float jumpForce;
+
+    [Space(20)]
+    public float rotationFactorPerFrame;
 
     private void OnValidate()
     {
