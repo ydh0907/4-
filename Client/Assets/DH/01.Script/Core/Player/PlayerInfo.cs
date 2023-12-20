@@ -14,6 +14,18 @@ namespace DH
         Pepsi
     }
 
+    public enum Char
+    {
+        Football,
+        Beach,
+        Business,
+        Disco,
+        Farmer,
+        Police,
+        Soccer,
+        Thief,
+    }
+
     public class PlayerInfo
     {
         public ulong ID = 0;
