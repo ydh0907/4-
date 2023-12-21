@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using DH;
+using Unity.Netcode;
 
 namespace AH {
     public class InputPlayerData : MonoBehaviour {
@@ -17,8 +19,6 @@ namespace AH {
         VisualElement root;
 
         private Button lastChoose = null;
-        private string drinkData = null;
-        private string playerData = null;
 
         private int createRoomCount = 0;
 
@@ -53,14 +53,78 @@ namespace AH {
                 var dve = evt.target as Button;
                 if (dve != null) {
                     ClearToButtonList(drinksList, dve);
-                    drinkData = dve.name;
+                    switch(dve.name)
+                    {
+                        case "cola-btn":
+                            {
+                                ConnectManager.Instance.cola = Cola.Cola;
+                                break;
+                            }
+                        case "pinapple-btn":
+                            {
+                                ConnectManager.Instance.cola = Cola.Pineapple;
+                                break;
+                            }
+                        case "cider-btn":
+                            {
+                                ConnectManager.Instance.cola = Cola.Sprite;
+                                break;
+                            }
+                        case "orangi-btn":
+                            {
+                                ConnectManager.Instance.cola = Cola.Orange;
+                                break;
+                            }
+                    }
                 }
             });
             playerButtonRow.RegisterCallback<ClickEvent>(evt => {
                 var dve = evt.target as Button;
                 if (dve != null) {
                     ClearToButtonList(playerList, dve);
-                    playerData = dve.name;
+                    switch(dve.name)
+                    {
+                        case "BeachGuy":
+                            {
+                                ConnectManager.Instance.character = Char.Beach;
+                                break;
+                            }
+                        case "AmericanFootballer":
+                            {
+                                ConnectManager.Instance.character = Char.Football;
+                                break;
+                            }
+                        case "BusinessGuy":
+                            {
+                                ConnectManager.Instance.character = Char.Business;
+                                break;
+                            }
+                        case "DiscoGuy":
+                            {
+                                ConnectManager.Instance.character = Char.Disco;
+                                break;
+                            }
+                        case "Farmer":
+                            {
+                                ConnectManager.Instance.character = Char.Farmer;
+                                break;
+                            }
+                        case "Police":
+                            {
+                                ConnectManager.Instance.character = Char.Police;
+                                break;
+                            }
+                        case "SoccerGuy":
+                            {
+                                ConnectManager.Instance.character = Char.Soccer;
+                                break;
+                            }
+                        case "Thief":
+                            {
+                                ConnectManager.Instance.character = Char.Thief;
+                                break;
+                            }
+                    }
                 }
             });
         }
@@ -74,24 +138,15 @@ namespace AH {
             }
         }
         private void HandleCreateRoom(ClickEvent evt) {
-            Debug.Log(drinkData);
-            Debug.Log(playerData);
-            if (IsInData()) {
-                SceneManager.LoadScene("Ingame"); // host
-            }
-            else {
-                Debug.Log("값이 비었어요!");
-            }
+            ConnectManager.Instance.StartHost();
         }
         private void HandleBackTitleScene(ClickEvent evt) { // host
-            SceneManager.LoadScene("Title");
+            if (NetworkManager.Singleton != null) Destroy(NetworkManager.Singleton.gameObject);
+            SceneManager.LoadScene(0);
         }
 
         #region find room
         private void HandleFindRoom(ClickEvent evt) {
-            if (!IsInData()) { // 데이터가 다 들어 있다면
-                return;
-            }
             CreateRoomList();
             ChooseRoom();
         }
@@ -146,9 +201,7 @@ namespace AH {
                 Debug.Log("값이 비었어요!");
             }
         }
-        private bool IsInData() {
-            return drinkData != null && playerData != null ? true : false;
-        }
+
         private void ClearToRoomList(List<Button> list, Button dve) {
             foreach (var button in list) {
                 Debug.Log(button);

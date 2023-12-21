@@ -11,7 +11,8 @@ namespace DH
         private NetworkClient m_NetworkClient;
 
         public string nickname = "Unknown";
-        public Cola cola = Cola.CocaCola;
+        public Cola cola = Cola.Cola;
+        public Char character = Char.Beach;
 
         private void Awake()
         {
