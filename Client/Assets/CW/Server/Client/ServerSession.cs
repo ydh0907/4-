@@ -2,6 +2,7 @@
 using Packets;
 using System;
 using System.Net;
+using UnityEngine;
 
 namespace TestClient
 {
@@ -10,8 +11,6 @@ namespace TestClient
         public override void OnConnected(EndPoint endPoint)
         {
             Console.WriteLine($"[Session] Connected with Server");
-
-            Program.CreateTest();
         }
 
         public override void OnDisconnected(EndPoint endPoint)
@@ -21,7 +20,6 @@ namespace TestClient
 
         public override void OnPacketReceived(ArraySegment<byte> buffer)
         {
-            Console.WriteLine($"[Session] {buffer.Count} of Data Received");
             PacketManager.Instance.HandlePacket(this, buffer);
         }
 

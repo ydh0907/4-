@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
     private DrinkDamageble DrinkDamageble;
 
     #region STATE PARAMETERS
+    public bool IsJumping { get; private set; }
+    public bool IsRushing { get; private set; }
+
     private const float LERP_AMOUNT = 1f;
     #endregion
-
-    public bool IsJumping { get; private set; }
-    public bool IsRushing { get; private set; } 
-
+  
     #region INPUT PARAMETERS
     [HideInInspector] public Vector3 _moveInput;
     #endregion
@@ -79,11 +79,6 @@ public class PlayerMovement : MonoBehaviour
         #endregion
     }
 
-    private void LateUpdate()
-    {
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-    }
-
     // Movement Methods
     #region RUN METHODS
     private void Run(float lerpAmount)
@@ -106,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
         }
 
-        Animator.SetFloat("AnimationSpeed", targetSpeed);
+        Animator.SetFloat("AnimationSpeed", targetSpeed); // 원래 Lat Updat 에서 실행ㅚ어야 한ㅏ.
     }
     #endregion
 

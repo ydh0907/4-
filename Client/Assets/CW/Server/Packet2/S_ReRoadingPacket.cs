@@ -11,12 +11,15 @@ namespace Packets
     {
         public override ushort ID => (ushort)PacketID.S_ReRoadingPacket;
 
+
         public override void Deserialize(ArraySegment<byte> buffer)
         {
             ushort process = 0;
 
             process += sizeof(ushort);
             process += sizeof(ushort);
+
+
         }
 
         public override ArraySegment<byte> Serialize()
