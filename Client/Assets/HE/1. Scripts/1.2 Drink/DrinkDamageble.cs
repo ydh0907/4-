@@ -2,63 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrinkDamageble : MonoBehaviour, IDamageble
+namespace HE
 {
-    private PlayerDamageble PlayerDamageble;
-
-    [field: SerializeField] public int CurrentHealth { get; set; }
-    [field: SerializeField] public int MaxHealth { get; set; }
-
-    private void Awake()
+    public class DrinkDamageble : MonoBehaviour, IDamageble
     {
-        PlayerDamageble = GetComponentInParent<PlayerDamageble>();
-    }
+        private PlayerDamageble PlayerDamageble;
 
-    private void Start()
-    {
-        MaxHealth = 1000;
-        CurrentHealth = MaxHealth;
-    }
+        [field: SerializeField] public int CurrentHealth { get; set; }
+        [field: SerializeField] public int MaxHealth { get; set; }
 
-    public void Damage(int damageAmount, Vector3 hitDirection)
-    {
-        CurrentHealth -= damageAmount;
-
-        if (CurrentHealth <= 200)
+        private void Awake()
         {
-            Die();
+            PlayerDamageble = GetComponentInParent<PlayerDamageble>();
         }
-    }
 
-    public void StartRush()
-    {
-         StartCoroutine(nameof(RushDamage));
-    }
-
-    public void Die()
-    {
-        PlayerDamageble.Die();
-    }
-
-    IEnumerator RushDamage()
-    {
-        CurrentHealth--;
-
-        if (CurrentHealth <= 200)
+        private void Start()
         {
-            Die();
+            MaxHealth = 1000;
+            CurrentHealth = MaxHealth;
         }
-        yield return null;
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("WEAPON"))
+        public void Damage(int damageAmount, Vector3 hitDirection)
         {
-            Transform rootParent = other.gameObject.transform.root;
-            string lastReaderName = rootParent.gameObject.name;
+            CurrentHealth -= damageAmount;
 
-            Debug.Log(lastReaderName);
+            if (CurrentHealth <= 200)
+            {
+                Die();
+            }
+        }
+
+        public void StartRush()
+        {
+            StartCoroutine(nameof(RushDamage));
+        }
+
+        public void Die()
+        {
+            PlayerDamageble.Die();
+        }
+
+        IEnumerator RushDamage()
+        {
+            CurrentHealth--;
+
+            if (CurrentHealth <= 200)
+            {
+                Die();
+            }
+            yield return null;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("WEAPON"))
+            {
+                Transform rootParent = other.gameObject.transform.root;
+                string lastReaderName = rootParent.gameObject.name;
+
+                Debug.Log(lastReaderName);
+            }
         }
     }
 }

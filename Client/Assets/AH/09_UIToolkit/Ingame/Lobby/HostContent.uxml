@@ -1,11 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=cd80b79b037fb024297b55feaf002c51&amp;type=3#Lobby" />
-    <ui:VisualElement name="host-content" class="lobby-content" style="-unity-text-align: middle-center; height: 270px; min-height: 270px;">
-        <ui:VisualElement name="empty" style="width: 500px; left: 100px; height: 100%;" />
-        <ui:VisualElement name="text-content" style="height: 100%; flex-grow: 1; align-items: center; justify-content: center;">
-            <ui:Label tabindex="-1" text="CODE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="-unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme%201.tss?fileID=2230732570650464555&amp;guid=9325f22bdc1097e46afe5699cc7015dd&amp;type=3#NotInter-Regular&apos;); font-size: 40px; -unity-font-style: normal;" />
-            <ui:Label tabindex="-1" text="join code" parse-escape-sequences="true" display-tooltip-when-elided="true" name="joincode-txt" style="font-size: 70px; -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&amp;guid=143bf3abee24d7c4cbea0e9c3f14ff01&amp;type=3#PyeongChangPeace-Light&apos;); -unity-font-style: bold;" />
-        </ui:VisualElement>
-        <ui:Button text="START GAEM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="startgame-btn" class="lobby-button" style="right: 100px;" />
+    <ui:VisualElement name="host-content" class="lobby-content" style="-unity-text-align: middle-center; height: 270px; min-height: 270px; justify-content: flex-end;">
+        <ui:Button text="게임 시작" parse-escape-sequences="true" display-tooltip-when-elided="true" name="startgame-btn" enable-rich-text="true" class="lobby-button" style="right: 100px;" />
     </ui:VisualElement>
 </ui:UXML>

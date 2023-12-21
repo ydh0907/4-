@@ -2,44 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDamageble : MonoBehaviour, IDamageble
+namespace HE
 {
-    public bool IsGroggying { get; private set; }
 
-    private PlayerMovement PlayerMovement;
-
-    public int CurrentHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public int MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    [SerializeField] private float _faintTime;
-
-    private void Awake()
+    public class PlayerDamageble : MonoBehaviour, IDamageble
     {
-        PlayerMovement = GetComponent<PlayerMovement>();
-    }
+        public bool IsGroggying { get; private set; }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I) && !IsGroggying)
+        private PlayerMovement PlayerMovement;
+
+        public int CurrentHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public int MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+        [SerializeField] private float _faintTime;
+
+        private void Awake()
         {
-            StartCoroutine(nameof(GroggyAction));
+            PlayerMovement = GetComponent<PlayerMovement>();
         }
-    }
 
-    public void Damage(int damageAmount, Vector3 hitDirection)
-    {
-        // StartCoroutine(nameof(GroggyAction));
-    }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.I) && !IsGroggying)
+            {
+                StartCoroutine(nameof(GroggyAction));
+            }
+        }
 
-    public void Die()
-    {
-        Debug.Log("d");
-    }
+        public void Damage(int damageAmount, Vector3 hitDirection)
+        {
+            // StartCoroutine(nameof(GroggyAction));
+        }
 
-    IEnumerator GroggyAction()
-    {
-        IsGroggying = true;
-        yield return new WaitForSeconds(_faintTime);
-        IsGroggying = false;
+        public void Die()
+        {
+            Debug.Log("d");
+        }
+
+        IEnumerator GroggyAction()
+        {
+            IsGroggying = true;
+            yield return new WaitForSeconds(_faintTime);
+            IsGroggying = false;
+        }
     }
 }

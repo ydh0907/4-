@@ -25,10 +25,7 @@ namespace AH {
 
         [Header("Data")]
         public bool isHost = true;
-        public string nickName;
-        public string drinkName;
 
-        private string _joinCode = "1234"; // 이 값은 server에서 받는다
         private bool isReady = false;
 
         private void Awake() {
@@ -40,11 +37,9 @@ namespace AH {
             _container = root.Q<VisualElement>("lobby-container");
 
             if(isHost) { // 이 값은 server에서 받는다
-                InputPlayerData();
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
             else {
-                InputPlayerData();
                 ClientLobbyPanel();
             }
         }
@@ -53,23 +48,14 @@ namespace AH {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
 
-            Label joinCode = hostPanel.Q<Label>("joincode-txt");
-            joinCode.text = _joinCode;
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
         }
         private void ClientLobbyPanel() {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
-            clientPanel.Q<Button>("ready-btn").RegisterCallback<ClickEvent>(HandleReadyGame);
-        }
-        private void InputPlayerData() {
-            VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
-            _container.Add(hostPanel);
-
-            Label joinCode = hostPanel.Q<Label>("joincode-txt");
-            joinCode.text = _joinCode;
-            hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
+            var ready = clientPanel.Q<Button>("ready-btn");
+            ready.RegisterCallback<ClickEvent>(HandleReadyGame);
         }
 
         private void HaneldStartGame(ClickEvent evt) {
@@ -78,23 +64,31 @@ namespace AH {
             _container.Clear();
             Counter();
         }
-        private void HandleReadyGame(ClickEvent evt) { // 서버 들어오고 수정 필요 가능서 있음
-            Debug.Log($"reday : {isReady}");
-            if(nickName !=null && drinkName != null) { // 둘 다 값을 입력 했을 때
-                isReady = true;
-
+        private void HandleReadyGame(ClickEvent evt) {
+            var dve = evt.target as Button;
+            if (dve != null) {
+                if (!isReady) { // 준비 완료를 안함
+                    isReady = true;
+                    dve.AddToClassList("isReady");
+                }
+                else {
+                    isReady = false;
+                    dve.RemoveFromClassList("isReady");
+                }
             }
+
+            Debug.Log($"reday : {isReady}");
         }
 
         // 카운터
-        private void Counter() {
+        private void Counter() { // 게임 시작시 카운트 다운
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
 
             _counter.CountDown(countText);
-        } 
-        private void ResurrectionCounter() {
+        }
+        private void ResurrectionCounter() { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
             _container.Add(counterPanel);
