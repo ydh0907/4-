@@ -14,7 +14,7 @@ namespace GM
 
         private void Start()
         {
-            spawnPos = GetComponentInChildren<Transform>();
+            spawnPos = transform.GetChild(0);
         }
 
         private void Update()
@@ -22,7 +22,9 @@ namespace GM
             currentTime += Time.deltaTime;
             if(currentTime > spawnCoolTime)
             {
-                Instantiate(mentosPrefab, spawnPos.position, Quaternion.identity);
+                GameObject mantosObj = Instantiate(mentosPrefab, spawnPos.position, Quaternion.identity);
+                Material mat = mantosObj.GetComponent<MeshRenderer>().material;
+                mat.color = Random.ColorHSV();
 
                 currentTime = 0;
             }
