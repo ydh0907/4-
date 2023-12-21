@@ -12,7 +12,6 @@ namespace HB
     {
         public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
         //NetworkVariable : 네트워크에 연결된 동일한 인스턴스들끼리 공유해야할 변수를 만들때 설정
-        public NetworkVariable<int> killCount = new NetworkVariable<int>();
 
         [field: SerializeField]
         public int MaxHealth
@@ -23,7 +22,7 @@ namespace HB
 
         public Action<Health> OnDie;
 
-        private bool _isDead;
+        private bool _isDead = false;
 
         public UnityEvent<int, int, float> OnHealthChanged;
 
@@ -32,6 +31,7 @@ namespace HB
             if (IsClient)
             {
                 currentHealth.OnValueChanged += HealthChangeHandle;
+
                 HealthChangeHandle(0, MaxHealth);
             }
 
@@ -68,12 +68,19 @@ namespace HB
             currentHealth.Value = Mathf.Clamp(currentHealth.Value + value, 0, MaxHealth);
             if (currentHealth.Value == 0)
             {
-                OnDie?.Invoke(this);
-                killCount.Value += 1;
+                if (OnDie == null)
+                {
+                    Debug.Log("empty");
+                }
+
+                else
+                {
+                    OnDie.Invoke(this);
+                }
+
+                Debug.Log("A");
                 _isDead = true;
             }
         }
-
-        NetworkServerTimer networkServerTimer = new NetworkServerTimer();
     }
 }
