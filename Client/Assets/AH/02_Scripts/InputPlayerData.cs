@@ -93,19 +93,9 @@ namespace AH {
                 return;
             }
             CreateRoomList();
-            for (int i = 0; i < createRoomList.childCount; i++) {
-                if (createRoomList[i] as Button != null) {
-                    roomList.Add(createRoomList[i] as Button);
-                }
-            }
-            createRoomList.RegisterCallback<ClickEvent>(evt => {
-                var dve = evt.target as Button;
-                if (dve != null) {
-                    ClearToRoomList(roomList, dve);
-                    lastChoose = dve;
-                }
-            });
+            ChooseRoom();
         }
+
         private void CreateRoomList() {
             var template = createRoomTemplate.Instantiate().Q<VisualElement>("container");
 
@@ -128,10 +118,25 @@ namespace AH {
                 createRoomList.Add(roomBoxTemplate);
             }
         }
+        private void ChooseRoom() {
+            for (int i = 0; i < createRoomList.childCount; i++) {
+                if (createRoomList[i] as Button != null) {
+                    roomList.Add(createRoomList[i] as Button);
+                }
+            }
+            createRoomList.RegisterCallback<ClickEvent>(evt => {
+                var dve = evt.target as Button;
+                if (dve != null) {
+                    ClearToRoomList(roomList, dve);
+                    lastChoose = dve;
+                }
+            });
+        }
 
         private void HandleRefresh(ClickEvent evt) {
             createRoomCount = Random.Range(0, 8);
             CreateRoomList();
+            ChooseRoom();
         }
         private void HandleEnterRoom(ClickEvent evt) {
             if(lastChoose != null) {
