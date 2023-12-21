@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using DH;
 
 namespace HB
 {
@@ -11,6 +12,7 @@ namespace HB
     {
         public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
         //NetworkVariable : 네트워크에 연결된 동일한 인스턴스들끼리 공유해야할 변수를 만들때 설정
+        public NetworkVariable<int> killCount = new NetworkVariable<int>();
 
         [field: SerializeField]
         public int MaxHealth
@@ -67,8 +69,11 @@ namespace HB
             if (currentHealth.Value == 0)
             {
                 OnDie?.Invoke(this);
+                killCount.Value += 1;
                 _isDead = true;
             }
         }
+
+        NetworkServerTimer networkServerTimer = new NetworkServerTimer();
     }
 }

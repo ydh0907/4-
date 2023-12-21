@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Text;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,10 +25,12 @@ namespace DH
             Instance = this;
         }
 
-        public void StartConnect()
+        public void StartConnect(string Address)
         {
             NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo(ConnectManager.Instance.nickname, ConnectManager.Instance.cola));
 
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(Address, (ushort)9070, "0.0.0.0");
+            
             isConnect = NetworkManager.Singleton.StartClient();
 
             StartCoroutine(WaitConnect());

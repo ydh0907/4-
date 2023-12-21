@@ -16,7 +16,8 @@ namespace TestClient
         public static Program Instance;
 
         public bool connect = false;
-        public static List<Room> Rooms = new List<Room>();
+        public bool reload = false;
+        public List<Room> Rooms = new List<Room>();
 
         private void Awake()
         {
@@ -25,13 +26,9 @@ namespace TestClient
                 Instance = this;
                 DontDestroyOnLoad(this);
             }
+            else Destroy(this);
+        }
 
-        }
-        private void Update()
-        {
-            if (connector is not null)
-                connect = connector.onConnecting;
-        }
         private IEnumerator ServerConnect()
         {
             IPAddress ipAddress = IPAddress.Parse("172.31.3.130");
@@ -41,90 +38,61 @@ namespace TestClient
             connector = new Connector(endPoint, serverSession);
             connector.StartConnect(endPoint);
 
-            yield return new WaitWhile(() => true);
-
+            yield return new WaitUntil(() =>
+            {
+                connect = connector.onConnecting;
+                return connect;
+            });
         }
 
-        public void DisConnectServer(Action testaction = null)
+        public void DisconnectServer()
         {
-            Debug.Log("DisConnect");
             serverSession.Close();
-            StopCoroutine("ServerConnect");
-
-            testaction?.Invoke();
         }
 
-        [ContextMenu("Create")]
-        public void Create()
+        public void Create(string roomName, string playerName)
         {
-            StartCoroutine(CreateTest());
+            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, 1));
         }
 
-        public IEnumerator CreateTest()
+        public void UpdateRoom(string roomName, string playerName, int playerCount)
+        {
+            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, (ushort)playerCount));
+        }
+
+        public IEnumerator SendRoomUpdatePacket(string roomName, string playerName, ushort playerCount)
         {
             StartCoroutine("ServerConnect");
 
-            yield return new WaitWhile(() => !connect);
-            Debug.Log("connect");
+            yield return new WaitUntil(() => connect);
 
             S_RoomCreatePacket packet = new S_RoomCreatePacket();
-            packet.roomName = "a";
-            packet.makerName = "b";
-            packet.playerCount = 1;
+            packet.roomName = roomName;
+            packet.makerName = playerName;
+            packet.playerCount = playerCount;
 
             serverSession.Send(packet.Serialize());
         }
 
-        [ContextMenu("Reload")]
-        public void Reload()
+        public void Reload(Action<List<Room>> callback)
         {
-            StartCoroutine(ReLoadTest());
+            StartCoroutine(Reloading(callback));
         }
 
-        public IEnumerator ReLoadTest()
+        public IEnumerator Reloading(Action<List<Room>> callback)
         {
             StartCoroutine("ServerConnect");
+
+            yield return new WaitUntil(() => connect);
 
             S_ReRoadingPacket packet = new S_ReRoadingPacket();
-
-            yield return new WaitWhile(() => !connect);
-            Debug.Log("connect");
-
             serverSession.Send(packet.Serialize());
+
+            yield return new WaitUntil(() => reload);
+
+            reload = false;
+
+            callback?.Invoke(Rooms);
         }
-
-        [ContextMenu("Delete")]
-        public void Delete()
-        {
-            StartCoroutine(DeleteTest());
-        }
-
-        public IEnumerator DeleteTest()
-        {
-            StartCoroutine("ServerConnect");
-
-            yield return new WaitWhile(() => !connect);
-            Debug.Log("connect");
-
-            S_RoomDeletePacket packet = new S_RoomDeletePacket();
-            packet.roomName = "a";
-            packet.makerName = "b";
-
-            serverSession.Send(packet.Serialize());
-        }
-
-        [ContextMenu("Room")]
-        public List<Room> Roomtest()
-        {
-            Debug.Log(Rooms.Count);
-            foreach (Room room in Rooms)
-            {
-                Debug.Log($" room :{room.roomName} maker :{room.makerName} pc :{room.playerCount}");
-            }
-
-            return Rooms;
-        }
-
-
     }
 }

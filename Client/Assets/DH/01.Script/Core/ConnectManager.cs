@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 namespace DH
@@ -25,13 +24,13 @@ namespace DH
             DontDestroyOnLoad(gameObject);
         }
 
-        public void StartClient()
+        public void StartClient(string Address)
         {
             nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
 
             if (nickname.Length < 1) nickname = "Unknown";
 
-            m_NetworkClient.StartConnect();
+            m_NetworkClient.StartConnect(Address);
         }
 
         public void StartHost()

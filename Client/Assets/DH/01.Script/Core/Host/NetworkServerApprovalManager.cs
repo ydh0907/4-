@@ -115,6 +115,8 @@ namespace DH
 
             foreach(var player in players)
             {
+                if (player.ID == OwnerClientId) return;
+
                 if(player.ID == id)
                 {
                     players.Remove(player);

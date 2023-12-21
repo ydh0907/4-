@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,8 @@ namespace DH
         public void StartConnect()
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += HostApproval;
+
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("127.0.0.0", (ushort)9070, "0.0.0.0");
 
             isConnect = NetworkManager.Singleton.StartHost();
 
