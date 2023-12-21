@@ -74,8 +74,6 @@ namespace AH {
             }
         }
         private void HandleCreateRoom(ClickEvent evt) {
-            Debug.Log(drinkData);
-            Debug.Log(playerData);
             if (IsInData()) {
                 SceneManager.LoadScene("Ingame"); // host
             }
@@ -151,7 +149,6 @@ namespace AH {
         }
         private void ClearToRoomList(List<Button> list, Button dve) {
             foreach (var button in list) {
-                Debug.Log(button);
                 button.RemoveFromClassList("choose");
                 if (button == dve) {
                     button.AddToClassList("choose");
