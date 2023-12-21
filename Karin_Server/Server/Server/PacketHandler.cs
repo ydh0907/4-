@@ -12,7 +12,6 @@ namespace TestServer
             C_ReRoadingPacket c_ReRoadingPacket = new C_ReRoadingPacket();
             Console.WriteLine($"방개수 {Program.Rooms.Count}");
             c_ReRoadingPacket.Rooms = Program.Rooms;
-            Console.WriteLine($"담기냐? {c_ReRoadingPacket.Rooms.Count}");
 
             clientSession.Send(c_ReRoadingPacket.Serialize());
         }
