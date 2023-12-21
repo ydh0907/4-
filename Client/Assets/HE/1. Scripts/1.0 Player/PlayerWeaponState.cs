@@ -6,11 +6,15 @@ public class PlayerWeaponState : MonoBehaviour
 {
     private PlayerMovement PlayerMovement;
     private PlayerKnockback PlayerKnockback;
-    
 
-    [SerializeField] private bool isMentosAvailable; // 임시로 인스펙터 창에 표시함
+    private bool isMentosAvailable; // 지금 멘토스를 가지고 있나?
 
-    private int _attackDamageAmount;
+    [SerializeField] private bool IsMisMentos; // 지금 멘토스인가?
+    [SerializeField] private bool IsFist; // 지금 멘토스인가?
+
+
+
+    private int attackDamageAmount;
     public int mentosDamageAmount;
     public int fistDamageAmount;
 
@@ -23,15 +27,30 @@ public class PlayerWeaponState : MonoBehaviour
 
     private void Update()
     {
-        if (CanChangeToMentosState())
+        #region INPUT HANDLER
+
+        // Stat
+        if (CanChangeToMentosState() && (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2)))
         {
             SetToMentosState();
         }
+        #endregion
     }
 
     private void SetToMentosState()
     {
-        _attackDamageAmount = mentosDamageAmount;
+        if (CanChangeToMentosState())
+        {
+            attackDamageAmount = mentosDamageAmount;
+            IsMisMentos = true;
+            IsFist = false;
+        }
+        else
+        {
+            attackDamageAmount = fistDamageAmount;
+            IsFist = true;
+            IsMisMentos = false;
+        }
     }
 
     private bool CanChangeToMentosState()
@@ -47,19 +66,17 @@ public class PlayerWeaponState : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamageble iDamageble = other.gameObject.GetComponent<IDamageble>();
-
         Vector2 hitDirection = other.gameObject.transform.position - transform.position;
 
         if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
         {
-            iDamageble.Damage(_attackDamageAmount, hitDirection);
+            iDamageble.Damage(attackDamageAmount, hitDirection);
         }
 
         else if (other.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
         {
             hitDirection.Normalize();
-            PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x);
-
+            PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x); // 실행 하는지 확인 피ㅣㄹ요
         }
     }
 

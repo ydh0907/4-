@@ -33,7 +33,6 @@ public class DrinkDamageble : MonoBehaviour, IDamageble
     public void StartRush()
     {
          StartCoroutine(nameof(RushDamage));
-        // CurrentHealth--;
     }
 
     public void Die()
@@ -50,5 +49,16 @@ public class DrinkDamageble : MonoBehaviour, IDamageble
             Die();
         }
         yield return null;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("WEAPON"))
+        {
+            Transform rootParent = other.gameObject.transform.root;
+            string lastReaderName = rootParent.gameObject.name;
+
+            Debug.Log(lastReaderName);
+        }
     }
 }

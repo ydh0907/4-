@@ -232,8 +232,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7775124741601270964}
-  m_Layer: 0
-  m_Name: GameObject
+  - component: {fileID: 5711501085912359602}
+  m_Layer: 7
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,6 +255,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9099351873233489117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5711501085912359602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048752487394272885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsMisMentos: 0
+  IsFist: 0
+  mentosDamageAmount: 0
+  fistDamageAmount: 0
 --- !u!1 &2137624987749983980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 573921883
+  GlobalObjectIdHash: 1027202239
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
