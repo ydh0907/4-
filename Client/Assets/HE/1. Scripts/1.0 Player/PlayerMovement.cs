@@ -15,7 +15,7 @@ namespace HE
         #endregion
 
         private PlayerDamageble PlayerDamageble;
-        private DrinkDamageble DrinkDamageble;
+        /*private DrinkDamageble DrinkDamageble;*/
 
         #region STATE PARAMETERS
         public bool IsJumping { get; private set; }
@@ -47,7 +47,7 @@ namespace HE
             Animator = GetComponent<Animator>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
-            DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
+            /*DrinkDamageble = GetComponentInChildren<DrinkDamageble>();*/
         }
 
         private void FixedUpdate()
@@ -110,7 +110,7 @@ namespace HE
         #region Rush METHODS
         private void Rush()
         {
-            DrinkDamageble.StartRush();
+            /*DrinkDamageble.StartRush();*/
         }
         #endregion
 

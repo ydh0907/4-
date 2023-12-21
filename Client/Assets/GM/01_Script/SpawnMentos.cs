@@ -7,27 +7,24 @@ namespace GM
     public class SpawnMentos : MonoBehaviour
     {
         [SerializeField] private GameObject mentosPrefab;
-        [SerializeField] private float spawnCoolTime;
-
-        private Transform spawnPos;
-        private float currentTime = 0;
+        [SerializeField] private Transform SpawnTrm;
 
         private void Start()
         {
-            spawnPos = transform.GetChild(0);
+            StartCoroutine("MentosSpawnCorutine");
         }
 
-        private void Update()
+        private IEnumerator MentosSpawnCorutine()
         {
-            currentTime += Time.deltaTime;
-            if(currentTime > spawnCoolTime)
-            {
-                GameObject mantosObj = Instantiate(mentosPrefab, spawnPos.position, Quaternion.identity);
-                Material mat = mantosObj.GetComponent<MeshRenderer>().material;
-                mat.color = Random.ColorHSV();
+            float randNum = Random.Range(25, 35);
+            GameObject mantosObj = Instantiate(mentosPrefab, SpawnTrm.position, Quaternion.identity);
+            Material mat = mantosObj.GetComponent<MeshRenderer>().material;
+            mat.color = Random.ColorHSV();
 
-                currentTime = 0;
-            }
+            yield return new WaitUntil(() => transform.GetChild(0) != null);
+            yield return new WaitForSeconds(randNum);
+
+            StartCoroutine("MentosSpawnCorutine");
         }
     }
 }

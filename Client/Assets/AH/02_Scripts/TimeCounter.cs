@@ -14,13 +14,13 @@ namespace AH {
             int startCount = Random.Range(3, 11);
 
             countText.text = startCount.ToString(); // 시작값을 바꾸고
-            StartCoroutine(RoutineCountDown(countText, startCount, 4));
+            StartCoroutine(RoutineCountDown(countText, startCount, 3));
         }
         public void ResurrectionCountDown(Label countText) {
             int startCount = 3;
 
             countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
-            StartCoroutine(RoutineCountDown(countText, startCount, 4, "초 뒤 부활"));
+            StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활"));
         }
 
         IEnumerator RoutineCountDown(Label countText, int time, int loopTime, string plusText = "") {
