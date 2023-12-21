@@ -25,3 +25,7 @@
 .lobby-button:hover {
     scale: 1.2 1.2;
 }
+
+.lobby-button.isReady {
+    -unity-background-image-tint-color: rgb(64, 255, 40);
+}

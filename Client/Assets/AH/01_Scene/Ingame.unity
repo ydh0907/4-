@@ -390,8 +390,6 @@ MonoBehaviour:
   basicPanel: {fileID: 9197481963319205126, guid: 11e0ed6a63aa99d4cb32011a74f8066b, type: 3}
   playPanel: {fileID: 9197481963319205126, guid: eeb08b3e61be8fe4d96d92e59e5877b8, type: 3}
   isHost: 0
-  nickName: 
-  drinkName: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
