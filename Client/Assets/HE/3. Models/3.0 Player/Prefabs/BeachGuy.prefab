@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab369a2ca7dea546b8a6914b9f20967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: bda51ee082b7d2348ae541e021b2d220, type: 2}
+  Data: {fileID: 11400000, guid: e4e3dcaf16bf61f4ab89f6abe29f7b50, type: 2}
   _moveInput: {x: 0, y: 0, z: 0}
   _groundCheckPoint: {fileID: 6883259527491943530}
   _groundCheckSize: {x: 1, y: 0.1, z: 1}
@@ -1364,8 +1364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth:
     m_InternalValue: 21
-  killCount:
-    m_InternalValue: -2
   <MaxHealth>k__BackingField: 100
   OnHealthChanged:
     m_PersistentCalls:

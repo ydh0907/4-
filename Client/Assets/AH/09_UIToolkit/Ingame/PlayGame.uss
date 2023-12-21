@@ -1,9 +1,8 @@
 .basePlayer {
     width: 300px;
     height: 80px;
-    margin-top: 80px;
     background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/Button_Small_A.png?fileID=21300000&guid=5ed7b78422faa044695989e1108c5d63&type=3#Button_Small_A');
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 

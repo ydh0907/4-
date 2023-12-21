@@ -18,8 +18,7 @@ namespace AH {
         [SerializeField] private VisualTreeAsset clientLobbyPanel;
         [Space]
 
-        [Header("LobbyPanel")]
-        [SerializeField] private VisualTreeAsset basicPanel;
+        [Header("playPanel")]
         [SerializeField] private VisualTreeAsset playPanel;
         [Space]
 
@@ -97,7 +96,10 @@ namespace AH {
         }
 
         public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
-            Debug.Log("finish");
+            _container.Clear();
+
+            var template = playPanel.Instantiate().Q<VisualElement>("container");
+            _container.Add(template);
         }
     }
 }
