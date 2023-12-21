@@ -42,6 +42,9 @@ namespace TestClient
 
             packetFactories.Add((ushort)PacketID.C_ReRoadingPacket, PacketUtillity.CreatePacket<C_ReRoadingPacket>);
             packetHandlers.Add((ushort)PacketID.C_ReRoadingPacket, PacketHandler.C_ReRoadingPacket);
+
+            packetFactories.Add((ushort)PacketID.C_RoomDeletePacket, PacketUtillity.CreatePacket<C_RoomDeletePacket>);
+            packetHandlers.Add((ushort)PacketID.C_RoomDeletePacket, PacketHandler.C_RoomDeletePacket);
         }
 
         public void HandlePacket(Session session, ArraySegment<byte> buffer)
