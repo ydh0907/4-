@@ -6,11 +6,15 @@ public class PlayerWeaponState : MonoBehaviour
 {
     private PlayerMovement PlayerMovement;
     private PlayerKnockback PlayerKnockback;
-    
 
-    [SerializeField] private bool isMentosAvailable; // 임시로 인스펙터 창에 표시함
+    private bool isMentosAvailable; // 지금 멘토스를 가지고 있나?
 
-    private int _attackDamageAmount;
+    [SerializeField] private bool IsMisMentos; // 지금 멘토스인가?
+    [SerializeField] private bool IsFist; // 지금 멘토스인가?
+
+
+
+    private int attackDamageAmount;
     public int mentosDamageAmount;
     public int fistDamageAmount;
 
@@ -23,21 +27,30 @@ public class PlayerWeaponState : MonoBehaviour
 
     private void Update()
     {
-        if (CanChangeToMentosState())
+        #region INPUT HANDLER
+
+        // Stat
+        if (CanChangeToMentosState() && (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2)))
         {
             SetToMentosState();
         }
+        #endregion
     }
 
     private void SetToMentosState()
     {
         if (CanChangeToMentosState())
         {
-            _attackDamageAmount = mentosDamageAmount;
+            attackDamageAmount = mentosDamageAmount;
+            IsMisMentos = true;
+            IsFist = false;
         }
         else
-            //_attackDamageAmount = 주먹 ㅔ미니;
-            Debug.Log("dfs");
+        {
+            attackDamageAmount = fistDamageAmount;
+            IsFist = true;
+            IsMisMentos = false;
+        }
     }
 
     private bool CanChangeToMentosState()
@@ -57,7 +70,7 @@ public class PlayerWeaponState : MonoBehaviour
 
         if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
         {
-            iDamageble.Damage(_attackDamageAmount, hitDirection);
+            iDamageble.Damage(attackDamageAmount, hitDirection);
         }
 
         else if (other.gameObject.layer == LayerMask.NameToLayer("PLAYER"))

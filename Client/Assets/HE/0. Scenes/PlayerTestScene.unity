@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ccc1dd9b06ef441a25e24d1379f7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: bda51ee082b7d2348ae541e021b2d220, type: 2}
+  Data: {fileID: 0}
   _moveInput: {x: 0, y: 0, z: 0}
   _groundCheckPoint: {fileID: 1146729536}
   _groundCheckSize: {x: 1, y: 0.1, z: 1}
@@ -682,9 +682,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2048752487394272885, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
-      propertyPath: m_Name
-      value: Weapon
+    - target: {fileID: 6688479621427393501, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1027202239
       objectReference: {fileID: 0}
     - target: {fileID: 8637493282298108973, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}
       propertyPath: m_Name
