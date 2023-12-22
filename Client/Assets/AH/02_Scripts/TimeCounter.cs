@@ -14,15 +14,25 @@ namespace AH {
             int startCount = Random.Range(3, 11);
 
             countText.text = startCount.ToString(); // 시작값을 바꾸고
-            StartCoroutine(RoutineCountDown(countText, startCount, 4));
+            StartCoroutine(RoutineCountDown(countText, startCount, 3));
         }
         public void ResurrectionCountDown(Label countText) {
             int startCount = 3;
 
             countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
-            StartCoroutine(RoutineCountDown(countText, startCount, 4, "초 뒤 부활"));
+            StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활"));
         }
+        public void PlayTimeCountDown(Label countText) {
+            int startCount = 180;
 
+            countText.text = $"{startCount / 60} : {startCount % 60}"; // 시작값을 바꾸고
+        }
+        IEnumerator RoutinePlayCountDown(Label countText, int startTime) {
+            while(int.Parse(countText.text) > 0) {
+                //countText.text = $"{startTime / 60} : {startTime % 60}";
+                yield return null;
+            }
+        }
         IEnumerator RoutineCountDown(Label countText, int time, int loopTime, string plusText = "") {
             while(loopTime > 0) {
                 //Debug.Log(loopTime);

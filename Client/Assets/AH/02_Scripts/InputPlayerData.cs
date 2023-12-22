@@ -10,6 +10,7 @@ using Packets;
 namespace AH {
     public class InputPlayerData : MonoBehaviour {
         private UIDocument _uiDocument;
+
         //private TextField _txtNickname; // ´Ð³×ÀÓ
         [SerializeField] private VisualTreeAsset createRoomTemplate;
         [SerializeField] private VisualTreeAsset roomListBox;
