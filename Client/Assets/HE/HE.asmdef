@@ -1,7 +1,9 @@
 {
     "name": "HE",
     "rootNamespace": "HE",
-    "references": [],
+    "references": [
+        "GUID:818352fd62ec1fe4083da52a405c3de3"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

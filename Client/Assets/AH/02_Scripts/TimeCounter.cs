@@ -22,7 +22,24 @@ namespace AH {
             countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활"));
         }
+        public void PlayTimeCountDown(Label countText) {
+            int runningTime = 180;
 
+            int minutes = Mathf.FloorToInt(runningTime / 60);
+            int seconds = Mathf.FloorToInt(runningTime % 60);
+            countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        IEnumerator RoutinePlayCountDown(Label countText, float runningTime) {
+            while(runningTime > 0) { // 기본값 180
+                runningTime -= Time.deltaTime;
+
+                int minutes = Mathf.FloorToInt(runningTime / 60);
+                int seconds = Mathf.FloorToInt(runningTime % 60);
+                countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+                yield return new WaitForSeconds(1f);
+            }
+        }
         IEnumerator RoutineCountDown(Label countText, int time, int loopTime, string plusText = "") {
             while(loopTime > 0) {
                 //Debug.Log(loopTime);

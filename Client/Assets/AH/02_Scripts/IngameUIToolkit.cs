@@ -1,3 +1,4 @@
+using Codice.Client.Common;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,6 +8,7 @@ namespace AH {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
         private VisualElement _container;
+
 
         [Header("CountDownPanels")]
         [SerializeField] private VisualTreeAsset deadCountDownPanel;
@@ -24,7 +26,8 @@ namespace AH {
 
         [Header("Data")]
         public bool isHost = true;
-
+        private Label killcount;
+        private Label timer;
         private bool isReady = false;
 
         private void Awake() {
@@ -99,6 +102,16 @@ namespace AH {
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");
+
+            // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
+
+            var nickname = template.Q<Label>("nickname-txt");
+            var drinkIcon = template.Q<VisualElement>("drinkIcon");
+            killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+            timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+
+            _counter.PlayTimeCountDown(timer);
+
             _container.Add(template);
         }
     }

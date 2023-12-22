@@ -29,7 +29,7 @@ namespace DH
 
             if (IsServer)
             {
-                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola));
+                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character));
                 UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
@@ -62,7 +62,7 @@ namespace DH
 
             if (players.Count < 4)
             {
-                players.Add(new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola));
+                players.Add(new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola, info.Char));
                 OnValueChangedClientRpc();
 
                 Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Connected");
@@ -89,9 +89,11 @@ namespace DH
 
             Cola cola = (Cola)BitConverter.ToUInt32(payload, process);
             process += sizeof(int);
+            Char character = (Char)BitConverter.ToUInt32(payload, process);
+            process += sizeof(int);
             string nickname = Encoding.Unicode.GetString(payload, process, payload.Length - process);
 
-            return new PlayerInfo(NetworkManager.Singleton.LocalClientId, nickname, cola);
+            return new PlayerInfo(NetworkManager.Singleton.LocalClientId, nickname, cola, character);
         }
 
         public static byte[] WriteApprovalData(PlayerInfo info)
@@ -99,7 +101,9 @@ namespace DH
             int process = 0;
             byte[] buffer = new byte[256];
 
-            Buffer.BlockCopy(BitConverter.GetBytes((int)info.Cola), 0, buffer, 0, 4);
+            Buffer.BlockCopy(BitConverter.GetBytes((int)info.Cola), 0, buffer, process, 4);
+            process += sizeof(int);
+            Buffer.BlockCopy(BitConverter.GetBytes((int)info.Char), 0, buffer, process, 4);
             process += sizeof(int);
             process += Encoding.Unicode.GetBytes(info.Nickname, 0, info.Nickname.Length, buffer, 0 + process);
 

@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "R/cyWVAb5F7Pm4uM/ouG74RypPRCwJzOjrY5g2QbHjCIL3/iF5+2wLGV3lpiXKVq9/obKvsTIHVArprFj7/TiA==",
+  "dgSpecHash": "utUvkbUyqPLVaZhRiSV8JcN/2gCazVztnQXYOtKTOkEsC+8n7GFPZuHs6wrWTddMUzY4lQWINGisRetb1oHHvQ==",
   "success": true,
-  "projectFilePath": "C:\\GitFork\\4-\\Karin_Server\\Server\\Karin.Network2\\Karin.Network2.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\Karin.Network2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
+  ],
   "logs": []
 }

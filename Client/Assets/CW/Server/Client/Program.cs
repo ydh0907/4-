@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TestClient
 {
-    internal class Program : MonoBehaviour
+    public class Program : MonoBehaviour
     {
         public static Connector connector;
         public static ServerSession serverSession;
@@ -31,7 +31,7 @@ namespace TestClient
 
         private IEnumerator ServerConnect()
         {
-            IPAddress ipAddress = IPAddress.Parse("172.31.3.130");
+            IPAddress ipAddress = IPAddress.Parse("172.31.1.237");
             IPEndPoint endPoint = new IPEndPoint(ipAddress, 8081);
 
             serverSession = new ServerSession();
@@ -50,24 +50,24 @@ namespace TestClient
             serverSession.Close();
         }
 
-        public void Create(string roomName, string playerName)
+        public void Create(string IP, string playerName)
         {
-            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, 1));
+            StartCoroutine(SendRoomUpdatePacket(IP, playerName, 1));
         }
 
-        public void UpdateRoom(string roomName, string playerName, int playerCount)
+        public void UpdateRoom(string IP, string playerName, int playerCount)
         {
-            StartCoroutine(SendRoomUpdatePacket(roomName, playerName, (ushort)playerCount));
+            StartCoroutine(SendRoomUpdatePacket(IP, playerName, (ushort)playerCount));
         }
 
-        public IEnumerator SendRoomUpdatePacket(string roomName, string playerName, ushort playerCount)
+        private IEnumerator SendRoomUpdatePacket(string IP, string playerName, ushort playerCount)
         {
             StartCoroutine("ServerConnect");
 
             yield return new WaitUntil(() => connect);
 
             S_RoomCreatePacket packet = new S_RoomCreatePacket();
-            packet.roomName = roomName;
+            packet.roomName = IP;
             packet.makerName = playerName;
             packet.playerCount = playerCount;
 
@@ -79,7 +79,7 @@ namespace TestClient
             StartCoroutine(Reloading(callback));
         }
 
-        public IEnumerator Reloading(Action<List<Room>> callback)
+        private IEnumerator Reloading(Action<List<Room>> callback)
         {
             StartCoroutine("ServerConnect");
 
@@ -93,6 +93,24 @@ namespace TestClient
             reload = false;
 
             callback?.Invoke(Rooms);
+        }
+
+        public void Delete(string nickname, string IP)
+        {
+            StartCoroutine(Deleting(nickname, IP));
+        }
+
+        private IEnumerator Deleting(string nickname, string IP)
+        {
+            StartCoroutine("ServerConnect");
+
+            yield return new WaitUntil(() => connect);
+
+            S_RoomDeletePacket s_RoomDeletePacket = new();
+            s_RoomDeletePacket.makerName = nickname;
+            s_RoomDeletePacket.roomName = IP;
+
+            serverSession.Send(s_RoomDeletePacket.Serialize());
         }
     }
 }
