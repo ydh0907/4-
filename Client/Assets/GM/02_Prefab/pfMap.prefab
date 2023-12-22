@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mentosPrefab: {fileID: 3760968827727927929, guid: 86305b4f47602604c9a8be50b5f98a1e, type: 3}
-  spawnCoolTime: 30
+  SpawnTrm: {fileID: 4433086097929834650}
 --- !u!1 &8628749694323827932
 GameObject:
   m_ObjectHideFlags: 0
