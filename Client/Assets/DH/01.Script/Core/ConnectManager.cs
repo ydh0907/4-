@@ -25,18 +25,18 @@ namespace DH
             DontDestroyOnLoad(gameObject);
         }
 
-        public void StartClient(string Address)
+        public void StartClient(string Address, string nickname)
         {
-            nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
+            this.nickname = nickname;
 
             if (nickname.Length < 1) nickname = "Unknown";
 
             m_NetworkClient.StartConnect(Address);
         }
 
-        public void StartHost()
+        public void StartHost(string nickname)
         {
-            nickname = GameObject.Find("NicknameInput").GetComponent<TMP_InputField>().text;
+            this.nickname = nickname;
 
             if (nickname.Length < 1) nickname = "Unknown";
 

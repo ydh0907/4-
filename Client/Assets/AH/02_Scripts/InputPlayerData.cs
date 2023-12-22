@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using DH;
+using TestClient;
 using Unity.Netcode;
+using DH;
+using Packets;
 
 namespace AH {
     public class InputPlayerData : MonoBehaviour {
@@ -138,7 +140,7 @@ namespace AH {
             }
         }
         private void HandleCreateRoom(ClickEvent evt) {
-            ConnectManager.Instance.StartHost();
+            ConnectManager.Instance.StartHost("");
         }
         private void HandleBackTitleScene(ClickEvent evt) { // host
             if (NetworkManager.Singleton != null) Destroy(NetworkManager.Singleton.gameObject);
@@ -147,8 +149,7 @@ namespace AH {
 
         #region find room
         private void HandleFindRoom(ClickEvent evt) {
-            CreateRoomList();
-            ChooseRoom();
+            HandleRefresh(evt);
         }
 
         private void CreateRoomList() {
@@ -159,8 +160,6 @@ namespace AH {
 
             root.Q<Button>("refresh-btn").RegisterCallback<ClickEvent>(HandleRefresh);
             root.Q<Button>("enterRoom-btn").RegisterCallback<ClickEvent>(HandleEnterRoom);
-
-            createRoomCount = Random.Range(0, 8);
 
             createRoomList = template.Q<VisualElement>("unity-content-container");
             for (int i = 0; i < createRoomCount; i++) { // 생성할 roomBox의 개수 및 생성
@@ -173,26 +172,37 @@ namespace AH {
                 createRoomList.Add(roomBoxTemplate);
             }
         }
-        private void ChooseRoom() {
+        private void ChooseRoom(List<Room> room) {
             for (int i = 0; i < createRoomList.childCount; i++) {
                 if (createRoomList[i] as Button != null) {
                     roomList.Add(createRoomList[i] as Button);
                 }
             }
+            int index = 0;
             createRoomList.RegisterCallback<ClickEvent>(evt => {
                 var dve = evt.target as Button;
                 if (dve != null) {
                     ClearToRoomList(roomList, dve);
                     lastChoose = dve;
+
+                    ConnectManager.Instance.StartClient(room[index].roomName, "");
+
+                    ++index;
                 }
             });
         }
 
         private void HandleRefresh(ClickEvent evt) {
-            createRoomCount = Random.Range(0, 8);
-            CreateRoomList();
-            ChooseRoom();
+            Program.Instance.Reload(Refresh);
         }
+
+        private void Refresh(List<Room> room)
+        {
+            createRoomCount = room.Count;
+            CreateRoomList();
+            ChooseRoom(room);
+        }
+
         private void HandleEnterRoom(ClickEvent evt) {
             if(lastChoose != null) {
                 SceneManager.LoadScene("Ingame");

@@ -2,10 +2,11 @@
     "name": "AH",
     "rootNamespace": "AH",
     "references": [
-        "GUID:05bcd83f5f4a6d94f9733495781a8514",
         "GUID:3b8ed52f1b5c64994af4c4e0aa4b6c4b",
         "GUID:9f4f5bf029cebb64f983b7bdc29f62a1",
-        "GUID:1491147abca9d7d4bb7105af628b223e"
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:3c139f492e5a8644a866f9b3a5946dd3",
+        "GUID:05bcd83f5f4a6d94f9733495781a8514"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
