@@ -1090,6 +1090,7 @@ GameObject:
   - component: {fileID: 7759189237972131010}
   - component: {fileID: 5532214979151258344}
   - component: {fileID: 17482185103416427}
+  - component: {fileID: -6325108923132186732}
   m_Layer: 0
   m_Name: BeachGuy
   m_TagString: Player
@@ -1380,6 +1381,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-6325108923132186732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637493282298108973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c712df17c03644f8d5654f35a985d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCount:
+    m_InternalValue: 0
 --- !u!1 &8645176644098225519
 GameObject:
   m_ObjectHideFlags: 0
