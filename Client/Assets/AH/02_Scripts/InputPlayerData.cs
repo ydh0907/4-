@@ -22,7 +22,6 @@ namespace AH {
         VisualElement root;
 
         private Button lastChoose = null;
-        private string nickName = "";
 
         private int createRoomCount = 0;
 
@@ -118,8 +117,8 @@ namespace AH {
                 }
             });
         }
-        private void GetNickName() {
-            nickName = root.Q<TextField>("nickname-inputfeld").text;
+        private string GetNickName() {
+            return root.Q<TextField>("nickname-inputfeld").text;
         }
 
         private void ClearToButtonList(List<Button> list, Button dve) {
@@ -131,7 +130,7 @@ namespace AH {
             }
         }
         private void HandleCreateRoom(ClickEvent evt) {
-            ConnectManager.Instance.StartHost("");
+            ConnectManager.Instance.StartHost(GetNickName());
         }
         private void HandleBackTitleScene(ClickEvent evt) { // host
             if (NetworkManager.Singleton != null) Destroy(NetworkManager.Singleton.gameObject);
@@ -176,7 +175,7 @@ namespace AH {
                     ClearToRoomList(roomList, dve);
                     lastChoose = dve;
 
-                    ConnectManager.Instance.StartClient(room[index].roomName, "");
+                    ConnectManager.Instance.StartClient(room[index].roomName, GetNickName());
 
                     ++index;
                 }
