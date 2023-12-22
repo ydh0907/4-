@@ -109,12 +109,10 @@ namespace AH {
             var drinkIcon = template.Q<VisualElement>("drinkIcon");
             killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
-            PlayTimeCountDown(timer);
+
+            _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
-        }
-        private void PlayTimeCountDown(Label timerTxt) {
-            _counter.PlayTimeCountDown(timerTxt);
         }
     }
 }
