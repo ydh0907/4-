@@ -1,11 +1,11 @@
+using DH;
+using Packets;
 using System.Collections.Generic;
+using TestClient;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using TestClient;
-using Unity.Netcode;
-using DH;
-using Packets;
 
 namespace AH {
     public class InputPlayerData : MonoBehaviour {
@@ -33,15 +33,14 @@ namespace AH {
         private void OnEnable() {
             root = _uiDocument.rootVisualElement;
 
-            //_txtNickname = root.Q<TextField>("nickname-inputfeld");
             root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
             root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
             root.Q<Button>("findroom-btn").RegisterCallback<ClickEvent>(HandleFindRoom);
 
             #region list°ª ³Ö±â
             VisualElement drinkButtonRow = root.Q<VisualElement>(className: "drink-content");
-            for(int i = 0; i < drinkButtonRow.childCount; i++) {
-                if(drinkButtonRow[i] as Button != null) {
+            for (int i = 0; i < drinkButtonRow.childCount; i++) {
+                if (drinkButtonRow[i] as Button != null) {
                     drinksList.Add(drinkButtonRow[i] as Button);
                 }
             }
@@ -56,25 +55,20 @@ namespace AH {
                 var dve = evt.target as Button;
                 if (dve != null) {
                     ClearToButtonList(drinksList, dve);
-                    switch(dve.name)
-                    {
-                        case "cola-btn":
-                            {
+                    switch (dve.name) {
+                        case "cola-btn": {
                                 ConnectManager.Instance.cola = Cola.Cola;
                                 break;
                             }
-                        case "pinapple-btn":
-                            {
+                        case "pinapple-btn": {
                                 ConnectManager.Instance.cola = Cola.Pineapple;
                                 break;
                             }
-                        case "cider-btn":
-                            {
+                        case "cider-btn": {
                                 ConnectManager.Instance.cola = Cola.Sprite;
                                 break;
                             }
-                        case "orangi-btn":
-                            {
+                        case "orangi-btn": {
                                 ConnectManager.Instance.cola = Cola.Orange;
                                 break;
                             }
@@ -85,45 +79,36 @@ namespace AH {
                 var dve = evt.target as Button;
                 if (dve != null) {
                     ClearToButtonList(playerList, dve);
-                    switch(dve.name)
-                    {
-                        case "BeachGuy":
-                            {
+                    switch (dve.name) {
+                        case "BeachGuy": {
                                 ConnectManager.Instance.character = Char.Beach;
                                 break;
                             }
-                        case "AmericanFootballer":
-                            {
+                        case "AmericanFootballer": {
                                 ConnectManager.Instance.character = Char.Football;
                                 break;
                             }
-                        case "BusinessGuy":
-                            {
+                        case "BusinessGuy": {
                                 ConnectManager.Instance.character = Char.Business;
                                 break;
                             }
-                        case "DiscoGuy":
-                            {
+                        case "DiscoGuy": {
                                 ConnectManager.Instance.character = Char.Disco;
                                 break;
                             }
-                        case "Farmer":
-                            {
+                        case "Farmer": {
                                 ConnectManager.Instance.character = Char.Farmer;
                                 break;
                             }
-                        case "Police":
-                            {
+                        case "Police": {
                                 ConnectManager.Instance.character = Char.Police;
                                 break;
                             }
-                        case "SoccerGuy":
-                            {
+                        case "SoccerGuy": {
                                 ConnectManager.Instance.character = Char.Soccer;
                                 break;
                             }
-                        case "Thief":
-                            {
+                        case "Thief": {
                                 ConnectManager.Instance.character = Char.Thief;
                                 break;
                             }
@@ -197,15 +182,14 @@ namespace AH {
             Program.Instance.Reload(Refresh);
         }
 
-        private void Refresh(List<Room> room)
-        {
+        private void Refresh(List<Room> room) {
             createRoomCount = room.Count;
             CreateRoomList();
             ChooseRoom(room);
         }
 
         private void HandleEnterRoom(ClickEvent evt) {
-            if(lastChoose != null) {
+            if (lastChoose != null) {
                 SceneManager.LoadScene("Ingame");
             }
             else {
@@ -215,7 +199,6 @@ namespace AH {
 
         private void ClearToRoomList(List<Button> list, Button dve) {
             foreach (var button in list) {
-                Debug.Log(button);
                 button.RemoveFromClassList("choose");
                 if (button == dve) {
                     button.AddToClassList("choose");
