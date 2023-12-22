@@ -35,7 +35,7 @@ namespace GM
 
             if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
             {
-                iDamageble.Damage(attackDamageAmount, hitDirection);
+                //iDamageble.Damage(attackDamageAmount, hitDirection);
             }
         }
     }
