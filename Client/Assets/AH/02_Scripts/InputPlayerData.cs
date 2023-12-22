@@ -22,6 +22,7 @@ namespace AH {
         VisualElement root;
 
         private Button lastChoose = null;
+        private string nickName = "";
 
         private int createRoomCount = 0;
 
@@ -32,6 +33,7 @@ namespace AH {
         }
         private void OnEnable() {
             root = _uiDocument.rootVisualElement;
+
 
             root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
             root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
@@ -115,6 +117,9 @@ namespace AH {
                     }
                 }
             });
+        }
+        private void GetNickName() {
+            nickName = root.Q<TextField>("nickname-inputfeld").text;
         }
 
         private void ClearToButtonList(List<Button> list, Button dve) {
