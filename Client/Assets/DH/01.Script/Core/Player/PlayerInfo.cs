@@ -8,10 +8,10 @@ namespace DH
 {
     public enum Cola
     {
-        CocaCola,
+        Cola,
+        Pineapple,
         Sprite,
-        DrPepper,
-        Pepsi
+        Orange
     }
 
     public enum Char
@@ -30,14 +30,14 @@ namespace DH
     {
         public ulong ID = 0;
         public string Nickname = "";
-        public Cola Cola = Cola.CocaCola;
+        public Cola Cola = Cola.Cola;
         public Char Char = Char.Beach;
         public int Kill = 0;
         public int Death = 0;
 
         public PlayerInfo() { }
 
-        public PlayerInfo(ulong ID, string Nickname, Cola Cola)
+        public PlayerInfo(ulong ID, string Nickname, Cola Cola, Char Char)
         {
             this.ID = ID;
             this.Nickname = Nickname;
@@ -46,7 +46,7 @@ namespace DH
             if(this.Nickname == null) this.Nickname = "";
         }
 
-        public PlayerInfo(string Nickname, Cola Cola)
+        public PlayerInfo(string Nickname, Cola Cola, Char Char)
         {
             this.Nickname = Nickname;
             this.Cola = Cola;
