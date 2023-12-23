@@ -59,6 +59,11 @@ namespace HB
             {
                 Run(LERP_AMOUNT);
             }
+            // rush
+            if (CanRush())
+            {
+                Rush();
+            }
         }
 
         private void Update()
@@ -72,14 +77,9 @@ namespace HB
             if (CanJump() && Input.GetKeyDown(KeyCode.Space))
             {
                 IsJumping = true;
+                Animator.SetTrigger("IsJumping");
 
                 Jump();
-            }
-
-            // rush
-            if (CanRush())
-            {
-                Rush();
             }
             #endregion
         }
