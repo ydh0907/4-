@@ -10,6 +10,7 @@ namespace GM
     {
         [SerializeField] private float speed;
         [SerializeField] private float playerDeathTime;
+        [SerializeField] private int attackDamageAmount;
 
         private void Start()
         {
@@ -35,7 +36,7 @@ namespace GM
 
             if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
             {
-                //iDamageble.Damage(attackDamageAmount, hitDirection);
+                iDamageble.Damage(attackDamageAmount, hitDirection);
             }
         }
     }

@@ -61,5 +61,3 @@ namespace HB
         }
     }
 }
-
-// 애러 발생함 왜? PlayrDamagbl에서 네임 스페이스가 ㅏㄹ라서 컴포넌트를 찾을 수 없음
