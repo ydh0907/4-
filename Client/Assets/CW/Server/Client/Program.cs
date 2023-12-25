@@ -1,4 +1,5 @@
-﻿using Karin.Network;
+﻿using DH;
+using Karin.Network;
 using Packets;
 using System;
 using System.Collections;
@@ -48,15 +49,18 @@ namespace TestClient
         public void DisconnectServer()
         {
             serverSession.Close();
+            connect = false;
         }
 
-        public void Create(string IP, string playerName)
+        public void CreateRoom(string IP, string playerName)
         {
+            Debug.Log($"Create Room {IP} : {playerName}");
             StartCoroutine(SendRoomUpdatePacket(IP, playerName, 1));
         }
 
         public void UpdateRoom(string IP, string playerName, int playerCount)
         {
+            Debug.Log($"Update Room {IP} : {playerName}");
             StartCoroutine(SendRoomUpdatePacket(IP, playerName, (ushort)playerCount));
         }
 
@@ -88,15 +92,19 @@ namespace TestClient
             S_ReRoadingPacket packet = new S_ReRoadingPacket();
             serverSession.Send(packet.Serialize());
 
+            Debug.Log("Reroad Send");
+
             yield return new WaitUntil(() => reload);
 
             reload = false;
 
             callback?.Invoke(Rooms);
+            Debug.Log("Reroaded");
         }
 
         public void Delete(string nickname, string IP)
         {
+            Debug.Log($"Delete Room {IP} : {nickname}");
             StartCoroutine(Deleting(nickname, IP));
         }
 

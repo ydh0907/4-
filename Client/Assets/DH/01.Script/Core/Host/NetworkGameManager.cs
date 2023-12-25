@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using TestClient;
+using System.Net;
+using System.Net.Sockets;
+using System.Linq;
 
 namespace DH
 {
@@ -13,7 +17,9 @@ namespace DH
 
         [SerializeField] private GameObject Player;
 
-        public List<PlayerInfo> players = new();
+        public Dictionary<ulong, PlayerInfo> players = new();
+
+        public Queue<Action> JopQueue = new Queue<Action>();
 
         public Action onGameStarted = null;
         public Action onGameEnded = null;
@@ -23,19 +29,29 @@ namespace DH
             Instance = this;
         }
 
+        private void Update()
+        {
+            if(JopQueue.Count > 0)
+            {
+                for(int i = 0; i < JopQueue.Count; i++)
+                {
+                    JopQueue.Dequeue()?.Invoke();
+                }
+            }
+        }
+
         public override void OnNetworkSpawn()
         {
             if (!IsServer) return;
 
             base.OnNetworkSpawn();
-
-            GameObject.Find("StartButton").GetComponent<Button>().onClick.AddListener(ServerGameStart);
-            GameObject.Find("EndButton").GetComponent<Button>().onClick.AddListener(ServerGameEnd);
         }
 
         public void ServerGameStart()
         {
             if (!IsServer) return;
+
+            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
 
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
@@ -49,7 +65,7 @@ namespace DH
                     rand = GM.MapManager.Instance.GetSpawnPosition();
 
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
-                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.ID);
+                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Key);
 
                 temp.Add(rand);
             }
@@ -83,6 +99,23 @@ namespace DH
             onGameEnded?.Invoke();
 
             LoadSceneManager.Instance.LoadScene(1);
+        }
+
+        public static string GetLocalIP()
+        {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+
+            string localIP = "";
+
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localIP = ip.ToString();
+                }
+            }
+
+            return localIP;
         }
     }
 }

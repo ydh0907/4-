@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -31,6 +32,7 @@ namespace AH {
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
+            isHost = NetworkManager.Singleton.IsHost;
         }
         private void OnEnable() {
             var root = _uiDocument.rootVisualElement;

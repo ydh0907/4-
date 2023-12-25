@@ -1,5 +1,6 @@
 using DH;
 using Packets;
+using System;
 using System.Collections.Generic;
 using TestClient;
 using Unity.Netcode;
@@ -21,7 +22,9 @@ namespace AH {
 
         VisualElement root;
 
+        string nickname = "";
         private Button lastChoose = null;
+        Room SelectedRoom;
 
         private int createRoomCount = 0;
 
@@ -82,35 +85,35 @@ namespace AH {
                     ClearToButtonList(playerList, dve);
                     switch (dve.name) {
                         case "BeachGuy": {
-                                ConnectManager.Instance.character = Char.Beach;
+                                ConnectManager.Instance.character = Character.Beach;
                                 break;
                             }
                         case "AmericanFootballer": {
-                                ConnectManager.Instance.character = Char.Football;
+                                ConnectManager.Instance.character = Character.Football;
                                 break;
                             }
                         case "BusinessGuy": {
-                                ConnectManager.Instance.character = Char.Business;
+                                ConnectManager.Instance.character = Character.Business;
                                 break;
                             }
                         case "DiscoGuy": {
-                                ConnectManager.Instance.character = Char.Disco;
+                                ConnectManager.Instance.character = Character.Disco;
                                 break;
                             }
                         case "Farmer": {
-                                ConnectManager.Instance.character = Char.Farmer;
+                                ConnectManager.Instance.character = Character.Farmer;
                                 break;
                             }
                         case "Police": {
-                                ConnectManager.Instance.character = Char.Police;
+                                ConnectManager.Instance.character = Character.Police;
                                 break;
                             }
                         case "SoccerGuy": {
-                                ConnectManager.Instance.character = Char.Soccer;
+                                ConnectManager.Instance.character = Character.Soccer;
                                 break;
                             }
                         case "Thief": {
-                                ConnectManager.Instance.character = Char.Thief;
+                                ConnectManager.Instance.character = Character.Thief;
                                 break;
                             }
                     }
@@ -118,7 +121,8 @@ namespace AH {
             });
         }
         private string GetNickName() {
-            return root.Q<TextField>("nickname-inputfeld").text;
+            if (root.Q<TextField>("nickname-inputfeld") != null) nickname = root.Q<TextField>("nickname-inputfeld").text;
+            return nickname;
         }
 
         private void ClearToButtonList(List<Button> list, Button dve) {
@@ -142,7 +146,7 @@ namespace AH {
             HandleRefresh(evt);
         }
 
-        private void CreateRoomList() {
+        private void CreateRoomList(List<Room> room) {
             var template = createRoomTemplate.Instantiate().Q<VisualElement>("container");
 
             root.Clear();
@@ -151,15 +155,20 @@ namespace AH {
             root.Q<Button>("refresh-btn").RegisterCallback<ClickEvent>(HandleRefresh);
             root.Q<Button>("enterRoom-btn").RegisterCallback<ClickEvent>(HandleEnterRoom);
 
+            int index = 0;
             createRoomList = template.Q<VisualElement>("unity-content-container");
             for (int i = 0; i < createRoomCount; i++) { // 생성할 roomBox의 개수 및 생성
                 var roomBoxTemplate = roomListBox.Instantiate().Q<VisualElement>("roomListBox");
 
                 var nickname = roomBoxTemplate.Q<Label>("ninkname-txt");
                 var peopleCount = roomBoxTemplate.Q<Label>("peopleCount");
-                // 위에서 받아온 값으로 닉네임와 플레이어 카운트를 조절한다
+
+                nickname.text = room[index].makerName;
+                peopleCount.text = room[index].playerCount.ToString();
 
                 createRoomList.Add(roomBoxTemplate);
+
+                ++index;
             }
         }
         private void ChooseRoom(List<Room> room) {
@@ -175,7 +184,7 @@ namespace AH {
                     ClearToRoomList(roomList, dve);
                     lastChoose = dve;
 
-                    ConnectManager.Instance.StartClient(room[index].roomName, GetNickName());
+                    SelectedRoom = room[index];
 
                     ++index;
                 }
@@ -188,17 +197,12 @@ namespace AH {
 
         private void Refresh(List<Room> room) {
             createRoomCount = room.Count;
-            CreateRoomList();
+            CreateRoomList(room);
             ChooseRoom(room);
         }
 
         private void HandleEnterRoom(ClickEvent evt) {
-            if (lastChoose != null) {
-                SceneManager.LoadScene("Ingame");
-            }
-            else {
-                Debug.Log("값이 비었어요!");
-            }
+            ConnectManager.Instance.StartClient(SelectedRoom.roomName, GetNickName());
         }
 
         private void ClearToRoomList(List<Button> list, Button dve) {
