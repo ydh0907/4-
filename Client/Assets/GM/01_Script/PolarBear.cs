@@ -11,6 +11,11 @@ namespace GM
         [SerializeField] private float speed;
         [SerializeField] private int attackDamageAmount;
 
+        private void Start()
+        {
+            Destroy(gameObject, 2f);
+        }
+
         private void Update()
         {
             transform.position += transform.forward * speed * Time.deltaTime;
