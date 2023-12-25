@@ -12,7 +12,7 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        public List<PlayerInfo> players => NetworkGameManager.Instance.players;
+        public Dictionary<ulong, PlayerInfo> players => NetworkGameManager.Instance.players;
 
         public bool isHandlingConnect = false;
 
@@ -29,7 +29,7 @@ namespace DH
 
             if (IsServer)
             {
-                players.Add(new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character));
+                players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character, true));
                 UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
@@ -62,8 +62,8 @@ namespace DH
 
             if (players.Count < 4)
             {
-                players.Add(new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola, info.Char));
-                OnValueChangedClientRpc();
+                players.Add(request.ClientNetworkId, new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola, info.Char));
+                OnValueChangedClientRpc(request.ClientNetworkId, players[request.ClientNetworkId]);
 
                 Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Connected");
 
@@ -89,7 +89,7 @@ namespace DH
 
             Cola cola = (Cola)BitConverter.ToUInt32(payload, process);
             process += sizeof(int);
-            Char character = (Char)BitConverter.ToUInt32(payload, process);
+            Character character = (Character)BitConverter.ToUInt32(payload, process);
             process += sizeof(int);
             string nickname = Encoding.Unicode.GetString(payload, process, payload.Length - process);
 
@@ -117,16 +117,9 @@ namespace DH
         {
             isHandlingConnect = true;
 
-            foreach(var player in players)
-            {
-                if (player.ID == OwnerClientId) return;
+            players.Remove(id);
 
-                if(player.ID == id)
-                {
-                    players.Remove(player);
-                    OnValueChangedClientRpc();
-                }
-            }
+            OnValueChangedClientRpc(id, null);
 
             isHandlingConnect = false;
 
@@ -134,9 +127,12 @@ namespace DH
         }
 
         [ClientRpc]
-        private void OnValueChangedClientRpc()
+        private void OnValueChangedClientRpc(ulong Key, PlayerInfo Value)
         {
-
+            if(Value == null)
+                NetworkGameManager.Instance.players.Remove(Key);
+            else
+                NetworkGameManager.Instance.players[Key] = Value;
         }
 
         private void UserLog()
@@ -145,7 +141,7 @@ namespace DH
 
             foreach (var player in players)
             {
-                log += player.ID.ToString() + " : " + player.Nickname + " : " + player.Cola.ToString() + "\n";
+                log += player.Key.ToString() + " : " + player.Value.Nickname + " : " + player.Value.Cola.ToString() + "\n";
             }
 
             Debug.Log(log);

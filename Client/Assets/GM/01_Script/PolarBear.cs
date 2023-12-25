@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HB;
 
 namespace GM
 {
@@ -9,6 +10,7 @@ namespace GM
     {
         [SerializeField] private float speed;
         [SerializeField] private float playerDeathTime;
+        [SerializeField] private int attackDamageAmount;
 
         private void Start()
         {
@@ -25,6 +27,17 @@ namespace GM
         {
             yield return new WaitForSeconds(playerDeathTime);
             Debug.Log("플레이어 죽음");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            IDamageble iDamageble = other.gameObject.GetComponent<IDamageble>();
+            Vector2 hitDirection = other.gameObject.transform.position - transform.position;
+
+            if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
+            {
+                iDamageble.Damage(attackDamageAmount, hitDirection);
+            }
         }
     }
 }

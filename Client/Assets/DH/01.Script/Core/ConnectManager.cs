@@ -12,7 +12,7 @@ namespace DH
 
         public string nickname = "Unknown";
         public Cola cola = Cola.Cola;
-        public Char character = Char.Beach;
+        public Character character = Character.Beach;
 
         private void Awake()
         {
