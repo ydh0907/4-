@@ -12,6 +12,8 @@ namespace GM
         [SerializeField] private float playerDeathTime;
         [SerializeField] private int attackDamageAmount;
 
+        private PlayerDamageble playerDamageble;
+
         private void Start()
         {
             Destroy(gameObject, 2f);
@@ -23,10 +25,15 @@ namespace GM
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 
+        public void SetPlayerDamageble(Transform playerTrm)
+        {
+            playerDamageble = playerTrm.GetComponent<PlayerDamageble>();
+        }
+
         private IEnumerator PlayerDeathCoroutine()
         {
             yield return new WaitForSeconds(playerDeathTime);
-            Debug.Log("플레이어 죽음");
+            playerDamageble.Die();
         }
 
         private void OnTriggerEnter(Collider other)
