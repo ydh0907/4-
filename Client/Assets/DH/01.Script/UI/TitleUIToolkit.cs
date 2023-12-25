@@ -1,6 +1,7 @@
 using Karin;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -14,6 +15,7 @@ namespace DH {
 
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
+            A_SoundManager.Instance.Init();
         }
         private void OnEnable() {
             root = _uiDocument.rootVisualElement;
@@ -54,7 +56,7 @@ namespace DH {
 
                     //SoundManager.Instance.bgmValue = index;
                     //SoundManager.Instance.RegulateSound(Sound.Bgm, index);
-                    OnOffImages(bgmList, index);
+                    //OnOffImages(bgmList, index);
                 }
             });
             effectValueButton.RegisterCallback<ClickEvent>(evt => {
@@ -64,7 +66,7 @@ namespace DH {
 
                     //SoundManager.Instance.effectValue = index;
                     //SoundManager.Instance.RegulateSound(Sound.Effect, index);
-                    OnOffImages(effectList, index);
+                    //OnOffImages(effectList, index);
                 }
             });
         }
