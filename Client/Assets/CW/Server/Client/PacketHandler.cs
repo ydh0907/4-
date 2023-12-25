@@ -23,8 +23,6 @@ namespace TestClient
         public static void C_RoomDeletePacket(Session session, Packet packet)
         {
             C_RoomDeletePacket c_RoomDeletePacket = packet as C_RoomDeletePacket;
-            // 방정보 공유 .Rooms
-
             Program.Instance.DisconnectServer();
         }
     }

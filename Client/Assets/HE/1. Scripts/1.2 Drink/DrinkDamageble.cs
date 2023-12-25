@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HB
+namespace HE
 {
     public class DrinkDamageble : MonoBehaviour, IDamageble
     {
@@ -26,7 +26,7 @@ namespace HB
         {
             CurrentHealth -= damageAmount;
 
-            if (CurrentHealth <= 200)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
