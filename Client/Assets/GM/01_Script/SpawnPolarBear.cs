@@ -14,8 +14,6 @@ namespace GM
             Vector3 spawnPos = playerTrm.position + (playerTrm.forward * spawnDistance);
             GameObject polarBearObj = Instantiate(polarBearPrefab, spawnPos, Quaternion.identity);
             polarBearObj.transform.forward = (playerTrm.position - polarBearObj.transform.position).normalized;
-
-            polarBearObj.GetComponent<PolarBear>().SetPlayerDamageble(playerTrm);
         }
     }
 }
