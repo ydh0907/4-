@@ -89,6 +89,12 @@
     margin-top: 20px;
     margin-left: 20px;
     background-color: rgb(0, 0, 0);
+    transition-timing-function: ease-out-circ;
+    transition-duration: 0.2s;
+}
+
+.playerdata-btn:hover {
+    scale: 1.2 1.2;
 }
 
 .playerdata-btn.notChoose {
@@ -107,6 +113,12 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     background-color: rgb(0, 0, 0);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-circ;
+}
+
+.drink-btn:hover {
+    scale: 1.2 1.2;
 }
 
 .drink-btn.notChoose {
