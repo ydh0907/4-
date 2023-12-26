@@ -4,11 +4,13 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AH {
-    public class IngameUIToolkit : NetworkBehaviour {
+namespace AH
+{
+    public class IngameUIToolkit : MonoBehaviour
+    {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
-        private VisualElement _container;
+        public VisualElement _container;
 
 
         [Header("CountDownPanels")]
@@ -26,35 +28,42 @@ namespace AH {
         [Space]
 
         [Header("Data")]
-        public bool isHost = true;
         private Label killcount;
         private Label timer;
         private bool isReady = false;
 
-        private void Awake() {
+        public bool isHost = false;
+
+        private void Awake()
+        {
+            isHost = NetworkManager.Singleton.IsHost;
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
-            isHost = NetworkManager.Singleton.IsHost;
         }
-        private void OnEnable() {
+        private void OnEnable()
+        {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
 
-            if(isHost) { // 이 값은 server에서 받는다
+            if (isHost)
+            { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
-            else {
+            else
+            {
                 ClientLobbyPanel();
             }
         }
         // Lobby
-        private void HostLobbyPanel() {
+        private void HostLobbyPanel()
+        {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
 
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
         }
-        private void ClientLobbyPanel() {
+        private void ClientLobbyPanel()
+        {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
@@ -62,44 +71,40 @@ namespace AH {
             ready.RegisterCallback<ClickEvent>(HandleReadyGame);
         }
 
-        private void HaneldStartGame(ClickEvent evt) {
-            if (!NetworkManager.Singleton.IsHost) return;
+        private void HaneldStartGame(ClickEvent evt)
+        {
+            if (!isHost) return;
 
             bool start = true;
 
-            foreach(var player in NetworkGameManager.Instance.players)
+            foreach (var player in NetworkGameManager.Instance.players)
             {
                 start = start && player.Value.Ready;
             }
 
-            if(start)
+            start = start && NetworkGameManager.Instance.players.Count > 1;
+
+            if (start)
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
-
-
-                if(IsHost)
-                    HandleStartGameClientRpc();
+                NetworkGameManager.Instance.UILoadServerRpc();
             }
         }
 
-        [ClientRpc]
-        private void HandleStartGameClientRpc()
+        private void HandleReadyGame(ClickEvent evt)
         {
-            Debug.Log("clientCounter");
-            _container.Clear();
-            Counter();
-        }
-
-        private void HandleReadyGame(ClickEvent evt) {
             var dve = evt.target as Button;
-            if (dve != null) {
-                if (!isReady) { // 준비 완료를 안함
+            if (dve != null)
+            {
+                if (!isReady)
+                { // 준비 완료를 안함
                     isReady = true;
                     NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.AddToClassList("isReady");
                 }
-                else {
+                else
+                {
                     isReady = false;
                     NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.RemoveFromClassList("isReady");
@@ -110,7 +115,8 @@ namespace AH {
         }
 
         // 카운터
-        private void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+        public void Counter(Action callback = null)
+        { // 게임 시작시 카운트 다운
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
@@ -118,7 +124,8 @@ namespace AH {
             _counter.CountDown(countText, callback);
         }
 
-        private void ResurrectionCounter(Action callback = null) { // 부활 카운트 다운
+        private void ResurrectionCounter(Action callback = null)
+        { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
             _container.Add(counterPanel);
@@ -126,7 +133,8 @@ namespace AH {
             _counter.ResurrectionCountDown(countText, callback);
         }
 
-        public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
+        public void FinishCountDown()
+        { // 준비 완료 상태 후 게임 시작 대기가 종료 
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");

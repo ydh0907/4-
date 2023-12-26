@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
 namespace DH
 {
@@ -13,6 +14,8 @@ namespace DH
         public string nickname = "Unknown";
         public Cola cola = Cola.Cola;
         public Character character = Character.Beach;
+
+        [SerializeField] public bool host;
 
         private void Awake()
         {
