@@ -6,6 +6,7 @@ namespace GM
 {
     public class Player_Test : MonoBehaviour
     {
+        [SerializeField] Transform[] trm;
         SpawnPolarBear polarBear;
 
         private void Awake()
@@ -17,7 +18,7 @@ namespace GM
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                polarBear.CallPolarBear(transform);
+                RankingPodium.Instance.SetPlayerPodium(trm);
             }
         }
     }
