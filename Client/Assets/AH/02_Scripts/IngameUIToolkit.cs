@@ -46,6 +46,7 @@ namespace AH {
             else {
                 ClientLobbyPanel();
             }
+            SoundManager.Instance.Init();
         }
         // Lobby
         private void HostLobbyPanel() {
@@ -76,7 +77,6 @@ namespace AH {
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
-
 
                 if(IsHost)
                     HandleStartGameClientRpc();
