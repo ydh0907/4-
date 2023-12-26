@@ -76,7 +76,10 @@ namespace AH {
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
-                HandleStartGameClientRpc();
+
+
+                if(IsHost)
+                    HandleStartGameClientRpc();
             }
         }
 
