@@ -19,10 +19,12 @@ namespace HB
 
         #region STATE PARAMETERS
         private const float LERP_AMOUNT = 1f;
+        private const float SPAWN_TIME = 5f;
         #endregion
 
         public bool IsJumping { get; private set; }
         public bool IsRushing { get; private set; }
+        public float CurrentTime { get; private set; }
 
         #region INPUT PARAMETERS
         [HideInInspector] public Vector3 _moveInput;
@@ -59,6 +61,11 @@ namespace HB
             {
                 Run(LERP_AMOUNT);
             }
+            // rush
+            if (CanRush())
+            {
+                Rush();
+            }
         }
 
         private void Update()
@@ -72,14 +79,28 @@ namespace HB
             if (CanJump() && Input.GetKeyDown(KeyCode.Space))
             {
                 IsJumping = true;
+                Animator.SetTrigger("IsJumping");
 
                 Jump();
             }
+            #endregion
 
-            // rush
-            if (CanRush())
+            #region POLAR BEAR SPAWN
+            // *주의
+            // 기절 시간이 2초, 북극곰 소환 시간이 5초라 하였을 때
+            // Player가 3초 동안 가만히 있다가 기절하여도
+            // 자의든 타의든 움직이지 않은 시간이 총 5초 이니 북극곰을 소환한다.
+            if (RB.velocity != Vector3.zero)
             {
-                Rush();
+                CurrentTime = 0;
+            }
+            else
+            {
+                CurrentTime += Time.deltaTime;
+                if (CurrentTime >= SPAWN_TIME)
+                {
+                    // 북극곰을 생성하는 스크립트 연결
+                }
             }
             #endregion
         }

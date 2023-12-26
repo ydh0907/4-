@@ -6,18 +6,22 @@ namespace GM
 {
     public class Player_Test : MonoBehaviour
     {
-        SpawnPolarBear polarBear;
+        //[SerializeField] Transform[] trm;
+        [SerializeField] GameObject obj;
 
-        private void Awake()
+        private void Start()
         {
-            polarBear = FindObjectOfType<SpawnPolarBear>();
+            StartCoroutine("Test");
         }
 
-        private void Update()
+        IEnumerator Test()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            while (true)
             {
-                polarBear.CallPolarBear(transform);
+                yield return new WaitForSeconds(0.1f);
+                Vector3 pos = MapManager.Instance.GetSpawnPosition();
+                Debug.Log(pos);
+                Instantiate(obj).transform.position = pos;
             }
         }
     }

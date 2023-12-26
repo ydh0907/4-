@@ -20,4 +20,4 @@ MonoBehaviour:
   jumpHeight: 10
   jumpTimeToApex: 0.5
   jumpForce: 40
-  rotationFactorPerFrame: 15
+  rotationFactorPerFrame: 50

@@ -9,11 +9,11 @@ namespace GM
         private bool isUp = true;
         private void Update()
         {
-            if (transform.position.y >= 0.7f)
+            if (transform.position.y >= 0.69f)
             {
                 isUp = false;
             }
-            else if (transform.position.y <= 0.4f)
+            else if (transform.position.y <= 0.41f)
             {
                 isUp = true;
             }
@@ -21,11 +21,17 @@ namespace GM
             Vector3 pos = transform.position;
             if (isUp)
             {
-                pos.y += Time.deltaTime / 5;
+                if (transform.position.y >= 0.55f)
+                    pos.y = Mathf.Lerp(transform.position.y, 0.7f, Time.deltaTime);
+                else
+                    pos.y += Time.deltaTime / 5;
             }
             else
             {
-                pos.y -= Time.deltaTime / 5;
+                if (transform.position.y <= 0.55f)
+                    pos.y = Mathf.Lerp(transform.position.y, 0.4f, Time.deltaTime);
+                else
+                    pos.y -= Time.deltaTime / 5;
             }
             transform.position = pos;
         }

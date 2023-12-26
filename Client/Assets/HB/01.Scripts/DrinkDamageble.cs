@@ -26,7 +26,7 @@ namespace HB
         {
             CurrentHealth -= damageAmount;
 
-            if (CurrentHealth <= 200)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
@@ -35,7 +35,6 @@ namespace HB
         public void StartRush()
         {
             StartCoroutine(nameof(RushDamage));
-            // CurrentHealth--;
         }
 
         public void Die()
@@ -47,7 +46,7 @@ namespace HB
         {
             CurrentHealth--;
 
-            if (CurrentHealth <= 200)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Net;
+using TestClient;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
@@ -32,7 +34,7 @@ namespace DH
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += HostApproval;
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("127.0.0.0", (ushort)9070, "0.0.0.0");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("127.0.0.1", (ushort)9070, "0.0.0.0");
 
             isConnect = NetworkManager.Singleton.StartHost();
 
@@ -63,6 +65,8 @@ namespace DH
             isConnect = null;
 
             LoadSceneManager.Instance.LoadScene(2, () => Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId));
+
+            Program.Instance.CreateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname);
 
             onConnectSucceed?.Invoke();
         }

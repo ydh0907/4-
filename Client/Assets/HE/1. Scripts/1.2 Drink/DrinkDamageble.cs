@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HB
+namespace HE
 {
     public class DrinkDamageble : MonoBehaviour, IDamageble
     {
@@ -26,7 +26,7 @@ namespace HB
         {
             CurrentHealth -= damageAmount;
 
-            if (CurrentHealth <= 200)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
@@ -44,13 +44,18 @@ namespace HB
 
         IEnumerator RushDamage()
         {
-            CurrentHealth--;
-
-            if (CurrentHealth <= 200)
+            while (true)
             {
-                Die();
+                CurrentHealth--;
+
+                if (CurrentHealth <= 0)
+                {
+                    Die();
+                    yield break; // 코루틴 종료
+                }
+
+                yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
             }
-            yield return null;
         }
 
         private void OnTriggerEnter(Collider other)

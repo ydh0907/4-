@@ -15,7 +15,6 @@ namespace HE
         #endregion
 
         private PlayerDamageble PlayerDamageble;
-        /*private DrinkDamageble DrinkDamageble;*/
 
         #region STATE PARAMETERS
         public bool IsJumping { get; private set; }
@@ -57,6 +56,11 @@ namespace HE
             {
                 Run(LERP_AMOUNT);
             }
+            // Handle Rush
+            if (CanRush())
+            {
+                Rush();
+            }
         }
 
         private void Update()
@@ -71,12 +75,6 @@ namespace HE
                 IsJumping = true;
 
                 Jump();
-            }
-
-            // rush
-            if (CanRush())
-            {
-                Rush();
             }
             #endregion
         }
