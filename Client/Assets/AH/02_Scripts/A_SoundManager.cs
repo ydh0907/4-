@@ -13,14 +13,8 @@ public class A_SoundManager : MonoSingleton<A_SoundManager> {
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClip = new Dictionary<string, AudioClip>();
 
-    //private AudioSource bgmSoundSource;
-    //private AudioSource effectSoundSource;
-
     public int bgmValue = 9;
     public int effectValue = 9;
-
-    //public List<VisualElement> bgmList = new List<VisualElement>();
-    //public List<VisualElement> effectList = new List<VisualElement>();
 
     /// <summary>
     /// SoundManager라는 오브젝트를 만들어서 그 아래에 Sound에 있는 타입 만큼의 오브젝트 생성 후 각각 AudioSource를 붙여줌
