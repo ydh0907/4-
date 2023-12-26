@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using GM;
 
 namespace HB
 {
@@ -25,6 +26,8 @@ namespace HB
         public bool IsJumping { get; private set; }
         public bool IsRushing { get; private set; }
         public float CurrentTime { get; private set; }
+
+        [SerializeField] SpawnPolarBear SpawnPolarBear;
 
         #region INPUT PARAMETERS
         [HideInInspector] public Vector3 _moveInput;
@@ -99,7 +102,7 @@ namespace HB
                 CurrentTime += Time.deltaTime;
                 if (CurrentTime >= SPAWN_TIME)
                 {
-                    // ºÏ±Ø°õÀ» »ý¼ºÇÏ´Â ½ºÅ©¸³Æ® ¿¬°á
+                    SpawnPolarBear.CallPolarBear(transform);
                 }
             }
             #endregion
@@ -126,12 +129,8 @@ namespace HB
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
             }
-            else
-            {
 
-            }
-
-                Animator.SetFloat("AnimationSpeed", targetSpeed);
+            Animator.SetFloat("AnimationSpeed", targetSpeed);
         }
         #endregion
 
