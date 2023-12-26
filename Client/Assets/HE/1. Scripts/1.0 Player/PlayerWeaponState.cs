@@ -11,7 +11,7 @@ namespace HB
         private PlayerMentorsManagement PlayerMentorsManagement;
 
         public bool isMentosAvailable { get; set; } // 지금 멘토스를 가지고 있나?
-        public bool IsMisMentos { get; set; } // 지금 멘토스인가?
+        public bool IsInMentosState { get; set; } // 지금 멘토스인가?
 
         private int attackDamageAmount;
         [SerializeField] private int mentosDamageAmount;
@@ -47,13 +47,13 @@ namespace HB
         private void OnMentosStateActivated()
         {
             attackDamageAmount = mentosDamageAmount;
-            IsMisMentos = true;
+            IsInMentosState = true;
         }
 
         private void OnFistStateActivated()
         {
             attackDamageAmount = fistDamageAmount;
-            IsMisMentos = false;
+            IsInMentosState = false;
         }
 
         private bool CanChangeToMentosState()
