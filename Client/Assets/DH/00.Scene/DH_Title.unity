@@ -390,8 +390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0d1956b1f41f34baf7ea5fe403eadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
   _titlePanel: {fileID: 9197481963319205126, guid: 7fba260de57ef314191889568f8ef182, type: 3}
+  _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
+  lobbyBGM: {fileID: 8300000, guid: f998db18db004b4499a799f95e0f489a, type: 3}
 --- !u!1 &2071834947
 GameObject:
   m_ObjectHideFlags: 0
