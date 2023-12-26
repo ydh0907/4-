@@ -86,6 +86,7 @@ namespace AH {
         [ClientRpc]
         private void HandleStartGameClientRpc()
         {
+            Debug.Log("clientCounter");
             _container.Clear();
             Counter();
         }

@@ -1,0 +1,86 @@
+.container {
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.bgm-content {
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.effect-content {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.bgmvalue-image {
+    background-image: url('project://database/Assets/AH/04_Sprites/GUI.png?fileID=21300028&guid=1eaee135ce037439d925cee5e41ce026&type=3#GUI_14');
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.bgmvalue-image.on {
+    background-image: url('project://database/Assets/AH/04_Sprites/GUI.png?fileID=21300030&guid=1eaee135ce037439d925cee5e41ce026&type=3#GUI_15');
+}
+
+.bgmvalue-image.off {
+    background-image: url('project://database/Assets/AH/04_Sprites/GUI.png?fileID=21300028&guid=1eaee135ce037439d925cee5e41ce026&type=3#GUI_14');
+}
+
+.soundvalue-image {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-image: url('project://database/Assets/AH/04_Sprites/GUI.png?fileID=21300028&guid=1eaee135ce037439d925cee5e41ce026&type=3#GUI_14');
+}
+
+.soundvalue-image.on {
+    background-image: url('project://database/Assets/AH/04_Sprites/GUI.png?fileID=21300030&guid=1eaee135ce037439d925cee5e41ce026&type=3#GUI_15');
+}
+
+.soundvalue-image.off {
+    background-image: url('project://database/Assets/AH/04_Sprites/GUI.png?fileID=21300028&guid=1eaee135ce037439d925cee5e41ce026&type=3#GUI_14');
+}
+
+.rbtn-content {
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    align-self: center;
+}
+
+.large-button {
+    background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/A.png?fileID=21300000&guid=0f9aff9d1d5411d419a50a1f33efcf25&type=3#A');
+    width: 500px;
+    height: 100px;
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/Maplestory%20Bold.ttf?fileID=12800000&guid=9f011ab977e55c14c9f2f670b884a55c&type=3#Maplestory Bold');
+    font-size: 52px;
+    color: rgb(0, 0, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out-circ;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+}
+
+.large-button:hover {
+    scale: 1.2 1.1;
+}
