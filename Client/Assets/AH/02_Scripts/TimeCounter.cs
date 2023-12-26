@@ -36,14 +36,13 @@ namespace AH {
         }
         IEnumerator RoutinePlayCountDown(Label countText, float runningTime) {
             while(runningTime > 0) { // ±âº»°ª 180
-                runningTime -= Time.deltaTime;
+                runningTime -= 1;
 
                 int minutes = Mathf.FloorToInt(runningTime / 60);
                 int seconds = Mathf.FloorToInt(runningTime % 60);
                 countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
                 yield return new WaitForSeconds(1f);
-                A_SoundManager.Instance.Play(countDown);
             }
 
             NetworkGameManager.Instance.ServerGameEnd();
@@ -55,8 +54,9 @@ namespace AH {
 
                 loopTime--;
                 time--;
-                yield return new WaitForSeconds(1);
+
                 A_SoundManager.Instance.Play(countDown);
+                yield return new WaitForSeconds(1);
             }
             ingameToolkit.FinishCountDown();
             callback?.Invoke();

@@ -8,6 +8,7 @@ using TestClient;
 using System.Net;
 using System.Net.Sockets;
 using System.Linq;
+using AH;
 
 namespace DH
 {
@@ -91,6 +92,22 @@ namespace DH
                 players.Remove(Key);
             else
                 players[Key] = Value;
+        }
+
+        [ServerRpc]
+        public void UILoadServerRpc()
+        {
+            UILoadClientRpc();
+        }
+
+        [ClientRpc]
+        private void UILoadClientRpc()
+        {
+            if (IsHost) return;
+
+            IngameUIToolkit ingame = GameObject.Find("UIDocument").GetComponent<IngameUIToolkit>();
+            ingame._container.Clear();
+            ingame.Counter();
         }
 
         public void ServerGameStart()

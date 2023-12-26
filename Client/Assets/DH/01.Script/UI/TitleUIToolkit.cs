@@ -1,8 +1,4 @@
-using Karin;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -15,8 +11,6 @@ namespace DH {
         [SerializeField] private VisualTreeAsset _titlePanel;
         [SerializeField] private VisualTreeAsset _settingPanel;
 
-        [SerializeField] private AudioClip lobbyBGM;
-
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
             A_SoundManager.Instance.Init();
@@ -26,7 +20,6 @@ namespace DH {
             _root = _root.Q<VisualElement>("container");
 
             TitleTemplate();
-            A_SoundManager.Instance.Play(lobbyBGM, Sound.Bgm);
         }
         private void OpenSettingWindow(ClickEvent evt) { // setting
             SettingTemplate();
