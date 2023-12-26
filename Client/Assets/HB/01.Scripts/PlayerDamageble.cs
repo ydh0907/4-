@@ -10,6 +10,7 @@ namespace HB
         public int MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         private PlayerMovement PlayerMovement;
+        private PlayerAttack PlayerAttack;
 
         public bool IsGroggying { get; private set; }
         [SerializeField] private float _faintTime;
@@ -18,6 +19,7 @@ namespace HB
         private void Awake()
         {
             PlayerMovement = GetComponent<PlayerMovement>();
+            PlayerAttack = GetComponent<PlayerAttack>();
         }
 
         public void Damage(int damageAmount, Vector3 hitDirection)
@@ -27,6 +29,7 @@ namespace HB
 
         public void Die()
         {
+            PlayerAttack.CurrentMentosCount = 0;
             StartCoroutine(nameof(PlayerRespawn));
         }
 

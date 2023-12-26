@@ -44,7 +44,7 @@ namespace AH {
 
                 yield return new WaitForSeconds(1f);
             }
-
+            ingameToolkit.GameOver();
             NetworkGameManager.Instance.ServerGameEnd();
         }
         IEnumerator RoutineCountDown(Label countText, int time, int loopTime, string plusText = "", Action callback = null) {
@@ -55,7 +55,7 @@ namespace AH {
                 loopTime--;
                 time--;
 
-                A_SoundManager.Instance.Play(countDown);
+                SoundManager.Instance.Play(countDown);
                 yield return new WaitForSeconds(1);
             }
             ingameToolkit.FinishCountDown();

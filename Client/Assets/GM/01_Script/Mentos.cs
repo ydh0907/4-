@@ -35,14 +35,5 @@ namespace GM
             }
             transform.position = pos;
         }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.name.Contains("Player"))
-            {
-                Destroy(gameObject);
-                Debug.Log("맨토스 수집됨");
-            }
-        }
     }
 }

@@ -8,11 +8,10 @@ namespace HB
     {
         private PlayerMovement PlayerMovement;
         private PlayerKnockback PlayerKnockback;
+        private PlayerMentorsManagement PlayerMentorsManagement;
 
-        private bool isMentosAvailable; // 지금 멘토스를 가지고 있나?
-
-        [SerializeField] private bool IsMisMentos; // 지금 멘토스인가?
-        [SerializeField] private bool IsFist; // 지금 멘토스인가?
+        public bool isMentosAvailable { get; set; } // 지금 멘토스를 가지고 있나?
+        public bool IsInMentosState { get; set; } // 지금 멘토스인가?
 
         private int attackDamageAmount;
         [SerializeField] private int mentosDamageAmount;
@@ -22,6 +21,7 @@ namespace HB
         {
             PlayerMovement = GetComponentInParent<PlayerMovement>();
             PlayerKnockback = GetComponentInParent<PlayerKnockback>();
+            PlayerMentorsManagement = GetComponentInParent<PlayerMentorsManagement>();
         }
 
         private void Start()
@@ -37,7 +37,7 @@ namespace HB
             {
                 OnMentosStateActivated();
             }
-            else if(Input.GetKeyDown(KeyCode.Alpha1))
+            else if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 OnFistStateActivated();
             }
@@ -47,15 +47,13 @@ namespace HB
         private void OnMentosStateActivated()
         {
             attackDamageAmount = mentosDamageAmount;
-            IsMisMentos = true;
-            IsFist = false;
+            IsInMentosState = true;
         }
 
         private void OnFistStateActivated()
         {
             attackDamageAmount = fistDamageAmount;
-            IsFist = true;
-            IsMisMentos = false;
+            IsInMentosState = false;
         }
 
         private bool CanChangeToMentosState()

@@ -11,8 +11,11 @@ namespace HB
         #endregion
 
         private PlayerDamageble PlayerDamageble;
+        private PlayerWeaponState PlayerWeaponState;
 
         #region STATE PARAMETERS
+        public int CurrentMentosCount { get; set; }
+
         private bool _attackRefilling;
 
         [SerializeField] private float _attackRefillTime;
@@ -24,6 +27,12 @@ namespace HB
             Animator = GetComponent<Animator>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
+            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>();
+        }
+
+        private void Start()
+        {
+            CurrentMentosCount = 0;
         }
 
         private void Update()
@@ -37,10 +46,19 @@ namespace HB
             #endregion
 
             Animator.SetFloat("AttackSpeed", _attackSpeed);
+
+            if (CurrentMentosCount > 0)
+                PlayerWeaponState.isMentosAvailable = true;
+
+            else if (CurrentMentosCount <= 0)
+                PlayerWeaponState.isMentosAvailable = false;
         }
 
         private void Attack()
         {
+            if (PlayerWeaponState.IsInMentosState)
+                CurrentMentosCount--;
+
             StartCoroutine(nameof(RefillAttack));
             Animator.SetTrigger("isAttacking");
         }
@@ -58,6 +76,16 @@ namespace HB
                 return true;
             else
                 return false;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Vector2 hitDirection = other.gameObject.transform.position - transform.position;
+
+            if (other.gameObject.layer == LayerMask.NameToLayer("MENTOS"))
+            {
+                CurrentMentosCount++;
+            }
         }
     }
 }

@@ -6,6 +6,24 @@ namespace GM
 {
     public class SpawnPolarBear : MonoBehaviour
     {
+        private static SpawnPolarBear instance = null;
+
+        public static SpawnPolarBear Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<SpawnPolarBear>();
+                    if (instance == null)
+                    {
+                        instance = new GameObject("SpawnPolarBear").AddComponent<SpawnPolarBear>();
+                    }
+                }
+                return instance;
+            }
+        }
+
         [SerializeField] private GameObject polarBearPrefab;
         [SerializeField] private float spawnDistance;
 
