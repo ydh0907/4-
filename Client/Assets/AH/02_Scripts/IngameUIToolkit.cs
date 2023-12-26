@@ -2,6 +2,7 @@ using DH;
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace AH {
@@ -24,6 +25,7 @@ namespace AH {
 
         [Header("playPanel")]
         [SerializeField] private VisualTreeAsset playPanel;
+        [SerializeField] private VisualTreeAsset gameOverPanel;
         [Space]
 
         [Header("Data")]
@@ -41,7 +43,7 @@ namespace AH {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
 
-            A_SoundManager.Instance.Init();
+            SoundManager.Instance.Init();
 
             if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
@@ -82,7 +84,6 @@ namespace AH {
                 NetworkGameManager.Instance.UILoadServerRpc();
             }
         }
-
         private void HandleReadyGame(ClickEvent evt) {
             var dve = evt.target as Button;
             if (dve != null) {
@@ -109,7 +110,6 @@ namespace AH {
 
             _counter.CountDown(countText, callback);
         }
-
         private void ResurrectionCounter(Action callback = null) { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
@@ -129,11 +129,26 @@ namespace AH {
             var drinkIcon = template.Q<VisualElement>("drinkIcon");
             killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
-            Debug.Log("finish time");
+
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
-            A_SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+            SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+        }
+        public void GameOver() {
+            VisualElement template = hostLobbyPanel.Instantiate().Q<VisualElement>("container");
+            _container.Add(template);
+
+            template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoTitle);
+            template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoLobby);
+        }
+
+        private void HandleGoLobby(ClickEvent evt) {
+            Debug.Log("go lobby");
+        }
+
+        private void HandleGoTitle(ClickEvent evt) {
+            SceneManager.LoadScene("DH_Title");
         }
     }
 }

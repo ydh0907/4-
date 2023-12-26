@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a271334acdc4f6e4795759a775a8fcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDown: {fileID: 8300000, guid: 7460c4dc37f6e474498df765e1800723, type: 3}
+  countDown: {fileID: 8300000, guid: bcf91677ba4f36d4fbb4d193cc60a431, type: 3}
 --- !u!114 &2018019691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,12 +457,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d6c93b2d8f733498748e70b5d1c773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingameBGM: {fileID: 8300000, guid: a8adb43281b7aab4e83703e92b3d2e5e, type: 3}
+  ingameBGM: {fileID: 8300000, guid: 64c9cb502dd7447409661ead67ec4a5b, type: 3}
   deadCountDownPanel: {fileID: 9197481963319205126, guid: 36ec50e6a9338e649adff1b1380981de, type: 3}
   countDownPanel: {fileID: 9197481963319205126, guid: 09b06c68b4b0c9f4bb5a9be1deaee09e, type: 3}
   hostLobbyPanel: {fileID: 9197481963319205126, guid: e4d2b4c6150600646b5e4fd0e5beec50, type: 3}
   clientLobbyPanel: {fileID: 9197481963319205126, guid: cc03807d703732540b0468539f9db0a0, type: 3}
   playPanel: {fileID: 9197481963319205126, guid: eeb08b3e61be8fe4d96d92e59e5877b8, type: 3}
+  gameOverPanel: {fileID: 9197481963319205126, guid: f5dcf951e249daf449874e738cf0607a, type: 3}
   isHost: 1
 --- !u!114 &2018019692
 MonoBehaviour:

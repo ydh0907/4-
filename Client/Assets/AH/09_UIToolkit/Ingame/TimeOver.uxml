@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/PlayGame.uss?fileID=7433441132597879392&amp;guid=f7851507cebef19478ee356d8cb53083&amp;type=3#PlayGame" />
-    <ui:VisualElement name="container" style="flex-grow: 1; justify-content: flex-end; align-items: flex-end;">
-        <ui:VisualElement name="content">
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="goTitle" text="타이틀" class="button" style="border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/A.png?fileID=21300000&amp;guid=0f9aff9d1d5411d419a50a1f33efcf25&amp;type=3#A&apos;); background-color: rgba(188, 188, 188, 0);" />
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="goLobby" text="로비" class="button" style="border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); background-image: url(&apos;project://database/Assets/AH/04_Sprites/Dark%20UI/A.png?fileID=21300000&amp;guid=0f9aff9d1d5411d419a50a1f33efcf25&amp;type=3#A&apos;); background-color: rgba(188, 188, 188, 0);" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-</ui:UXML>
