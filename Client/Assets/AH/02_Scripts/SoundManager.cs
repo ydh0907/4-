@@ -38,7 +38,6 @@ public class SoundManager : MonoSingleton<SoundManager> {
     }
     private void MakeSoundManager(GameObject root) {
         int child = root.transform.GetChildCount();
-        Debug.Log(child);
         if (child <= 0) {
             string[] soundName = System.Enum.GetNames(typeof(Sound)); // BGM Effect
             for (int i = 0; i < soundName.Length - 1; i++) { // -1 : MaxCount»©±â

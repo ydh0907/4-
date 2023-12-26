@@ -35,18 +35,21 @@ namespace AH {
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
-            isHost = NetworkManager.Singleton.IsHost;
+            //isHost = NetworkManager.Singleton.IsHost;
         }
         private void OnEnable() {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
 
-            if(isHost) { // 이 값은 server에서 받는다
+            SoundManager.Instance.Init();
+
+            /*if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
             else {
                 ClientLobbyPanel();
-            }
+            }*/
+            Counter();
         }
         // Lobby
         private void HostLobbyPanel() {
@@ -138,7 +141,7 @@ namespace AH {
             var drinkIcon = template.Q<VisualElement>("drinkIcon");
             killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
-
+            Debug.Log("finish time");
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
