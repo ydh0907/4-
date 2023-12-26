@@ -1459,14 +1459,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8977181268269844119}
     m_Modifications:
-    - target: {fileID: 2031003416644896372, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3438073810224855585, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7857529585432975561, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1511,58 +1503,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColeDrink
       objectReference: {fileID: 0}
-    - target: {fileID: 7857529585433134313, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857529585433134315, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857529585433134317, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857529585433134319, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9002381003097182183, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7857529585433134313, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 8095808340497315828}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
 --- !u!4 &9086700671287808794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7857529585432975561, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
   m_PrefabInstance: {fileID: 1374160402974444499}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9086700671288102714 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7857529585433134313, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
-  m_PrefabInstance: {fileID: 1374160402974444499}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8095808340497315828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9086700671288102714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0876a5356738f2043a77082799de2f4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 1000
 --- !u!1001 &3545110688364568692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1571,26 +1521,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8977181268269844119}
     m_Modifications:
-    - target: {fileID: 1258855710766843265, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.318
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912884183008015115, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3975504965863558701, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3975504965863558701, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3975504965863558701, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3975504965863558701, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1631,29 +1561,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3975504965863558701, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4123605803889763469, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143726558202984648, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716201054009953642, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: _barTransform
-      value: 
-      objectReference: {fileID: 2326841456558597621}
     - target: {fileID: 7910492786708016214, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
       propertyPath: m_Name
       value: HealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 7910492786708016214, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1663,11 +1573,6 @@ PrefabInstance:
 --- !u!4 &439408652582940249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3975504965863558701, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
-  m_PrefabInstance: {fileID: 3545110688364568692}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2326841456558597621 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1258855710766843265, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
   m_PrefabInstance: {fileID: 3545110688364568692}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7784047704228179230 stripped
