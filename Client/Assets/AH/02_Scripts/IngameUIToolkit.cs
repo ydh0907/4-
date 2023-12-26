@@ -78,17 +78,9 @@ namespace AH {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
 
-                if(IsHost)
-                    HandleStartGameClientRpc();
+                if (IsHost)
+                    NetworkGameManager.Instance.UILoadServerRpc();
             }
-        }
-
-        [ClientRpc]
-        private void HandleStartGameClientRpc()
-        {
-            Debug.Log("clientCounter");
-            _container.Clear();
-            Counter();
         }
 
         private void HandleReadyGame(ClickEvent evt) {
