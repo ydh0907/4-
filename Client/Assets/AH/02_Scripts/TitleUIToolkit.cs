@@ -54,8 +54,8 @@ namespace AH {
                 if (btn != null) {
                     int index = bgmList.IndexOf(btn);
 
-                    SoundManager.Instance.bgmValue = index;
-                    SoundManager.Instance.RegulateSound(Sound.Bgm, index);
+                    A_SoundManager.Instance.bgmValue = index;
+                    A_SoundManager.Instance.RegulateSound(Sound.Bgm, index);
                     //OnOffImages(bgmList, index);
                 }
             });
@@ -64,8 +64,8 @@ namespace AH {
                 if (btn != null) {
                     int index = effectList.IndexOf(btn);
 
-                    SoundManager.Instance.effectValue = index;
-                    SoundManager.Instance.RegulateSound(Sound.Effect, index);
+                    A_SoundManager.Instance.effectValue = index;
+                    A_SoundManager.Instance.RegulateSound(Sound.Effect, index);
                     //OnOffImages(effectList, index);
                 }
             });
