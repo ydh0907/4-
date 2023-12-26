@@ -1192,6 +1192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _faintTime: 2
+  _respawnTime: 5
 --- !u!114 &5055354573460058493
 MonoBehaviour:
   m_ObjectHideFlags: 0
