@@ -36,6 +36,7 @@ namespace HE
 
         public void Die()
         {
+            
             Debug.Log("d");
         }
 
@@ -45,5 +46,6 @@ namespace HE
             yield return new WaitForSeconds(_faintTime);
             IsGroggying = false;
         }
+
     }
 }
