@@ -8,9 +8,12 @@ public class RankingPodium : MonoSingleton<RankingPodium>
 
     public void SetPlayerPodium(Transform[] players)
     {
-        for(int i = 0; i< players.Length; i++)
+        int i;
+        for(i = 0; i< players.Length-1; i++)
         {
             players[i].transform.position = spawnPositions[i].position;
         }
+        players[i].transform.position = spawnPositions[i].position;
+        players[i].transform.rotation = Quaternion.Euler(90, 0, 90);
     }
 }

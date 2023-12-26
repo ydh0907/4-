@@ -6,14 +6,6 @@ namespace GM
 {
     public class MapManager : MonoSingleton<MapManager>
     {
-        public static MapManager instance;
-
-        private void Awake()
-        {
-            if(instance != null) Destroy(instance);
-            instance = this;
-        }
-
         [SerializeField] private List<Transform> spawnPoints;
 
         public Vector3 GetSpawnPosition()

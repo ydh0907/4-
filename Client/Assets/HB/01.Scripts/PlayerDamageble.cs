@@ -13,6 +13,7 @@ namespace HB
 
         public bool IsGroggying { get; private set; }
         [SerializeField] private float _faintTime;
+        [SerializeField] private float _respawnTime;
 
         private void Awake()
         {
@@ -26,7 +27,7 @@ namespace HB
 
         public void Die()
         {
-            Debug.Log("Die");
+            StartCoroutine(nameof(PlayerRespawn));
         }
 
         IEnumerator GroggyAction()
@@ -34,6 +35,12 @@ namespace HB
             IsGroggying = true;
             yield return new WaitForSeconds(_faintTime);
             IsGroggying = false;
+        }
+
+        IEnumerator PlayerRespawn()
+        {
+            yield return new WaitForSeconds(_respawnTime);
+            // ¸®½ºÆù
         }
     }
 }
