@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityStrength: -80
   gravityScale: 8.154943
-  fallGravityMult: 2
-  runMaxSpeed: 9.8
+  fallGravityMult: 5
+  runMaxSpeed: 49
   rushMaxSpeed: 18
   jumpHeight: 10
   jumpTimeToApex: 0.5
   jumpForce: 40
-  rotationFactorPerFrame: 50
+  rotationFactorPerFrame: 30
