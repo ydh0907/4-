@@ -268,8 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMisMentos: 0
-  IsFist: 0
   mentosDamageAmount: 400
   fistDamageAmount: 150
 --- !u!135 &3815682357109878204
@@ -1172,6 +1170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: e4e3dcaf16bf61f4ab89f6abe29f7b50, type: 2}
+  SpawnPolarBear: {fileID: 0}
   _moveInput: {x: 0, y: 0, z: 0}
   _groundCheckPoint: {fileID: 6883259527491943530}
   _groundCheckSize: {x: 1, y: 0.1, z: 1}
@@ -1460,6 +1459,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8977181268269844119}
     m_Modifications:
+    - target: {fileID: 2031003416644896372, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3438073810224855585, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1523,6 +1526,10 @@ PrefabInstance:
     - target: {fileID: 7857529585433134319, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002381003097182183, guid: b8c1151a4912ca24c80143ecf9af3e26, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

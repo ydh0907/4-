@@ -56,7 +56,7 @@ namespace HB
 
         private void Attack()
         {
-            if (PlayerWeaponState.IsMisMentos)
+            if (PlayerWeaponState.IsInMentosState)
                 CurrentMentosCount--;
 
             StartCoroutine(nameof(RefillAttack));
