@@ -361,7 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 9ec7cb9e98d0b464d89ecad0ac5467ec, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 26fcf880b1fbcda4fa06bd8f5d95c087, type: 3}
   m_SortingOrder: 0
 --- !u!4 &2051066405
 Transform:
@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
+  _titlePanel: {fileID: 9197481963319205126, guid: 7fba260de57ef314191889568f8ef182, type: 3}
 --- !u!1 &2071834947
 GameObject:
   m_ObjectHideFlags: 0

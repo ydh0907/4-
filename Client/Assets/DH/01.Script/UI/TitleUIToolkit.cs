@@ -1,6 +1,7 @@
 using Karin;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,8 +10,9 @@ using UnityEngine.UIElements;
 namespace DH {
     public class TitleUIToolkit : MonoBehaviour {
         private UIDocument _uiDocument;
-        private VisualElement root;
+        private VisualElement _root;
 
+        [SerializeField] private VisualTreeAsset _titlePanel;
         [SerializeField] private VisualTreeAsset _settingPanel;
 
         private void Awake() {
@@ -18,18 +20,31 @@ namespace DH {
             A_SoundManager.Instance.Init();
         }
         private void OnEnable() {
-            root = _uiDocument.rootVisualElement;
+            _root = _uiDocument.rootVisualElement;
+            _root = _root.Q<VisualElement>("container");
 
-            root.Q<Button>("playgame-btn").RegisterCallback<ClickEvent>(HandleInputPlayerDataScene);
-            root.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(OpenSettingWindow);
-            root.Q<Button>("exit-btn").RegisterCallback<ClickEvent>(ExitGame);
-        }
-
-        private void HandleInputPlayerDataScene(ClickEvent evt) { // host
-            SceneManager.LoadScene("DH_Lobby");
+            TitleTemplate();
         }
         private void OpenSettingWindow(ClickEvent evt) { // setting
+            SettingTemplate();
+        }
+        private void TitleTemplate() {
+            var template = _titlePanel.Instantiate().Q<VisualElement>("title-container");
+
+            _root.Clear();
+            _root.Add(template);
+
+            template.Q<Button>("playgame-btn").RegisterCallback<ClickEvent>(HandleInputPlayerDataScene);
+            template.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(OpenSettingWindow);
+            template.Q<Button>("exit-btn").RegisterCallback<ClickEvent>(ExitGame);
+
+        }
+        private void SettingTemplate() {
             var template = _settingPanel.Instantiate().Q<VisualElement>("setting-border");
+
+            //_root.Clear();
+            _root.Add(template);
+
             var bgmData = template.Q<VisualElement>("bgm-content");
             var effectData = template.Q<VisualElement>("effect-content");
 
@@ -40,11 +55,6 @@ namespace DH {
             //GetSoundVisualElementData(effectList, effectData);
             //GetcurrentSoundData(bgmList, effectList);
 
-            root.Clear();
-            root.Add(template);
-
-            template.AddToClassList("on");
-
             template.Q<Button>("close-btn").RegisterCallback<ClickEvent>(HandleCloseButton);
 
             VisualElement bgmValueButton = template.Q<VisualElement>(className: "bgm-content");
@@ -53,27 +63,34 @@ namespace DH {
                 var btn = evt.target as DataSound;
                 if (btn != null) {
                     int index = bgmList.IndexOf(btn);
-
-                    //SoundManager.Instance.bgmValue = index;
-                    //SoundManager.Instance.RegulateSound(Sound.Bgm, index);
-                    //OnOffImages(bgmList, index);
+                    Debug.Log("click");
+                    A_SoundManager.Instance.bgmValue = index;
+                    A_SoundManager.Instance.RegulateSound(Sound.Bgm, index);
+                    OnOffImages(bgmList, index);
                 }
             });
             effectValueButton.RegisterCallback<ClickEvent>(evt => {
                 var btn = evt.target as DataSound;
                 if (btn != null) {
                     int index = effectList.IndexOf(btn);
-
-                    //SoundManager.Instance.effectValue = index;
-                    //SoundManager.Instance.RegulateSound(Sound.Effect, index);
-                    //OnOffImages(effectList, index);
+                    Debug.Log("click");
+                    A_SoundManager.Instance.effectValue = index;
+                    A_SoundManager.Instance.RegulateSound(Sound.Effect, index);
+                    OnOffImages(effectList, index);
                 }
             });
         }
-        private void HandleCloseButton(ClickEvent evt) {
+
+        private void OnOffImages(List<VisualElement> bgmList, int index) {
 
         }
 
+        private void HandleCloseButton(ClickEvent evt) {
+            TitleTemplate();
+        }
+        private void HandleInputPlayerDataScene(ClickEvent evt) { // host
+            SceneManager.LoadScene("DH_Lobby");
+        }
         private void ExitGame(ClickEvent evt) { // exit
             Application.Quit();
             Debug.Log("QUIT");

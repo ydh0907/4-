@@ -1,5 +1,6 @@
 using Karin;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum Sound {
@@ -7,8 +8,8 @@ public enum Sound {
     Effect,
     MaxCount //그냥 enum의 개수를 세기 위해 존재(아무것도 아님)
 }
-public class A_SoundManagere : MonoBehaviour {
-    protected A_SoundManagere() { }
+public class A_SoundManager : MonoSingleton<A_SoundManager> {
+    protected A_SoundManager() { }
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClip = new Dictionary<string, AudioClip>();
 
@@ -28,7 +29,7 @@ public class A_SoundManagere : MonoBehaviour {
         GameObject root = GameObject.Find("SoundManager"); // "SoundManager라는 이름의 오브젝트를 찾아
         if (root == null) { // 없다면
             root = new GameObject { name = "SoundManager" }; // SoundManager오브젝트를 만들고 
-            root.AddComponent<A_SoundManagere>();
+            root.AddComponent<A_SoundManager>();
             Object.DontDestroyOnLoad(root); // 파괴 보호 방지
 
             MakeSoundManager(root);
