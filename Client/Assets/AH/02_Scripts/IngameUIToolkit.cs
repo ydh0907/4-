@@ -198,8 +198,16 @@ namespace AH {
 
             // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
 
-            var nickname = template.Q<Label>("nickname-txt");
-            var drinkIcon = template.Q<VisualElement>("drinkIcon");
+            VisualElement playerData = template.Q<VisualElement>(className: "players-border");
+            Debug.Log(playerData.childCount);
+            for(int i = 0; i < playerData.childCount; i++) {
+                Debug.Log(playerData[i]);
+                var nickname = playerData[i].Q<Label>("nickname-txt");
+                var drinkIcon = playerData[i].Q<VisualElement>("drinkIcon");
+                //Debug.Log(nickname);
+                //Debug.Log(drinkIcon);
+            }
+
             killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
