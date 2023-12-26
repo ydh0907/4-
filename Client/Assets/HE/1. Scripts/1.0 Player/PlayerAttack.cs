@@ -27,7 +27,7 @@ namespace HB
             Animator = GetComponent<Animator>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
-            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>();
+            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); // ¼öÁ¤
         }
 
         private void Start()
