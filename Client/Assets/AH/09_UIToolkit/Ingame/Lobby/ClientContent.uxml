@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=cd80b79b037fb024297b55feaf002c51&amp;type=3#Lobby" />
-    <ui:VisualElement name="client-content" class="lobby-content" style="justify-content: flex-end;">
-        <ui:Button text="준비" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ready-btn" class="lobby-button" style="right: 100px;" />
+    <ui:VisualElement name="client-content" class="lobby-content">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" class="setting-btn" />
+        <ui:Button text="준비" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ready-btn" class="lobby-button" />
     </ui:VisualElement>
 </ui:UXML>

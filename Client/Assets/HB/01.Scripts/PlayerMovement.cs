@@ -72,7 +72,6 @@ namespace HB
         private void Update()
         {
             #region INPUT HANDLER
-            if (!IsOwner) return;
             _moveInput.x = Input.GetAxisRaw("Horizontal");
             _moveInput.z = Input.GetAxisRaw("Vertical");
 
@@ -120,6 +119,9 @@ namespace HB
                 targetSpeed = moveDirection.magnitude * Data.runMaxSpeed;
 
             targetSpeed = Mathf.Lerp(RB.velocity.magnitude, targetSpeed, lerpAmount);
+            Animator.SetFloat("AnimationSpeed", targetSpeed);
+
+            if (!IsOwner) return;
 
             if (CanRun())  // 이 부분 추가
             {
@@ -132,13 +134,13 @@ namespace HB
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
             }
 
-            Animator.SetFloat("AnimationSpeed", targetSpeed);
         }
         #endregion
 
         #region Rush METHODS
         private void Rush()
         {
+            if (!IsOwner) return;
             DrinkDamageble.StartRush();
         }
         #endregion

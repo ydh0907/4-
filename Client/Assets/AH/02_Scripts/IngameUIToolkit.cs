@@ -1,5 +1,7 @@
 using DH;
+using Packets;
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +28,7 @@ namespace AH {
         [Header("playPanel")]
         [SerializeField] private VisualTreeAsset playPanel;
         [SerializeField] private VisualTreeAsset gameOverPanel;
+        [SerializeField] private VisualTreeAsset _settingPanel;
         [Space]
 
         [Header("Data")]
@@ -58,15 +61,85 @@ namespace AH {
             _container.Add(hostPanel);
 
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
+            hostPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
         private void ClientLobbyPanel() {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
-            var ready = clientPanel.Q<Button>("ready-btn");
-            ready.RegisterCallback<ClickEvent>(HandleReadyGame);
+            clientPanel.Q<Button>("ready-btn").RegisterCallback<ClickEvent>(HandleReadyGame);
+            clientPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
+        }
+        private void HandleSettingTemplate(ClickEvent evt) {
+            SettingTemplate();
         }
 
+        // setting
+        private void SettingTemplate() {
+            var template = _settingPanel.Instantiate().Q<VisualElement>("setting-border");
+
+            _container.Add(template);
+
+            var bgmData = template.Q<VisualElement>("bgm-content");
+            var effectData = template.Q<VisualElement>("effect-content");
+
+            List<VisualElement> bgmList = new List<VisualElement>();
+            List<VisualElement> effectList = new List<VisualElement>();
+
+            GetSoundVisualElementData(bgmList, bgmData); // 생성할 때마다 가져와야 함
+            GetSoundVisualElementData(effectList, effectData);
+            GetcurrentSoundData(bgmList, effectList);
+
+            template.Q<Button>("close-btn").RegisterCallback<ClickEvent, VisualElement>(HandleCloseButton, template);
+
+            VisualElement bgmValueButton = template.Q<VisualElement>(className: "bgm-content");
+            VisualElement effectValueButton = template.Q<VisualElement>(className: "effect-content");
+            bgmValueButton.RegisterCallback<ClickEvent>(evt => {
+                var btn = evt.target as DataSound;
+                if (btn != null) {
+                    int index = bgmList.IndexOf(btn);
+
+                    SoundManager.Instance.bgmValue = index;
+                    SoundManager.Instance.RegulateSound(Sound.Bgm, index);
+                    OnOffImages(bgmList, index);
+                }
+            });
+            effectValueButton.RegisterCallback<ClickEvent>(evt => {
+                var btn = evt.target as DataSound;
+                if (btn != null) {
+                    int index = effectList.IndexOf(btn);
+
+                    SoundManager.Instance.effectValue = index;
+                    SoundManager.Instance.RegulateSound(Sound.Effect, index);
+                    OnOffImages(effectList, index);
+                }
+            });
+        }
+        private void GetSoundVisualElementData(List<VisualElement> list, VisualElement data) {
+            if (list.Count > 0) {
+                list.Clear();
+            }
+            for (int i = 1; i < data.childCount; i++) {
+                list.Add(data[i]);
+            }
+        }
+        private void GetcurrentSoundData(List<VisualElement> bgmList, List<VisualElement> effectList) {
+            OnOffImages(bgmList, SoundManager.Instance.bgmValue);
+            OnOffImages(effectList, SoundManager.Instance.effectValue);
+        }
+        private void OnOffImages(List<VisualElement> bgmList, int index) {
+            foreach (VisualElement bgm in bgmList) {
+                bgm.RemoveFromClassList("on");
+            }
+            for (int i = 0; i <= index; i++) {
+                bgmList[i].AddToClassList("on");
+            }
+        }
+        private void HandleCloseButton(ClickEvent evt, VisualElement template) {
+            _container.Remove(template);
+        }
+
+        // lobby
         private void HaneldStartGame(ClickEvent evt) {
             if (!NetworkManager.Singleton.IsHost) return;
 
@@ -136,11 +209,11 @@ namespace AH {
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
         public void GameOver() {
-            VisualElement template = hostLobbyPanel.Instantiate().Q<VisualElement>("container");
+            VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("container");
             _container.Add(template);
 
             template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoTitle);
-            template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoLobby);
+            template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
         }
 
         private void HandleGoLobby(ClickEvent evt) {
