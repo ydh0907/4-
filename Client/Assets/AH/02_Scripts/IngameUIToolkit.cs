@@ -8,7 +8,7 @@ namespace AH {
     public class IngameUIToolkit : NetworkBehaviour {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
-        private VisualElement _container;
+        public VisualElement _container;
 
         [SerializeField] private AudioClip ingameBGM;
 
@@ -114,7 +114,7 @@ namespace AH {
         }
 
         // 카운터
-        private void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+        public void Counter(Action callback = null) { // 게임 시작시 카운트 다운
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
