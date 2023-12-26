@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace AH {
-    public class IngameUIToolkit : MonoBehaviour {
+    public class IngameUIToolkit : NetworkBehaviour {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
         private VisualElement _container;
@@ -76,8 +76,17 @@ namespace AH {
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
+                HandleStartGameClientRpc();
             }
         }
+
+        [ClientRpc]
+        private void HandleStartGameClientRpc()
+        {
+            _container.Clear();
+            Counter();
+        }
+
         private void HandleReadyGame(ClickEvent evt) {
             var dve = evt.target as Button;
             if (dve != null) {
