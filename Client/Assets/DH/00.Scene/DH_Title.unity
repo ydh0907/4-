@@ -215,7 +215,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1560798089
+--- !u!1 &1836786819
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,22 +223,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1560798090}
-  - component: {fileID: 1560798091}
+  - component: {fileID: 1836786821}
+  - component: {fileID: 1836786820}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1560798090
+--- !u!114 &1836786820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836786819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c12aca73ca70a42b9342718f608fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmValue: 9
+  effectValue: 9
+--- !u!4 &1836786821
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560798089}
+  m_GameObject: {fileID: 1836786819}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -247,20 +261,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1560798091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560798089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29c12aca73ca70a42b9342718f608fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmValue: 9
-  effectValue: 9
 --- !u!1 &2008454660
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,8 +390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0d1956b1f41f34baf7ea5fe403eadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
   _titlePanel: {fileID: 9197481963319205126, guid: 7fba260de57ef314191889568f8ef182, type: 3}
+  _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
+  lobbyBGM: {fileID: 8300000, guid: f998db18db004b4499a799f95e0f489a, type: 3}
 --- !u!1 &2071834947
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,4 +495,4 @@ SceneRoots:
   - {fileID: 2071834949}
   - {fileID: 2008454663}
   - {fileID: 2051066405}
-  - {fileID: 1560798090}
+  - {fileID: 1836786821}
