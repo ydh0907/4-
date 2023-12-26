@@ -101,6 +101,7 @@ namespace HB
                 if (CurrentTime >= SPAWN_TIME)
                 {
                     SpawnPolarBear.Instance.CallPolarBear(transform);
+                    CurrentTime = 0;
                 }
             }
             #endregion
@@ -120,7 +121,10 @@ namespace HB
 
             targetSpeed = Mathf.Lerp(RB.velocity.magnitude, targetSpeed, lerpAmount);
 
-            RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+            if (CanRun())  // 이 부분 추가
+            {
+                RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+            }
 
             // Rotation
             if (moveDirection != Vector3.zero)
