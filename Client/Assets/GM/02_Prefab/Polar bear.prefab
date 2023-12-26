@@ -101,8 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1b73986b3c38a449cd532569eb57a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
-  playerDeathTime: 0.3
+  speed: 150
   attackDamageAmount: 0
 --- !u!1001 &3265016050355357193
 PrefabInstance:
