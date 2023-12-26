@@ -126,8 +126,12 @@ namespace HB
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
             }
+            else
+            {
 
-            Animator.SetFloat("AnimationSpeed", targetSpeed);
+            }
+
+                Animator.SetFloat("AnimationSpeed", targetSpeed);
         }
         #endregion
 
