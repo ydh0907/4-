@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3147167221043823596}
   - component: {fileID: 4560676032925130644}
   - component: {fileID: 1828015623718633454}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
