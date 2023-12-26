@@ -27,8 +27,6 @@ namespace HB
         public bool IsRushing { get; private set; }
         public float CurrentTime { get; private set; }
 
-        [SerializeField] SpawnPolarBear SpawnPolarBear;
-
         #region INPUT PARAMETERS
         [HideInInspector] public Vector3 _moveInput;
         #endregion
@@ -102,7 +100,7 @@ namespace HB
                 CurrentTime += Time.deltaTime;
                 if (CurrentTime >= SPAWN_TIME)
                 {
-                    SpawnPolarBear.CallPolarBear(transform);
+                    SpawnPolarBear.Instance.CallPolarBear(transform);
                 }
             }
             #endregion
