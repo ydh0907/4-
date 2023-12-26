@@ -68,6 +68,8 @@ namespace DH
 
             Program.Instance.CreateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname);
 
+            ConnectManager.Instance.host = NetworkManager.Singleton.IsHost;
+
             onConnectSucceed?.Invoke();
         }
 
