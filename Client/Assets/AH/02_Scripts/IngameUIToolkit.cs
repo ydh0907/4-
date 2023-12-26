@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace AH {
-    public class IngameUIToolkit : NetworkBehaviour {
+    public class IngameUIToolkit : MonoBehaviour {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
-        private VisualElement _container;
+        public VisualElement _container;
 
         [SerializeField] private AudioClip ingameBGM;
 
@@ -35,7 +35,7 @@ namespace AH {
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
-            //isHost = NetworkManager.Singleton.IsHost;
+            isHost = NetworkManager.Singleton.IsHost;
         }
         private void OnEnable() {
             var root = _uiDocument.rootVisualElement;
@@ -43,15 +43,14 @@ namespace AH {
 
             SoundManager.Instance.Init();
 
-            /*if(isHost) { // 이 값은 server에서 받는다
+            if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
             else {
                 ClientLobbyPanel();
-            }*/
-            Counter();
+            }
         }
-        // Lobby
+
         private void HostLobbyPanel() {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
@@ -80,19 +79,8 @@ namespace AH {
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
-
-
-                if(IsHost)
-                    HandleStartGameClientRpc();
+                NetworkGameManager.Instance.UILoadServerRpc();
             }
-        }
-
-        [ClientRpc]
-        private void HandleStartGameClientRpc()
-        {
-            Debug.Log("clientCounter");
-            _container.Clear();
-            Counter();
         }
 
         private void HandleReadyGame(ClickEvent evt) {
@@ -110,11 +98,11 @@ namespace AH {
                 }
             }
 
-            Debug.Log($"reday : {isReady}");
+            Debug.Log($"Ready : {isReady}");
         }
 
         // 카운터
-        private void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+        public void Counter(Action callback = null) { // 게임 시작시 카운트 다운
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
