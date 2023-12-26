@@ -464,6 +464,7 @@ MonoBehaviour:
   clientLobbyPanel: {fileID: 9197481963319205126, guid: cc03807d703732540b0468539f9db0a0, type: 3}
   playPanel: {fileID: 9197481963319205126, guid: eeb08b3e61be8fe4d96d92e59e5877b8, type: 3}
   gameOverPanel: {fileID: 9197481963319205126, guid: f5dcf951e249daf449874e738cf0607a, type: 3}
+  _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
   isHost: 1
 --- !u!114 &2018019692
 MonoBehaviour:
