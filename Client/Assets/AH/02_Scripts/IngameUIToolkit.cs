@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace AH {
-    public class IngameUIToolkit : NetworkBehaviour {
+    public class IngameUIToolkit : MonoBehaviour {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
-        private VisualElement _container;
+        public VisualElement _container;
 
         [SerializeField] private AudioClip ingameBGM;
 
@@ -41,6 +41,8 @@ namespace AH {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
 
+            A_SoundManager.Instance.Init();
+
             if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
@@ -48,7 +50,7 @@ namespace AH {
                 ClientLobbyPanel();
             }
         }
-        // Lobby
+
         private void HostLobbyPanel() {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
@@ -77,19 +79,8 @@ namespace AH {
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
-
-
-                if(IsHost)
-                    HandleStartGameClientRpc();
+                NetworkGameManager.Instance.UILoadServerRpc();
             }
-        }
-
-        [ClientRpc]
-        private void HandleStartGameClientRpc()
-        {
-            Debug.Log("clientCounter");
-            _container.Clear();
-            Counter();
         }
 
         private void HandleReadyGame(ClickEvent evt) {
@@ -107,11 +98,11 @@ namespace AH {
                 }
             }
 
-            Debug.Log($"reday : {isReady}");
+            Debug.Log($"Ready : {isReady}");
         }
 
         // 카운터
-        private void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+        public void Counter(Action callback = null) { // 게임 시작시 카운트 다운
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
@@ -138,11 +129,11 @@ namespace AH {
             var drinkIcon = template.Q<VisualElement>("drinkIcon");
             killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
-
+            Debug.Log("finish time");
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
-            SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+            A_SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
     }
 }
