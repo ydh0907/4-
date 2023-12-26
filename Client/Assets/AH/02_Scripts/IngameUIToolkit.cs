@@ -41,7 +41,7 @@ namespace AH {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
 
-            SoundManager.Instance.Init();
+            A_SoundManager.Instance.Init();
 
             if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
@@ -133,7 +133,7 @@ namespace AH {
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
-            SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+            A_SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
     }
 }

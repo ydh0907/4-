@@ -1,6 +1,5 @@
 using Karin;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum Sound {
@@ -8,8 +7,8 @@ public enum Sound {
     Effect,
     MaxCount //�׳� enum�� ������ ���� ���� ����(�ƹ��͵� �ƴ�)
 }
-public class SoundManager : MonoSingleton<SoundManager> {
-    protected SoundManager() { }
+public class A_SoundManager : MonoSingleton<A_SoundManager> {
+    protected A_SoundManager() { }
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClip = new Dictionary<string, AudioClip>();
 
@@ -26,7 +25,7 @@ public class SoundManager : MonoSingleton<SoundManager> {
         GameObject root = GameObject.Find("SoundManager"); // "SoundManager��� �̸��� ������Ʈ�� ã��
         if (root == null) { // ���ٸ�
             root = new GameObject { name = "SoundManager" }; // SoundManager������Ʈ�� ����� 
-            root.AddComponent<SoundManager>();
+            root.AddComponent<A_SoundManager>();
             Object.DontDestroyOnLoad(root); // �ı� ��ȣ ����
 
             MakeSoundManager(root);
