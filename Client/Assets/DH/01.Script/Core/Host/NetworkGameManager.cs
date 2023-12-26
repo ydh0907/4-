@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Linq;
 using AH;
+using Unity.VisualScripting;
 
 namespace DH
 {
@@ -16,7 +17,10 @@ namespace DH
     {
         public static NetworkGameManager Instance;
 
-        [SerializeField] private GameObject Player;
+        [SerializeField] GameObject Player;
+
+        [SerializeField] List<GameObject> Characters = new();
+        [SerializeField] List<GameObject> Drinks = new();
 
         public Dictionary<ulong, PlayerInfo> players = new();
 
@@ -129,6 +133,9 @@ namespace DH
 
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
                 p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Key);
+
+                Instantiate(Characters[(int)player.Value.Char], p.transform);
+                Instantiate(Drinks[(int)player.Value.Cola], p.transform);
 
                 temp.Add(rand);
             }
