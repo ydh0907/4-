@@ -8,14 +8,17 @@ public enum Sound {
     Effect,
     MaxCount //그냥 enum의 개수를 세기 위해 존재(아무것도 아님)
 }
-public class A_SoundManager : MonoSingleton<A_SoundManager> {
-    protected A_SoundManager() { }
+public class SoundManager : MonoSingleton<SoundManager> {
+    protected SoundManager() { }
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClip = new Dictionary<string, AudioClip>();
 
     public int bgmValue = 9;
     public int effectValue = 9;
-
+    /*private void Awake() {
+        Debug.Log(bgmValue);
+        Debug.Log(effectValue);
+    }*/
     /// <summary>
     /// SoundManager라는 오브젝트를 만들어서 그 아래에 Sound에 있는 타입 만큼의 오브젝트 생성 후 각각 AudioSource를 붙여줌
     /// </summary>
@@ -23,27 +26,33 @@ public class A_SoundManager : MonoSingleton<A_SoundManager> {
         GameObject root = GameObject.Find("SoundManager"); // "SoundManager라는 이름의 오브젝트를 찾아
         if (root == null) { // 없다면
             root = new GameObject { name = "SoundManager" }; // SoundManager오브젝트를 만들고 
-            root.AddComponent<A_SoundManager>();
+            root.AddComponent<SoundManager>();
             Object.DontDestroyOnLoad(root); // 파괴 보호 방지
 
             MakeSoundManager(root);
         }
         else {
+            Object.DontDestroyOnLoad(root);
             MakeSoundManager(root);
         }
     }
     private void MakeSoundManager(GameObject root) {
-        string[] soundName = System.Enum.GetNames(typeof(Sound)); // BGM Effect
-        for (int i = 0; i < soundName.Length - 1; i++) { // -1 : MaxCount빼기
-            GameObject soundObj = new GameObject { name = soundName[i] }; // 이를 부모로 삼는 Bgm, Effect라는 이름의 오브젝트에
-            _audioSources[i] = soundObj.AddComponent<AudioSource>(); // AudioSource를 붙인다
-            _audioSources[i] = soundObj.GetComponent<AudioSource>();
-            soundObj.transform.parent = root.transform;
-        }
-        _audioSources[0] = root.transform.GetChild(0).GetComponent<AudioSource>();
-        _audioSources[1] = root.transform.GetChild(1).GetComponent<AudioSource>();
+        int child = root.transform.GetChildCount();
+        Debug.Log(child);
+        if (child <= 0) {
+            string[] soundName = System.Enum.GetNames(typeof(Sound)); // BGM Effect
+            for (int i = 0; i < soundName.Length - 1; i++) { // -1 : MaxCount빼기
+                GameObject soundObj = new GameObject { name = soundName[i] }; // 이를 부모로 삼는 Bgm, Effect라는 이름의 오브젝트에
+                _audioSources[i] = soundObj.AddComponent<AudioSource>(); // AudioSource를 붙인다
+                _audioSources[i] = soundObj.GetComponent<AudioSource>();
+                soundObj.transform.parent = root.transform;
+            }
+            _audioSources[0] = root.transform.GetChild(0).GetComponent<AudioSource>();
+            _audioSources[1] = root.transform.GetChild(1).GetComponent<AudioSource>();
 
-        _audioSources[(int)Sound.Bgm].loop = true; // bgm 무한 반복 재생
+            _audioSources[(int)Sound.Bgm].loop = true; // bgm 무한 반복 재생
+
+        }
     }
 
     /// <summary> Clear 함수 사용방법

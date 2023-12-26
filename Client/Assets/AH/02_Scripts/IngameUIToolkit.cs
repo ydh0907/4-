@@ -142,7 +142,7 @@ namespace AH {
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
-            A_SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+            SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
     }
 }

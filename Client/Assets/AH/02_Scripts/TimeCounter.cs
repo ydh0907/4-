@@ -43,7 +43,7 @@ namespace AH {
                 countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
                 yield return new WaitForSeconds(1f);
-                A_SoundManager.Instance.Play(countDown);
+                SoundManager.Instance.Play(countDown);
             }
 
             NetworkGameManager.Instance.ServerGameEnd();
@@ -56,7 +56,7 @@ namespace AH {
                 loopTime--;
                 time--;
                 yield return new WaitForSeconds(1);
-                A_SoundManager.Instance.Play(countDown);
+                SoundManager.Instance.Play(countDown);
             }
             ingameToolkit.FinishCountDown();
             callback?.Invoke();
