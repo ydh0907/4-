@@ -210,6 +210,8 @@ namespace AH {
         }
         public void GameOver() {
             VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("container");
+
+            _container.Clear();
             _container.Add(template);
 
             template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoTitle);
