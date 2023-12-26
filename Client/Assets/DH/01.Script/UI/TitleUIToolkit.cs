@@ -15,18 +15,15 @@ namespace DH {
         [SerializeField] private VisualTreeAsset _titlePanel;
         [SerializeField] private VisualTreeAsset _settingPanel;
 
-        [SerializeField] private AudioClip lobbyBGM;
-
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
-            SoundManager.Instance.Init();
+            A_SoundManager.Instance.Init();
         }
         private void OnEnable() {
             _root = _uiDocument.rootVisualElement;
             _root = _root.Q<VisualElement>("container");
 
             TitleTemplate();
-            SoundManager.Instance.Play(lobbyBGM, Sound.Bgm);
         }
         private void OpenSettingWindow(ClickEvent evt) { // setting
             SettingTemplate();
@@ -66,8 +63,8 @@ namespace DH {
                 if (btn != null) {
                     int index = bgmList.IndexOf(btn);
 
-                    SoundManager.Instance.bgmValue = index;
-                    SoundManager.Instance.RegulateSound(Sound.Bgm, index);
+                    A_SoundManager.Instance.bgmValue = index;
+                    A_SoundManager.Instance.RegulateSound(Sound.Bgm, index);
                     OnOffImages(bgmList, index);
                 }
             });
@@ -76,8 +73,8 @@ namespace DH {
                 if (btn != null) {
                     int index = effectList.IndexOf(btn);
 
-                    SoundManager.Instance.effectValue = index;
-                    SoundManager.Instance.RegulateSound(Sound.Effect, index);
+                    A_SoundManager.Instance.effectValue = index;
+                    A_SoundManager.Instance.RegulateSound(Sound.Effect, index);
                     OnOffImages(effectList, index);
                 }
             });
@@ -92,8 +89,8 @@ namespace DH {
             }
         }
         private void GetcurrentSoundData(List<VisualElement> bgmList, List<VisualElement> effectList) {
-            OnOffImages(bgmList, SoundManager.Instance.bgmValue);
-            OnOffImages(effectList, SoundManager.Instance.effectValue);
+            OnOffImages(bgmList, A_SoundManager.Instance.bgmValue);
+            OnOffImages(effectList, A_SoundManager.Instance.effectValue);
         }
         private void OnOffImages(List<VisualElement> bgmList, int index) {
             foreach(VisualElement bgm in bgmList) {
