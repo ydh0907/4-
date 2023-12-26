@@ -42,7 +42,6 @@ namespace DH {
         private void SettingTemplate() {
             var template = _settingPanel.Instantiate().Q<VisualElement>("setting-border");
 
-            //_root.Clear();
             _root.Add(template);
 
             var bgmData = template.Q<VisualElement>("bgm-content");
@@ -51,9 +50,9 @@ namespace DH {
             List<VisualElement> bgmList = new List<VisualElement>();
             List<VisualElement> effectList = new List<VisualElement>();
 
-            //GetSoundVisualElementData(bgmList, bgmData); // 생성할 때마다 가져와야 함
-            //GetSoundVisualElementData(effectList, effectData);
-            //GetcurrentSoundData(bgmList, effectList);
+            GetSoundVisualElementData(bgmList, bgmData); // 생성할 때마다 가져와야 함
+            GetSoundVisualElementData(effectList, effectData);
+            GetcurrentSoundData(bgmList, effectList);
 
             template.Q<Button>("close-btn").RegisterCallback<ClickEvent>(HandleCloseButton);
 
@@ -63,7 +62,7 @@ namespace DH {
                 var btn = evt.target as DataSound;
                 if (btn != null) {
                     int index = bgmList.IndexOf(btn);
-                    Debug.Log("click");
+
                     A_SoundManager.Instance.bgmValue = index;
                     A_SoundManager.Instance.RegulateSound(Sound.Bgm, index);
                     OnOffImages(bgmList, index);
@@ -73,7 +72,7 @@ namespace DH {
                 var btn = evt.target as DataSound;
                 if (btn != null) {
                     int index = effectList.IndexOf(btn);
-                    Debug.Log("click");
+
                     A_SoundManager.Instance.effectValue = index;
                     A_SoundManager.Instance.RegulateSound(Sound.Effect, index);
                     OnOffImages(effectList, index);
@@ -81,8 +80,25 @@ namespace DH {
             });
         }
 
+        private void GetSoundVisualElementData(List<VisualElement> list, VisualElement data) {
+            if (list.Count > 0) {
+                list.Clear();
+            }
+            for (int i = 1; i < data.childCount; i++) {
+                list.Add(data[i]);
+            }
+        }
+        private void GetcurrentSoundData(List<VisualElement> bgmList, List<VisualElement> effectList) {
+            OnOffImages(bgmList, A_SoundManager.Instance.bgmValue);
+            OnOffImages(effectList, A_SoundManager.Instance.effectValue);
+        }
         private void OnOffImages(List<VisualElement> bgmList, int index) {
-
+            foreach(VisualElement bgm in bgmList) {
+                bgm.RemoveFromClassList("on");
+            }
+            for(int i = 0; i <= index; i++) {
+                bgmList[i].AddToClassList("on");
+            }
         }
 
         private void HandleCloseButton(ClickEvent evt) {
