@@ -34,6 +34,9 @@ namespace DH
         public Character Char = Character.Beach;
         public bool Ready = false;
 
+        public int kill = 0;
+        public int death = 0;
+
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
             serializer.SerializeValue(ref ID);
@@ -41,6 +44,9 @@ namespace DH
             serializer.SerializeValue(ref Cola);
             serializer.SerializeValue(ref Char);
             serializer.SerializeValue(ref Ready);
+
+            serializer.SerializeValue(ref kill);
+            serializer.SerializeValue(ref death);
         }
 
         public PlayerInfo() { }

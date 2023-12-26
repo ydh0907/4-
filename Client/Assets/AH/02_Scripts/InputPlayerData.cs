@@ -119,6 +119,7 @@ namespace AH {
                 }
             });
         }
+
         private string GetNickName() {
             if (root.Q<TextField>("nickname-inputfeld") != null) nickname = root.Q<TextField>("nickname-inputfeld").text;
             return nickname;
@@ -142,6 +143,7 @@ namespace AH {
 
         #region find room
         private void HandleFindRoom(ClickEvent evt) {
+            GetNickName();
             HandleRefresh(evt);
         }
 
@@ -176,16 +178,14 @@ namespace AH {
                     roomList.Add(createRoomList[i] as Button);
                 }
             }
-            int index = 0;
+
             createRoomList.RegisterCallback<ClickEvent>(evt => {
                 var dve = evt.target as Button;
                 if (dve != null) {
                     ClearToRoomList(roomList, dve);
                     lastChoose = dve;
 
-                    SelectedRoom = room[index];
-
-                    ++index;
+                    SelectedRoom = room[roomList.IndexOf(dve)];
                 }
             });
         }

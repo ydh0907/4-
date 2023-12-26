@@ -1,9 +1,11 @@
+using DH;
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace AH {
-    public class IngameUIToolkit : MonoBehaviour {
+    public class IngameUIToolkit : NetworkBehaviour {
         private UIDocument _uiDocument;
         private TimeCounter _counter;
         private VisualElement _container;
@@ -61,20 +63,41 @@ namespace AH {
         }
 
         private void HaneldStartGame(ClickEvent evt) {
-            /*if (isReady) { // 여기 코드 수정 필요 => 모든 클라의 값을 확인해야함(호스트 제외)
-            }*/
+            if (!NetworkManager.Singleton.IsHost) return;
+
+            bool start = true;
+
+            foreach(var player in NetworkGameManager.Instance.players)
+            {
+                start = start && player.Value.Ready;
+            }
+
+            if(start)
+            {
+                _container.Clear();
+                Counter(NetworkGameManager.Instance.ServerGameStart);
+                HandleStartGameClientRpc();
+            }
+        }
+
+        [ClientRpc]
+        private void HandleStartGameClientRpc()
+        {
             _container.Clear();
             Counter();
         }
+
         private void HandleReadyGame(ClickEvent evt) {
             var dve = evt.target as Button;
             if (dve != null) {
                 if (!isReady) { // 준비 완료를 안함
                     isReady = true;
+                    NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.AddToClassList("isReady");
                 }
                 else {
                     isReady = false;
+                    NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.RemoveFromClassList("isReady");
                 }
             }
@@ -83,19 +106,20 @@ namespace AH {
         }
 
         // 카운터
-        private void Counter() { // 게임 시작시 카운트 다운
+        private void Counter(Action callback = null) { // 게임 시작시 카운트 다운
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
 
-            _counter.CountDown(countText);
+            _counter.CountDown(countText, callback);
         }
-        private void ResurrectionCounter() { // 부활 카운트 다운
+
+        private void ResurrectionCounter(Action callback = null) { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
             _container.Add(counterPanel);
 
-            _counter.ResurrectionCountDown(countText);
+            _counter.ResurrectionCountDown(countText, callback);
         }
 
         public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
