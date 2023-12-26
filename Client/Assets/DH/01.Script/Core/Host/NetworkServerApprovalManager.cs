@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace DH
 {
@@ -30,11 +28,18 @@ namespace DH
             if (IsServer)
             {
                 players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character, true));
+                NetworkGameManager.Instance.SetValueServerRpc(NetworkManager.Singleton.LocalClientId, players[NetworkManager.Singleton.LocalClientId]);
                 UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;
+                NetworkManager.Singleton.OnClientConnectedCallback += ConnectedCallback;
             }
+        }
+
+        private void ConnectedCallback(ulong obj)
+        {
+            NetworkGameManager.Instance.SyncPlayerList();
         }
 
         public override void OnNetworkDespawn()
@@ -63,7 +68,6 @@ namespace DH
             if (players.Count < 4)
             {
                 players.Add(request.ClientNetworkId, new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola, info.Char));
-                OnValueChangedClientRpc(request.ClientNetworkId, players[request.ClientNetworkId]);
 
                 Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Connected");
 
@@ -119,23 +123,27 @@ namespace DH
 
             players.Remove(id);
 
-            OnValueChangedClientRpc(id, null);
+            NetworkGameManager.Instance.SetValueServerRpc(id, null);
 
             isHandlingConnect = false;
 
             UserLog();
         }
 
-        [ClientRpc]
-        private void OnValueChangedClientRpc(ulong Key, PlayerInfo Value)
+        public void UserLog()
         {
-            if(Value == null)
-                NetworkGameManager.Instance.players.Remove(Key);
-            else
-                NetworkGameManager.Instance.players[Key] = Value;
+            string log = "";
+
+            foreach (var player in players)
+            {
+                log += player.Key.ToString() + " : " + player.Value.Nickname + " : " + player.Value.Cola.ToString() + "\n";
+            }
+
+            Debug.Log(log);
         }
 
-        private void UserLog()
+        [ClientRpc]
+        public void UserLogClientRpc()
         {
             string log = "";
 

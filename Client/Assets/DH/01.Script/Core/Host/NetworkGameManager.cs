@@ -31,13 +31,16 @@ namespace DH
 
         private void Update()
         {
-            if(JopQueue.Count > 0)
+            if (JopQueue.Count > 0)
             {
-                for(int i = 0; i < JopQueue.Count; i++)
+                for (int i = 0; i < JopQueue.Count; i++)
                 {
                     JopQueue.Dequeue()?.Invoke();
                 }
             }
+
+            if (!NetworkManager.IsConnectedClient || !NetworkManager.IsListening)
+                LoadSceneManager.Instance.LoadScene(1);
         }
 
         public override void OnNetworkSpawn()
@@ -45,6 +48,49 @@ namespace DH
             if (!IsServer) return;
 
             base.OnNetworkSpawn();
+        }
+
+        public void SyncPlayerList()
+        {
+            if(!IsHost) return;
+
+            Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.players);
+
+            foreach(var player in players)
+            {
+                OnValueChangedClientRpc(player.Key, player.Value);
+            }
+
+            NetworkServerApprovalManager.Instance.UserLogClientRpc();
+        }
+
+        public void PlayerKillCount(ulong id)
+        {
+            players[id].kill++;
+            SetValueServerRpc(id, players[id]);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void PlayerReadyServerRpc(ulong id, bool ready)
+        {
+            players[id].Ready = ready;
+            OnValueChangedClientRpc(id, players[id]);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void SetValueServerRpc(ulong Key, PlayerInfo Value)
+        {
+            players[Key] = Value;
+            OnValueChangedClientRpc(Key, Value);
+        }
+
+        [ClientRpc]
+        private void OnValueChangedClientRpc(ulong Key, PlayerInfo Value)
+        {
+            if (Value == null)
+                players.Remove(Key);
+            else
+                players[Key] = Value;
         }
 
         public void ServerGameStart()
@@ -86,8 +132,6 @@ namespace DH
             Destroy(NetworkManager.Singleton.gameObject);
 
             onGameEnded?.Invoke();
-
-            LoadSceneManager.Instance.LoadScene(1);
         }
 
         [ClientRpc]
@@ -97,8 +141,6 @@ namespace DH
             Destroy(NetworkManager.Singleton.gameObject);
 
             onGameEnded?.Invoke();
-
-            LoadSceneManager.Instance.LoadScene(1);
         }
 
         public static string GetLocalIP()
@@ -116,6 +158,13 @@ namespace DH
             }
 
             return localIP;
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
         }
     }
 }

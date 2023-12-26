@@ -35,7 +35,6 @@ namespace HB
         public void StartRush()
         {
             StartCoroutine(nameof(RushDamage));
-            // CurrentHealth--;
         }
 
         public void Die()
