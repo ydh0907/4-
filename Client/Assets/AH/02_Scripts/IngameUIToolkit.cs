@@ -12,6 +12,7 @@ namespace AH
         private TimeCounter _counter;
         public VisualElement _container;
 
+        [SerializeField] private AudioClip ingameBGM;
 
         [Header("CountDownPanels")]
         [SerializeField] private VisualTreeAsset deadCountDownPanel;
@@ -149,6 +150,7 @@ namespace AH
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
+            SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
     }
 }
