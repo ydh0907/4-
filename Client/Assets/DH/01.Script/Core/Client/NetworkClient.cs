@@ -50,8 +50,6 @@ namespace DH
         {
             isConnect = null;
 
-            ConnectManager.Instance.host = NetworkManager.Singleton.IsHost;
-
             onConnectSucceed?.Invoke();
         }
 

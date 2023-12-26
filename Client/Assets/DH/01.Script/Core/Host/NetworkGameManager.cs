@@ -8,7 +8,6 @@ using TestClient;
 using System.Net;
 using System.Net.Sockets;
 using System.Linq;
-using AH;
 
 namespace DH
 {
@@ -53,11 +52,11 @@ namespace DH
 
         public void SyncPlayerList()
         {
-            if (!IsHost) return;
+            if(!IsHost) return;
 
             Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.players);
 
-            foreach (var player in players)
+            foreach(var player in players)
             {
                 OnValueChangedClientRpc(player.Key, player.Value);
             }
@@ -104,11 +103,11 @@ namespace DH
 
             List<Vector3> temp = new List<Vector3>();
 
-            foreach (var player in players)
+            foreach(var player in players)
             {
                 Vector3 rand = GM.MapManager.Instance.GetSpawnPosition();
 
-                while (temp.Contains(rand))
+                while(temp.Contains(rand))
                     rand = GM.MapManager.Instance.GetSpawnPosition();
 
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
@@ -120,22 +119,6 @@ namespace DH
             GetComponent<NetworkServerTimer>().StartTimer();
 
             onGameStarted?.Invoke();
-        }
-
-        [ServerRpc]
-        public void UILoadServerRpc()
-        {
-            UILoadClientRpc();
-        }
-
-        [ClientRpc]
-        private void UILoadClientRpc()
-        {
-            if (IsHost) return;
-
-            IngameUIToolkit ingame = GameObject.Find("UIDocument").GetComponent<IngameUIToolkit>();
-            ingame._container.Clear();
-            ingame.Counter();
         }
 
         public void ServerGameEnd()
