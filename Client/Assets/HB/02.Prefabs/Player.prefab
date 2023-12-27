@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507676568230363084}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21114324, y: 0.41562203, z: -0.099831425, w: 0.8790396}
+  m_LocalRotation: {x: 0.078268275, y: 0.8808528, z: -0.15677115, w: 0.43976727}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 3.6331735, z: -6.004679}
+  m_FollowOffset: {x: 0, y: 9.049966, z: -19.999949}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 1039791847822239447}
   - component: {fileID: 3091808520266400396}
   - component: {fileID: 6700655164520621216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &4617369948609424967
 CapsuleCollider:
@@ -643,7 +643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3012127645582402663}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1469219, y: 0.421761, z: -0.069466695, w: 0.89202356}
+  m_LocalRotation: {x: 0.07921619, y: 0.8805128, z: -0.15866981, w: 0.43959755}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -722,7 +722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3171726591832531914}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22705556, y: 0.41374257, z: -0.10735499, w: 0.8750645}
+  m_LocalRotation: {x: 0.086233415, y: 0.87786376, z: -0.1727253, w: 0.43827498}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -803,7 +803,7 @@ Transform:
   m_GameObject: {fileID: 4293158397876219968}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.64074, y: 3.6331735, z: -3.8104734}
+  m_LocalPosition: {x: -15.985578, y: 9.049966, z: 12.019123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -852,7 +852,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.8597533
+    Value: 0.0000041878216
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 3.6331735, z: -6.004679}
+  m_FollowOffset: {x: 0, y: 9.049966, z: -19.999949}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 3.6331735, z: -6.004679}
+  m_FollowOffset: {x: 0, y: 9.049966, z: -19.999949}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
