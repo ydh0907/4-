@@ -47,11 +47,11 @@ namespace HB
 
             Animator.SetFloat("AttackSpeed", _attackSpeed);
 
-            if (CurrentMentosCount > 0)
+            /*if (CurrentMentosCount > 0)
                 PlayerWeaponState.isMentosAvailable = true;
 
             else if (CurrentMentosCount <= 0)
-                PlayerWeaponState.isMentosAvailable = false;
+                PlayerWeaponState.isMentosAvailable = false;*/
         }
 
         private void Attack()
