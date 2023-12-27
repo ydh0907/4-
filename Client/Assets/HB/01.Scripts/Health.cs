@@ -28,8 +28,11 @@ namespace HB
         public Action<int, int, float> OnHealthChanged;
 
         private void Awake() {
-            if(instance == null) {
-                instance = this;
+            if (IsOwner)
+            {
+                if(instance == null) {
+                    instance = this;
+                }
             }
         }
 

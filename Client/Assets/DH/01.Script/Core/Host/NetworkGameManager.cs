@@ -78,10 +78,12 @@ namespace DH
             NetworkServerApprovalManager.Instance.UserLogClientRpc();
         }
 
-        public void PlayerKillCount(ulong id)
+        [ServerRpc(RequireOwnership = false)]
+        public void PlayerKillCountServerRpc(ulong id)
         {
             users[id].kill++;
             SetValueServerRpc(id, users[id]);
+            FindFirstObjectByType<IngameUIToolkit>().SetStateClientRpc();
         }
 
         [ServerRpc(RequireOwnership = false)]

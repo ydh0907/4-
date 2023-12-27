@@ -33,8 +33,15 @@ namespace HB
             CurrentMentosCount = 0;
         }
 
+        [ServerRpc]
+        public void AttackAniServerRpc()
+        {
+            Animator.SetTrigger("isAttacking");
+            AttackAniClientRpc();
+        }
+
         [ClientRpc]
-        public void AttackAniClientRpc()
+        private void AttackAniClientRpc()
         {
             Animator.SetTrigger("isAttacking");
         }
@@ -75,8 +82,7 @@ namespace HB
                 CurrentMentosCount--;
 
             StartCoroutine(nameof(RefillAttack));
-            Animator.SetTrigger("isAttacking");
-            AttackAniClientRpc();
+            AttackAniServerRpc();
         }
 
         public IEnumerator RefillAttack()

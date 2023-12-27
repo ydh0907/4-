@@ -59,7 +59,7 @@ namespace HB
 
         private void FixedUpdate()
         {
-            if(!IsOwner) return;
+            if (!IsOwner) return;
 
             if (!Animator || !DrinkDamageble)
             {
@@ -145,12 +145,10 @@ namespace HB
 
         private void SetAnimation()
         {
-            if(transform.position != temppos && transform.position.y == temppos.y)
-            {
-                Animator.SetFloat("AnimationSpeed", 1);
-                temppos = transform.position;
-            }
-            else if(!Physics.Raycast(transform.position, Vector3.down, 0.6f, _groundLayer))
+            Animator.SetFloat("AnimationSpeed", (transform.position - temppos).magnitude * (1 / Time.deltaTime));
+            temppos = transform.position;
+
+            if (!Physics.Raycast(transform.position, Vector3.down, 0.5f, _groundLayer))
             {
                 Animator.SetTrigger("IsJumping");
             }
@@ -185,7 +183,7 @@ namespace HB
             // Rotation
             if (moveDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(RB.velocity.normalized), Data.rotationFactorPerFrame * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(RB.velocity.x, 0, RB.velocity.z)), Data.rotationFactorPerFrame * Time.deltaTime);
             }
         }
         #endregion

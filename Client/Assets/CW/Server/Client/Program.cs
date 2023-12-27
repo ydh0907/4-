@@ -54,12 +54,14 @@ namespace TestClient
 
         public void CreateRoom(string IP, string playerName)
         {
+            if (connect) return;
             Debug.Log($"Create Room {IP} : {playerName}");
             StartCoroutine(SendRoomUpdatePacket(IP, playerName, 1));
         }
 
         public void UpdateRoom(string IP, string playerName, int playerCount)
         {
+            if (connect) return;
             Debug.Log($"Update Room {IP} : {playerName}");
             StartCoroutine(SendRoomUpdatePacket(IP, playerName, (ushort)playerCount));
         }
@@ -80,6 +82,7 @@ namespace TestClient
 
         public void Reload(Action<List<Room>> callback)
         {
+            if (connect) return;
             StartCoroutine(Reloading(callback));
         }
 
@@ -89,17 +92,29 @@ namespace TestClient
 
             yield return new WaitUntil(() => connect);
 
+            Send:
+
             S_ReRoadingPacket packet = new S_ReRoadingPacket();
             serverSession.Send(packet.Serialize());
 
             Debug.Log("Reroad Send");
 
-            yield return new WaitUntil(() => reload);
+            float time = 0;
+            while (!reload)
+            {
+                time += Time.deltaTime;
+
+                if (time > 0.2f) goto Send;
+
+                yield return null;
+            }
 
             reload = false;
 
             callback?.Invoke(Rooms);
+
             Debug.Log("Reroaded");
+            DisconnectServer();
         }
 
         public void Delete(string nickname, string IP)

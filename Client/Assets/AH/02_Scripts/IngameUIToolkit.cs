@@ -3,13 +3,16 @@ using HB;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace AH {
-    public class IngameUIToolkit : MonoBehaviour {
+namespace AH
+{
+    public class IngameUIToolkit : NetworkBehaviour
+    {
         public static IngameUIToolkit instance;
 
         private UIDocument _uiDocument;
@@ -17,7 +20,9 @@ namespace AH {
         public VisualElement _container;
 
         List<VisualElement> playerData = new List<VisualElement>();
-        
+
+        [SerializeField] private Sprite[] sprites;
+
         [SerializeField] private AudioClip ingameBGM;
 
         [Header("CountDownPanels")]
@@ -38,35 +43,45 @@ namespace AH {
 
         [Header("Data")]
         public bool isHost = true;
-        private Label killcount;
         private Label timer;
         private bool isReady = false;
 
-        private void Awake() {
+        private void Awake()
+        {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
             isHost = NetworkManager.Singleton.IsHost;
 
-            if (instance == null) {
+            if (instance == null)
+            {
                 instance = this;
             }
         }
-        private void OnEnable() {
+        private void OnEnable()
+        {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
 
-            if(isHost) { // 이 값은 server에서 받는다
+            if (isHost)
+            { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
             }
-            else {
+            else
+            {
                 ClientLobbyPanel();
             }
         }
-        private void OnDestroy() {
-            Health.instance.OnHealthChanged -= OnChangeHealth;
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            if (Health.instance != null)
+                Health.instance.OnHealthChanged -= OnChangeHealth;
         }
 
-        private void HostLobbyPanel() {
+        private void HostLobbyPanel()
+        {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
 
@@ -74,7 +89,8 @@ namespace AH {
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
             hostPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
-        private void ClientLobbyPanel() {
+        private void ClientLobbyPanel()
+        {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
@@ -83,15 +99,18 @@ namespace AH {
             clientPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
 
-        private void HandleLeaveGame(ClickEvent evt) {
+        private void HandleLeaveGame(ClickEvent evt)
+        {
             NetworkGameManager.Instance.ServerGameEnd();
         }
-        private void HandleSettingTemplate(ClickEvent evt) {
+        private void HandleSettingTemplate(ClickEvent evt)
+        {
             SettingTemplate();
         }
 
         // setting
-        private void SettingTemplate() {
+        private void SettingTemplate()
+        {
             var template = _settingPanel.Instantiate().Q<VisualElement>("setting-border");
 
             _container.Add(template);
@@ -110,9 +129,11 @@ namespace AH {
 
             VisualElement bgmValueButton = template.Q<VisualElement>(className: "bgm-content");
             VisualElement effectValueButton = template.Q<VisualElement>(className: "effect-content");
-            bgmValueButton.RegisterCallback<ClickEvent>(evt => {
+            bgmValueButton.RegisterCallback<ClickEvent>(evt =>
+            {
                 var btn = evt.target as DataSound;
-                if (btn != null) {
+                if (btn != null)
+                {
                     int index = bgmList.IndexOf(btn);
 
                     SoundManager.Instance.bgmValue = index;
@@ -120,9 +141,11 @@ namespace AH {
                     OnOffImages(bgmList, index);
                 }
             });
-            effectValueButton.RegisterCallback<ClickEvent>(evt => {
+            effectValueButton.RegisterCallback<ClickEvent>(evt =>
+            {
                 var btn = evt.target as DataSound;
-                if (btn != null) {
+                if (btn != null)
+                {
                     int index = effectList.IndexOf(btn);
 
                     SoundManager.Instance.effectValue = index;
@@ -131,59 +154,72 @@ namespace AH {
                 }
             });
         }
-        private void GetSoundVisualElementData(List<VisualElement> list, VisualElement data) {
-            if (list.Count > 0) {
+        private void GetSoundVisualElementData(List<VisualElement> list, VisualElement data)
+        {
+            if (list.Count > 0)
+            {
                 list.Clear();
             }
-            for (int i = 1; i < data.childCount; i++) {
+            for (int i = 1; i < data.childCount; i++)
+            {
                 list.Add(data[i]);
             }
         }
-        private void GetcurrentSoundData(List<VisualElement> bgmList, List<VisualElement> effectList) {
+        private void GetcurrentSoundData(List<VisualElement> bgmList, List<VisualElement> effectList)
+        {
             OnOffImages(bgmList, SoundManager.Instance.bgmValue);
             OnOffImages(effectList, SoundManager.Instance.effectValue);
         }
-        private void OnOffImages(List<VisualElement> bgmList, int index) {
-            foreach (VisualElement bgm in bgmList) {
+        private void OnOffImages(List<VisualElement> bgmList, int index)
+        {
+            foreach (VisualElement bgm in bgmList)
+            {
                 bgm.RemoveFromClassList("on");
             }
-            for (int i = 0; i <= index; i++) {
+            for (int i = 0; i <= index; i++)
+            {
                 bgmList[i].AddToClassList("on");
             }
         }
-        private void HandleCloseButton(ClickEvent evt, VisualElement template) {
+        private void HandleCloseButton(ClickEvent evt, VisualElement template)
+        {
             _container.Remove(template);
         }
 
         // lobby
-        private void HaneldStartGame(ClickEvent evt) {
+        private void HaneldStartGame(ClickEvent evt)
+        {
             SoundManager.Instance.Play("Effect/Button click");
             if (!NetworkManager.Singleton.IsHost) return;
 
             bool start = true;
 
-            foreach(var player in NetworkGameManager.Instance.users)
+            foreach (var player in NetworkGameManager.Instance.users)
             {
                 start = start && player.Value.Ready;
             }
 
-            if(start)
+            if (start)
             {
                 _container.Clear();
                 Counter(NetworkGameManager.Instance.ServerGameStart);
                 NetworkGameManager.Instance.UILoadServerRpc();
             }
         }
-        private void HandleReadyGame(ClickEvent evt) {
+        private void HandleReadyGame(ClickEvent evt)
+        {
             SoundManager.Instance.Play("Effect/Button click");
             var dve = evt.target as Button;
-            if (dve != null) {
-                if (!isReady) { // 준비 완료를 안함
+            if (dve != null)
+            {
+                if (!isReady)
+                { // 준비 완료를 안함
                     isReady = true;
                     NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.AddToClassList("isReady");
                 }
-                else {
+                else
+                {
                     isReady = false;
                     NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.RemoveFromClassList("isReady");
@@ -194,7 +230,8 @@ namespace AH {
         }
 
         // 카운터
-        public void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+        public void Counter(Action callback = null)
+        { // 게임 시작시 카운트 다운
             SoundManager.Instance.Clear();
 
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
@@ -203,7 +240,8 @@ namespace AH {
 
             _counter.CountDown(countText, callback);
         }
-        private void ResurrectionCounter(Action callback = null) { // 부활 카운트 다운
+        private void ResurrectionCounter(Action callback = null)
+        { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
             _container.Add(counterPanel);
@@ -211,7 +249,8 @@ namespace AH {
             _counter.ResurrectionCountDown(countText, callback);
         } // 플레이어 부활
 
-        public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
+        public void FinishCountDown()
+        { // 준비 완료 상태 후 게임 시작 대기가 종료 
 
             _container.Clear();
 
@@ -219,18 +258,16 @@ namespace AH {
 
             // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
             VisualElement basePlayerData = template.Q<VisualElement>(className: "players-border");
-            for(int i = 0; i < basePlayerData.childCount; i++) {
-                if (basePlayerData[i].name == "player") {
+            for (int i = 0; i < basePlayerData.childCount; i++)
+            {
+                if (basePlayerData[i].name == "player")
+                {
                     playerData.Add(basePlayerData[i]);
                 }
             }
 
-            // playerData 리스트에 4개의 visualelement가 있음
-            foreach (var data in playerData) {
-                var nickname = data.Q<Label>("nickname-txt");
-                var drinkIcon = data.Q<VisualElement>("drinkIcon");
-                killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
-            }
+            if(IsHost)
+                SetStateClientRpc();
 
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
@@ -240,7 +277,31 @@ namespace AH {
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
             //Health.instance.OnHealthChanged += OnChangeHealth;
         }
-        public void GameOver() {
+
+        [ClientRpc]
+        public void SetStateClientRpc()
+        {
+            int i = 0;
+
+            foreach (var user in NetworkGameManager.Instance.users)
+            {
+                var data = playerData[i];
+
+                var nickname = data.Q<Label>("nickname-txt");
+                var drinkIcon = data.Q<VisualElement>("drinkIcon");
+                var killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+
+                nickname.text = user.Value.Nickname;
+                StyleBackground style = new StyleBackground(sprites[(int)user.Value.Cola]);
+                drinkIcon.style.backgroundImage = style;
+                killcount.text = user.Value.kill.ToString();
+
+                i++;
+            }
+        }
+
+        public void GameOver()
+        {
             SoundManager.Instance.Clear();
             SoundManager.Instance.Play("Effect/DrumRoll");
 
@@ -253,7 +314,8 @@ namespace AH {
 
             StartCoroutine(DrumRoutine(template));
         }
-        IEnumerator DrumRoutine(VisualElement template) {
+        IEnumerator DrumRoutine(VisualElement template)
+        {
             yield return new WaitForSeconds(2f);
 
             SoundManager.Instance.Play("Effect/TaDa");
@@ -263,18 +325,22 @@ namespace AH {
 
         }
 
-        private void HandleGoLobby(ClickEvent evt) {
+        private void HandleGoLobby(ClickEvent evt)
+        {
             NetworkGameManager.Instance.ServerGameEnd();
         }
 
         // player
-        private void OnChangeHealth(int beforeHealth, int currentHealth, float arg3) { // 이전 // 현재
+        private void OnChangeHealth(int beforeHealth, int currentHealth, float arg3)
+        { // 이전 // 현재
             Debug.Log("change health");
         }
-        public void ChangeMantosAttack() { // 맨토스 공격
+        public void ChangeMantosAttack()
+        { // 맨토스 공격
             Debug.Log("맨토스 공격");
         }
-        public void ChangeFistAttack() { // 주먹 공격
+        public void ChangeFistAttack()
+        { // 주먹 공격
             Debug.Log("주먹 공격");
         }
     }

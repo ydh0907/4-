@@ -35,7 +35,7 @@ namespace AH {
         }
         private void OnEnable() {
             root = _uiDocument.rootVisualElement;
-
+            flag = true;
 
             root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
             root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
@@ -134,10 +134,15 @@ namespace AH {
                 }
             }
         }
+
+        bool flag;
         private void HandleCreateRoom(ClickEvent evt) {
             ButtonClick();
-            ConnectManager.Instance.StartHost(GetNickName());
+            if(flag)
+                ConnectManager.Instance.StartHost(GetNickName());
+            flag = false;
         }
+
         private void HandleBackTitleScene(ClickEvent evt) { // host
             if (NetworkManager.Singleton != null) {
                 Destroy(NetworkManager.Singleton.gameObject);
