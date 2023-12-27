@@ -331,7 +331,7 @@ namespace AH
         }
 
         // player
-        private void OnChangeHealth(int beforeHealth, int currentHealth, float arg3)
+        private void OnChangeHealth(int beforeHealth, int currentHealth)
         { // 이전 // 현재
             Debug.Log("change health");
         }
