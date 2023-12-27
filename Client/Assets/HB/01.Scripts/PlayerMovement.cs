@@ -22,11 +22,14 @@ namespace HB
         #region STATE PARAMETERS
         private const float LERP_AMOUNT = 1f;
         private const float SPAWN_TIME = 5f;
+
         #endregion
 
         public bool IsJumping { get; private set; }
         public bool IsRushing { get; private set; }
         public float CurrentTime { get; private set; }
+
+        float targetSpeed;
 
         #region INPUT PARAMETERS
         [HideInInspector] public Vector3 _moveInput;
@@ -55,6 +58,9 @@ namespace HB
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
             SetGravityScale(Data.gravityScale);
+
+            //Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void FixedUpdate()
@@ -104,7 +110,6 @@ namespace HB
                 return;
             }
 
-
             #region INPUT HANDLER
             float x = Input.GetAxisRaw("Horizontal");
             float z = Input.GetAxisRaw("Vertical");
@@ -147,7 +152,7 @@ namespace HB
         {
             if(transform.position != temppos && transform.position.y == temppos.y)
             {
-                Animator.SetFloat("AnimationSpeed", 1);
+                Animator.SetFloat("AnimationSpeed", targetSpeed);
                 temppos = transform.position;
             }
             else if(!Physics.Raycast(transform.position, Vector3.down, 0.6f, _groundLayer))
@@ -166,7 +171,6 @@ namespace HB
         private void Run(float lerpAmount)
         {
             Vector3 moveDirection = _moveInput.normalized;
-            float targetSpeed;
 
             if (IsRushing)
                 targetSpeed = moveDirection.magnitude * Data.rushMaxSpeed;
