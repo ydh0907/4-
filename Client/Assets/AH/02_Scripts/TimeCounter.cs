@@ -26,7 +26,7 @@ namespace AH {
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));
         }
         public void PlayTimeCountDown(Label countText) {
-            int runningTime = 10; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<180
+            int runningTime = 999;
 
             int minutes = Mathf.FloorToInt(runningTime / 60);
             int seconds = Mathf.FloorToInt(runningTime % 60);
@@ -42,20 +42,22 @@ namespace AH {
                 int seconds = Mathf.FloorToInt(runningTime % 60);
                 countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
+                if(runningTime <= 3) {
+                    SoundManager.Instance.Play("Effect/FinishTime");
+                }
+
                 yield return new WaitForSeconds(1f);
             }
             ingameToolkit.GameOver();
-            NetworkGameManager.Instance.ServerGameEnd();
         }
         IEnumerator RoutineCountDown(Label countText, int time, int loopTime, string plusText = "", Action callback = null) {
             while(loopTime > 0) {
-                //Debug.Log(loopTime);
                 countText.text = $"{time}{plusText}";
 
                 loopTime--;
                 time--;
 
-                SoundManager.Instance.Play(countDown);
+                SoundManager.Instance.Play("Effect/CountDown");
                 yield return new WaitForSeconds(1);
             }
             ingameToolkit.FinishCountDown();

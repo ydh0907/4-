@@ -10,6 +10,8 @@ using System.Net.Sockets;
 using System.Linq;
 using AH;
 using Unity.VisualScripting;
+using TMPro;
+using Unity.Services.Matchmaker.Models;
 
 namespace DH
 {
@@ -19,10 +21,10 @@ namespace DH
 
         [SerializeField] GameObject Player;
 
-        [SerializeField] List<GameObject> Characters = new();
-        [SerializeField] List<GameObject> Drinks = new();
+        [SerializeField] public List<GameObject> Characters = new();
+        [SerializeField] public List<GameObject> Drinks = new();
 
-        public Dictionary<ulong, PlayerInfo> players = new();
+        public Dictionary<ulong, PlayerInfo> users = new();
 
         public Queue<Action> JopQueue = new Queue<Action>();
 
@@ -45,7 +47,14 @@ namespace DH
             }
 
             if (!NetworkManager.IsConnectedClient || !NetworkManager.IsListening)
+            {
+                users.Clear();
+
+                NetworkManager.Singleton.Shutdown();
+                Destroy(NetworkManager.Singleton.gameObject);
+
                 LoadSceneManager.Instance.LoadScene(1);
+            }
         }
 
         public override void OnNetworkSpawn()
@@ -59,7 +68,7 @@ namespace DH
         {
             if(!IsHost) return;
 
-            Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.players);
+            Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.users);
 
             foreach(var player in players)
             {
@@ -71,21 +80,22 @@ namespace DH
 
         public void PlayerKillCount(ulong id)
         {
-            players[id].kill++;
-            SetValueServerRpc(id, players[id]);
+            users[id].kill++;
+            SetValueServerRpc(id, users[id]);
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void PlayerReadyServerRpc(ulong id, bool ready)
         {
-            players[id].Ready = ready;
-            OnValueChangedClientRpc(id, players[id]);
+            users[id].Ready = ready;
+            SetValueServerRpc(id, users[id]);
+            ReadyObjects.Instance.SetNicknameColorClientRpc();
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void SetValueServerRpc(ulong Key, PlayerInfo Value)
         {
-            players[Key] = Value;
+            users[Key] = Value;
             OnValueChangedClientRpc(Key, Value);
         }
 
@@ -93,9 +103,9 @@ namespace DH
         private void OnValueChangedClientRpc(ulong Key, PlayerInfo Value)
         {
             if (Value == null)
-                players.Remove(Key);
+                users.Remove(Key);
             else
-                players[Key] = Value;
+                users[Key] = Value;
         }
 
         [ServerRpc]
@@ -122,9 +132,11 @@ namespace DH
 
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
+            ReadyObjects.Instance.RemoveClientRpc();
+
             List<Vector3> temp = new List<Vector3>();
 
-            foreach(var player in players)
+            foreach(var player in users)
             {
                 Vector3 rand = GM.MapManager.Instance.GetSpawnPosition();
 
@@ -132,10 +144,10 @@ namespace DH
                     rand = GM.MapManager.Instance.GetSpawnPosition();
 
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
-                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Key);
+                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Value.ID);
 
-                Instantiate(Characters[(int)player.Value.Char], p.transform);
-                Instantiate(Drinks[(int)player.Value.Cola], p.transform);
+                NetworkObjectReference reference = p.GetComponent<NetworkObject>();
+                CreateCharacterClientRpc(player.Key, reference);
 
                 temp.Add(rand);
             }
@@ -145,26 +157,26 @@ namespace DH
             onGameStarted?.Invoke();
         }
 
-        public void ServerGameEnd()
+        [ClientRpc]
+        private void CreateCharacterClientRpc(ulong id, NetworkObjectReference reference)
         {
-            if (!IsServer) return;
+            PlayerInfo player = users[id];
+            NetworkObject networkObject = reference;
+            GameObject p = networkObject.gameObject;
 
-            GameEndClientRpc();
-            players.Clear();
+            Instantiate(Characters[(int)player.Char], p.transform);
+            Instantiate(Drinks[(int)player.Cola], p.transform);
 
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
-
-            onGameEnded?.Invoke();
+            p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
         }
 
-        [ClientRpc]
-        public void GameEndClientRpc()
+        public void ServerGameEnd()
         {
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
+            NetworkManager.Singleton?.Shutdown();
+            Destroy(NetworkManager.Singleton?.gameObject);
 
             onGameEnded?.Invoke();
+            LoadSceneManager.Instance.LoadScene(1);
         }
 
         public static string GetLocalIP()

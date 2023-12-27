@@ -1,4 +1,3 @@
-using Karin;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,23 +7,20 @@ public enum Sound {
     MaxCount //�׳� enum�� ������ ���� ���� ����(�ƹ��͵� �ƴ�)
 }
 public class SoundManager : MonoSingleton<SoundManager> {
-    protected SoundManager() { }
+    public SoundManager() { }
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClip = new Dictionary<string, AudioClip>();
 
     public int bgmValue = 9;
     public int effectValue = 9;
-    /*private void Awake() {
-        Debug.Log(bgmValue);
-        Debug.Log(effectValue);
-    }*/
+
     /// <summary>
     /// SoundManager��� ������Ʈ�� ���� �� �Ʒ��� Sound�� �ִ� Ÿ�� ��ŭ�� ������Ʈ ���� �� ���� AudioSource�� �ٿ���
     /// </summary>
     public void Init() {
-        GameObject root = GameObject.Find("SoundManager"); // "SoundManager��� �̸��� ������Ʈ�� ã��
+        GameObject root = GameObject.Find("SoundManager");
         if (root == null) { // ���ٸ�
-            root = new GameObject { name = "SoundManager" }; // SoundManager������Ʈ�� ����� 
+            root = new GameObject { name = "SoundManager" };
             root.AddComponent<SoundManager>();
             Object.DontDestroyOnLoad(root); // �ı� ��ȣ ����
 
@@ -38,17 +34,17 @@ public class SoundManager : MonoSingleton<SoundManager> {
     private void MakeSoundManager(GameObject root) {
         int child = root.transform.childCount;
         if (child <= 0) {
-            string[] soundName = System.Enum.GetNames(typeof(Sound)); // BGM Effect
-            for (int i = 0; i < soundName.Length - 1; i++) { // -1 : MaxCount����
-                GameObject soundObj = new GameObject { name = soundName[i] }; // �̸� �θ�� ��� Bgm, Effect��� �̸��� ������Ʈ��
-                _audioSources[i] = soundObj.AddComponent<AudioSource>(); // AudioSource�� ���δ�
+            string[] soundName = System.Enum.GetNames(typeof(Sound));
+            for (int i = 0; i < soundName.Length - 1; i++) {
+                GameObject soundObj = new GameObject { name = soundName[i] };
+                _audioSources[i] = soundObj.AddComponent<AudioSource>();
                 _audioSources[i] = soundObj.GetComponent<AudioSource>();
                 soundObj.transform.parent = root.transform;
             }
             _audioSources[0] = root.transform.GetChild(0).GetComponent<AudioSource>();
             _audioSources[1] = root.transform.GetChild(1).GetComponent<AudioSource>();
 
-            _audioSources[(int)Sound.Bgm].loop = true; // bgm ���� �ݺ� ���
+            _audioSources[(int)Sound.Bgm].loop = true;
 
         }
     }
@@ -69,16 +65,15 @@ public class SoundManager : MonoSingleton<SoundManager> {
             audioSource.clip = null;
             audioSource.Stop();
         }
-        // ȿ���� Dictionary ����
-        _audioClip.Clear(); // �׷��Ͼ����� ������ �ʹ� ���� ���� �� _audioClip�� Dictionary�� ��� �߰��Ǿ� �޸𸮰� �������� �� ����
+        _audioClip.Clear();
     }
-    public void Play(AudioClip audioClip, Sound type = Sound.Effect, float pitch = 1.0f) { // ������ audioClip�� �޾� �����Ŵ
+    public void Play(AudioClip audioClip, Sound type = Sound.Effect, float pitch = 1.0f) {
         if (audioClip == null) {
             return;
         }
-        if (type == Sound.Bgm) { // bgm���� ���
-            AudioSource audioSource = _audioSources[(int)Sound.Bgm]; // _audioSources[(int)Sound.Bgm]�� ���� ���
-            if (audioSource.isPlaying) { // ���࿡ ������̶�� ���߰�
+        if (type == Sound.Bgm) {
+            AudioSource audioSource = _audioSources[(int)Sound.Bgm];
+            if (audioSource.isPlaying) {
                 audioSource.Stop();
             }
             audioSource.pitch = pitch;
@@ -86,10 +81,9 @@ public class SoundManager : MonoSingleton<SoundManager> {
             audioSource.Play();
         }
         else if (type == Sound.Effect) {
-            AudioSource audioSource = _audioSources[(int)(Sound.Effect)];// _audioSources[(int)Sound.Bgm]�� ���� ���
-            // ȿ������ ��ø�Ǿ �Ǳ� ������ if���� ����
+            AudioSource audioSource = _audioSources[(int)(Sound.Effect)];
             audioSource.pitch = pitch;
-            audioSource.PlayOneShot(audioClip); // ���ϴ� Ŭ���� ��ø�ؼ� ��� �� �� �ְ� PlayOneShot�Լ� ���
+            audioSource.PlayOneShot(audioClip);
         }
     }
     /// <summary> (path)Play �Լ� �����
@@ -99,28 +93,26 @@ public class SoundManager : MonoSingleton<SoundManager> {
     /// <param name="path">���</param>
     /// <param name="type">Sound type</param>
     /// <param name="pitch">��� �ӵ�</param>
-    public void Play(string path, Sound type = Sound.Effect, float pitch = 1.0f) { // ������ path�� �޾Ƽ� �����Ŵ
+    public void Play(string path, Sound type = Sound.Effect, float pitch = 1.0f) {
         AudioClip audioClip = GetOrAddAudioClip(path, type);
         Play(audioClip, type, pitch);
     }
 
-    private AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect) { // path�� ���� �ش� Ŭ���� �ε��ϰ� �����Ѵ�
+    private AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect) {
         if (path.Contains("Sounds/") == false) {
-            path = $"Sounds/{path}"; // Sounds ���� �ȿ� ������ �ֱ�
+            path = $"Sounds/{path}";
         }
+        //Debug.Log(path);
         AudioClip audioClip = null;
 
         if (type == Sound.Bgm) {
-            //audioClip = Manager.Resource.Load<AudioClip>(path);
+            audioClip = Resources.Load(path, typeof(AudioClip)) as AudioClip;
         }
-        // ȿ������ ��� �ſ� ���� ����ϱ� ������ Dictionary�� �����صΰ� �����´�
         else if (type == Sound.Effect) {
-            //_audioClip�� Dictionary�� �ش�path(Key)�� �����ϴ��� Ȯ���Ѵ� 
-            if (_audioClip.TryGetValue(path, out audioClip) == false) { // ���� ���ٸ� �߰��Ѵ�
-                                                                        //audioClip = Manager.Resource.Load<AudioClip>(path);
+            if (_audioClip.TryGetValue(path, out audioClip) == false) {
+                audioClip = Resources.Load(path, typeof(AudioClip)) as AudioClip;
                 _audioClip.Add(path, audioClip);
             }
-            // ���� �ִٸ� �׳� �״�� return
         }
 
         if (audioClip == null) {

@@ -1,6 +1,7 @@
 using DH;
-using Packets;
+using HB;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -9,10 +10,14 @@ using UnityEngine.UIElements;
 
 namespace AH {
     public class IngameUIToolkit : MonoBehaviour {
+        public static IngameUIToolkit instance;
+
         private UIDocument _uiDocument;
         private TimeCounter _counter;
         public VisualElement _container;
 
+        List<VisualElement> playerData = new List<VisualElement>();
+        
         [SerializeField] private AudioClip ingameBGM;
 
         [Header("CountDownPanels")]
@@ -41,12 +46,14 @@ namespace AH {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
             isHost = NetworkManager.Singleton.IsHost;
+
+            if (instance == null) {
+                instance = this;
+            }
         }
         private void OnEnable() {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
-
-            SoundManager.Instance.Init();
 
             if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
@@ -55,11 +62,15 @@ namespace AH {
                 ClientLobbyPanel();
             }
         }
+        private void OnDestroy() {
+            Health.instance.OnHealthChanged -= OnChangeHealth;
+        }
 
         private void HostLobbyPanel() {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
 
+            hostPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
             hostPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
@@ -67,8 +78,13 @@ namespace AH {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
+            clientPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
             clientPanel.Q<Button>("ready-btn").RegisterCallback<ClickEvent>(HandleReadyGame);
             clientPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
+        }
+
+        private void HandleLeaveGame(ClickEvent evt) {
+            NetworkGameManager.Instance.ServerGameEnd();
         }
         private void HandleSettingTemplate(ClickEvent evt) {
             SettingTemplate();
@@ -141,11 +157,12 @@ namespace AH {
 
         // lobby
         private void HaneldStartGame(ClickEvent evt) {
+            SoundManager.Instance.Play("Effect/Button click");
             if (!NetworkManager.Singleton.IsHost) return;
 
             bool start = true;
 
-            foreach(var player in NetworkGameManager.Instance.players)
+            foreach(var player in NetworkGameManager.Instance.users)
             {
                 start = start && player.Value.Ready;
             }
@@ -158,6 +175,7 @@ namespace AH {
             }
         }
         private void HandleReadyGame(ClickEvent evt) {
+            SoundManager.Instance.Play("Effect/Button click");
             var dve = evt.target as Button;
             if (dve != null) {
                 if (!isReady) { // 준비 완료를 안함
@@ -177,6 +195,8 @@ namespace AH {
 
         // 카운터
         public void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+            SoundManager.Instance.Clear();
+
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
@@ -189,41 +209,73 @@ namespace AH {
             _container.Add(counterPanel);
 
             _counter.ResurrectionCountDown(countText, callback);
-        }
+        } // 플레이어 부활
 
         public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
+
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");
 
             // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
+            VisualElement basePlayerData = template.Q<VisualElement>(className: "players-border");
+            for(int i = 0; i < basePlayerData.childCount; i++) {
+                if (basePlayerData[i].name == "player") {
+                    playerData.Add(basePlayerData[i]);
+                }
+            }
 
-            var nickname = template.Q<Label>("nickname-txt");
-            var drinkIcon = template.Q<VisualElement>("drinkIcon");
-            killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+            // playerData 리스트에 4개의 visualelement가 있음
+            foreach (var data in playerData) {
+                var nickname = data.Q<Label>("nickname-txt");
+                var drinkIcon = data.Q<VisualElement>("drinkIcon");
+                killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+            }
+
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+            //Health.instance.OnHealthChanged += OnChangeHealth;
         }
         public void GameOver() {
-            VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("container");
+            SoundManager.Instance.Clear();
+            SoundManager.Instance.Play("Effect/DrumRoll");
+
+            VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("blackContainer");
 
             _container.Clear();
             _container.Add(template);
 
-            template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoTitle);
             template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
+
+            StartCoroutine(DrumRoutine(template));
+        }
+        IEnumerator DrumRoutine(VisualElement template) {
+            yield return new WaitForSeconds(2f);
+
+            SoundManager.Instance.Play("Effect/TaDa");
+
+            template.AddToClassList("fadeOff");
+            template.Q<VisualElement>("container").AddToClassList("fadeOff");
+
         }
 
         private void HandleGoLobby(ClickEvent evt) {
-            Debug.Log("go lobby");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
 
-        private void HandleGoTitle(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Title");
+        // player
+        private void OnChangeHealth(int beforeHealth, int currentHealth, float arg3) { // 이전 // 현재
+            Debug.Log("change health");
+        }
+        public void ChangeMantosAttack() { // 맨토스 공격
+            Debug.Log("맨토스 공격");
+        }
+        public void ChangeFistAttack() { // 주먹 공격
+            Debug.Log("주먹 공격");
         }
     }
 }

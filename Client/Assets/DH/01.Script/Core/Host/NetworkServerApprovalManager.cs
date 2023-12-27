@@ -10,7 +10,7 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        public Dictionary<ulong, PlayerInfo> players => NetworkGameManager.Instance.players;
+        public Dictionary<ulong, PlayerInfo> players => NetworkGameManager.Instance.users;
 
         public bool isHandlingConnect = false;
 
@@ -28,7 +28,7 @@ namespace DH
             if (IsServer)
             {
                 players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character, true));
-                NetworkGameManager.Instance.SetValueServerRpc(NetworkManager.Singleton.LocalClientId, players[NetworkManager.Singleton.LocalClientId]);
+
                 UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
@@ -40,6 +40,8 @@ namespace DH
         private void ConnectedCallback(ulong obj)
         {
             NetworkGameManager.Instance.SyncPlayerList();
+            ReadyObjects.Instance.SetCurrentCharactersClientRpc();
+            ReadyObjects.Instance.SetNicknameColorClientRpc();
         }
 
         public override void OnNetworkDespawn()
@@ -50,6 +52,7 @@ namespace DH
             {
                 NetworkManager.Singleton.ConnectionApprovalCallback -= ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback -= DisconnectHandling;
+                NetworkManager.Singleton.OnClientConnectedCallback -= ConnectedCallback;
             }
         }
 
@@ -124,6 +127,9 @@ namespace DH
             players.Remove(id);
 
             NetworkGameManager.Instance.SetValueServerRpc(id, null);
+
+            ReadyObjects.Instance.SetCurrentCharactersClientRpc();
+            ReadyObjects.Instance.SetNicknameColorClientRpc();
 
             isHandlingConnect = false;
 

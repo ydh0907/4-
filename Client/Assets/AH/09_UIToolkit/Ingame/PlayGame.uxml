@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/PlayGame.uss?fileID=7433441132597879392&amp;guid=f7851507cebef19478ee356d8cb53083&amp;type=3#PlayGame" />
     <ui:VisualElement name="container" style="flex-grow: 1; justify-content: space-between; align-items: stretch;">
-        <ui:VisualElement name="players-border" style="height: 20%; flex-direction: row; justify-content: space-around; width: 100%;">
+        <ui:VisualElement name="players-border" class="players-border">
             <ui:VisualElement name="player" style="flex-direction: column; justify-content: flex-end; height: 180px;">
                 <ui:Label tabindex="-1" text="nickName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nickname-txt" style="-unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&amp;guid=143bf3abee24d7c4cbea0e9c3f14ff01&amp;type=3#PyeongChangPeace-Light&apos;); font-size: 30px; -unity-text-align: upper-center;" />
                 <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/player.png?fileID=21300000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(255, 194, 178); flex-direction: row;">
