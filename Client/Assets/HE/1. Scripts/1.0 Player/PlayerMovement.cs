@@ -40,6 +40,8 @@ namespace HE
         [SerializeField] private LayerMask _groundLayer;
         #endregion
 
+        [SerializeField] GameObject PlayerCAM;
+
         private void Awake()
         {
             RB = GetComponent<Rigidbody>();
@@ -79,6 +81,24 @@ namespace HE
             #endregion
         }
 
+        private void LateUpdate()
+        {
+            //Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            //Vector3 CMAangle = PlayerCAM.transform.rotation.eulerAngles;
+            //float x = CMAangle.x - mouseDelta.y;
+
+            //if (x < 180f)
+            //{
+            //    x = Math.Clamp(x, -1, 70f);
+            //}
+            //else
+            //{
+            //    x = Math.Clamp(x, 335f, 360f);
+            //}
+
+            //PlayerCAM.transform.rotation = Quaternion.Euler(x, CMAangle.y + mouseDelta.x, CMAangle.z);
+        }
+
         // Movement Methods
         #region RUN METHODS
         private void Run(float lerpAmount)
@@ -92,16 +112,18 @@ namespace HE
                 targetSpeed = moveDirection.magnitude * Data.runMaxSpeed;
 
             targetSpeed = Mathf.Lerp(RB.velocity.magnitude, targetSpeed, lerpAmount);
+            Animator.SetFloat("AnimationSpeed", targetSpeed);
 
-            RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+            if (CanRun())
+            {
+                RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+            }
 
             // Rotation
             if (moveDirection != Vector3.zero)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
             }
-
-            Animator.SetFloat("AnimationSpeed", targetSpeed); // 원래 Lat Updat 에서 실행ㅚ어야 한ㅏ.
         }
         #endregion
 

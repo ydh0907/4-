@@ -7,10 +7,12 @@ using UnityEngine.UIElements;
 namespace AH {
     public class TimeCounter : MonoBehaviour {
         IngameUIToolkit ingameToolkit;
+        [SerializeField] private AudioClip countDown;
 
         private void Awake() {
             ingameToolkit = GetComponent<IngameUIToolkit>();
         }
+
         public void CountDown(Label countText, Action callback = null) {
             int startCount = UnityEngine.Random.Range(3, 11);
 
@@ -24,7 +26,7 @@ namespace AH {
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));
         }
         public void PlayTimeCountDown(Label countText) {
-            int runningTime = 10;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<180
+            int runningTime = 30;
 
             int minutes = Mathf.FloorToInt(runningTime / 60);
             int seconds = Mathf.FloorToInt(runningTime % 60);
@@ -56,7 +58,7 @@ namespace AH {
                 loopTime--;
                 time--;
 
-                SoundManager.Instance.Play("Effect/CountDown");
+                SoundManager.Instance.Play(countDown);
                 yield return new WaitForSeconds(1);
             }
             ingameToolkit.FinishCountDown();
