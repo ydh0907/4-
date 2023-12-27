@@ -48,12 +48,16 @@ namespace HB
         {
             if (!IsOwner) return;
             RB = GetComponent<Rigidbody>();
-            Animator = GetComponent<Animator>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
             DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
 
             SetGravityScale(Data.gravityScale);
+        }
+
+        public void Start()
+        {
+            Animator = GetComponentInChildren<Animator>();
         }
 
         private void FixedUpdate()

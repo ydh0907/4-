@@ -24,14 +24,13 @@ namespace HB
 
         private void Awake()
         {
-            Animator = GetComponent<Animator>();
-
             PlayerDamageble = GetComponent<PlayerDamageble>();
         }
 
         private void Start()
         {
             CurrentMentosCount = 0;
+            Animator = GetComponentInChildren<Animator>();
             PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); 
         }
 
