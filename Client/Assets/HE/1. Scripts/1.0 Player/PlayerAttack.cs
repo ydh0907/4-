@@ -51,7 +51,10 @@ namespace HB
                 PlayerWeaponState.isMentosAvailable = true;
 
             else if (CurrentMentosCount <= 0)
+            {
+                CurrentMentosCount = 0;
                 PlayerWeaponState.isMentosAvailable = false;
+            }
         }
 
         private void Attack()
