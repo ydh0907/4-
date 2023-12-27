@@ -1,6 +1,6 @@
 using DH;
-using Packets;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -45,8 +45,6 @@ namespace AH {
         private void OnEnable() {
             var root = _uiDocument.rootVisualElement;
             _container = root.Q<VisualElement>("lobby-container");
-
-            SoundManager.Instance.Init();
 
             if(isHost) { // 이 값은 server에서 받는다
                 HostLobbyPanel(); // 현제는 호스크에서 들어감
@@ -141,6 +139,7 @@ namespace AH {
 
         // lobby
         private void HaneldStartGame(ClickEvent evt) {
+            SoundManager.Instance.Play("Effect/Button click");
             if (!NetworkManager.Singleton.IsHost) return;
 
             bool start = true;
@@ -158,6 +157,7 @@ namespace AH {
             }
         }
         private void HandleReadyGame(ClickEvent evt) {
+            SoundManager.Instance.Play("Effect/Button click");
             var dve = evt.target as Button;
             if (dve != null) {
                 if (!isReady) { // 준비 완료를 안함
@@ -177,6 +177,8 @@ namespace AH {
 
         // 카운터
         public void Counter(Action callback = null) { // 게임 시작시 카운트 다운
+            SoundManager.Instance.Clear();
+
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
             var countText = counterPanel.Q<Label>("count-txt");
             _container.Add(counterPanel);
@@ -214,18 +216,31 @@ namespace AH {
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
         public void GameOver() {
-            Debug.Log("GAME OVER");
-            VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("container");
+            SoundManager.Instance.Clear();
+            SoundManager.Instance.Play("Effect/DrumRoll");
+
+            VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("blackContainer");
 
             _container.Clear();
             _container.Add(template);
 
             template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoTitle);
             template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
+
+            StartCoroutine(DrumRoutine(template));
+        }
+        IEnumerator DrumRoutine(VisualElement template) {
+            yield return new WaitForSeconds(2f);
+
+            SoundManager.Instance.Play("Effect/TaDa");
+
+            template.AddToClassList("fadeOff");
+            template.Q<VisualElement>("container").AddToClassList("fadeOff");
+
         }
 
         private void HandleGoLobby(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Gamey");
+            SceneManager.LoadScene("DH_Game");
         }
         private void HandleGoTitle(ClickEvent evt) {
             SceneManager.LoadScene("DH_Title");

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using TestClient;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -134,15 +135,20 @@ namespace AH {
             }
         }
         private void HandleCreateRoom(ClickEvent evt) {
+            ButtonClick();
             ConnectManager.Instance.StartHost(GetNickName());
         }
         private void HandleBackTitleScene(ClickEvent evt) { // host
-            if (NetworkManager.Singleton != null) Destroy(NetworkManager.Singleton.gameObject);
+            if (NetworkManager.Singleton != null) {
+                Destroy(NetworkManager.Singleton.gameObject);
+            }
+            ButtonClick();
             SceneManager.LoadScene(0);
         }
 
         #region find room
         private void HandleFindRoom(ClickEvent evt) {
+            ButtonClick();
             GetNickName();
             HandleRefresh(evt);
         }
@@ -191,17 +197,17 @@ namespace AH {
         }
 
         private void HandleRefresh(ClickEvent evt) {
+            ButtonClick();
             Program.Instance.Reload(Refresh);
         }
-
+        private void HandleEnterRoom(ClickEvent evt) {
+            ButtonClick();
+            ConnectManager.Instance.StartClient(SelectedRoom.roomName, GetNickName());
+        }
         private void Refresh(List<Room> room) {
             createRoomCount = room.Count;
             CreateRoomList(room);
             ChooseRoom(room);
-        }
-
-        private void HandleEnterRoom(ClickEvent evt) {
-            ConnectManager.Instance.StartClient(SelectedRoom.roomName, GetNickName());
         }
 
         private void ClearToRoomList(List<Button> list, Button dve) {
@@ -213,5 +219,8 @@ namespace AH {
             }
         }
         #endregion
+        private void ButtonClick() {
+            SoundManager.Instance.Play("Effect/Button click");
+        }
     }
 }
