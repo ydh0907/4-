@@ -2,7 +2,8 @@
     <Style src="project://database/Assets/AH/09_UIToolkit/Title/Title.uss?fileID=7433441132597879392&amp;guid=239daa97be206bb45b8985b74d03c919&amp;type=3#Title" />
     <Style src="project://database/Assets/AH/09_UIToolkit/Sound/Setting.uss?fileID=7433441132597879392&amp;guid=0ebfa25a7f450c24d8f0f504ae090514&amp;type=3#Setting" />
     <ui:VisualElement name="title-container" class="title-container" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/image%201.png?fileID=21300000&amp;guid=2989c4dafc6edc14784878ee6caf4fb4&amp;type=3#image 1&apos;);">
-        <ui:Label tabindex="-1" text="Sparkling Splash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" style="text-shadow: 15px 50px 0 rgb(58, 255, 38);" />
+        <ui:Label tabindex="-1" text="Sparkling Splash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" style="text-shadow: 15px 50px 0 rgb(255, 254, 163);" />
+        <ui:Label tabindex="-1" text="last can standing" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" style="text-shadow: 15px 50px 0 rgb(255, 254, 163); font-size: 90px;" />
         <ui:VisualElement name="low-border" style="height: 820px; flex-direction: row;">
             <ui:VisualElement name="system-content" style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: space-around;">
                 <ui:Button text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" class="title-button" />
