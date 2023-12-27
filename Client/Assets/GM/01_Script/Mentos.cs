@@ -39,7 +39,8 @@ namespace GM
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<PlayerMovement>())
+            Debug.Log(other.name);
+            if (other.tag == "Player" || other.gameObject.layer == 8)
             {
                 Destroy(gameObject);
             }

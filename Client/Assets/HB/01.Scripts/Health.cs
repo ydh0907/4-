@@ -25,7 +25,7 @@ namespace HB
 
         private bool _isDead = false;
 
-        public Action<int, int, float> OnHealthChanged;
+        public Action<int, int> OnHealthChanged;
 
         private void Awake() {
             if (IsOwner)
@@ -42,7 +42,7 @@ namespace HB
             {
                 currentHealth.OnValueChanged += HealthChangeHandle;
 
-                HealthChangeHandle(0, MaxHealth);
+                HealthChangeHandle(MaxHealth, MaxHealth);
             }
 
             if (!IsServer) return; // 체력 초기화는 서버만
@@ -61,8 +61,7 @@ namespace HB
         {
             Debug.Log(prev);
             Debug.Log(newValue);
-            Debug.Log((float)newValue / MaxHealth);
-            OnHealthChanged?.Invoke(prev, newValue, (float)newValue / MaxHealth);
+            OnHealthChanged?.Invoke(MaxHealth, newValue);
         }
 
         public void TakeDamage(int damageValue)
