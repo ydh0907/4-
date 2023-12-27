@@ -153,7 +153,7 @@ namespace AH {
 
             bool start = true;
 
-            foreach(var player in NetworkGameManager.Instance.players)
+            foreach(var player in NetworkGameManager.Instance.users)
             {
                 start = start && player.Value.Ready;
             }

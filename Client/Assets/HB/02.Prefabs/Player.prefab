@@ -663,7 +663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3171726591832531914}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17370531, y: -0.46820143, z: 0.09443497, w: 0.86121774}
+  m_LocalRotation: {x: 0.17370532, y: -0.46820146, z: 0.094435, w: 0.86121774}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 5272264362739396716}
   - component: {fileID: 1036906020715889332}
   - component: {fileID: 4150463359184988269}
+  - component: {fileID: 918254336847836230}
   m_Layer: 0
   m_Name: PlayerCMA
   m_TagString: Untagged
@@ -769,7 +770,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 1574642045492003328}
   m_Follow: {fileID: 1574642045492003328}
@@ -888,6 +889,18 @@ MonoBehaviour:
   m_Damping: 0
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
+--- !u!114 &918254336847836230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4293158397876219968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e83f76ec489264b9d26ba5cf3fe037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5621605349554292153
 GameObject:
   m_ObjectHideFlags: 0

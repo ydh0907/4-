@@ -10,7 +10,7 @@ namespace DH
     {
         public static NetworkServerApprovalManager Instance = null;
 
-        public Dictionary<ulong, PlayerInfo> players => NetworkGameManager.Instance.players;
+        public Dictionary<ulong, PlayerInfo> players => NetworkGameManager.Instance.users;
 
         public bool isHandlingConnect = false;
 

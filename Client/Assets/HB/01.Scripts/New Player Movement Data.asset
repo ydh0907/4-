@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2531db66693b0fc47b0f98a771b2e039, type: 3}
   m_Name: New Player Movement Data
   m_EditorClassIdentifier: 
-  gravityStrength: -80
-  gravityScale: 8.154943
+  gravityStrength: -800
+  gravityScale: 81.54944
   fallGravityMult: 5
-  runMaxSpeed: 9.8
-  rushMaxSpeed: 18
-  jumpHeight: 10
+  runMaxSpeed: 5
+  rushMaxSpeed: 10
+  jumpHeight: 100
   jumpTimeToApex: 0.5
-  jumpForce: 40
-  rotationFactorPerFrame: 30
+  jumpForce: 400
+  rotationFactorPerFrame: 10
