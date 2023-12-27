@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=cd80b79b037fb024297b55feaf002c51&amp;type=3#Lobby" />
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/PlayGame.uss?fileID=7433441132597879392&amp;guid=f7851507cebef19478ee356d8cb53083&amp;type=3#PlayGame" />
+    <Style src="project://database/Assets/AH/09_UIToolkit/Sound/Setting.uss?fileID=7433441132597879392&amp;guid=0ebfa25a7f450c24d8f0f504ae090514&amp;type=3#Setting" />
     <ui:VisualElement name="lobby-container" style="flex-grow: 1; align-items: stretch; justify-content: flex-end;" />
 </ui:UXML>

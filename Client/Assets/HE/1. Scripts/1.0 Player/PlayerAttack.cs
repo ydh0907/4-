@@ -27,12 +27,12 @@ namespace HB
             Animator = GetComponent<Animator>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
-            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>();
         }
 
         private void Start()
         {
             CurrentMentosCount = 0;
+            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); // ¼öÁ¤
         }
 
         private void Update()
@@ -47,11 +47,12 @@ namespace HB
 
             Animator.SetFloat("AttackSpeed", _attackSpeed);
 
-            if (CurrentMentosCount > 0)
-                PlayerWeaponState.isMentosAvailable = true;
-
-            else if (CurrentMentosCount <= 0)
+            PlayerWeaponState.isMentosAvailable = CurrentMentosCount > 0;
+            if (CurrentMentosCount <= 0)
+            {
+                CurrentMentosCount = 0;
                 PlayerWeaponState.isMentosAvailable = false;
+            }
         }
 
         private void Attack()

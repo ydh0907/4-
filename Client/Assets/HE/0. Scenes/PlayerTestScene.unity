@@ -682,6 +682,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1098435497296547239, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1393076047703794077, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2893674323
@@ -690,13 +694,21 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3768136469
       objectReference: {fileID: 0}
+    - target: {fileID: 6369689236497442345, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070202353030399028, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8637493282298108973, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
       propertyPath: m_Name
       value: HEplayer
       objectReference: {fileID: 0}
     - target: {fileID: 8637493282298108973, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8977181268269844119, guid: 5e222de5c39e324459f4cceba9de53a6, type: 3}
       propertyPath: m_LocalPosition.x
