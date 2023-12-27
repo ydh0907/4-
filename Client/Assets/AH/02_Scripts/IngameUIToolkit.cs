@@ -72,7 +72,7 @@ namespace AH {
         }
 
         private void HandleLeaveGame(ClickEvent evt) {
-            Debug.Log("LEAVE GAME");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
 
         private void HandleSettingTemplate(ClickEvent evt) {
@@ -246,7 +246,7 @@ namespace AH {
         }
 
         private void HandleGoLobby(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Game");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
     }
 }

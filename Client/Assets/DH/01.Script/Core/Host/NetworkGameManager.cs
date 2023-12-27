@@ -160,8 +160,6 @@ namespace DH
 
         public void ServerGameEnd()
         {
-            if (!IsServer) return;
-
             NetworkManager.Singleton?.Shutdown();
             Destroy(NetworkManager.Singleton?.gameObject);
 

@@ -28,7 +28,7 @@ namespace DH
             if (IsServer)
             {
                 players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character, true));
-                NetworkGameManager.Instance.SetValueServerRpc(NetworkManager.Singleton.LocalClientId, players[NetworkManager.Singleton.LocalClientId]);
+
                 UserLog();
 
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
@@ -127,6 +127,9 @@ namespace DH
             players.Remove(id);
 
             NetworkGameManager.Instance.SetValueServerRpc(id, null);
+
+            ReadyObjects.Instance.SetCurrentCharactersClientRpc();
+            ReadyObjects.Instance.SetNicknameColorClientRpc();
 
             isHandlingConnect = false;
 
