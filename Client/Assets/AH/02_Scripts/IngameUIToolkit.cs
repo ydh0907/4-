@@ -58,6 +58,7 @@ namespace AH {
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
 
+            hostPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
             hostPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
@@ -65,9 +66,15 @@ namespace AH {
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
+            clientPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
             clientPanel.Q<Button>("ready-btn").RegisterCallback<ClickEvent>(HandleReadyGame);
             clientPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
+
+        private void HandleLeaveGame(ClickEvent evt) {
+            Debug.Log("LEAVE GAME");
+        }
+
         private void HandleSettingTemplate(ClickEvent evt) {
             SettingTemplate();
         }

@@ -2,6 +2,9 @@
     <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/Lobby/Lobby.uss?fileID=7433441132597879392&amp;guid=cd80b79b037fb024297b55feaf002c51&amp;type=3#Lobby" />
     <ui:VisualElement name="host-content" class="lobby-content" style="-unity-text-align: middle-center; flex-direction: column; justify-content: space-between;">
         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" enable-rich-text="true" class="setting-btn" />
-        <ui:Button text="게임 시작" parse-escape-sequences="true" display-tooltip-when-elided="true" name="startgame-btn" enable-rich-text="true" class="lobby-button" />
+        <ui:VisualElement name="content" style="width: 100%; flex-direction: row; justify-content: space-between;">
+            <ui:Button text="나가기" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leaveGame-btn" enable-rich-text="true" class="lobby-button" style="margin-left: 70px;" />
+            <ui:Button text="게임 시작" parse-escape-sequences="true" display-tooltip-when-elided="true" name="startgame-btn" enable-rich-text="true" class="lobby-button" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
