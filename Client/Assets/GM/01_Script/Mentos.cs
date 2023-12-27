@@ -1,3 +1,4 @@
+using HB;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,15 @@ namespace GM
                     pos.y -= Time.deltaTime / 5;
             }
             transform.position = pos;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.name);
+            if (other.tag == "Player" || other.gameObject.layer == 8)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
