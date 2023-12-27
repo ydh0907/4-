@@ -42,6 +42,9 @@ namespace AH {
         private Label timer;
         private bool isReady = false;
 
+        private VisualElement mantos;
+        private VisualElement bareHanded;
+
         private void Awake() {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
@@ -215,10 +218,12 @@ namespace AH {
 
             _container.Clear();
 
-            var template = playPanel.Instantiate().Q<VisualElement>("container");
+            var ingameTemplate = playPanel.Instantiate().Q<VisualElement>("container");
+            mantos = ingameTemplate.Q<VisualElement>("mantosAttack");
+            bareHanded = ingameTemplate.Q<VisualElement>("bareHandedAttack");
 
             // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
-            VisualElement basePlayerData = template.Q<VisualElement>(className: "players-border");
+            VisualElement basePlayerData = ingameTemplate.Q<VisualElement>(className: "players-border");
             for(int i = 0; i < basePlayerData.childCount; i++) {
                 if (basePlayerData[i].name == "player") {
                     playerData.Add(basePlayerData[i]);
@@ -232,13 +237,12 @@ namespace AH {
                 killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
             }
 
-            timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+            timer = ingameTemplate.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
             _counter.PlayTimeCountDown(timer);
 
-            _container.Add(template);
+            _container.Add(ingameTemplate);
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
-            //Health.instance.OnHealthChanged += OnChangeHealth;
         }
         public void GameOver() {
             SoundManager.Instance.Clear();
@@ -268,14 +272,24 @@ namespace AH {
         }
 
         // player
-        private void OnChangeHealth(int beforeHealth, int currentHealth, float arg3) { // 이전 // 현재
-            Debug.Log("change health");
+        private void OnChangeHealth(int maxHealth, int currentHealth) {
+            Debug.Log(maxHealth);
+            Debug.Log(currentHealth);
         }
         public void ChangeMantosAttack() { // 맨토스 공격
-            Debug.Log("맨토스 공격");
+            Debug.Log("맨토스");
+
+            bareHanded.AddToClassList("toSmall");
+            mantos.AddToClassList("toLarge");
         }
         public void ChangeFistAttack() { // 주먹 공격
-            Debug.Log("주먹 공격");
+            Debug.Log("주먹");
+
+            bareHanded.RemoveFromClassList("toSmall");
+            mantos.RemoveFromClassList("toLarge");
+
+            bareHanded.AddToClassList("toLarge");
+            mantos.AddToClassList("toSmall");
         }
     }
 }
