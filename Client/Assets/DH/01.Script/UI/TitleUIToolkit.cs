@@ -12,6 +12,7 @@ namespace DH {
         [SerializeField] private VisualTreeAsset _titlePanel;
         [SerializeField] private VisualTreeAsset _settingPanel;
 
+        [Header("SOUND")]
         [SerializeField] private AudioClip lobbyBGM;
 
         private void Awake() {
@@ -40,6 +41,7 @@ namespace DH {
 
         }
         private void SettingTemplate() {
+            ButtonClick();
             var template = _settingPanel.Instantiate().Q<VisualElement>("setting-border");
 
             _root.Add(template);
@@ -79,7 +81,6 @@ namespace DH {
                 }
             });
         }
-
         private void GetSoundVisualElementData(List<VisualElement> list, VisualElement data) {
             if (list.Count > 0) {
                 list.Clear();
@@ -103,13 +104,19 @@ namespace DH {
 
         private void HandleCloseButton(ClickEvent evt) {
             TitleTemplate();
+            ButtonClick();
         }
         private void HandleInputPlayerDataScene(ClickEvent evt) { // host
+            ButtonClick();
             SceneManager.LoadScene("DH_Lobby");
         }
         private void ExitGame(ClickEvent evt) { // exit
             Application.Quit();
+            ButtonClick();
             Debug.Log("QUIT");
+        }
+        private void ButtonClick() {
+            SoundManager.Instance.Play("Effect/Button click");
         }
     }
 }

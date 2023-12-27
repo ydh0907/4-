@@ -201,11 +201,8 @@ namespace AH {
             VisualElement playerData = template.Q<VisualElement>(className: "players-border");
             Debug.Log(playerData.childCount);
             for(int i = 0; i < playerData.childCount; i++) {
-                Debug.Log(playerData[i]);
                 var nickname = playerData[i].Q<Label>("nickname-txt");
                 var drinkIcon = playerData[i].Q<VisualElement>("drinkIcon");
-                //Debug.Log(nickname);
-                //Debug.Log(drinkIcon);
             }
 
             killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
@@ -217,6 +214,7 @@ namespace AH {
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
         }
         public void GameOver() {
+            Debug.Log("GAME OVER");
             VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("container");
 
             _container.Clear();
@@ -227,9 +225,8 @@ namespace AH {
         }
 
         private void HandleGoLobby(ClickEvent evt) {
-            Debug.Log("go lobby");
+            SceneManager.LoadScene("DH_Gamey");
         }
-
         private void HandleGoTitle(ClickEvent evt) {
             SceneManager.LoadScene("DH_Title");
         }

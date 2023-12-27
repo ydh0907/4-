@@ -1,4 +1,3 @@
-using Karin;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ public enum Sound {
     MaxCount //�׳� enum�� ������ ���� ���� ����(�ƹ��͵� �ƴ�)
 }
 public class SoundManager : MonoSingleton<SoundManager> {
-    protected SoundManager() { }
+    public SoundManager() { }
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClip = new Dictionary<string, AudioClip>();
 
@@ -99,28 +98,26 @@ public class SoundManager : MonoSingleton<SoundManager> {
     /// <param name="path">���</param>
     /// <param name="type">Sound type</param>
     /// <param name="pitch">��� �ӵ�</param>
-    public void Play(string path, Sound type = Sound.Effect, float pitch = 1.0f) { // ������ path�� �޾Ƽ� �����Ŵ
+    public void Play(string path, Sound type = Sound.Effect, float pitch = 1.0f) {
         AudioClip audioClip = GetOrAddAudioClip(path, type);
         Play(audioClip, type, pitch);
     }
 
-    private AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect) { // path�� ���� �ش� Ŭ���� �ε��ϰ� �����Ѵ�
+    private AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect) {
         if (path.Contains("Sounds/") == false) {
-            path = $"Sounds/{path}"; // Sounds ���� �ȿ� ������ �ֱ�
+            path = $"Sounds/{path}";
         }
+        //Debug.Log(path);
         AudioClip audioClip = null;
 
         if (type == Sound.Bgm) {
-            //audioClip = Manager.Resource.Load<AudioClip>(path);
+            audioClip = Resources.Load(path, typeof(AudioClip)) as AudioClip;
         }
-        // ȿ������ ��� �ſ� ���� ����ϱ� ������ Dictionary�� �����صΰ� �����´�
         else if (type == Sound.Effect) {
-            //_audioClip�� Dictionary�� �ش�path(Key)�� �����ϴ��� Ȯ���Ѵ� 
-            if (_audioClip.TryGetValue(path, out audioClip) == false) { // ���� ���ٸ� �߰��Ѵ�
-                                                                        //audioClip = Manager.Resource.Load<AudioClip>(path);
+            if (_audioClip.TryGetValue(path, out audioClip) == false) {
+                audioClip = Resources.Load(path, typeof(AudioClip)) as AudioClip;
                 _audioClip.Add(path, audioClip);
             }
-            // ���� �ִٸ� �׳� �״�� return
         }
 
         if (audioClip == null) {

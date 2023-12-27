@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 1560798090}
   - component: {fileID: 1560798091}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,11 +291,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560798089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29c12aca73ca70a42b9342718f608fdd, type: 3}
+  m_Script: {fileID: 11500000, guid: 60c107b76fde52e4b81a2154a96b074a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmValue: 9
-  effectValue: 9
 --- !u!1 &2008454660
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +426,7 @@ MonoBehaviour:
   _titlePanel: {fileID: 9197481963319205126, guid: 7fba260de57ef314191889568f8ef182, type: 3}
   _settingPanel: {fileID: 9197481963319205126, guid: 872a004560ecae74888dae8d0210b9a0, type: 3}
   lobbyBGM: {fileID: 8300000, guid: 65258f6a191a96347936a35c4fce765d, type: 3}
+  buttonClick: {fileID: 0}
 --- !u!1 &2071834947
 GameObject:
   m_ObjectHideFlags: 0
