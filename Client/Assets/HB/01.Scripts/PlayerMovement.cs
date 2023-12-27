@@ -75,6 +75,17 @@ namespace HB
             {
                 Rush();
             }
+
+            if (RB.velocity.y < 0)
+            {
+                // 낙하시 중력값 증가 
+                SetGravityScale(Data.gravityScale * Data.fallGravityMult);
+            }
+            else
+            {
+                // 기본 중력값
+                SetGravityScale(Data.gravityScale);
+            }
         }
 
         private void Update()
@@ -130,17 +141,6 @@ namespace HB
                 }
             }
             #endregion
-
-            if (RB.velocity.y < 0)
-            {
-                // 낙하시 중력값 증가 
-                SetGravityScale(Data.gravityScale * Data.fallGravityMult);
-            }
-            else
-            {
-                // 기본 중력값
-                SetGravityScale(Data.gravityScale);
-            }
         }
 
         private void SetAnimation()
@@ -150,7 +150,7 @@ namespace HB
                 Animator.SetFloat("AnimationSpeed", 1);
                 temppos = transform.position;
             }
-            else if(!Physics.Raycast(transform.position, Vector3.down, 1f, _groundLayer))
+            else if(!Physics.Raycast(transform.position, Vector3.down, 0.6f, _groundLayer))
             {
                 Animator.SetTrigger("IsJumping");
             }
@@ -178,7 +178,8 @@ namespace HB
 
             if (CanRun())
             {
-                RB.velocity = (follow.right * moveDirection.x + follow.forward * moveDirection.z).normalized * targetSpeed;
+                Vector3 velo = (follow.right * moveDirection.x + follow.forward * moveDirection.z).normalized * targetSpeed;
+                RB.velocity = new Vector3(velo.x, RB.velocity.y, velo.z);
             }
 
             // Rotation
