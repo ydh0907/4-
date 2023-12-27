@@ -37,9 +37,9 @@ namespace GM
             transform.position = pos;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter(Collider other)
         {
-            if (collision.GetComponent<PlayerMovement>())
+            if (other.GetComponent<PlayerMovement>())
             {
                 Destroy(gameObject);
             }
