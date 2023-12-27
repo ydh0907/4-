@@ -11,6 +11,7 @@ using System.Linq;
 using AH;
 using Unity.VisualScripting;
 using TMPro;
+using Unity.Services.Matchmaker.Models;
 
 namespace DH
 {
@@ -23,7 +24,7 @@ namespace DH
         [SerializeField] public List<GameObject> Characters = new();
         [SerializeField] public List<GameObject> Drinks = new();
 
-        public Dictionary<ulong, PlayerInfo> players = new();
+        public Dictionary<ulong, PlayerInfo> users = new();
 
         public Queue<Action> JopQueue = new Queue<Action>();
 
@@ -47,7 +48,7 @@ namespace DH
 
             if (!NetworkManager.IsConnectedClient || !NetworkManager.IsListening)
             {
-                players.Clear();
+                users.Clear();
 
                 NetworkManager.Singleton.Shutdown();
                 Destroy(NetworkManager.Singleton.gameObject);
@@ -67,7 +68,7 @@ namespace DH
         {
             if(!IsHost) return;
 
-            Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.players);
+            Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.users);
 
             foreach(var player in players)
             {
@@ -79,22 +80,22 @@ namespace DH
 
         public void PlayerKillCount(ulong id)
         {
-            players[id].kill++;
-            SetValueServerRpc(id, players[id]);
+            users[id].kill++;
+            SetValueServerRpc(id, users[id]);
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void PlayerReadyServerRpc(ulong id, bool ready)
         {
-            players[id].Ready = ready;
-            SetValueServerRpc(id, players[id]);
+            users[id].Ready = ready;
+            SetValueServerRpc(id, users[id]);
             ReadyObjects.Instance.SetNicknameColorClientRpc();
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void SetValueServerRpc(ulong Key, PlayerInfo Value)
         {
-            players[Key] = Value;
+            users[Key] = Value;
             OnValueChangedClientRpc(Key, Value);
         }
 
@@ -102,9 +103,9 @@ namespace DH
         private void OnValueChangedClientRpc(ulong Key, PlayerInfo Value)
         {
             if (Value == null)
-                players.Remove(Key);
+                users.Remove(Key);
             else
-                players[Key] = Value;
+                users[Key] = Value;
         }
 
         [ServerRpc]
@@ -135,7 +136,7 @@ namespace DH
 
             List<Vector3> temp = new List<Vector3>();
 
-            foreach(var player in players)
+            foreach(var player in users)
             {
                 Vector3 rand = GM.MapManager.Instance.GetSpawnPosition();
 
@@ -143,12 +144,10 @@ namespace DH
                     rand = GM.MapManager.Instance.GetSpawnPosition();
 
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
-                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Key);
+                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Value.ID);
 
-                Instantiate(Characters[(int)player.Value.Char], p.transform);
-                Instantiate(Drinks[(int)player.Value.Cola], p.transform);
-
-                p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Value.Nickname;
+                NetworkObjectReference reference = p.GetComponent<NetworkObject>();
+                CreateCharacterClientRpc(player.Key, reference);
 
                 temp.Add(rand);
             }
@@ -158,10 +157,21 @@ namespace DH
             onGameStarted?.Invoke();
         }
 
+        [ClientRpc]
+        private void CreateCharacterClientRpc(ulong id, NetworkObjectReference reference)
+        {
+            PlayerInfo player = users[id];
+            NetworkObject networkObject = reference;
+            GameObject p = networkObject.gameObject;
+
+            Instantiate(Characters[(int)player.Char], p.transform);
+            Instantiate(Drinks[(int)player.Cola], p.transform);
+
+            p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
+        }
+
         public void ServerGameEnd()
         {
-            if (!IsServer) return;
-
             NetworkManager.Singleton?.Shutdown();
             Destroy(NetworkManager.Singleton?.gameObject);
 

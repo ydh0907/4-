@@ -24,6 +24,14 @@ public class ReadyObjects : NetworkBehaviour
         Instance = this;
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        SetCurrentCharactersClientRpc();
+        SetNicknameColorClientRpc();
+    }
+
     [ClientRpc]
     public void SetCurrentCharactersClientRpc()
     {
@@ -37,8 +45,9 @@ public class ReadyObjects : NetworkBehaviour
         }
 
         Dummys.Clear();
+        nicknames.Clear();
 
-        foreach(var player in NetworkGameManager.Instance.players)
+        foreach(var player in NetworkGameManager.Instance.users)
         {
             GameObject character = Instantiate(NetworkGameManager.Instance.Characters[(int)player.Value.Char], SpawnPos[index].position, SpawnPos[index].rotation);
             TextMeshPro text = Instantiate(Nickname, character.transform).GetComponent<TextMeshPro>();
@@ -55,7 +64,7 @@ public class ReadyObjects : NetworkBehaviour
     [ClientRpc]
     public void SetNicknameColorClientRpc()
     {
-        foreach(var player in NetworkGameManager.Instance.players)
+        foreach(var player in NetworkGameManager.Instance.users)
         {
             nicknames[player.Key].color = player.Value.Ready ? Color.green : Color.red;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using GM;
+using System;
 
 namespace HB
 {
@@ -44,26 +45,27 @@ namespace HB
         [SerializeField] private LayerMask _groundLayer;
         #endregion
 
+        [SerializeField] Transform follow;
+
+        Vector3 temppos = Vector3.zero;
+
         public override void OnNetworkSpawn()
         {
-            if (!IsOwner) return;
             RB = GetComponent<Rigidbody>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
-            DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
-
             SetGravityScale(Data.gravityScale);
-        }
-
-        public void Start()
-        {
-            Animator = GetComponentInChildren<Animator>();
         }
 
         private void FixedUpdate()
         {
-            // Handle Run
-            if (!IsOwner) return;
+            if(!IsOwner) return;
+
+            if (!Animator || !DrinkDamageble)
+            {
+                return;
+            }
+
             if (CanRun())
             {
                 Run(LERP_AMOUNT);
@@ -77,9 +79,26 @@ namespace HB
 
         private void Update()
         {
+            if (!Animator || !DrinkDamageble)
+            {
+                Animator = GetComponentInChildren<Animator>();
+                DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
+
+                return;
+            }
+
+            if (!IsOwner)
+            {
+                SetAnimation();
+                return;
+            }
+
+
             #region INPUT HANDLER
-            _moveInput.x = Input.GetAxisRaw("Horizontal");
-            _moveInput.z = Input.GetAxisRaw("Vertical");
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+            _moveInput.x = x;
+            _moveInput.z = z;
 
             // jump
             if (CanJump() && Input.GetKeyDown(KeyCode.Space))
@@ -96,6 +115,7 @@ namespace HB
             // 기절 시간이 2초, 북극곰 소환 시간이 5초라 하였을 때
             // Player가 3초 동안 가만히 있다가 기절하여도
             // 자의든 타의든 움직이지 않은 시간이 총 5초 이니 북극곰을 소환한다.
+
             if (RB.velocity != Vector3.zero)
             {
                 CurrentTime = 0;
@@ -123,6 +143,19 @@ namespace HB
             }
         }
 
+        private void SetAnimation()
+        {
+            if(transform.position != temppos && transform.position.y == temppos.y)
+            {
+                Animator.SetFloat("AnimationSpeed", 1);
+                temppos = transform.position;
+            }
+            else if(!Physics.Raycast(transform.position, Vector3.down, 1f, _groundLayer))
+            {
+                Animator.SetTrigger("IsJumping");
+            }
+        }
+
         public void SetGravityScale(float scale)
         {
             RB.AddForce(Vector3.down * scale);
@@ -145,13 +178,13 @@ namespace HB
 
             if (CanRun())
             {
-                RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+                RB.velocity = (follow.right * moveDirection.x + follow.forward * moveDirection.z).normalized * targetSpeed;
             }
 
             // Rotation
             if (moveDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(RB.velocity.normalized), Data.rotationFactorPerFrame * Time.deltaTime);
             }
         }
         #endregion
@@ -159,7 +192,6 @@ namespace HB
         #region Rush METHODS
         private void Rush()
         {
-            if (!IsOwner) return;
             DrinkDamageble.StartRush();
         }
         #endregion

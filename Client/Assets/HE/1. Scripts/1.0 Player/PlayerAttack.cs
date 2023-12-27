@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace HB
 {
-    public class PlayerAttack : MonoBehaviour
+    public class PlayerAttack : NetworkBehaviour
     {
         #region COMPONENTS
         private Animator Animator;
@@ -30,12 +31,26 @@ namespace HB
         private void Start()
         {
             CurrentMentosCount = 0;
-            Animator = GetComponentInChildren<Animator>();
-            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); 
+        }
+
+        [ClientRpc]
+        public void AttackAniClientRpc()
+        {
+            Animator.SetTrigger("isAttacking");
         }
 
         private void Update()
         {
+            if (!PlayerWeaponState || !Animator)
+            {
+                Animator = GetComponentInChildren<Animator>();
+                PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>();
+
+                return;
+            }
+
+            if (!IsOwner) return;
+
             #region INPUT HANDLER
             // attack
             if (CanAttack() && Input.GetKeyDown(KeyCode.Mouse0))
@@ -61,6 +76,7 @@ namespace HB
 
             StartCoroutine(nameof(RefillAttack));
             Animator.SetTrigger("isAttacking");
+            AttackAniClientRpc();
         }
 
         public IEnumerator RefillAttack()

@@ -84,7 +84,7 @@ namespace AH {
         }
 
         private void HandleLeaveGame(ClickEvent evt) {
-            Debug.Log("LEAVE GAME");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
         private void HandleSettingTemplate(ClickEvent evt) {
             SettingTemplate();
@@ -162,7 +162,7 @@ namespace AH {
 
             bool start = true;
 
-            foreach(var player in NetworkGameManager.Instance.players)
+            foreach(var player in NetworkGameManager.Instance.users)
             {
                 start = start && player.Value.Ready;
             }
@@ -264,7 +264,7 @@ namespace AH {
         }
 
         private void HandleGoLobby(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Game");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
 
         // player
