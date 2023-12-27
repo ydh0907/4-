@@ -44,7 +44,6 @@ namespace DH
                 timer.Value = 0;
 
                 onTimerEnd?.Invoke();
-                NetworkGameManager.Instance.ServerGameEnd();
             }
         }
     }
