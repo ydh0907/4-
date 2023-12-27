@@ -40,6 +40,8 @@ namespace DH
         private void ConnectedCallback(ulong obj)
         {
             NetworkGameManager.Instance.SyncPlayerList();
+            ReadyObjects.Instance.SetCurrentCharactersClientRpc();
+            ReadyObjects.Instance.SetNicknameColorClientRpc();
         }
 
         public override void OnNetworkDespawn()
@@ -50,6 +52,7 @@ namespace DH
             {
                 NetworkManager.Singleton.ConnectionApprovalCallback -= ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback -= DisconnectHandling;
+                NetworkManager.Singleton.OnClientConnectedCallback -= ConnectedCallback;
             }
         }
 
