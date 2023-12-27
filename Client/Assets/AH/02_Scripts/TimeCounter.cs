@@ -40,6 +40,10 @@ namespace AH {
                 int seconds = Mathf.FloorToInt(runningTime % 60);
                 countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
+                if(runningTime <= 3) {
+                    SoundManager.Instance.Play("Effect/FinishTime");
+                }
+
                 yield return new WaitForSeconds(1f);
             }
             ingameToolkit.GameOver();
@@ -47,7 +51,6 @@ namespace AH {
         }
         IEnumerator RoutineCountDown(Label countText, int time, int loopTime, string plusText = "", Action callback = null) {
             while(loopTime > 0) {
-                //Debug.Log(loopTime);
                 countText.text = $"{time}{plusText}";
 
                 loopTime--;

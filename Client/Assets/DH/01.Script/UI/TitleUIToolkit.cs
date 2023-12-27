@@ -103,16 +103,16 @@ namespace DH {
         }
 
         private void HandleCloseButton(ClickEvent evt) {
-            TitleTemplate();
             ButtonClick();
+            TitleTemplate();
         }
         private void HandleInputPlayerDataScene(ClickEvent evt) { // host
             ButtonClick();
             SceneManager.LoadScene("DH_Lobby");
         }
         private void ExitGame(ClickEvent evt) { // exit
-            Application.Quit();
             ButtonClick();
+            Application.Quit();
             Debug.Log("QUIT");
         }
         private void ButtonClick() {
