@@ -52,6 +52,8 @@ namespace HB
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
             DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
+
+            SetGravityScale(Data.gravityScale); //
         }
 
         private void FixedUpdate()
@@ -104,6 +106,22 @@ namespace HB
                 }
             }
             #endregion
+
+            if (RB.velocity.y < 0)
+            {
+                // 낙하시 중력값 증가 
+                SetGravityScale(Data.gravityScale * Data.fallGravityMult);
+            }
+            else
+            {
+                // 기본 중력값
+                SetGravityScale(Data.gravityScale);
+            }
+        }
+
+        public void SetGravityScale(float scale)
+        {
+            RB.AddForce(Vector3.down * scale);
         }
 
         // Movement Methods
@@ -123,7 +141,7 @@ namespace HB
 
             if (!IsOwner) return;
 
-            if (CanRun())  // 이 부분 추가
+            if (CanRun())
             {
                 RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
             }
