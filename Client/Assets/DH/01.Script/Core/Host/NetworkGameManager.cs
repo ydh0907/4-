@@ -19,8 +19,8 @@ namespace DH
 
         [SerializeField] GameObject Player;
 
-        [SerializeField] List<GameObject> Characters = new();
-        [SerializeField] List<GameObject> Drinks = new();
+        [SerializeField] public List<GameObject> Characters = new();
+        [SerializeField] public List<GameObject> Drinks = new();
 
         public Dictionary<ulong, PlayerInfo> players = new();
 
@@ -79,7 +79,7 @@ namespace DH
         public void PlayerReadyServerRpc(ulong id, bool ready)
         {
             players[id].Ready = ready;
-            OnValueChangedClientRpc(id, players[id]);
+            SetValueServerRpc(id, players[id]);
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -96,6 +96,7 @@ namespace DH
                 players.Remove(Key);
             else
                 players[Key] = Value;
+            ReadyObjects.Instance.SetCurrentCharacters();
         }
 
         [ServerRpc]
@@ -121,6 +122,8 @@ namespace DH
             Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
 
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
+
+            ReadyObjects.Instance.Remove();
 
             List<Vector3> temp = new List<Vector3>();
 
