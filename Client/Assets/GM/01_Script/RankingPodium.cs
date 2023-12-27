@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RankingPodium : MonoSingleton<RankingPodium>
+public class RankingPodium : MonoBehaviour
 {
+    private static RankingPodium instance;
+    public static RankingPodium Instance { get { return instance; } }
+
     [SerializeField] Transform[] spawnPositions;
 
-    public void SetPlayerPodium(Transform[] players)
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void SetPlayerPodium(Transform[] players)// 1등부터 내림차순 정렬
     {
         int i;
         for(i = 0; i< players.Length-1; i++)

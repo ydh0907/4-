@@ -1,3 +1,4 @@
+using HB;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,14 @@ namespace GM
                     pos.y -= Time.deltaTime / 5;
             }
             transform.position = pos;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.GetComponent<PlayerMovement>())
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
