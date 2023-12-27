@@ -105,6 +105,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8777324756650378445}
+  - component: {fileID: 1590264344548846674}
+  - component: {fileID: 4454979147678644092}
   m_Layer: 9
   m_Name: Hand.L
   m_TagString: Untagged
@@ -127,6 +129,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8200612263346652916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1590264344548846674
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293003049264262323}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.00126
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4454979147678644092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293003049264262323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mentosDamageAmount: 400
+  fistDamageAmount: 150
 --- !u!1 &2794239262813134910
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,8 +364,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5188359890209440021}
-  - component: {fileID: 2361705519311732735}
-  - component: {fileID: 2777811624468557681}
   m_Layer: 7
   m_Name: Hand.R
   m_TagString: Untagged
@@ -351,41 +386,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6971364164147549834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2361705519311732735
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709141180177306538}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.00126
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2777811624468557681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709141180177306538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mentosDamageAmount: 400
-  fistDamageAmount: 150
 --- !u!1 &3939798503966380784
 GameObject:
   m_ObjectHideFlags: 0
