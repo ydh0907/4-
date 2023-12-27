@@ -46,7 +46,14 @@ namespace DH
             }
 
             if (!NetworkManager.IsConnectedClient || !NetworkManager.IsListening)
+            {
+                players.Clear();
+
+                NetworkManager.Singleton.Shutdown();
+                Destroy(NetworkManager.Singleton.gameObject);
+
                 LoadSceneManager.Instance.LoadScene(1);
+            }
         }
 
         public override void OnNetworkSpawn()
@@ -81,6 +88,7 @@ namespace DH
         {
             players[id].Ready = ready;
             SetValueServerRpc(id, players[id]);
+            ReadyObjects.Instance.SetNicknameColorClientRpc();
         }
 
         [ServerRpc(RequireOwnership = false)]
@@ -97,7 +105,6 @@ namespace DH
                 players.Remove(Key);
             else
                 players[Key] = Value;
-            ReadyObjects.Instance.SetCurrentCharacters();
         }
 
         [ServerRpc]
@@ -124,7 +131,7 @@ namespace DH
 
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
-            ReadyObjects.Instance.Remove();
+            ReadyObjects.Instance.RemoveClientRpc();
 
             List<Vector3> temp = new List<Vector3>();
 
@@ -155,22 +162,11 @@ namespace DH
         {
             if (!IsServer) return;
 
-            GameEndClientRpc();
-            players.Clear();
-
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
+            NetworkManager.Singleton?.Shutdown();
+            Destroy(NetworkManager.Singleton?.gameObject);
 
             onGameEnded?.Invoke();
-        }
-
-        [ClientRpc]
-        public void GameEndClientRpc()
-        {
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
-
-            onGameEnded?.Invoke();
+            LoadSceneManager.Instance.LoadScene(1);
         }
 
         public static string GetLocalIP()

@@ -24,7 +24,8 @@ public class ReadyObjects : NetworkBehaviour
         Instance = this;
     }
 
-    public void SetCurrentCharacters()
+    [ClientRpc]
+    public void SetCurrentCharactersClientRpc()
     {
         if (start) return;
 
@@ -45,19 +46,23 @@ public class ReadyObjects : NetworkBehaviour
             Instantiate(NetworkGameManager.Instance.Drinks[(int)player.Value.Cola], character.transform).transform.position += new Vector3(0, 0, -0.3f);
 
             Dummys.Add(character);
-            nicknames[player.Key] = text;
+            nicknames.Add(player.Key, text);
 
             index++;
         }
     }
 
     [ClientRpc]
-    public void SetNicknameColorClientRpc(ulong id, Color color)
+    public void SetNicknameColorClientRpc()
     {
-        nicknames[id].color = color;
+        foreach(var player in NetworkGameManager.Instance.players)
+        {
+            nicknames[player.Key].color = player.Value.Ready ? Color.green : Color.red;
+        }
     }
 
-    public void Remove()
+    [ClientRpc]
+    public void RemoveClientRpc()
     {
         foreach (var d in Dummys)
         {
