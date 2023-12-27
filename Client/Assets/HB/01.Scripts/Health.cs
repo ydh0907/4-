@@ -77,7 +77,6 @@ namespace HB
                     OnDie.Invoke(this);
                 }
 
-                Debug.Log("A");
                 _isDead = true;
             }
         }
