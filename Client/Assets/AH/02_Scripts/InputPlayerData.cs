@@ -146,7 +146,6 @@ namespace AH {
             SceneManager.LoadScene(0);
         }
 
-        #region find room
         private void HandleFindRoom(ClickEvent evt) {
             ButtonClick();
             GetNickName();
@@ -218,7 +217,6 @@ namespace AH {
                 }
             }
         }
-        #endregion
         private void ButtonClick() {
             SoundManager.Instance.Play("Effect/Button click");
         }

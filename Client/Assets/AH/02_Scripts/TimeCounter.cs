@@ -57,7 +57,7 @@ namespace AH {
                 loopTime--;
                 time--;
 
-                SoundManager.Instance.Play(countDown);
+                SoundManager.Instance.Play("Effect/CountDown");
                 yield return new WaitForSeconds(1);
             }
             ingameToolkit.FinishCountDown();
