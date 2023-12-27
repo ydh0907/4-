@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507676568230363084}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21114324, y: 0.41562203, z: -0.099831425, w: 0.8790396}
+  m_LocalRotation: {x: 0.21114326, y: 0.41562203, z: -0.09983143, w: 0.8790396}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -503,6 +503,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  PlayerCAM: {fileID: 4293158397876219968}
 --- !u!114 &4014096858930262263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,7 +740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3012127645582402663}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14692192, y: 0.421761, z: -0.0694667, w: 0.89202356}
+  m_LocalRotation: {x: 0.1469219, y: 0.421761, z: -0.069466695, w: 0.89202356}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -44,6 +44,9 @@ namespace HB
         [SerializeField] private LayerMask _groundLayer;
         #endregion
 
+        [Header("CAM")]
+        [SerializeField] GameObject PlayerCAM;
+
         public override void OnNetworkSpawn()
         {
             if (!IsOwner) return;
@@ -143,15 +146,18 @@ namespace HB
 
             if (CanRun())
             {
-                RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
-            }
+                Vector3 cameraForward = Camera.main.transform.forward;
+                cameraForward.y = 0f;
 
-            // Rotation
-            if (moveDirection != Vector3.zero)
-            {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
-            }
+                RB.velocity = targetSpeed * cameraForward.normalized;
 
+                if (moveDirection != Vector3.zero)
+                {
+                    // Rotation
+                    Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Data.rotationFactorPerFrame * Time.deltaTime);
+                }
+            }   
         }
         #endregion
 
