@@ -24,7 +24,7 @@ namespace AH {
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));
         }
         public void PlayTimeCountDown(Label countText) {
-            int runningTime = 10;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<180
+            int runningTime = 999;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<180
 
             int minutes = Mathf.FloorToInt(runningTime / 60);
             int seconds = Mathf.FloorToInt(runningTime % 60);

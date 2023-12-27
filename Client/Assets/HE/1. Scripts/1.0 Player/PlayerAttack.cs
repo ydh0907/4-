@@ -32,7 +32,7 @@ namespace HB
         private void Start()
         {
             CurrentMentosCount = 0;
-            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); // ¼öÁ¤
+            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); 
         }
 
         private void Update()

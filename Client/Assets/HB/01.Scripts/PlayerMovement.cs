@@ -44,9 +44,6 @@ namespace HB
         [SerializeField] private LayerMask _groundLayer;
         #endregion
 
-        [Header("CAM")]
-        [SerializeField] GameObject PlayerCAM;
-
         public override void OnNetworkSpawn()
         {
             if (!IsOwner) return;
@@ -56,7 +53,7 @@ namespace HB
             PlayerDamageble = GetComponent<PlayerDamageble>();
             DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
 
-            SetGravityScale(Data.gravityScale); //
+            SetGravityScale(Data.gravityScale);
         }
 
         private void FixedUpdate()
@@ -142,22 +139,16 @@ namespace HB
             targetSpeed = Mathf.Lerp(RB.velocity.magnitude, targetSpeed, lerpAmount);
             Animator.SetFloat("AnimationSpeed", targetSpeed);
 
-            if (!IsOwner) return;
-
             if (CanRun())
             {
-                Vector3 cameraForward = Camera.main.transform.forward;
-                cameraForward.y = 0f;
+                RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+            }
 
-                RB.velocity = targetSpeed * cameraForward.normalized;
-
-                if (moveDirection != Vector3.zero)
-                {
-                    // Rotation
-                    Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Data.rotationFactorPerFrame * Time.deltaTime);
-                }
-            }   
+            // Rotation
+            if (moveDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
+            }
         }
         #endregion
 
