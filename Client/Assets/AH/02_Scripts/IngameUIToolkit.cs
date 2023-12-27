@@ -231,7 +231,6 @@ namespace AH {
             _container.Clear();
             _container.Add(template);
 
-            template.Q<Button>("goTitle").RegisterCallback<ClickEvent>(HandleGoTitle);
             template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
 
             StartCoroutine(DrumRoutine(template));
@@ -248,9 +247,6 @@ namespace AH {
 
         private void HandleGoLobby(ClickEvent evt) {
             SceneManager.LoadScene("DH_Game");
-        }
-        private void HandleGoTitle(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Title");
         }
     }
 }
