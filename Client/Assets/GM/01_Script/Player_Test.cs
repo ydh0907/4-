@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GM
 {
     public class Player_Test : MonoBehaviour
     {
-        //[SerializeField] Transform[] trm;
+        [SerializeField] Transform[] trm;
         [SerializeField] GameObject obj;
 
         private void Start()
         {
-            StartCoroutine("Test");
+            //StartCoroutine("Test");
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                RankingPodium.Instance.SetPlayerPodium(trm);
+            }
         }
 
         IEnumerator Test()
