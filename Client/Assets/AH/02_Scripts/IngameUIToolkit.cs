@@ -13,6 +13,8 @@ namespace AH {
         private TimeCounter _counter;
         public VisualElement _container;
 
+        List<VisualElement> playerData = new List<VisualElement>();
+        
         [SerializeField] private AudioClip ingameBGM;
 
         [Header("CountDownPanels")]
@@ -72,7 +74,7 @@ namespace AH {
         }
 
         private void HandleLeaveGame(ClickEvent evt) {
-            Debug.Log("LEAVE GAME");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
 
         private void HandleSettingTemplate(ClickEvent evt) {
@@ -198,7 +200,7 @@ namespace AH {
             _container.Add(counterPanel);
 
             _counter.ResurrectionCountDown(countText, callback);
-        }
+        } // 플레이어 부활
 
         public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
             _container.Clear();
@@ -206,15 +208,20 @@ namespace AH {
             var template = playPanel.Instantiate().Q<VisualElement>("container");
 
             // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
-
-            VisualElement playerData = template.Q<VisualElement>(className: "players-border");
-            Debug.Log(playerData.childCount);
-            for(int i = 0; i < playerData.childCount; i++) {
-                var nickname = playerData[i].Q<Label>("nickname-txt");
-                var drinkIcon = playerData[i].Q<VisualElement>("drinkIcon");
+            VisualElement basePlayerData = template.Q<VisualElement>(className: "players-border");
+            for(int i = 0; i < basePlayerData.childCount; i++) {
+                if (basePlayerData[i].name == "player") {
+                    playerData.Add(basePlayerData[i]);
+                }
             }
 
-            killcount = template.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+            // playerData 리스트에 4개의 visualelement가 있음
+            foreach (var data in playerData) {
+                var nickname = data.Q<Label>("nickname-txt");
+                var drinkIcon = data.Q<VisualElement>("drinkIcon");
+                killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+            }
+
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
             _counter.PlayTimeCountDown(timer);
@@ -246,7 +253,7 @@ namespace AH {
         }
 
         private void HandleGoLobby(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Game");
+            NetworkGameManager.Instance.ServerGameEnd();
         }
     }
 }

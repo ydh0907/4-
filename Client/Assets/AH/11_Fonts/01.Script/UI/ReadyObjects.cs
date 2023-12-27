@@ -24,6 +24,14 @@ public class ReadyObjects : NetworkBehaviour
         Instance = this;
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        SetCurrentCharactersClientRpc();
+        SetNicknameColorClientRpc();
+    }
+
     [ClientRpc]
     public void SetCurrentCharactersClientRpc()
     {
@@ -37,6 +45,7 @@ public class ReadyObjects : NetworkBehaviour
         }
 
         Dummys.Clear();
+        nicknames.Clear();
 
         foreach(var player in NetworkGameManager.Instance.players)
         {
