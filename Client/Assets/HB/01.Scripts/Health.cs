@@ -9,6 +9,8 @@ namespace HB
 {
     public class Health : NetworkBehaviour
     {
+        public static Health instance = null;
+
         public NetworkVariable<int> currentHealth = new NetworkVariable<int>();
         //NetworkVariable : 네트워크에 연결된 동일한 인스턴스들끼리 공유해야할 변수를 만들때 설정
 
@@ -23,7 +25,13 @@ namespace HB
 
         private bool _isDead = false;
 
-        public UnityEvent<int, int, float> OnHealthChanged;
+        public Action<int, int, float> OnHealthChanged;
+
+        private void Awake() {
+            if(instance == null) {
+                instance = this;
+            }
+        }
 
         public override void OnNetworkSpawn()
         {
@@ -48,6 +56,9 @@ namespace HB
 
         private void HealthChangeHandle(int prev, int newValue)
         {
+            Debug.Log(prev);
+            Debug.Log(newValue);
+            Debug.Log((float)newValue / MaxHealth);
             OnHealthChanged?.Invoke(prev, newValue, (float)newValue / MaxHealth);
         }
 

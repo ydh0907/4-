@@ -1,3 +1,4 @@
+using AH;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,12 +34,14 @@ namespace HB
         {
             #region INPUT HANDLER
             // Stat
-            if (CanChangeToMentosState() && Input.GetKeyDown(KeyCode.Alpha2))
+            if (CanChangeToMentosState() && Input.GetKeyDown(KeyCode.Alpha2)) // ∏«≈‰Ω∫
             {
+                IngameUIToolkit.instance.ChangeMantosAttack();
                 OnMentosStateActivated();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha1))
+            else if (Input.GetKeyDown(KeyCode.Alpha1)) // ¡÷∏‘
             {
+                IngameUIToolkit.instance.ChangeFistAttack();
                 OnFistStateActivated();
             }
             #endregion

@@ -1,4 +1,5 @@
 using DH;
+using HB;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using UnityEngine.UIElements;
 
 namespace AH {
     public class IngameUIToolkit : MonoBehaviour {
+        public static IngameUIToolkit instance;
+
         private UIDocument _uiDocument;
         private TimeCounter _counter;
         public VisualElement _container;
@@ -43,6 +46,10 @@ namespace AH {
             _uiDocument = GetComponent<UIDocument>();
             _counter = GetComponent<TimeCounter>();
             isHost = NetworkManager.Singleton.IsHost;
+
+            if (instance == null) {
+                instance = this;
+            }
         }
         private void OnEnable() {
             var root = _uiDocument.rootVisualElement;
@@ -54,6 +61,9 @@ namespace AH {
             else {
                 ClientLobbyPanel();
             }
+        }
+        private void OnDestroy() {
+            Health.instance.OnHealthChanged -= OnChangeHealth;
         }
 
         private void HostLobbyPanel() {
@@ -76,7 +86,6 @@ namespace AH {
         private void HandleLeaveGame(ClickEvent evt) {
             Debug.Log("LEAVE GAME");
         }
-
         private void HandleSettingTemplate(ClickEvent evt) {
             SettingTemplate();
         }
@@ -203,6 +212,7 @@ namespace AH {
         } // 플레이어 부활
 
         public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
+
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");
@@ -228,6 +238,7 @@ namespace AH {
 
             _container.Add(template);
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
+            //Health.instance.OnHealthChanged += OnChangeHealth;
         }
         public void GameOver() {
             SoundManager.Instance.Clear();
@@ -254,6 +265,17 @@ namespace AH {
 
         private void HandleGoLobby(ClickEvent evt) {
             SceneManager.LoadScene("DH_Game");
+        }
+
+        // player
+        private void OnChangeHealth(int beforeHealth, int currentHealth, float arg3) { // 이전 // 현재
+            Debug.Log("change health");
+        }
+        public void ChangeMantosAttack() { // 맨토스 공격
+            Debug.Log("맨토스 공격");
+        }
+        public void ChangeFistAttack() { // 주먹 공격
+            Debug.Log("주먹 공격");
         }
     }
 }
