@@ -27,12 +27,12 @@ namespace HB
             Animator = GetComponent<Animator>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
-            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); // 수정
         }
 
         private void Start()
         {
             CurrentMentosCount = 0;
+            PlayerWeaponState = GetComponentInChildren<PlayerWeaponState>(); // 수정
         }
 
         private void Update()
