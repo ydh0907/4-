@@ -44,20 +44,21 @@ namespace HB
         [SerializeField] private LayerMask _groundLayer;
         #endregion
 
+        [SerializeField] Transform follow;
+
         public override void OnNetworkSpawn()
         {
             if (!IsOwner) return;
             RB = GetComponent<Rigidbody>();
 
             PlayerDamageble = GetComponent<PlayerDamageble>();
-            DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
-
             SetGravityScale(Data.gravityScale);
         }
 
         public void Start()
         {
             Animator = GetComponentInChildren<Animator>();
+            DrinkDamageble = GetComponentInChildren<DrinkDamageble>();
         }
 
         private void FixedUpdate()
@@ -78,8 +79,12 @@ namespace HB
         private void Update()
         {
             #region INPUT HANDLER
-            _moveInput.x = Input.GetAxisRaw("Horizontal");
-            _moveInput.z = Input.GetAxisRaw("Vertical");
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+            _moveInput.x = x;
+            _moveInput.z = z;
+
+            // _moveInput = 
 
             // jump
             if (CanJump() && Input.GetKeyDown(KeyCode.Space))
@@ -145,13 +150,13 @@ namespace HB
 
             if (CanRun())
             {
-                RB.velocity = new Vector3(targetSpeed * moveDirection.x, RB.velocity.y, targetSpeed * moveDirection.z);
+                RB.velocity = (follow.right * moveDirection.x + follow.forward * moveDirection.z).normalized * targetSpeed;
             }
 
             // Rotation
             if (moveDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDirection), Data.rotationFactorPerFrame * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(RB.velocity.normalized), Data.rotationFactorPerFrame * Time.deltaTime);
             }
         }
         #endregion
