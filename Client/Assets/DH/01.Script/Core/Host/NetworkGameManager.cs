@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Linq;
 using AH;
 using Unity.VisualScripting;
+using TMPro;
 
 namespace DH
 {
@@ -139,6 +140,8 @@ namespace DH
 
                 Instantiate(Characters[(int)player.Value.Char], p.transform);
                 Instantiate(Drinks[(int)player.Value.Cola], p.transform);
+
+                p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Value.Nickname;
 
                 temp.Add(rand);
             }
