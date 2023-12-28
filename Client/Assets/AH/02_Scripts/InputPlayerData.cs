@@ -23,7 +23,6 @@ namespace AH {
         VisualElement root;
 
         string nickname = "";
-        private Button lastChoose = null;
         Room SelectedRoom;
 
         private int createRoomCount = 0;
@@ -148,12 +147,8 @@ namespace AH {
             HandleRefresh(evt);
         }
 
-        private void Refresh(List<Room> room) {
-            createRoomCount = room.Count;
-            CreateRoomList(room);
-            ChooseRoom(room);
-        }
         private void CreateRoomList(List<Room> room) {
+
             var template = createRoomTemplate.Instantiate().Q<VisualElement>("container");
 
             root.Clear();
@@ -189,12 +184,25 @@ namespace AH {
             createRoomList.RegisterCallback<ClickEvent>(evt => {
                 var dve = evt.target as Button;
                 if (dve != null) {
-                    ClearToRoomList(roomList, dve);
-                    lastChoose = dve;
+                    OnChooseRoom(roomList, dve);
 
                     SelectedRoom = room[roomList.IndexOf(dve)];
                 }
             });
+        }
+        private void Refresh(List<Room> room) {
+            createRoomCount = room.Count;
+            roomList.Clear();
+            CreateRoomList(room);
+            ChooseRoom(room);
+        }
+        private void OnChooseRoom(List<Button> list, Button dve) {
+            foreach (var button in list) {
+                button.RemoveFromClassList("choose");
+                if (button == dve) {
+                    button.AddToClassList("choose");
+                }
+            }
         }
 
         private void HandleBackTitleScene(ClickEvent evt) { // host
@@ -206,6 +214,7 @@ namespace AH {
         }
         private void HandleRefresh(ClickEvent evt) {
             ButtonClick();
+            SelectedRoom = null;
             Program.Instance.Reload(Refresh);
         }
         private void HandleEnterRoom(ClickEvent evt) {
@@ -216,14 +225,6 @@ namespace AH {
             SceneManager.LoadScene("DH_Lobby");
         }
 
-        private void ClearToRoomList(List<Button> list, Button dve) {
-            foreach (var button in list) {
-                button.RemoveFromClassList("choose");
-                if (button == dve) {
-                    button.AddToClassList("choose");
-                }
-            }
-        }
         private void ButtonClick() {
             SoundManager.Instance.Play("Effect/Button click");
         }
