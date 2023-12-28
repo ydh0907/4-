@@ -36,7 +36,6 @@ namespace HB
         {
             PlayerAttack.CurrentMentosCount = 0;
             SoundManager.Instance.Play("Effect/DieLaugh");
-            IngameUIToolkit.instance.ResurrectionCounter();
             StartCoroutine(nameof(PlayerRespawn));
         }
 
@@ -50,6 +49,7 @@ namespace HB
         IEnumerator PlayerRespawn() // 리스폰
         {
             Debug.Log("respawn wait");
+            IngameUIToolkit.instance.ResurrectionCounter();
             CinemachineFreeLook.Priority = -1; // 카메라 이동
             transform.position = new Vector3(0, 0, -10);
 

@@ -21,6 +21,7 @@ namespace AH {
         }
         public void ResurrectionCountDown(Label countText, Action callback = null) {
             int startCount = 3;
+            Debug.Log("start");
 
             countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));
@@ -53,8 +54,8 @@ namespace AH {
                 countText.text = $"{time}{plusText}";
 
                 loopTime--;
+                Debug.Log(time);
                 time--;
-
                 SoundManager.Instance.Play("Effect/CountDown");
                 yield return new WaitForSeconds(1);
             }
