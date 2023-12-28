@@ -67,7 +67,7 @@
     width: 500px;
     height: 100px;
     -unity-font-definition: initial;
-    -unity-font: url('project://database/Assets/AH/11_Fonts/Maplestory%20Bold.ttf?fileID=12800000&guid=9f011ab977e55c14c9f2f670b884a55c&type=3#Maplestory Bold');
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&guid=143bf3abee24d7c4cbea0e9c3f14ff01&type=3#PyeongChangPeace-Light');
     font-size: 52px;
     color: rgb(0, 0, 0);
     border-left-color: rgba(255, 255, 255, 0);
@@ -80,6 +80,7 @@
     margin-top: 50px;
     margin-bottom: 50px;
     -unity-background-image-tint-color: rgb(0, 0, 0);
+    -unity-font-style: bold;
 }
 
 .large-button:hover {

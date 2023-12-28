@@ -26,13 +26,13 @@
     -unity-font-definition: initial;
     -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&guid=143bf3abee24d7c4cbea0e9c3f14ff01&type=3#PyeongChangPeace-Light');
     font-size: 40px;
-    -unity-font-style: bold;
     margin-bottom: 40px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
     margin-right: 50px;
     margin-left: 50px;
     -unity-background-image-tint-color: rgb(0, 0, 0);
+    -unity-font-style: bold;
 }
 
 .button:hover {

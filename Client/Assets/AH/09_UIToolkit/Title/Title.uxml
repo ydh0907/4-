@@ -6,7 +6,7 @@
         <ui:Label tabindex="-1" text="last can standing" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" style="text-shadow: 15px 50px 0 rgb(242, 255, 0); font-size: 90px; color: rgb(255, 0, 207);" />
         <ui:VisualElement name="low-border" style="height: 820px; flex-direction: row;">
             <ui:VisualElement name="system-content" style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: space-around;">
-                <ui:Button text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" class="title-button" style="background-color: rgb(105, 0, 255); -unity-background-image-tint-color: rgb(255, 255, 255); color: rgb(255, 255, 255); border-top-left-radius: 39px; border-top-right-radius: 39px; border-bottom-right-radius: 39px; border-bottom-left-radius: 39px;" />
+                <ui:Button text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-btn" class="title-button" />
                 <ui:Button text="시작하기" parse-escape-sequences="true" display-tooltip-when-elided="true" name="playgame-btn" class="title-button" />
                 <ui:Button text="나가기" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit-btn" class="title-button" />
             </ui:VisualElement>

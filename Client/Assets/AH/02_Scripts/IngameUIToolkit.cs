@@ -209,9 +209,11 @@ namespace AH {
 
             _counter.CountDown(countText, callback);
         }
-        private void ResurrectionCounter(Action callback = null) { // 부활 카운트 다운
+        public void ResurrectionCounter(Action callback = null) { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
+
+            _container.Clear();
             _container.Add(counterPanel);
 
             _counter.ResurrectionCountDown(countText, callback);
@@ -316,14 +318,10 @@ namespace AH {
 
         // player
         public void ChangeMantosAttack() { // 맨토스 공격
-            Debug.Log("맨토스 공격");
-
             mantos.AddToClassList("toLarge");
             bareHanded.AddToClassList("toSmall");
         }
         public void ChangeFistAttack() { // 주먹 공격
-            Debug.Log("주먹 공격");
-
             mantos.RemoveFromClassList("toLarge");
             bareHanded.RemoveFromClassList("toSmall");
         }
