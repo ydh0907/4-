@@ -30,6 +30,8 @@
     margin-bottom: 40px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
+    margin-right: 50px;
+    margin-left: 50px;
 }
 
 .button:hover {

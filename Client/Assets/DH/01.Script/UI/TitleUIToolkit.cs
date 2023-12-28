@@ -81,6 +81,7 @@ namespace DH {
                 }
             });
         }
+
         private void GetSoundVisualElementData(List<VisualElement> list, VisualElement data) {
             if (list.Count > 0) {
                 list.Clear();
