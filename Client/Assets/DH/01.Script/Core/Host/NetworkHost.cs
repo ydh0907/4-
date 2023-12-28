@@ -15,6 +15,7 @@ namespace DH
         public static NetworkHost Instance = null;
 
         [SerializeField] private GameObject NetworkGameManager;
+        [SerializeField] private GameObject Map;
 
         private bool? isConnect = null;
         public bool IsConnect => NetworkManager.Singleton.IsHost;
@@ -64,7 +65,11 @@ namespace DH
         {
             isConnect = null;
 
-            LoadSceneManager.Instance.LoadScene(2, () => Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId));
+            LoadSceneManager.Instance.LoadScene(2, () =>
+            {
+                Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
+                Instantiate(Map).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
+            });
 
             Program.Instance.CreateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname);
 
