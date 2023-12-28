@@ -18,7 +18,6 @@ namespace HB
             
             killCount.Value = 0;
 
-            health.OnDie += UpdateKillCount;
         }
 
         public void UpdateKillCount(Health health)
@@ -31,7 +30,6 @@ namespace HB
 
         public override void OnNetworkDespawn()
         {
-            health.OnDie -= UpdateKillCount;
         }
     }
 }
