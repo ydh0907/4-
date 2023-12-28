@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -65,9 +66,6 @@ namespace AH {
 
         public override void OnNetworkDespawn() {
             base.OnNetworkDespawn();
-
-            if (Health.instance != null)
-                Health.instance.OnHealthChanged -= OnChangeHealth;
         }
 
         private void HostLobbyPanel() {
@@ -88,9 +86,11 @@ namespace AH {
         }
 
         private void HandleLeaveGame(ClickEvent evt) {
+            ButtonClick();
             NetworkGameManager.Instance.ServerGameEnd();
         }
         private void HandleSettingTemplate(ClickEvent evt) {
+            ButtonClick();
             SettingTemplate();
         }
 
@@ -156,12 +156,13 @@ namespace AH {
             }
         }
         private void HandleCloseButton(ClickEvent evt, VisualElement template) {
+            ButtonClick();
             _container.Remove(template);
         }
 
         // lobby
         private void HaneldStartGame(ClickEvent evt) {
-            SoundManager.Instance.Play("Effect/Button click");
+            ButtonClick();
             if (!NetworkManager.Singleton.IsHost) return;
 
             bool start = true;
@@ -177,7 +178,7 @@ namespace AH {
             }
         }
         private void HandleReadyGame(ClickEvent evt) {
-            SoundManager.Instance.Play("Effect/Button click");
+            ButtonClick();
             var dve = evt.target as Button;
             if (dve != null) {
                 if (!isReady) { // 준비 완료를 안함
@@ -214,7 +215,6 @@ namespace AH {
         } // 플레이어 부활
 
         public void FinishCountDown() { // 준비 완료 상태 후 게임 시작 대기가 종료 
-
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");
@@ -290,11 +290,10 @@ namespace AH {
         private void HandleGoLobby(ClickEvent evt) {
             NetworkGameManager.Instance.ServerGameEnd();
         }
-
-        // player
-        private void OnChangeHealth(int beforeHealth, int currentHealth) { // 이전 // 현재
-            Debug.Log("change health");
+        private void ButtonClick() {
+            SoundManager.Instance.Play("Effect/Button click");
         }
+        // player
         public void ChangeMantosAttack() { // 맨토스 공격
             Debug.Log("맨토스 공격");
         }
