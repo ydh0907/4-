@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 namespace AH {
     public class TimeCounter : MonoBehaviour {
         IngameUIToolkit ingameToolkit;
-        [SerializeField] private AudioClip countDown;
+        [SerializeField] private int runningTime;
 
         private void Awake() {
             ingameToolkit = GetComponent<IngameUIToolkit>();
@@ -26,8 +26,6 @@ namespace AH {
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));
         }
         public void PlayTimeCountDown(Label countText) {
-            int runningTime = 180;
-
             int minutes = Mathf.FloorToInt(runningTime / 60);
             int seconds = Mathf.FloorToInt(runningTime % 60);
             countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
