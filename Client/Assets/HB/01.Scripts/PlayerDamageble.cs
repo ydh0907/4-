@@ -1,4 +1,5 @@
 using AH;
+using DH;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace HB
 
         private PlayerMovement PlayerMovement;
         private PlayerAttack PlayerAttack;
+
+        public ulong Enemy = ulong.MaxValue;
 
         public bool IsGroggying { get; private set; }
         [SerializeField] private float _faintTime;
@@ -33,6 +36,8 @@ namespace HB
             PlayerAttack.CurrentMentosCount = 0;
             SoundManager.Instance.Play("Effect/DieLaugh");
             IngameUIToolkit.instance.ResurrectionCounter();
+            if(Enemy != ulong.MaxValue)
+                NetworkGameManager.Instance.PlayerKillCountServerRpc(Enemy);
             StartCoroutine(nameof(PlayerRespawn));
         }
 

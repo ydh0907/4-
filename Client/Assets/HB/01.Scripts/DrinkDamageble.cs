@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace HB
@@ -10,6 +11,18 @@ namespace HB
 
         [field: SerializeField] public int CurrentHealth { get; set; }
         [field: SerializeField] public int MaxHealth { get; set; }
+
+        ulong Enemy
+        {
+            get
+            {
+                return PlayerDamageble.Enemy;
+            }
+            set
+            {
+                PlayerDamageble.Enemy = value;
+            }
+        }
 
         private void Awake()
         {
@@ -57,10 +70,7 @@ namespace HB
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("WEAPON"))
             {
-                Transform rootParent = other.gameObject.transform.root;
-                string lastReaderName = rootParent.gameObject.name;
-
-                Debug.Log(lastReaderName);
+                Enemy = other.transform.root.GetComponent<NetworkObject>().OwnerClientId;
             }
         }
     }

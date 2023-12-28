@@ -86,6 +86,7 @@ namespace HB
                 hitDirection.Normalize();
                 iDamageble.Damage(attackDamageAmount, hitDirection);
                 PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x); // 실행 하는지 확인 피ㅣㄹ요
+                Debug.Log("af");
             }
         }
 
