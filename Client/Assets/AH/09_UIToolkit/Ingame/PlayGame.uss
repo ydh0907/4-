@@ -1,3 +1,9 @@
+.parentPlayerBase {
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 145px;
+}
+
 .basePlayer {
     width: 300px;
     height: 80px;

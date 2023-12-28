@@ -43,6 +43,12 @@ namespace HB
                 OnFistStateActivated();
             }
             #endregion
+
+            if (!isActiveAndEnabled)
+            {
+                IngameUIToolkit.instance.ChangeFistAttack();
+                OnFistStateActivated();
+            }
         }
 
         private void OnMentosStateActivated()
