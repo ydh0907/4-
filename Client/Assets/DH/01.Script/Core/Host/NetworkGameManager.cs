@@ -21,7 +21,7 @@ namespace DH
         public static NetworkGameManager Instance;
 
         [SerializeField] GameObject Player;
-        [SerializeField] GameObject Map;
+        [SerializeField] GameObject Podium;
 
         [SerializeField] public List<GameObject> Characters = new();
         [SerializeField] public List<GameObject> Drinks = new();
@@ -161,7 +161,7 @@ namespace DH
             onGameStarted?.Invoke();
         }
 
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         public void UnspawnMentosServerRpc()
         {
             SetUnspawnMentosClientRpc();
@@ -184,6 +184,18 @@ namespace DH
             Instantiate(Drinks[(int)player.Cola], p.transform);
 
             p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
+        }
+
+        public void GameResultSetting()
+        {
+            Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+            GameResultSettingClientRpc();
+        }
+
+        [ClientRpc]
+        public void GameResultSettingClientRpc()
+        {
+            RankingPodium.Instance.SetPlayerPodium(users);
         }
 
         public void ServerGameEnd()

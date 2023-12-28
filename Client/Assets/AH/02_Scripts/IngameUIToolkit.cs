@@ -297,6 +297,16 @@ namespace AH {
             NetworkGameManager.Instance.UnspawnMentosServerRpc();
 
             StartCoroutine(DrumRoutine(template));
+
+            if (IsHost)
+            {
+                foreach(var player in NetworkManager.Singleton.ConnectedClientsList)
+                {
+                    Destroy(player.PlayerObject);
+                }
+
+                NetworkGameManager.Instance.GameResultSetting();
+            }
         }
         IEnumerator DrumRoutine(VisualElement template) {
             yield return new WaitForSeconds(2f);

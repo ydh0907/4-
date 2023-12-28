@@ -1,5 +1,6 @@
 using AH;
 using Cinemachine;
+using DH;
 using GM;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace HB
     {
         public int CurrentHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public int MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+        public ulong Enemy = ulong.MaxValue;
 
         private PlayerMovement PlayerMovement;
         private PlayerAttack PlayerAttack;
@@ -34,6 +37,7 @@ namespace HB
 
         public void Die()
         {
+            NetworkGameManager.Instance.PlayerKillCountServerRpc(Enemy);
             PlayerAttack.CurrentMentosCount = 0;
             SoundManager.Instance.Play("Effect/DieLaugh");
             StartCoroutine(nameof(PlayerRespawn));

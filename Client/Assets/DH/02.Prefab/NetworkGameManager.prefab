@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 2912199792607788135, guid: b626777b967160c43859b02d3e531445, type: 3}
+  Podium: {fileID: 3394249938184343423, guid: fda600dbd49b21547901691e1dae7430, type: 3}
   Characters:
   - {fileID: 3399731427270799583, guid: 6578709570ab609449fe11ae7c9ecbba, type: 3}
   - {fileID: 8637493282298108973, guid: ad41d25dd8580d84e84654d57e6024cb, type: 3}

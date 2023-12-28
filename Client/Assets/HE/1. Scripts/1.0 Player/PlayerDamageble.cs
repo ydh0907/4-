@@ -1,3 +1,4 @@
+using DH;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace HE
         public bool IsGroggying { get; private set; }
 
         private PlayerMovement PlayerMovement;
+
+        public ulong Enemy = ulong.MaxValue;
 
         public int CurrentHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public int MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -36,8 +39,10 @@ namespace HE
 
         public void Die()
         {
-            
-            Debug.Log("d");
+            if(Enemy != ulong.MaxValue)
+            {
+                NetworkGameManager.Instance.PlayerKillCountServerRpc(Enemy);
+            }
         }
 
         IEnumerator GroggyAction()
