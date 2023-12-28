@@ -12,6 +12,7 @@ using AH;
 using Unity.VisualScripting;
 using TMPro;
 using Unity.Services.Matchmaker.Models;
+using GM;
 
 namespace DH
 {
@@ -156,7 +157,27 @@ namespace DH
 
             GetComponent<NetworkServerTimer>().StartTimer();
 
+            SetUnspawnMentosClientRpc();
+
             onGameStarted?.Invoke();
+        }
+
+        [ClientRpc]
+        private void SetSpawnMentosClientRpc()
+        {
+            SpawnMentos.Instance.StartSpawn();
+        }
+
+        [ServerRpc]
+        public void UnspawnMentosServerRpc()
+        {
+            SetUnspawnMentosClientRpc();
+        }
+
+        [ClientRpc]
+        private void SetUnspawnMentosClientRpc()
+        {
+            SpawnMentos.Instance.StopSpawn();
         }
 
         [ClientRpc]

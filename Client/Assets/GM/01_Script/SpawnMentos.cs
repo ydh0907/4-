@@ -9,9 +9,21 @@ namespace GM
         [SerializeField] private GameObject mentosPrefab;
         [SerializeField] private Transform SpawnTrm;
 
-        private void Start()
+        public static SpawnMentos Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        public void StartSpawn()
         {
             StartCoroutine("MentosSpawnCorutine");
+        }
+
+        public void StopSpawn()
+        {
+            StopCoroutine("MentosSpawnCorutine");
         }
 
         private IEnumerator MentosSpawnCorutine()

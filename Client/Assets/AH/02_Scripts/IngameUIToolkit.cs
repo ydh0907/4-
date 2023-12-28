@@ -1,4 +1,5 @@
 using DH;
+using GM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -268,7 +269,7 @@ namespace AH {
                 else {
                     nickname.text = "";
                     drinkIcon.style.backgroundImage = new StyleBackground();
-                    killcount.text = "Empty";
+                    killcount.text = "";
                 }
             }
         }
@@ -290,6 +291,8 @@ namespace AH {
             _container.Add(template);
 
             template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
+
+            NetworkGameManager.Instance.UnspawnMentosServerRpc();
 
             StartCoroutine(DrumRoutine(template));
         }
