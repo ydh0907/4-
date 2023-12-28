@@ -268,10 +268,10 @@ namespace AH {
 
             VisualElement template = gameOverPanel.Instantiate().Q<VisualElement>("blackContainer");
 
+            template.Q<VisualElement>("container").AddToClassList("fadeStart");
+
             _container.Clear();
             _container.Add(template);
-
-            template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
 
             StartCoroutine(DrumRoutine(template));
         }
@@ -281,8 +281,10 @@ namespace AH {
             SoundManager.Instance.Play("Effect/TaDa");
 
             template.AddToClassList("fadeOff");
+            template.Q<VisualElement>("container").RemoveFromClassList("fadeStart");
             template.Q<VisualElement>("container").AddToClassList("fadeOff");
 
+            template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
         }
 
         private void HandleGoLobby(ClickEvent evt) {
