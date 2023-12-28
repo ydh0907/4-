@@ -59,7 +59,7 @@ namespace Karin.Network
 
         public void Send(ArraySegment<byte> sendBuffer) // 패킷 송신 요청 함수
         {
-            lock(locker)
+            lock (locker)
             {
                 sendQueue.Enqueue(sendBuffer); // sendQueue에 패킷 예약
                 if (pendingList.Count == 0) // pendingList가 0이라면 (현재 전송중인 데이터가 없다면)
@@ -79,38 +79,53 @@ namespace Karin.Network
         #region Send
         private void FlushSendQueue() // sendQueue를 비우고 데이터를 전송하는 함수
         {
-            if (active == 0) // 연결이 끊겼다면
-                return; // return
-
-            while (sendQueue.Count > 0) // sendQueue가 빌 때까지
+            try
             {
-                ArraySegment<byte> buffer = sendQueue.Dequeue(); // 패킷 pop
-                pendingList.Add(buffer); // pendingList(예약 리스트)에 추가
+                if (active == 0) // 연결이 끊겼다면
+                    return; // return
+
+                while (sendQueue.Count > 0) // sendQueue가 빌 때까지
+                {
+                    ArraySegment<byte> buffer = sendQueue.Dequeue(); // 패킷 pop
+                    pendingList.Add(buffer); // pendingList(예약 리스트)에 추가
+                }
+
+                sendArgs.BufferList = pendingList; // 송신 인자에 버퍼들 세팅
+
+                bool pending = socket.SendAsync(sendArgs); // 비동기 전송
+                if (pending == false) // 만약 동기적으로 처리되었다면
+                    OnSendCompleted(null, sendArgs); // 직접 콜백 실행
             }
-
-            sendArgs.BufferList = pendingList; // 송신 인자에 버퍼들 세팅
-
-            bool pending = socket.SendAsync(sendArgs); // 비동기 전송
-            if (pending == false) // 만약 동기적으로 처리되었다면
-                OnSendCompleted(null, sendArgs); // 직접 콜백 실행
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void OnSendCompleted(object sender, SocketAsyncEventArgs args) // 송신 완료 콜백
         {
-            lock (locker)
+            try
             {
-                if (args.SocketError == SocketError.Success && args.BytesTransferred > 0) // 에러 없이 데이터가 잘 전송되었다면
+                lock (locker)
                 {
-                    sendArgs.BufferList = null; // 송신 인자 버퍼 비우기
-                    pendingList.Clear(); // 예약 리스트 비우기
+                    if (args.SocketError == SocketError.Success && args.BytesTransferred > 0) // 에러 없이 데이터가 잘 전송되었다면
+                    {
+                        sendArgs.BufferList = null; // 송신 인자 버퍼 비우기
+                        pendingList.Clear(); // 예약 리스트 비우기
 
-                    OnSent(args.BytesTransferred); // 데이터가 전송되었음을 알림
+                        OnSent(args.BytesTransferred); // 데이터가 전송되었음을 알림
 
-                    if (sendQueue.Count > 0) // 모든 작업이 끝났을 때 예약된 패킷이 존재한다면
-                        FlushSendQueue(); // 다시 sendQueue Flsuh
+                        if (sendQueue.Count > 0) // 모든 작업이 끝났을 때 예약된 패킷이 존재한다면
+                            FlushSendQueue(); // 다시 sendQueue Flsuh
+                    }
+                    else
+                        Close(); // 문제가 생겼다면 접속 해제
                 }
-                else
-                    Close(); // 문제가 생겼다면 접속 해제
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
         #endregion
@@ -118,49 +133,65 @@ namespace Karin.Network
         #region Receive
         private void Receive(SocketAsyncEventArgs args) // 데이터 수신 함수
         {
-            receiveBuffer.PurifyBuffer();
+            try
+            {
+                receiveBuffer.PurifyBuffer();
 
-            ArraySegment<byte> buffer = receiveBuffer.WriteBuffer; // 데이터를 받을 버퍼 발급
-            args.SetBuffer(buffer.Array, buffer.Offset, buffer.Count); // 수신 인자에 버퍼 세팅
+                ArraySegment<byte> buffer = receiveBuffer.WriteBuffer; // 데이터를 받을 버퍼 발급
+                args.SetBuffer(buffer.Array, buffer.Offset, buffer.Count); // 수신 인자에 버퍼 세팅
 
-            bool pending = socket.ReceiveAsync(args); // 비동기 수신
-            if (pending == false) // 만약 동기적으로 처리되었다면
-                OnReceiveCompleted(null, args); // 직접 콜백 실행
+                bool pending = socket.ReceiveAsync(args); // 비동기 수신
+                if (pending == false) // 만약 동기적으로 처리되었다면
+                    OnReceiveCompleted(null, args); // 직접 콜백 실행
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void OnReceiveCompleted(object sender, SocketAsyncEventArgs args) // 수신 완료 콜백
         {
-            if(args.SocketError == SocketError.Success && args.BytesTransferred > 0) // 에러 없이 데이터가 수신되었다면
+            try
             {
-                bool result = receiveBuffer.ShiftWriteCursor(args.BytesTransferred); // 데이터를 받은 만큼 WriteCursor 업데이트
-
-                if(result == false) // WriteCursor 업데이트 중 문제가 생겼다면
+                if (args.SocketError == SocketError.Success && args.BytesTransferred > 0) // 에러 없이 데이터가 수신되었다면
                 {
-                    Close(); // 연결 해제
-                    return; // return
+                    bool result = receiveBuffer.ShiftWriteCursor(args.BytesTransferred); // 데이터를 받은 만큼 WriteCursor 업데이트
+
+                    if (result == false) // WriteCursor 업데이트 중 문제가 생겼다면
+                    {
+                        Close(); // 연결 해제
+                        return; // return
+                    }
+
+                    ArraySegment<byte> buffer = receiveBuffer.ReadBuffer; // 데이터를 읽을 버퍼 발급
+
+                    int processedLength = HandleBuffer(buffer); // 버퍼 핸들링
+                    if (processedLength < 0 || receiveBuffer.Size < processedLength) // 핸들링 도중 문제가 생겼다면
+                    {
+                        Close(); // 연결 해제
+                        return; // return
+                    }
+
+                    result = receiveBuffer.ShiftReadCursor(processedLength); // 핸들링 된 만큼만 ReadCursor 업데이트
+                    if (result == false) // ReadCursor 업데이트 중 문제가 생겼다면
+                    {
+                        Close(); // 연결 해제
+                        return; // return
+                    }
+
+                    Receive(args); // 다시 수신 요청
+                }
+                else
+                {
+                    Close(); // 문제가 생겼다면 연결 해제
                 }
 
-                ArraySegment<byte> buffer = receiveBuffer.ReadBuffer; // 데이터를 읽을 버퍼 발급
-
-                int processedLength = HandleBuffer(buffer); // 버퍼 핸들링
-                if(processedLength < 0 || receiveBuffer.Size < processedLength) // 핸들링 도중 문제가 생겼다면
-                {
-                    Close(); // 연결 해제
-                    return; // return
-                }
-
-                result = receiveBuffer.ShiftReadCursor(processedLength); // 핸들링 된 만큼만 ReadCursor 업데이트
-                if(result == false) // ReadCursor 업데이트 중 문제가 생겼다면
-                {
-                    Close(); // 연결 해제
-                    return; // return
-                }
-
-                Receive(args); // 다시 수신 요청
             }
-            else
+            catch (Exception ex)
             {
-                Close(); // 문제가 생겼다면 연결 해제
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -168,7 +199,7 @@ namespace Karin.Network
         {
             int processedLength = 0; // 처리한 길이
 
-            while(true)
+            while (true)
             {
                 if (buffer.Count < HeaderSize) // 읽을 데이터가 header의 사이즈보다 작다면
                     break; // 루프 끝내기
