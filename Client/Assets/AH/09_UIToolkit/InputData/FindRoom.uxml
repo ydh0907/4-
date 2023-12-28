@@ -5,6 +5,9 @@
             <ui:ScrollView name="roomList" elasticity="0.91" elastic-animation-interval-ms="71" vertical-scroller-visibility="AlwaysVisible" scroll-deceleration-rate="100" mode="Vertical" class="roomList" style="flex-direction: column;" />
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="refresh-btn" class="refresh-btn" />
         </ui:VisualElement>
-        <ui:Button text="들어가기" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="enterRoom-btn" class="button" />
+        <ui:VisualElement name="content" style="flex-direction: row; width: 100%; justify-content: center;">
+            <ui:Button text="뒤로가기" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="back-btn" class="button" />
+            <ui:Button text="들어가기" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="enterRoom-btn" class="button" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

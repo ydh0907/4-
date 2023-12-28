@@ -59,8 +59,6 @@ namespace HB
 
         private void HealthChangeHandle(int prev, int newValue)
         {
-            Debug.Log(prev);
-            Debug.Log(newValue);
             OnHealthChanged?.Invoke(MaxHealth, newValue);
         }
 

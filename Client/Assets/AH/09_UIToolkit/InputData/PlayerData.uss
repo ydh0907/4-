@@ -22,7 +22,7 @@
     background-image: url('project://database/Assets/AH/04_Sprites/Dark%20UI/A.png?fileID=21300000&guid=0f9aff9d1d5411d419a50a1f33efcf25&type=3#A');
     width: 350px;
     height: 100px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     -unity-font-definition: initial;
     -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&guid=143bf3abee24d7c4cbea0e9c3f14ff01&type=3#PyeongChangPeace-Light');
     font-size: 40px;
@@ -30,6 +30,9 @@
     margin-bottom: 40px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
+    margin-right: 50px;
+    margin-left: 50px;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
 .button:hover {
@@ -67,6 +70,7 @@
     margin-right: 35px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-cubic;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
 .backToTitle-btn:hover {
@@ -179,6 +183,7 @@
     top: 111px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
 .refresh-btn:hover {
