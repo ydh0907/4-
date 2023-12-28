@@ -120,7 +120,7 @@ namespace AH {
                 }
             });
         }
-
+        
         private string GetNickName() {
             if (root.Q<TextField>("nickname-inputfeld") != null) nickname = root.Q<TextField>("nickname-inputfeld").text;
             return nickname;
@@ -142,21 +142,17 @@ namespace AH {
                 ConnectManager.Instance.StartHost(GetNickName());
             flag = false;
         }
-
-        private void HandleBackTitleScene(ClickEvent evt) { // host
-            if (NetworkManager.Singleton != null) {
-                Destroy(NetworkManager.Singleton.gameObject);
-            }
-            ButtonClick();
-            SceneManager.LoadScene(0);
-        }
-
         private void HandleFindRoom(ClickEvent evt) {
             ButtonClick();
             GetNickName();
             HandleRefresh(evt);
         }
 
+        private void Refresh(List<Room> room) {
+            createRoomCount = room.Count;
+            CreateRoomList(room);
+            ChooseRoom(room);
+        }
         private void CreateRoomList(List<Room> room) {
             var template = createRoomTemplate.Instantiate().Q<VisualElement>("container");
 
@@ -165,6 +161,7 @@ namespace AH {
 
             root.Q<Button>("refresh-btn").RegisterCallback<ClickEvent>(HandleRefresh);
             root.Q<Button>("enterRoom-btn").RegisterCallback<ClickEvent>(HandleEnterRoom);
+            root.Q<Button>("back-btn").RegisterCallback<ClickEvent>(HandleBackSceneButton);
 
             int index = 0;
             createRoomList = template.Q<VisualElement>("unity-content-container");
@@ -200,6 +197,13 @@ namespace AH {
             });
         }
 
+        private void HandleBackTitleScene(ClickEvent evt) { // host
+            if (NetworkManager.Singleton != null) {
+                Destroy(NetworkManager.Singleton.gameObject);
+            }
+            ButtonClick();
+            SceneManager.LoadScene(0);
+        }
         private void HandleRefresh(ClickEvent evt) {
             ButtonClick();
             Program.Instance.Reload(Refresh);
@@ -208,10 +212,8 @@ namespace AH {
             ButtonClick();
             ConnectManager.Instance.StartClient(SelectedRoom.roomName, GetNickName());
         }
-        private void Refresh(List<Room> room) {
-            createRoomCount = room.Count;
-            CreateRoomList(room);
-            ChooseRoom(room);
+        private void HandleBackSceneButton(ClickEvent evt) {
+            SceneManager.LoadScene("DH_Lobby");
         }
 
         private void ClearToRoomList(List<Button> list, Button dve) {

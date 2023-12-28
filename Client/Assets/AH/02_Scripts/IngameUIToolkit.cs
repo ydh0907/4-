@@ -226,7 +226,6 @@ namespace AH {
                     playerData.Add(basePlayerData[i]);
                 }
             }
-
             if (IsHost)
                 SetStateClientRpc();
 
@@ -249,6 +248,10 @@ namespace AH {
                 var nickname = data.Q<Label>("nickname-txt");
                 var drinkIcon = data.Q<VisualElement>("drinkIcon");
                 var killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+
+                Debug.Log(nickname);
+                Debug.Log(drinkIcon);
+                Debug.Log(killcount);
 
                 nickname.text = user.Value.Nickname;
                 StyleBackground style = new StyleBackground(sprites[(int)user.Value.Cola]);
