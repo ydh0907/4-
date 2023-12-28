@@ -364,7 +364,7 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: e4e3dcaf16bf61f4ab89f6abe29f7b50, type: 2}
   _moveInput: {x: 0, y: 0, z: 0}
   _groundCheckPoint: {fileID: 4398063501265008848}
-  _groundCheckSize: {x: 1, y: 0.1, z: 1}
+  _groundCheckSize: {x: 0.5, y: 0.1, z: 0.5}
   _maxDistance: 0.05
   _groundLayer:
     serializedVersion: 2
@@ -472,7 +472,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2912199792607788135}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 57bace855f5d68a44af60bad2b8625d0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -570,7 +570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3012127645582402663}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18934168, y: -0.46640626, z: 0.10293571, w: 0.85791564}
+  m_LocalRotation: {x: 0.1893417, y: -0.46640626, z: 0.10293572, w: 0.85791564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -649,7 +649,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3171726591832531914}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17370531, y: -0.46820143, z: 0.09443497, w: 0.86121774}
+  m_LocalRotation: {x: 0.17370532, y: -0.46820146, z: 0.094435, w: 0.86121774}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
