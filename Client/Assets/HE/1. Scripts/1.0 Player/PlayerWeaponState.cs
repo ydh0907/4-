@@ -13,9 +13,10 @@ namespace HB
         public bool isMentosAvailable { get; set; } // 지금 멘토스를 가지고 있나?
         public bool IsInMentosState { get; set; } // 지금 멘토스인가?
 
+        public int mentosDamageAmount = 40;
+        public int fistDamageAmount = 15;
+
         private int attackDamageAmount;
-        [SerializeField] private int mentosDamageAmount;
-        [SerializeField] private int fistDamageAmount;
 
         private void Awake()
         {
@@ -51,16 +52,14 @@ namespace HB
             }
         }
 
-        private void OnMentosStateActivated()
+        private bool OnMentosStateActivated()
         {
-            attackDamageAmount = mentosDamageAmount;
-            IsInMentosState = true;
+            return IsInMentosState = true;
         }
 
-        private void OnFistStateActivated()
+        private bool OnFistStateActivated()
         {
-            attackDamageAmount = fistDamageAmount;
-            IsInMentosState = false;
+            return IsInMentosState = false;
         }
 
         private bool CanChangeToMentosState()
@@ -71,23 +70,27 @@ namespace HB
                 return false;
         }
 
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
-            IDamageble iDamageble = other.gameObject.GetComponent<IDamageble>();
-            Vector2 hitDirection = other.gameObject.transform.position - transform.position;
+            if (other.attachedRigidbody is null) return;
 
-            if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
+            if (other.attachedRigidbody.TryGetComponent<IDamageble>(out IDamageble damageble))
             {
-                iDamageble.Damage(attackDamageAmount, hitDirection);
-            }
+                Vector2 hitDirection = other.gameObject.transform.position - transform.position;
 
-            else if (iDamageble != null && other.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
-            {
-                hitDirection.Normalize();
-                iDamageble.Damage(attackDamageAmount, hitDirection);
-                PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x); // 실행 하는지 확인 피ㅣㄹ요
+                if (other.gameObject.layer == LayerMask.NameToLayer("DRINK"))
+                {
+                    damageble.Damage(attackDamageAmount, hitDirection);
+                }
+
+                else if (other.gameObject.layer == LayerMask.NameToLayer("PLAYER"))
+                {
+                    hitDirection.Normalize();
+                    damageble.Damage(attackDamageAmount, hitDirection);
+                    PlayerKnockback.StartKnockback(hitDirection, hitDirection, PlayerMovement._moveInput.x); // 실행 하는지 확인 피ㅣㄹ요
+                }
             }
-        }
+        }*/
 
         // ㅔ미지를 불 ㅒ 자시노 함께 ㅇㅇ 맞은 사람이 ㅐ린 사람을 저장 di 함수 실행할 ㅒ 마지막으로 ㅐ린 사람에게 점수 부여
     }

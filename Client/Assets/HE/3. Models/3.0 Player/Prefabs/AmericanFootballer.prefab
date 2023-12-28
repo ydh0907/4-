@@ -584,6 +584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2622666275113232997}
   - component: {fileID: 1981564996556965795}
+  - component: {fileID: 2825417771440834713}
   m_Layer: 9
   m_Name: AmericanFootballer
   m_TagString: Player
@@ -630,6 +631,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2825417771440834713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399731427270799583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85826683f170c1f49a0bd2f92e949aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4038549926675909919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1036,8 @@ GameObject:
   - component: {fileID: 1691163238867822071}
   - component: {fileID: 700214686899354321}
   - component: {fileID: 2952062830515442669}
+  - component: {fileID: 4400448758609733960}
+  - component: {fileID: 2853738930485512096}
   m_Layer: 9
   m_Name: Hand.L
   m_TagString: Untagged
@@ -1060,7 +1075,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1078,8 +1093,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mentosDamageAmount: 400
-  fistDamageAmount: 150
+  mentosDamageAmount: 40
+  fistDamageAmount: 15
+--- !u!114 &4400448758609733960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170946178893057417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 373804861
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &2853738930485512096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170946178893057417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263630b9e80c152469f7d1753f129d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 0
 --- !u!1 &8573892888996626445
 GameObject:
   m_ObjectHideFlags: 0
