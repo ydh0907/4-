@@ -1,3 +1,4 @@
+using DH;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,16 +22,16 @@ namespace HB
             private set;
         } = 100;
 
-        public Action<Health> OnDie;
-
         private bool _isDead = false;
 
-        public Action<int, int> OnHealthChanged;
+        public UnityEvent<int, int, float> OnHealthChanged;
 
-        private void Awake() {
+        private void Awake()
+        {
             if (IsOwner)
             {
-                if(instance == null) {
+                if (instance == null)
+                {
                     instance = this;
                 }
             }
@@ -42,7 +43,7 @@ namespace HB
             {
                 currentHealth.OnValueChanged += HealthChangeHandle;
 
-                HealthChangeHandle(MaxHealth, MaxHealth);
+                HealthChangeHandle(100, MaxHealth);
             }
 
             if (!IsServer) return; // 체력 초기화는 서버만
@@ -59,7 +60,7 @@ namespace HB
 
         private void HealthChangeHandle(int prev, int newValue)
         {
-            OnHealthChanged?.Invoke(MaxHealth, newValue);
+            OnHealthChanged?.Invoke(prev, newValue, (float)newValue / MaxHealth);
         }
 
         public void TakeDamage(int damageValue)
@@ -78,16 +79,6 @@ namespace HB
             currentHealth.Value = Mathf.Clamp(currentHealth.Value + value, 0, MaxHealth);
             if (currentHealth.Value == 0)
             {
-                if (OnDie == null)
-                {
-                    Debug.Log("empty");
-                }
-
-                else
-                {
-                    OnDie.Invoke(this);
-                }
-
                 _isDead = true;
             }
         }
