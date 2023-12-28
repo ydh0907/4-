@@ -157,15 +157,9 @@ namespace DH
 
             GetComponent<NetworkServerTimer>().StartTimer();
 
-            SetUnspawnMentosClientRpc();
+            SpawnMentos.Instance.StartSpawn();
 
             onGameStarted?.Invoke();
-        }
-
-        [ClientRpc]
-        private void SetSpawnMentosClientRpc()
-        {
-            SpawnMentos.Instance.StartSpawn();
         }
 
         [ServerRpc]

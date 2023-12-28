@@ -1,13 +1,15 @@
 using HB;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace GM
 {
-    public class Mentos : MonoBehaviour
+    public class Mentos : NetworkBehaviour
     {
         private bool isUp = true;
+
         private void Update()
         {
             if (transform.position.y >= 0.69f)
@@ -42,8 +44,14 @@ namespace GM
             Debug.Log(other.name);
             if (other.tag == "Player" || other.gameObject.layer == 8)
             {
-                Destroy(gameObject);
+                DestroyServerRpc();
             }
+        }
+
+        [ServerRpc]
+        private void DestroyServerRpc()
+        {
+            Destroy(gameObject);
         }
     }
 }
