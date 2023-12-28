@@ -1,6 +1,7 @@
 using HB;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace GM
@@ -8,6 +9,7 @@ namespace GM
     public class Mentos : MonoBehaviour
     {
         private bool isUp = true;
+
         private void Update()
         {
             if (transform.position.y >= 0.69f)

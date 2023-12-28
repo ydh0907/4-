@@ -395,6 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkGameManager: {fileID: 2714208593251620132, guid: b4841836bc2c69d48a3fbacb05f5b028, type: 3}
+  Map: {fileID: 7551390068932993972, guid: dbbead23c878e2c46aceabffc88cb757, type: 3}
   onConnectFailed:
     m_PersistentCalls:
       m_Calls: []
