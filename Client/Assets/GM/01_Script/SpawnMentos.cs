@@ -11,6 +11,9 @@ namespace GM
 
         public static SpawnMentos Instance { get; private set; }
 
+        private int minSpawnTime = 10;
+        private int maxSpawnTime = 20;
+
         private void Awake()
         {
             Instance = this;
@@ -28,7 +31,7 @@ namespace GM
 
         private IEnumerator MentosSpawnCorutine()
         {
-            float randNum = Random.Range(25, 35);
+            float randNum = Random.Range(minSpawnTime, maxSpawnTime);
             yield return new WaitForSeconds(randNum);
 
             GameObject mentosObj = Instantiate(mentosPrefab, SpawnTrm.position, Quaternion.identity);
