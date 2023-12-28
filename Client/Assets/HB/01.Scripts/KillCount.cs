@@ -24,7 +24,8 @@ namespace HB
         public void UpdateKillCount(Health health)
         {
             killCount.Value += 1;
-            
+
+            SoundManager.Instance.Play("Kill");
             Debug.Log($"{health.name}, {killCount.Value}");
         }
 
