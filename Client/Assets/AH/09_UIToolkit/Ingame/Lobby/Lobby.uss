@@ -17,7 +17,7 @@
     border-top-color: rgba(149, 149, 149, 0);
     border-bottom-color: rgba(149, 149, 149, 0);
     -unity-font-definition: initial;
-    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&guid=143bf3abee24d7c4cbea0e9c3f14ff01&type=3#PyeongChangPeace-Light');
     font-size: 45px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
@@ -25,6 +25,7 @@
     margin-right: 70px;
     color: rgb(0, 0, 0);
     -unity-background-image-tint-color: rgb(0, 0, 0);
+    -unity-font-style: bold;
 }
 
 .lobby-button:hover {

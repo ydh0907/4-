@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _faintTime: 2
-  _respawnTime: 5
+  _respawnTime: 3
 --- !u!114 &8735074346600153064
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using AH;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ namespace HB
         public void Die()
         {
             PlayerAttack.CurrentMentosCount = 0;
+            SoundManager.Instance.Play("Effect/DieLaugh");
+            IngameUIToolkit.instance.ResurrectionCounter();
             StartCoroutine(nameof(PlayerRespawn));
         }
 

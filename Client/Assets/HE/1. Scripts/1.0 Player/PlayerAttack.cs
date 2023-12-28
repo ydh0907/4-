@@ -78,8 +78,14 @@ namespace HB
 
         private void Attack()
         {
-            if (PlayerWeaponState.IsInMentosState)
+            if (PlayerWeaponState.IsInMentosState) { // 맨토스로 공격
                 CurrentMentosCount--;
+                SoundManager.Instance.Play("Effect/MantosAttack");
+
+            }
+            else if (!PlayerWeaponState.IsInMentosState) { // 주먹으로 공격
+                SoundManager.Instance.Play("Effect/bareHandedAttack");
+            }
 
             StartCoroutine(nameof(RefillAttack));
             AttackAniServerRpc();

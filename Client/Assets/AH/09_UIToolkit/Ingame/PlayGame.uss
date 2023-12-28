@@ -13,6 +13,14 @@
     width: 100%;
 }
 
+.nickname-txt {
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Light.ttf?fileID=12800000&guid=143bf3abee24d7c4cbea0e9c3f14ff01&type=3#PyeongChangPeace-Light');
+    font-size: 30px;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+}
+
 .playerIcon {
     height: 80px;
     width: 80px;
@@ -71,9 +79,10 @@
     -unity-font-definition: initial;
     -unity-font: url('project://database/Assets/AH/11_Fonts/PyeongChangPeace-Bold.ttf?fileID=12800000&guid=88c2af26a84302f48b28f9eb26d75e7a&type=3#PyeongChangPeace-Bold');
     font-size: 45px;
-    color: rgb(255, 255, 255);
     margin-right: 100px;
     margin-bottom: 60px;
+    color: rgb(0, 0, 0);
+    -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
 .button:hover {
