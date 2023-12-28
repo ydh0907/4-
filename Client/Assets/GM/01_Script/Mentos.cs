@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GM
 {
-    public class Mentos : NetworkBehaviour
+    public class Mentos : MonoBehaviour
     {
         private bool isUp = true;
 
@@ -44,14 +44,8 @@ namespace GM
             Debug.Log(other.name);
             if (other.tag == "Player" || other.gameObject.layer == 8)
             {
-                DestroyServerRpc();
+                Destroy(gameObject);
             }
-        }
-
-        [ServerRpc]
-        private void DestroyServerRpc()
-        {
-            Destroy(gameObject);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace DH
         public static NetworkGameManager Instance;
 
         [SerializeField] GameObject Player;
+        [SerializeField] GameObject Map;
 
         [SerializeField] public List<GameObject> Characters = new();
         [SerializeField] public List<GameObject> Drinks = new();
@@ -60,8 +61,6 @@ namespace DH
 
         public override void OnNetworkSpawn()
         {
-            if (!IsServer) return;
-
             base.OnNetworkSpawn();
         }
 

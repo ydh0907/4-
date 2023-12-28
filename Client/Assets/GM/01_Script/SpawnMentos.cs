@@ -20,12 +20,16 @@ namespace GM
 
         public void StartSpawn()
         {
+            if (!IsServer) return;
+
             Debug.Log("StartSpawn");
             StartCoroutine("MentosSpawnCorutine");
         }
 
         public void StopSpawn()
         {
+            if (!IsServer) return;
+
             Debug.Log("StopSpawn");
             StopCoroutine("MentosSpawnCorutine");
         }
@@ -38,11 +42,12 @@ namespace GM
                 yield return new WaitForSeconds(randNum);
                 yield return new WaitWhile(() => current);
 
-                Spawn();
+                SpawnClientRpc();
             }
         }
 
-        private void Spawn()
+        [ClientRpc]
+        private void SpawnClientRpc()
         {
             current = Instantiate(mentosPrefab, SpawnTrm.position, Quaternion.identity).GetComponent<Mentos>();
             Material mat = current.GetComponent<MeshRenderer>().material;
