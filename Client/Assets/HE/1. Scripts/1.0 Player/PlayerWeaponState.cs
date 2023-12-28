@@ -9,7 +9,6 @@ namespace HB
     {
         private PlayerMovement PlayerMovement;
         private PlayerKnockback PlayerKnockback;
-        private PlayerMentorsManagement PlayerMentorsManagement;
 
         public bool isMentosAvailable { get; set; } // 지금 멘토스를 가지고 있나?
         public bool IsInMentosState { get; set; } // 지금 멘토스인가?
@@ -22,7 +21,6 @@ namespace HB
         {
             PlayerMovement = GetComponentInParent<PlayerMovement>();
             PlayerKnockback = GetComponentInParent<PlayerKnockback>();
-            PlayerMentorsManagement = GetComponentInParent<PlayerMentorsManagement>();
         }
 
         private void Start()
