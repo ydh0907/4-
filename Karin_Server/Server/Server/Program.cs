@@ -12,7 +12,7 @@ namespace TestServer
 
         static void Main(string[] args)
         {
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 8081);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 31408);
 
             listener = new Listener(endPoint);
             if (listener.Listen(10))

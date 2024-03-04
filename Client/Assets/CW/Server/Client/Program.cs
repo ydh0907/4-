@@ -32,8 +32,7 @@ namespace TestClient
 
         private IEnumerator ServerConnect()
         {
-            IPAddress ipAddress = IPAddress.Parse("172.31.1.237");
-            IPEndPoint endPoint = new IPEndPoint(ipAddress, 8081);
+            IPEndPoint endPoint = new(IPAddress.Parse("116.33.174.234"), 31408);
 
             serverSession = new ServerSession();
             connector = new Connector(endPoint, serverSession);

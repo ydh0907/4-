@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d372687497f3340933318c7a9bdc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enemy: 18446744073709551615
   _faintTime: 2
   _respawnTime: 3
 --- !u!114 &8735074346600153064

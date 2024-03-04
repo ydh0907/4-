@@ -13,6 +13,7 @@ using Unity.VisualScripting;
 using TMPro;
 using Unity.Services.Matchmaker.Models;
 using GM;
+using HB;
 
 namespace DH
 {
@@ -186,16 +187,48 @@ namespace DH
             p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
         }
 
-        public void GameResultSetting()
-        {
-            Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
-            GameResultSettingClientRpc();
-        }
-
         [ClientRpc]
         public void GameResultSettingClientRpc()
         {
-            RankingPodium.Instance.SetPlayerPodium(users);
+            if(IsServer)
+                Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+
+            List<PlayerInfo> list = new();
+            foreach (var player in users) list.Add(player.Value);
+
+            PlayerInfo temp;
+            for(int i = 0; i < list.Count - 1; i++)
+            {
+                if (list[i].kill < list[i + 1].kill)
+                {
+                    temp = list[i];
+                    list[i] = list[i + 1];
+                    list[i + 1] = temp;
+                }
+            }
+
+            Transform[] pos = RankingPodium.Instance.GetPositions();
+
+            for(int i = 0; i < list.Count; i++)
+            {
+                if (list[i].ID == NetworkManager.LocalClientId)
+                {
+                    NetworkObject obj = NetworkManager.ConnectedClients[list[i].ID].PlayerObject;
+                    obj.transform.position = pos[i].position;
+                    obj.transform.rotation = pos[i].rotation;
+                    obj.GetComponent<PlayerMovement>().enabled = false;
+                    obj.GetComponent<PlayerDamageble>().enabled = false;
+                    obj.GetComponent<PlayerKnockback>().enabled = false;
+                    obj.GetComponent<PlayerAttack>().enabled = false;
+                    obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll ^ RigidbodyConstraints.FreezePositionY;
+                }
+            }
+        }
+
+        [ClientRpc]
+        public void DeleteTransformClientRpc()
+        {
+            NetworkManager.ConnectedClients[NetworkManager.LocalClientId].PlayerObject.GetComponent<ClientNetworkTransform>().enabled = false;
         }
 
         public void ServerGameEnd()

@@ -28,6 +28,8 @@ namespace GM
 
         public void StopSpawn()
         {
+            if(current != null) Destroy(current);
+
             if (!IsServer) return;
 
             Debug.Log("StopSpawn");
