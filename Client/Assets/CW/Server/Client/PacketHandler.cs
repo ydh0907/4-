@@ -1,4 +1,5 @@
-﻿using Karin.Network;
+﻿using DH;
+using Karin.Network;
 using Packets;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ namespace TestClient
         {
             C_RoomDeletePacket c_RoomDeletePacket = packet as C_RoomDeletePacket;
             Program.Instance.DisconnectServer();
+            NetworkGameManager.MatchingServerConnection = false;
+            QuitServerHandler.QuitDeletingFlag = false;
         }
     }
 }

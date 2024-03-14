@@ -7,6 +7,8 @@ namespace HB
 {
     public class PlayerAttack : NetworkBehaviour
     {
+        public static bool canAttack = true;
+
         #region COMPONENTS
         private Animator Animator;
         #endregion
@@ -48,6 +50,8 @@ namespace HB
 
         private void Update()
         {
+            if (!canAttack) return;
+
             if (!PlayerWeaponState || !Animator)
             {
                 Animator = GetComponentInChildren<Animator>();
@@ -78,12 +82,14 @@ namespace HB
 
         private void Attack()
         {
-            if (PlayerWeaponState.IsInMentosState) { // 맨토스로 공격
+            if (PlayerWeaponState.IsInMentosState)
+            { // 맨토스로 공격
                 CurrentMentosCount--;
                 SoundManager.Instance.Play("Effect/MantosAttack");
 
             }
-            else if (!PlayerWeaponState.IsInMentosState) { // 주먹으로 공격
+            else if (!PlayerWeaponState.IsInMentosState)
+            { // 주먹으로 공격
                 SoundManager.Instance.Play("Effect/bareHandedAttack");
             }
 

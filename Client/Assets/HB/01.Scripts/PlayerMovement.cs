@@ -9,6 +9,8 @@ namespace HB
 {
     public class PlayerMovement : NetworkBehaviour
     {
+        public static bool canMove = true;
+
         public PlayerMovementData Data;
 
         #region COMPONENTS
@@ -90,6 +92,8 @@ namespace HB
 
         private void Update()
         {
+            if (!canMove) return;
+
             if (!Animator || !DrinkDamageble)
             {
                 Animator = GetComponentInChildren<Animator>();

@@ -10,12 +10,12 @@ namespace TestClient
     {
         public override void OnConnected(EndPoint endPoint)
         {
-            Console.WriteLine($"[Session] Connected with Server");
+            Program.messages.Enqueue($"[Session] Connected with Server");
         }
 
         public override void OnDisconnected(EndPoint endPoint)
         {
-            Console.WriteLine($"[Session] DisConnected with Server");
+            Program.messages.Enqueue($"[Session] DisConnected with Server");
         }
 
         public override void OnPacketReceived(ArraySegment<byte> buffer)
@@ -25,7 +25,7 @@ namespace TestClient
 
         public override void OnSent(int length)
         {
-            Console.WriteLine($"[Session] {length} of Data Sent");
+            Program.messages.Enqueue($"[Session] {length} of Data Sent");
         }
     }
 }

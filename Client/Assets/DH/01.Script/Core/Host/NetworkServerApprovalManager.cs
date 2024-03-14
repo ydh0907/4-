@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
+using TestClient;
 
 namespace DH
 {
@@ -42,6 +43,7 @@ namespace DH
             NetworkGameManager.Instance.SyncPlayerList();
             ReadyObjects.Instance.SetCurrentCharactersClientRpc();
             ReadyObjects.Instance.SetNicknameColorClientRpc();
+            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, NetworkGameManager.Instance.users.Count);
         }
 
         public override void OnNetworkDespawn()

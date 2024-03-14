@@ -5,12 +5,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace TestClient
 {
     public class Program : MonoBehaviour
     {
+        public static Queue<string> messages = new Queue<string>();
         public static Connector connector;
         public static ServerSession serverSession;
 
@@ -30,6 +33,14 @@ namespace TestClient
             else Destroy(this);
         }
 
+        private void Update()
+        {
+            if (messages.Count > 0)
+            {
+                Debug.Log(messages.Dequeue());
+            }
+        }
+
         private IEnumerator ServerConnect()
         {
             IPEndPoint endPoint = new(IPAddress.Parse("116.33.174.234"), 31408);
@@ -40,7 +51,7 @@ namespace TestClient
 
             yield return new WaitUntil(() =>
             {
-                connect = connector.onConnecting;
+                connect = connector.Connected;
                 return connect;
             });
         }
@@ -91,22 +102,11 @@ namespace TestClient
 
             yield return new WaitUntil(() => connect);
 
-            Send:
-
             S_ReRoadingPacket packet = new S_ReRoadingPacket();
             serverSession.Send(packet.Serialize());
 
-            Debug.Log("Reroad Send");
-
-            float time = 0;
             while (!reload)
-            {
-                time += Time.deltaTime;
-
-                if (time > 0.2f) goto Send;
-
                 yield return null;
-            }
 
             reload = false;
 

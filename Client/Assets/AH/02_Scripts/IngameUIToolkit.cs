@@ -337,11 +337,10 @@ namespace AH
 
             template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
 
-            NetworkGameManager.Instance.UnspawnMentosServerRpc();
-
             StartCoroutine(DrumRoutine(template));
 
-            NetworkGameManager.Instance.GameResultSettingClientRpc(); 
+            if (isHost)
+                NetworkGameManager.Instance.GameResultSetting();
         }
         IEnumerator DrumRoutine(VisualElement template)
         {

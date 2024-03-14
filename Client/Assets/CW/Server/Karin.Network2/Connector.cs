@@ -10,6 +10,13 @@ namespace Karin.Network
         private Socket socket; // 서버 소켓과 통신할 소켓
         private Session session; // 현재 커넥터가 연결중인 세션
         public bool onConnecting = false; // 연결 여부
+        public bool Connected
+        {
+            get
+            {
+                return session.Active == 1;
+            }
+        }
 
         public Connector(IPEndPoint endPoint, Session session) // 생성자
         {

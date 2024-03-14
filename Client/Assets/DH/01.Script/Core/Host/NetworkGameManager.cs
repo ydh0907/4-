@@ -1,19 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
 using TestClient;
 using System.Net;
 using System.Net.Sockets;
-using System.Linq;
 using AH;
-using Unity.VisualScripting;
 using TMPro;
-using Unity.Services.Matchmaker.Models;
-using GM;
 using HB;
+using UnityEngine.SceneManagement;
 
 namespace DH
 {
@@ -34,9 +29,17 @@ namespace DH
         public Action onGameStarted = null;
         public Action onGameEnded = null;
 
+        public static bool MatchingServerConnection = false;
+
         private void Awake()
         {
             Instance = this;
+            Application.wantsToQuit += CanQuit;
+        }
+
+        private void OnDestroy()
+        {
+            Application.wantsToQuit -= CanQuit;
         }
 
         private void Update()
@@ -67,11 +70,11 @@ namespace DH
 
         public void SyncPlayerList()
         {
-            if(!IsHost) return;
+            if (!IsHost) return;
 
             Dictionary<ulong, PlayerInfo> players = new Dictionary<ulong, PlayerInfo>(this.users);
 
-            foreach(var player in players)
+            foreach (var player in players)
             {
                 OnValueChangedClientRpc(player.Key, player.Value);
             }
@@ -139,11 +142,11 @@ namespace DH
 
             List<Vector3> temp = new List<Vector3>();
 
-            foreach(var player in users)
+            foreach (var player in users)
             {
                 Vector3 rand = GM.MapManager.Instance.GetSpawnPosition();
 
-                while(temp.Contains(rand))
+                while (temp.Contains(rand))
                     rand = GM.MapManager.Instance.GetSpawnPosition();
 
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
@@ -157,21 +160,7 @@ namespace DH
 
             GetComponent<NetworkServerTimer>().StartTimer();
 
-            SpawnMentos.Instance.StartSpawn();
-
             onGameStarted?.Invoke();
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        public void UnspawnMentosServerRpc()
-        {
-            SetUnspawnMentosClientRpc();
-        }
-
-        [ClientRpc]
-        private void SetUnspawnMentosClientRpc()
-        {
-            SpawnMentos.Instance.StopSpawn();
         }
 
         [ClientRpc]
@@ -187,17 +176,16 @@ namespace DH
             p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
         }
 
-        [ClientRpc]
-        public void GameResultSettingClientRpc()
+        public void GameResultSetting()
         {
-            if(IsServer)
+            if (IsServer)
                 Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
             List<PlayerInfo> list = new();
             foreach (var player in users) list.Add(player.Value);
 
             PlayerInfo temp;
-            for(int i = 0; i < list.Count - 1; i++)
+            for (int i = 0; i < list.Count - 1; i++)
             {
                 if (list[i].kill < list[i + 1].kill)
                 {
@@ -209,18 +197,20 @@ namespace DH
 
             Transform[] pos = RankingPodium.Instance.GetPositions();
 
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (list[i].ID == NetworkManager.LocalClientId)
+                foreach (Unity.Netcode.NetworkClient obj in NetworkManager.ConnectedClients.Values)
                 {
-                    NetworkObject obj = NetworkManager.ConnectedClients[list[i].ID].PlayerObject;
-                    obj.transform.position = pos[i].position;
-                    obj.transform.rotation = pos[i].rotation;
-                    obj.GetComponent<PlayerMovement>().enabled = false;
-                    obj.GetComponent<PlayerDamageble>().enabled = false;
-                    obj.GetComponent<PlayerKnockback>().enabled = false;
-                    obj.GetComponent<PlayerAttack>().enabled = false;
-                    obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll ^ RigidbodyConstraints.FreezePositionY;
+                    if (obj.ClientId == list[i].ID)
+                    {
+                        obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.ServerClientId);
+                        obj.PlayerObject.transform.position = pos[i].position;
+                        obj.PlayerObject.transform.rotation = pos[i].rotation;
+
+                        obj.PlayerObject.GetComponentInChildren<Animator>().SetTrigger("EndAnimation");
+                        obj.PlayerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                        obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(list[i].ID);
+                    }
                 }
             }
         }
@@ -240,28 +230,25 @@ namespace DH
             LoadSceneManager.Instance.LoadScene(1);
         }
 
-        public static string GetLocalIP()
-        {
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-
-            string localIP = "";
-
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    localIP = ip.ToString();
-                }
-            }
-
-            return localIP;
-        }
+        public static string GetLocalIP() => Dns.GetHostAddresses(Dns.GetHostName())[1].ToString();
 
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
 
-            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
+            if (MatchingServerConnection)
+            {
+                Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
+            }
+        }
+
+        private bool CanQuit()
+        {
+            if (!QuitServerHandler.QuitDeletingFlag)
+            {
+                QuitServerHandler.DeleteImmediately(ConnectManager.Instance.nickname, GetLocalIP());
+            }
+            return !MatchingServerConnection;
         }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Karin.Network2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be251f6e74b244e6500f36d8224e112445f852c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Karin.Network2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Karin.Network2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

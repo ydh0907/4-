@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
-using System.Net;
 using TestClient;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace DH
 {
@@ -72,6 +69,7 @@ namespace DH
             });
 
             Program.Instance.CreateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname);
+            DH.NetworkGameManager.MatchingServerConnection = true;
 
             onConnectSucceed?.Invoke();
         }

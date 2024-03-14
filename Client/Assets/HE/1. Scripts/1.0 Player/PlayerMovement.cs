@@ -7,6 +7,8 @@ namespace HE
 {
     public class PlayerMovement : MonoBehaviour
     {
+        public static bool canMove = true;
+
         public PlayerMovementData Data;
 
         #region COMPONENTS
@@ -67,6 +69,8 @@ namespace HE
 
         private void Update()
         {
+            if (!canMove) return;
+
             #region INPUT HANDLER
             _moveInput.x = Input.GetAxisRaw("Horizontal");
             _moveInput.z = Input.GetAxisRaw("Vertical");

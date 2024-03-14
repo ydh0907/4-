@@ -1,0 +1,200 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\4-\\Karin_Server\\Server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|d:\\github\\4-\\karin_server\\server\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|d:\\github\\4-\\karin_server\\server\\server\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|solutionrelative:server\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04451704-753E-4677-A930-3555AA229512}|Karin.Network2\\Karin.Network2.csproj|d:\\github\\4-\\karin_server\\server\\karin.network2\\jobqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04451704-753E-4677-A930-3555AA229512}|Karin.Network2\\Karin.Network2.csproj|solutionrelative:karin.network2\\jobqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04451704-753E-4677-A930-3555AA229512}|Karin.Network2\\Karin.Network2.csproj|d:\\github\\4-\\karin_server\\server\\karin.network2\\packetutillity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04451704-753E-4677-A930-3555AA229512}|Karin.Network2\\Karin.Network2.csproj|solutionrelative:karin.network2\\packetutillity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D174F1E2-6EBB-4C43-9841-DB8F2D94EFDF}|Packet2\\Packet2.csproj|d:\\github\\4-\\karin_server\\server\\packet2\\packetid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D174F1E2-6EBB-4C43-9841-DB8F2D94EFDF}|Packet2\\Packet2.csproj|solutionrelative:packet2\\packetid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D174F1E2-6EBB-4C43-9841-DB8F2D94EFDF}|Packet2\\Packet2.csproj|d:\\github\\4-\\karin_server\\server\\packet2\\s_roomdeletepacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D174F1E2-6EBB-4C43-9841-DB8F2D94EFDF}|Packet2\\Packet2.csproj|solutionrelative:packet2\\s_roomdeletepacket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|d:\\github\\4-\\karin_server\\server\\client\\packetmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|solutionrelative:client\\packetmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|d:\\github\\4-\\karin_server\\server\\client\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|solutionrelative:client\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|d:\\github\\4-\\karin_server\\server\\client\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|solutionrelative:client\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|d:\\github\\4-\\karin_server\\server\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{148AF318-C375-4084-9E45-F4DC424F08E9}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 506,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClientSession.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\ClientSession.cs",
+              "RelativeDocumentMoniker": "Server\\ClientSession.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\ClientSession.cs",
+              "RelativeToolTip": "Server\\ClientSession.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PacketID.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Packet2\\PacketID.cs",
+              "RelativeDocumentMoniker": "Packet2\\PacketID.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Packet2\\PacketID.cs",
+              "RelativeToolTip": "Packet2\\PacketID.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "Server\\Program.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\Program.cs",
+              "RelativeToolTip": "Server\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JobQueue.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\JobQueue.cs",
+              "RelativeDocumentMoniker": "Karin.Network2\\JobQueue.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\JobQueue.cs",
+              "RelativeToolTip": "Karin.Network2\\JobQueue.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-28T15:02:37.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PacketUtillity.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\PacketUtillity.cs",
+              "RelativeDocumentMoniker": "Karin.Network2\\PacketUtillity.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\PacketUtillity.cs",
+              "RelativeToolTip": "Karin.Network2\\PacketUtillity.cs",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAQwHEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "S_RoomDeletePacket.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Packet2\\S_RoomDeletePacket.cs",
+              "RelativeDocumentMoniker": "Packet2\\S_RoomDeletePacket.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Packet2\\S_RoomDeletePacket.cs",
+              "RelativeToolTip": "Packet2\\S_RoomDeletePacket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PacketManager.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\PacketManager.cs",
+              "RelativeDocumentMoniker": "Client\\PacketManager.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\PacketManager.cs",
+              "RelativeToolTip": "Client\\PacketManager.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PacketHandler.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\PacketHandler.cs",
+              "RelativeDocumentMoniker": "Client\\PacketHandler.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\PacketHandler.cs",
+              "RelativeToolTip": "Client\\PacketHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ServerSession.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\ServerSession.cs",
+              "RelativeDocumentMoniker": "Client\\ServerSession.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\ServerSession.cs",
+              "RelativeToolTip": "Client\\ServerSession.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-22T00:19:10.741Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 274,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
