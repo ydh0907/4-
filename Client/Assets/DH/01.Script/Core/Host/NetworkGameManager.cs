@@ -37,8 +37,9 @@ namespace DH
             Application.wantsToQuit += CanQuit;
         }
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
             Application.wantsToQuit -= CanQuit;
         }
 
