@@ -1,3 +1,5 @@
+using System;
+using HB;
 using UnityEngine;
 
 namespace PJH
@@ -39,6 +41,7 @@ namespace PJH
 
         #region Components
 
+
         private PhysicMaterial
             _frictionPhysics, _maxFrictionPhysics, _slippyPhysics; // create PhysicMaterial for the Rigidbody
 
@@ -47,8 +50,11 @@ namespace PJH
         private Animator _animator;
         private Rigidbody _rigidbody;
         private Transform _model;
-
         private CapsuleCollider _capsuleCollider;
+
+        public DamageCaster DamageCaster { get; private set; }
+
+        public Transform Model => _model;
 
         #endregion
 
@@ -62,13 +68,13 @@ namespace PJH
 
         private static readonly int InputMagnitudeHash = Animator.StringToHash("InputMagnitude");
         private static readonly int IsGroundedHash = Animator.StringToHash("IsGrounded");
+        private static readonly int IsAttackingHash = Animator.StringToHash("IsAttacking");
         private static readonly int IsSprintingHash = Animator.StringToHash("IsSprinting");
         private static readonly int GroundDistanceHash = Animator.StringToHash("GroundDistance");
 
         #endregion
 
         #endregion
-
 
 
         public bool IsAttacking { get; set; }

@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b25c40ad-7b20-40fc-9952-5ae9a9e2c85d" name="변경" comment="" />
+    <list default="true" id="b25c40ad-7b20-40fc-9952-5ae9a9e2c85d" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DH/00.Scene/DH_TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DH/00.Scene/DH_TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.GroundCheck.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.GroundCheck.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Setting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Setting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Update.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Update.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Variables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Variables.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/PlayerAnimationEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/PlayerAnimationEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAnimator.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAttack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAttack.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,38 +26,40 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/Drink.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/DamageCaster.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.7.1/Components/NetworkRigidbody.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2doqtoOMGCJPXFNHKkMdwghgZSZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "PJH",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "File.Encoding",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PJH&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\bagj2\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\bagj2\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\bagj2\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\bagj2\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\bagj2\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\bagj2\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.14f1\Editor\Unity.exe" />
@@ -93,6 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1710685000238</updated>
       <workItem from="1710685001434" duration="5161000" />
+      <workItem from="1710767226193" duration="8339000" />
     </task>
     <servers />
   </component>

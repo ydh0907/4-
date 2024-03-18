@@ -38,7 +38,6 @@ namespace PJH
 
         private void ControlMaterialPhysics()
         {
-            // change the physics material to very slip when not grounded
             _capsuleCollider.material =
                 (IsGrounded && GroundAngle() <= _slopeLimit + 1) ? _frictionPhysics : _slippyPhysics;
 
@@ -54,16 +53,12 @@ namespace PJH
         {
             if (_capsuleCollider != null)
             {
-                // radius of the SphereCast
                 float radius = _capsuleCollider.radius * 0.9f;
                 var dist = 10f;
-                // ray for RayCast
                 Ray ray2 = new Ray(transform.position + new Vector3(0, _colliderHeight / 2, 0), Vector3.down);
-                // raycast for check the ground distance
                 if (Physics.Raycast(ray2, out _groundHit, (_colliderHeight / 2) + dist, _whatIsGround) &&
                     !_groundHit.collider.isTrigger)
                     dist = transform.position.y - _groundHit.point.y;
-                // sphere cast around the base of the capsule to check the ground distance
                 if (dist >= _groundMinDistance)
                 {
                     Vector3 pos = transform.position + Vector3.up * (_capsuleCollider.radius);

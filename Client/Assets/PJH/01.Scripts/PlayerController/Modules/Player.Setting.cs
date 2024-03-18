@@ -6,9 +6,10 @@ namespace PJH
     {
         private void Init()
         {
-            _model = transform.Find("Model");
+            DamageCaster = transform.GetComponentInChildren<DamageCaster>();
+            _animator = GetComponentInChildren<Animator>();
             _mainCamera = Camera.main;
-            _animator = _model.GetComponent<Animator>();
+            _model = _animator.transform;
             _rigidbody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
             _animator.updateMode = AnimatorUpdateMode.AnimatePhysics;

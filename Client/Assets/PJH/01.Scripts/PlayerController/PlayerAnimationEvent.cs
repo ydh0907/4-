@@ -16,4 +16,9 @@ public class PlayerAnimationEvent : MonoBehaviour
     {
         _player.FinishAttack();
     }
+
+    private void EnableCollider(int enable)
+    {
+        _player.DamageCaster.EnableCollider(Convert.ToBoolean(enable));
+    }
 }

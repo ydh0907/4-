@@ -34,7 +34,7 @@ namespace PJH
             _animator.SetBool(IsSprintingHash, IsSprinting);
             _animator.SetBool(IsGroundedHash, IsGrounded);
             _animator.SetFloat(GroundDistanceHash, _groundDistance);
-
+            _animator.SetBool(IsAttackingHash, IsAttacking);
 
             _animator.SetFloat(InputMagnitudeHash, StopMove ? 0f : _inputMagnitude,
                 IsStrafing ? strafeSpeed.animationSmooth : freeSpeed.animationSmooth, Time.deltaTime);
