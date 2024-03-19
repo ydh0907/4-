@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 namespace PJH
@@ -6,6 +7,14 @@ namespace PJH
     {
         private void Init()
         {
+            _cinemachineFreeLook = FindObjectOfType<CinemachineFreeLook>();
+
+            if (_cinemachineFreeLook.Follow == null)
+            {
+                _cinemachineFreeLook.Follow = transform;
+                _cinemachineFreeLook.LookAt = transform.Find("LookAt");
+            }
+
             _respawnPos = transform.position;
             DamageCaster = transform.GetComponentInChildren<DamageCaster>();
             _animator = GetComponentInChildren<Animator>();

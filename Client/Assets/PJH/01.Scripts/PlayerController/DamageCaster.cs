@@ -1,8 +1,9 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace PJH
 {
-    public class DamageCaster : MonoBehaviour
+    public class DamageCaster : NetworkBehaviour
     {
         [SerializeField] private int _damage;
         [SerializeField] private float _bounceOff = 4;
@@ -20,6 +21,8 @@ namespace PJH
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!IsOwner) return;
+
             if (other.TryGetComponent(out Player player))
             {
                 player.Faint();
@@ -29,7 +32,7 @@ namespace PJH
 
             if (other.TryGetComponent(out Drink drink))
             {
-                drink.ApplyDamage(_damage, _bounceOff);
+                drink.ApplyDamageServerRpc(_damage, _bounceOff);
                 _owner.AddForce((-_owner.Model.transform.forward + new Vector3(0, 1.5f, 0)) * _bounceOff);
                 EnableCollider(false);
             }

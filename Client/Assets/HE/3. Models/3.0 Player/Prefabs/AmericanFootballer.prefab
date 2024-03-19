@@ -584,6 +584,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2622666275113232997}
   - component: {fileID: 1981564996556965795}
+  - component: {fileID: -1410245705571913755}
+  - component: {fileID: -4070671114911007200}
   m_Layer: 9
   m_Name: AmericanFootballer
   m_TagString: Player
@@ -630,6 +632,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1410245705571913755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399731427270799583}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1309412988
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-4070671114911007200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399731427270799583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454943d9385d4ef3b714d237b84086cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4038549926675909919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1691163238867822071}
   - component: {fileID: 4272905531837146634}
-  - component: {fileID: 124255168147220725}
+  - component: {fileID: 4531783064109802193}
   m_Layer: 9
   m_Name: Hand.L
   m_TagString: Untagged
@@ -1066,7 +1100,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.00126
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &124255168147220725
+--- !u!114 &4531783064109802193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1075,11 +1109,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8170946178893057417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b6186d9e10b16478c6b4fce6cd5014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mentosDamageAmount: 400
-  fistDamageAmount: 150
+  _damage: 10
+  _bounceOff: 4
 --- !u!1 &8573892888996626445
 GameObject:
   m_ObjectHideFlags: 0

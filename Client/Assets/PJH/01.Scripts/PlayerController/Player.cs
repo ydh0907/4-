@@ -1,16 +1,16 @@
 using System;
-using System.Collections;
 using System.Threading.Tasks;
-using HB;
-using Unity.VisualScripting;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace PJH
 {
-    public partial class Player : MonoBehaviour
+    public partial class Player : NetworkBehaviour
     {
-        private void Awake()
+
+        public override void OnNetworkSpawn()
         {
+            base.OnNetworkSpawn();
             Init();
         }
 
@@ -21,25 +21,30 @@ namespace PJH
 
         private void OnEnable()
         {
+            _inputReader.AttackEvent += HandleAttackEvent;
+            if (!IsOwner) return;
             _inputReader.MovementEvent += HandleMovementEvent;
             _inputReader.JumpEvent += HandleJumpEvent;
             _inputReader.RunEvent += HandleSprintEvent;
-            _inputReader.AttackEvent += HandleAttackEvent;
         }
 
         private void OnDisable()
         {
+            _inputReader.AttackEvent -= HandleAttackEvent;
+            if (!IsOwner) return;
             _inputReader.MovementEvent -= HandleMovementEvent;
             _inputReader.JumpEvent -= HandleJumpEvent;
             _inputReader.RunEvent -= HandleSprintEvent;
-            _inputReader.AttackEvent -= HandleAttackEvent;
         }
 
         private void Update()
         {
+            UpdateAnimator();
+
+            if (!IsOwner) return;
+
             CheckGround();
             CheckSlopeLimit();
-            UpdateAnimator();
             UpdateMoveDirection(_mainCamera.transform);
 
             ControlRotationType();
@@ -47,6 +52,8 @@ namespace PJH
 
         private void FixedUpdate()
         {
+            if (!IsOwner) return;
+
             ControlJumpBehaviour();
             ControlLocomotionType();
             AirControl();
@@ -108,7 +115,7 @@ namespace PJH
             if (Health.instance != null)
             {
                 Health.instance.TakeDamage(damage);
-                if (Health.instance.currentHealth == 0) Death();
+                if (Health.instance.CurrentHealth == 0) Death();
             }
         }
 
