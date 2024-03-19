@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using HB;
 using Unity.VisualScripting;
@@ -107,7 +108,7 @@ namespace PJH
             if (Health.instance != null)
             {
                 Health.instance.TakeDamage(damage);
-                if (Health.instance.currentHealth.Value == 0) Death();
+                if (Health.instance.currentHealth == 0) Death();
             }
         }
 
@@ -117,6 +118,7 @@ namespace PJH
             _lockMovement = true;
             _lockRotation = true;
             StopMove = true;
+            _inputMagnitude = 0;
             await Task.Delay(500);
             StopMove = false;
             _lockMovement = false;
@@ -125,6 +127,26 @@ namespace PJH
 
         private void Death()
         {
+            if (_isDead) return;
+            _isDead = true;
+            gameObject.SetActive(false);
+            RespawnManager.Instance.Respawn(this);
+        }
+
+        public void Respawn()
+        {
+            IsAttacking = false;
+            IsJumping = false;
+            _isDead = false;
+            IsSprinting = false;
+            IsStrafing = false;
+            _input = Vector3.zero;
+            _lockMovement = false;
+            _lockRotation = false;
+            StopMove = false;
+            gameObject.SetActive(true);
+            _rigidbody.position = _respawnPos;
+            Health.instance.Reset();
         }
 
         public async void AddForce(Vector3 dir)

@@ -6,6 +6,7 @@ namespace PJH
     {
         private void Init()
         {
+            _respawnPos = transform.position;
             DamageCaster = transform.GetComponentInChildren<DamageCaster>();
             _animator = GetComponentInChildren<Animator>();
             _mainCamera = Camera.main;

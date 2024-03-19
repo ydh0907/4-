@@ -105,6 +105,8 @@ namespace PJH
         private Vector3 _colliderCenter;
         private Vector3 _inputSmooth;
         private Vector3 _moveDirection;
+        private Vector3 _respawnPos;
+        private bool _isDead;
 
 
         [System.Serializable]
