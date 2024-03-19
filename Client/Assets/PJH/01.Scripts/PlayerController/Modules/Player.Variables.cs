@@ -1,5 +1,4 @@
-using System;
-using HB;
+using Cinemachine;
 using UnityEngine;
 
 namespace PJH
@@ -40,7 +39,6 @@ namespace PJH
         #endregion
 
         #region Components
-
 
         private PhysicMaterial
             _frictionPhysics, _maxFrictionPhysics, _slippyPhysics; // create PhysicMaterial for the Rigidbody
@@ -107,7 +105,7 @@ namespace PJH
         private Vector3 _moveDirection;
         private Vector3 _respawnPos;
         private bool _isDead;
-
+        private CinemachineFreeLook _cinemachineFreeLook;
 
         [System.Serializable]
         public class MovementSpeed

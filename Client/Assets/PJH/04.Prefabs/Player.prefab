@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 979248984
+  GlobalObjectIdHash: 3743782848
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5763237597000604674}
   m_Layer: 0
-  m_Name: Lookat
+  m_Name: LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,6 +305,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7910492786708016214, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2561325450496904138}
+    - targetCorrespondingSourceObject: {fileID: 7910492786708016214, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8252761487918035474}
   m_SourcePrefab: {fileID: 100100000, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
 --- !u!4 &1180930420363780981 stripped
 Transform:
@@ -344,6 +347,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8252761487918035474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372761399248306446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c259d47c61078ad4daec98d24a9cd556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxHealth>k__BackingField: 100
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8826184489714262066 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6716201054009953642, guid: 1bc1ee6f26f054c4d9fe2e958f39d575, type: 3}
