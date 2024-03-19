@@ -1,23 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GM
-{
-    public class MapManager : MonoSingleton<MapManager>
-    {
-        [SerializeField] private List<Transform> spawnPoints;
+namespace GM {
+    public class MapManager : MonoSingleton<MapManager> {
+        [SerializeField] private List<Transform> spawnPosList;
 
-        public int count => spawnPoints.Count;
+        public int count => spawnPosList.Count;
 
-        public Vector3 GetSpawnPosition()
-        {
-            return spawnPoints[Random.Range(0, spawnPoints.Count)].position;
-        }
-
-        public Vector3 GetSpawnPosition(int rand)
-        {
-            return spawnPoints[rand].position;
+        public Vector3 GetSpawnPosition() {
+            int index = Random.Range(0, spawnPosList.Count);
+            Transform pos = spawnPosList[index];
+            spawnPosList.Remove(pos);
+            Debug.Log($"SpawnPsoListCount : {spawnPosList.Count}");
+            return spawnPosList[index].position;
         }
     }
 }
