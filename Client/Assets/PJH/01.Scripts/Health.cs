@@ -1,7 +1,3 @@
-using DH;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using HB;
 using Unity.Netcode;
 using UnityEngine;
@@ -9,13 +5,24 @@ using UnityEngine.Events;
 
 namespace PJH
 {
-    public class Health : MonoBehaviour
+    public class Health : NetworkBehaviour
     {
         public static Health instance = null;
 
-        public int currentHealth;
+        private NetworkVariable<int> _health = new NetworkVariable<int> { Value = 0 };
 
-        //NetworkVariable : ��Ʈ��ũ�� ����� ������ �ν��Ͻ��鳢�� �����ؾ��� ������ ���鶧 ����
+        public int CurrentHealth
+        {
+            get
+            {
+                return _health.Value;
+            }
+            set
+            {
+                _health.Value = value;
+            }
+        }
+
         [field: SerializeField] public int MaxHealth { get; private set; } = 100;
 
         private bool _isDead = false;
@@ -41,7 +48,7 @@ namespace PJH
             HealthChangeHandle(MaxHealth, MaxHealth);
 
             _isDead = false;
-            currentHealth = MaxHealth;
+            CurrentHealth = MaxHealth;
         }
 
         private void HealthChangeHandle(int prev, int newValue)
@@ -62,10 +69,10 @@ namespace PJH
         private void ModifyHealth(int value)
         {
             if (_isDead) return;
-            int prevHealth = currentHealth;
-            currentHealth = Mathf.Clamp(currentHealth + value, 0, MaxHealth);
-            HealthChangeHandle(prevHealth, currentHealth);
-            if (currentHealth == 0)
+            int prevHealth = CurrentHealth;
+            CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, MaxHealth);
+            HealthChangeHandle(prevHealth, CurrentHealth);
+            if (CurrentHealth == 0)
             {
                 _isDead = true;
             }

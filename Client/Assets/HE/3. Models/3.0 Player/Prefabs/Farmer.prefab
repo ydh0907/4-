@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8835497563869647083}
   - component: {fileID: 5704592434427597688}
-  - component: {fileID: 4630943547073831140}
+  - component: {fileID: 868070558751681958}
   m_Layer: 9
   m_Name: Hand.L
   m_TagString: Untagged
@@ -260,7 +260,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.00126
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4630943547073831140
+--- !u!114 &868070558751681958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,11 +269,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2053868460817807509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ae59f7e14546d43a3ca0e97d6295b4, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b6186d9e10b16478c6b4fce6cd5014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mentosDamageAmount: 400
-  fistDamageAmount: 150
+  _damage: 10
+  _bounceOff: 4
 --- !u!1 &2708226514352731160
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,6 +712,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5296324615820844921}
   - component: {fileID: 3904062397450904603}
+  - component: {fileID: -8962023911229213064}
+  - component: {fileID: -3442342707169811777}
   m_Layer: 9
   m_Name: Farmer
   m_TagString: Player
@@ -758,6 +760,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8962023911229213064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813085220466640323}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3382393308
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-3442342707169811777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813085220466640323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454943d9385d4ef3b714d237b84086cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4822475295884913793
 GameObject:
   m_ObjectHideFlags: 0

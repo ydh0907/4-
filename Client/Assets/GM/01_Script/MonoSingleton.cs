@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+public class MonoSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
 {
     private static bool destroyed = false;
     private static T instance = null;

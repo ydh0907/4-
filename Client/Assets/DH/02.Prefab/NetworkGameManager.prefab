@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06307add88c9cc146b5d4b4fbaa65f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 2912199792607788135, guid: b626777b967160c43859b02d3e531445, type: 3}
+  Player: {fileID: 2265761228488487905, guid: f1f5d587133f34e49ae74cfd91f5c989, type: 3}
   Podium: {fileID: 3394249938184343423, guid: fda600dbd49b21547901691e1dae7430, type: 3}
   Characters:
   - {fileID: 3399731427270799583, guid: 6578709570ab609449fe11ae7c9ecbba, type: 3}
