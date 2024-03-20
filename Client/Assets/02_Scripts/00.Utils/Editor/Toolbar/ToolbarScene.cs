@@ -9,7 +9,7 @@ using UnityToolbarExtender;
 
 [InitializeOnLoad]
 public class ToolbarScene {
-    private const string ScenesFilePath = "/01.Scenes"; // 내가 scene을 가져올 경로를 지정해준다
+    private const string ScenesFilePath = "/01_Scenes"; // 내가 scene을 가져올 경로를 지정해준다
 
     static ToolbarScene() {
         ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
@@ -70,6 +70,7 @@ public class ToolbarScene {
             }
             else {
                 if (addPath == "") { // scene이 존재
+                Debug.Log($"{path}/{addPath}");
                     MakeSceneMenus(scene, menu, extension + "/");
                 }
                 else { // file이 존재
