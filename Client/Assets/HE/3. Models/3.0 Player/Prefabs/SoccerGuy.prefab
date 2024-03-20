@@ -1098,7 +1098,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8962278419312647550}
   - component: {fileID: 4990092474478296117}
-  - component: {fileID: 6375485041398369149}
   - component: {fileID: 5962790445637288225}
   m_Layer: 9
   m_Name: SoccerGuy
@@ -1135,7 +1134,7 @@ Animator:
   m_GameObject: {fileID: 8587159495048153028}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9a7f0f8e15a1368448069f8baf858d51, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0afdd78a23388d24c925c93e3c5028ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: a34e2856bb712a14998ccebc5064078c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1146,26 +1145,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6375485041398369149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8587159495048153028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 292686708
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &5962790445637288225
 MonoBehaviour:
   m_ObjectHideFlags: 0

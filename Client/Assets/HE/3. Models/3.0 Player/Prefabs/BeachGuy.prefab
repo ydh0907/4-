@@ -1067,7 +1067,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8977181268269844119}
   - component: {fileID: 701995816572851120}
-  - component: {fileID: -7406729699383564124}
   - component: {fileID: 9038237231253865913}
   m_Layer: 9
   m_Name: BeachGuy
@@ -1104,7 +1103,7 @@ Animator:
   m_GameObject: {fileID: 8637493282298108973}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 23d53c4d6bbfffe4388f71b4171a13d0, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0afdd78a23388d24c925c93e3c5028ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: a34e2856bb712a14998ccebc5064078c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1115,26 +1114,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7406729699383564124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8637493282298108973}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3591861181
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &9038237231253865913
 MonoBehaviour:
   m_ObjectHideFlags: 0

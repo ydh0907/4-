@@ -1,14 +1,15 @@
+using AH;
+using HB;
+using PJH;
 using System;
 using System.Collections.Generic;
-using Unity.Netcode;
-using UnityEngine;
-using TestClient;
 using System.Net;
-using System.Net.Sockets;
-using AH;
+using TestClient;
 using TMPro;
-using HB;
-using UnityEngine.SceneManagement;
+using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
+using UnityEngine;
+using Player = PJH.Player;
 
 namespace DH
 {
@@ -159,9 +160,25 @@ namespace DH
                 temp.Add(rand);
             }
 
+            OnPlayerSpawnedClientRpc();
+
             GetComponent<NetworkServerTimer>().StartTimer();
 
             onGameStarted?.Invoke();
+        }
+
+        [ClientRpc]
+        private void OnPlayerSpawnedClientRpc()
+        {
+            Player[] players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            foreach (Player player in players)
+            {
+                player.StartInit();
+            }
         }
 
         [ClientRpc]
@@ -207,13 +224,19 @@ namespace DH
                         obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.ServerClientId);
                         obj.PlayerObject.transform.position = pos[i].position;
                         obj.PlayerObject.transform.rotation = pos[i].rotation;
-
-                        obj.PlayerObject.GetComponentInChildren<Animator>().SetTrigger("EndAnimation");
-                        obj.PlayerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                         obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(list[i].ID);
                     }
                 }
             }
+
+            GameEndClientRpc();
+        }
+
+        [ClientRpc]
+        private void GameEndClientRpc()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         [ClientRpc]

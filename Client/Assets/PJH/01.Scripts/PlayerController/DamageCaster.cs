@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace PJH
 {
-    public class DamageCaster : NetworkBehaviour
+    public class DamageCaster : MonoBehaviour
     {
         [SerializeField] private int _damage;
         [SerializeField] private float _bounceOff = 4;
         private Collider _collider;
-
 
         private Player _owner;
 
@@ -21,26 +20,33 @@ namespace PJH
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!IsOwner) return;
+            if (!_owner) return;
+            if (!_owner.IsOwner) return;
 
             if (other.TryGetComponent(out Player player))
             {
                 player.Faint();
                 EnableCollider(false);
+                Debug.Log("Hit Player");
                 return;
             }
 
             if (other.TryGetComponent(out Drink drink))
             {
-                drink.ApplyDamageServerRpc(_damage, _bounceOff);
+                drink.ApplyDamage(_damage, _bounceOff);
                 _owner.AddForce((-_owner.Model.transform.forward + new Vector3(0, 1.5f, 0)) * _bounceOff);
                 EnableCollider(false);
+                Debug.Log("Hit Cola");
             }
         }
 
         public void EnableCollider(bool enable)
         {
+            if (!_owner) return;
+            if (!_owner.IsOwner) return;
+
             _collider.enabled = enable;
+            Debug.Log("On Collider " + enable);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace PJH
     {
         public static Health instance = null;
 
-        private NetworkVariable<int> _health = new NetworkVariable<int> { Value = 0 };
+        private NetworkVariable<int> _health = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         public int CurrentHealth
         {
@@ -40,15 +40,21 @@ namespace PJH
             }
 
             OnHealthChanged.AddListener(_healthBar.HandleHealthChanged);
-            Reset();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            if (IsServer)
+            {
+                Reset();
+            }
         }
 
         public void Reset()
         {
-            HealthChangeHandle(MaxHealth, MaxHealth);
-
             _isDead = false;
             CurrentHealth = MaxHealth;
+            HealthChangeHandle(MaxHealth, MaxHealth);
         }
 
         private void HealthChangeHandle(int prev, int newValue)
@@ -72,6 +78,7 @@ namespace PJH
             int prevHealth = CurrentHealth;
             CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, MaxHealth);
             HealthChangeHandle(prevHealth, CurrentHealth);
+            Debug.Log("Hit");
             if (CurrentHealth == 0)
             {
                 _isDead = true;

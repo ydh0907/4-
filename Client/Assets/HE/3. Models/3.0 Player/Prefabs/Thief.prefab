@@ -460,7 +460,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5391652393568717663}
   - component: {fileID: 6993954924383618444}
-  - component: {fileID: 2571604403206542986}
   - component: {fileID: 61103433724747427}
   m_Layer: 9
   m_Name: Thief
@@ -496,7 +495,7 @@ Animator:
   m_GameObject: {fileID: 4726861947679281637}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 013a181fc0e64424dae69e2dccda45f8, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0afdd78a23388d24c925c93e3c5028ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: a34e2856bb712a14998ccebc5064078c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -507,26 +506,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2571604403206542986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726861947679281637}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4124234507
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &61103433724747427
 MonoBehaviour:
   m_ObjectHideFlags: 0
