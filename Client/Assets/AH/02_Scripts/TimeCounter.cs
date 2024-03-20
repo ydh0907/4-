@@ -54,7 +54,6 @@ namespace AH {
                 countText.text = $"{time}{plusText}";
 
                 loopTime--;
-                Debug.Log(time);
                 time--;
                 SoundManager.Instance.Play("Effect/CountDown");
                 yield return new WaitForSeconds(1);
