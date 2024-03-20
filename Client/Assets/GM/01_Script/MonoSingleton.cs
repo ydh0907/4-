@@ -5,6 +5,16 @@ public class MonoSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
 {
     private static bool destroyed = false;
     private static T instance = null;
+
+    protected virtual void Awake() {
+        if(instance != null) {
+            return;
+        }
+        T _instance = this as T;
+        SingletonManager.Register(instance);
+
+        instance = _instance;
+    }
     public static T Instance
     {
         get 
