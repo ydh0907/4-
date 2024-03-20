@@ -184,7 +184,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1971725209172887878}
   - component: {fileID: 3409434459445524408}
-  - component: {fileID: 8253218473610182890}
   - component: {fileID: 1936533113987979917}
   m_Layer: 9
   m_Name: Police
@@ -222,7 +221,7 @@ Animator:
   m_GameObject: {fileID: 1159440565249414140}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 62822117026e80c478e4a051b6f217fd, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0afdd78a23388d24c925c93e3c5028ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: a34e2856bb712a14998ccebc5064078c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -233,26 +232,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8253218473610182890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159440565249414140}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3339862968
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &1936533113987979917
 MonoBehaviour:
   m_ObjectHideFlags: 0

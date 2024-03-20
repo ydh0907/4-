@@ -7,19 +7,26 @@ namespace PJH
 {
     public partial class Player : NetworkBehaviour
     {
-
-        public override void OnNetworkSpawn()
+        public void StartInit()
         {
             base.OnNetworkSpawn();
             Init();
+            Join();
+            SetStart();
         }
 
-        private void Start()
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            UnJoin();
+        }
+
+        private void SetStart()
         {
             if (_rigidbody.isKinematic) _rigidbody.isKinematic = false;
         }
 
-        private void OnEnable()
+        private void Join()
         {
             _inputReader.AttackEvent += HandleAttackEvent;
             if (!IsOwner) return;
@@ -28,7 +35,7 @@ namespace PJH
             _inputReader.RunEvent += HandleSprintEvent;
         }
 
-        private void OnDisable()
+        private void UnJoin()
         {
             _inputReader.AttackEvent -= HandleAttackEvent;
             if (!IsOwner) return;

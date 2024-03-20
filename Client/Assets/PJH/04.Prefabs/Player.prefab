@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3743782848
+  GlobalObjectIdHash: 979248984
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -174,8 +174,8 @@ MonoBehaviour:
     rotationSpeed: 2
     walkByDefault: 1
     rotateWithCamera: 0
-    walkSpeed: 2
-    runningSpeed: 4
+    walkSpeed: 3
+    runningSpeed: 6
     sprintSpeed: 6
   strafeSpeed:
     movementSmooth: 6
@@ -186,11 +186,11 @@ MonoBehaviour:
     walkSpeed: 2
     runningSpeed: 4
     sprintSpeed: 6
-  _jumpWithRigidbodyForce: 1
+  _jumpWithRigidbodyForce: 0
   _jumpAndRotate: 1
   _jumpTimer: 0.3
   _jumpHeight: 4
-  _airSpeed: 5
+  _airSpeed: 3
   _airSmooth: 6
   _extraGravity: -9
   _whatIsGround:

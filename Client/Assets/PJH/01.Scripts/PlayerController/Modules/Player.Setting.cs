@@ -11,15 +11,20 @@ namespace PJH
 
             if (_cinemachineFreeLook.Follow == null)
             {
-                _cinemachineFreeLook.Follow = transform;
-                _cinemachineFreeLook.LookAt = transform.Find("LookAt");
+                if (IsOwner)
+                {
+                    _cinemachineFreeLook.Follow = transform;
+                    _cinemachineFreeLook.LookAt = transform.Find("LookAt");
+                    _cinemachineFreeLook.m_YAxis.m_MaxSpeed = 0.002f;
+                    _cinemachineFreeLook.m_XAxis.m_MaxSpeed = 0.2f;
+                }
             }
 
             _respawnPos = transform.position;
             DamageCaster = transform.GetComponentInChildren<DamageCaster>();
             _animator = GetComponentInChildren<Animator>();
             _mainCamera = Camera.main;
-            _model = _animator.transform;
+            _model = transform;
             _rigidbody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
             _animator.updateMode = AnimatorUpdateMode.AnimatePhysics;
@@ -48,9 +53,6 @@ namespace PJH
             _colliderHeight = _capsuleCollider.height;
 
             IsGrounded = true;
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void SetAnimatorMoveSpeed(MovementSpeed speed)

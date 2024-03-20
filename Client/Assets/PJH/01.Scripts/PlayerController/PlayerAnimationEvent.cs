@@ -1,10 +1,10 @@
-using System;
 using PJH;
-using Unity.Netcode;
+using System;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 
-public class PlayerAnimationEvent : NetworkBehaviour
+public class PlayerAnimationEvent : MonoBehaviour
 {
     private Player _player;
 
@@ -16,13 +16,14 @@ public class PlayerAnimationEvent : NetworkBehaviour
 
     private void FinishAttack()
     {
-        if (!IsOwner) return;
         _player.FinishAttack();
     }
 
     private void EnableCollider(int enable)
     {
-        if (!IsOwner) return;
+        if (!_player) return;
+        if (!_player.IsOwner) return;
+
         _player.DamageCaster.EnableCollider(Convert.ToBoolean(enable));
     }
 }
