@@ -5,8 +5,6 @@ namespace GM {
     public class MapManager : MonoSingleton<MapManager> {
         [SerializeField] private List<Transform> spawnPosList;
 
-        public int count => spawnPosList.Count;
-
         public Vector3 GetSpawnPosition() {
             int index = Random.Range(0, spawnPosList.Count);
             Transform pos = spawnPosList[index];
