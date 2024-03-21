@@ -15,7 +15,7 @@ namespace TestClient
 
         public override void OnDisconnected(EndPoint endPoint)
         {
-            Program.messages.Enqueue($"[Session] Disconnected with Server");
+            Program.messages.Enqueue($"[Session] DisConnected with Server");
         }
 
         public override void OnPacketReceived(ArraySegment<byte> buffer)

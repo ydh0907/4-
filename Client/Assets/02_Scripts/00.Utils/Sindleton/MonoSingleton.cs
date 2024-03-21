@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+public class MonoSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
 {
     private static bool destroyed = false;
     private static T instance = null;
@@ -11,7 +11,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             return;
         }
         T _instance = this as T;
-        // SingletonManager.Register(instance);
+        SingletonManager.Register(instance);
 
         instance = _instance;
     }
@@ -27,12 +27,10 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             if(instance == null)
             {
                 instance = (T)FindObjectOfType(typeof(T));
-                Debug.Log((bool)instance + " : Find");
 
-                if (instance == null)
+                if(instance == null)
                 {
                     instance = new GameObject(typeof(T).ToString()).AddComponent<T>();
-                    Debug.Log((bool)instance + " : Make");
                 }
             }
             return instance; 
