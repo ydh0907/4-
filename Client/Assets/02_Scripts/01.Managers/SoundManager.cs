@@ -99,8 +99,8 @@ public class SoundManager : MonoSingleton<SoundManager> {
     }
 
     private AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect) {
-        if (path.Contains("Sounds/") == false) {
-            path = $"Sounds/{path}";
+        if (path.Contains("01.Sounds/") == false) {
+            path = $"01.Sounds/{path}";
         }
         //Debug.Log(path);
         AudioClip audioClip = null;
