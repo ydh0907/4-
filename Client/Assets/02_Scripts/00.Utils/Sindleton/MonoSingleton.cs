@@ -6,7 +6,7 @@ public class MonoSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
     private static bool destroyed = false;
     private static T instance = null;
 
-    protected virtual void Awake() {
+    /*protected virtual void Awake() {
         if(instance != null) {
             return;
         }
@@ -14,7 +14,7 @@ public class MonoSingleton<T> : NetworkBehaviour where T : NetworkBehaviour
         SingletonManager.Register(instance);
 
         instance = _instance;
-    }
+    }*/
     public static T Instance
     {
         get 
