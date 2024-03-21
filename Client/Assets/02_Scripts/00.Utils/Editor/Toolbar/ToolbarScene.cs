@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -9,7 +10,7 @@ using UnityToolbarExtender;
 
 [InitializeOnLoad]
 public class ToolbarScene {
-    private const string ScenesFilePath = "/01_Scenes"; // 내가 scene을 가져올 경로를 지정해준다
+    private const string ScenesFilePath = "/01_Scenes";
 
     static ToolbarScene() {
         ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
@@ -37,17 +38,16 @@ public class ToolbarScene {
         menu.ShowAsContext();
     }
 
-    private static void MakeSceneMenus(string path, GenericMenu menu, string addPath = "") { // 재귀함수
+    private static void MakeSceneMenus(string path, GenericMenu menu) {
         string[] scenes = { };
-        try { // 주어진 경로 내에 scene파일이 아니라 다른 파일이 들어 있을 수 있음 
-            scenes = Directory.GetFileSystemEntries(path);
+
+        try {
+            scenes = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
         }
         catch {
-            Debug.LogError("The file is in an incorrect format");
+            // ignored
         }
-
-        foreach (string scene in scenes) { // 재귀함수를 이용하는 이유는 ScenesFilePath 내에 파일이 있고 그 안에 scene이 존재 할때
-                                           // 이를 화면에 한번에 보여주는 것이 아닌 실제 파일처럼 ui로 보여준다
+        foreach (string scene in scenes) {
             int dotIndex = scene.LastIndexOf('.');
             if (dotIndex == -1) continue;
 
@@ -57,25 +57,26 @@ public class ToolbarScene {
 
             string extension = Path.GetFileNameWithoutExtension(scene);
 
-            if (substring == ".unity") { // 현재 파일의 확장자가 .unity일때
+
+
+            if (substring == ".unity") {
                 int assetsIndex = scene.IndexOf("Assets");
+                var sceneFilePathIndex = scene.IndexOf(ScenesFilePath);
 
                 if (assetsIndex == -1) continue;
+                if (sceneFilePathIndex == -1) continue;
 
-                menu.AddItem(new GUIContent($"{addPath}{extension}"), false, () => {
-                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) {
+                sceneFilePathIndex += 1 + ScenesFilePath.Length;
+
+                var contentPath = scene[sceneFilePathIndex..];
+                string originalString = @"C:\Your\Path\Here";
+                string modifiedString = originalString.Replace("\\", "/");
+                contentPath = contentPath.Replace('\\', '/').Replace(".unity", string.Empty);
+
+                menu.AddItem(new GUIContent(contentPath), false, () => {
+                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                         EditorSceneManager.OpenScene(scene[assetsIndex..]);
-                    }
                 });
-            }
-            else {
-                if (addPath == "") { // scene이 존재
-                Debug.Log($"{path}/{addPath}");
-                    MakeSceneMenus(scene, menu, extension + "/");
-                }
-                else { // file이 존재
-                    MakeSceneMenus(scene, menu, addPath + extension + "/");
-                }
             }
         }
     }
