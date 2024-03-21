@@ -6,6 +6,7 @@ namespace GM {
         [SerializeField] private List<Transform> spawnPosList;
 
         public Vector3 GetSpawnPosition() {
+            Debug.Log(count);
             int index = Random.Range(0, spawnPosList.Count);
             Debug.Log(index);
             Transform pos = spawnPosList[index];
