@@ -452,9 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e6afd3bfe19c3438b63b1016d54183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chooseCustomizingTemplate: {fileID: 9197481963319205126, guid: de612980aeb33b947a803a9a56a1fa71, type: 3}
-  createRoomTemplate: {fileID: 9197481963319205126, guid: b9c6056f44d13aa4ba1181c50c125620, type: 3}
-  roomListBox: {fileID: 9197481963319205126, guid: 3ca77dd058f3e0643ae68bb54842bfb2, type: 3}
 --- !u!114 &823230281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03216570719cc7445b4d027d17f1e2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chooseCustomizingTemplate: {fileID: 9197481963319205126, guid: de612980aeb33b947a803a9a56a1fa71, type: 3}
   createRoomTemplate: {fileID: 9197481963319205126, guid: b9c6056f44d13aa4ba1181c50c125620, type: 3}
   roomListBox: {fileID: 9197481963319205126, guid: 3ca77dd058f3e0643ae68bb54842bfb2, type: 3}
 --- !u!114 &823230284
@@ -513,9 +509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6851a92eb15764bb918f41a93a14eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chooseCustomizingTemplate: {fileID: 9197481963319205126, guid: de612980aeb33b947a803a9a56a1fa71, type: 3}
-  createRoomTemplate: {fileID: 9197481963319205126, guid: b9c6056f44d13aa4ba1181c50c125620, type: 3}
-  roomListBox: {fileID: 9197481963319205126, guid: 3ca77dd058f3e0643ae68bb54842bfb2, type: 3}
+  chooseCustomizingTemplate: {fileID: 9197481963319205126, guid: 09d54b9cda9c6f24e843a8fa8aa097c9, type: 3}
+  customizingPlayerTemplate: {fileID: 9197481963319205126, guid: 920374af8a28b3b4ea40493d936d66fd, type: 3}
+  customizingDrinkTemplate: {fileID: 9197481963319205126, guid: c6913d5a89f414541a60091f429fadce, type: 3}
 --- !u!1 &1440065165
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,12 +78,10 @@
     justify-content: space-around;
     flex-direction: row;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.39);
     margin-top: 65px;
 }
 
 .player-content {
-    background-color: rgba(0, 0, 0, 0.39);
     margin-top: 120px;
     flex-direction: row;
     flex-wrap: wrap;
@@ -112,8 +110,8 @@
 }
 
 .playerdata-btn {
-    width: 160px;
-    height: 200px;
+    width: 180px;
+    height: 220px;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -122,10 +120,10 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    margin-left: 25px;
     background-color: rgb(0, 0, 0);
     transition-timing-function: ease-out-circ;
     transition-duration: 0.2s;
@@ -140,8 +138,8 @@
 }
 
 .drink-btn {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-left-color: rgba(149, 149, 149, 0);
     border-right-color: rgba(149, 149, 149, 0);
     border-top-color: rgba(149, 149, 149, 0);
@@ -153,6 +151,10 @@
     background-color: rgb(0, 0, 0);
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
+    margin-top: 25px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-left: 25px;
 }
 
 .drink-btn:hover {

@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 namespace AH {
     public class LobbyMain : UI {
         private CreateRoom _createRoom;
-        private VisualElement _dataBorder;
+        public VisualElement _dataBorder;
         private CustomPlayerAndDrinkData _playerData;
 
         string nickname = "";
@@ -20,14 +20,15 @@ namespace AH {
         }
         protected override void OnEnable() {
             base.OnEnable();
-            _dataBorder = root.Q<VisualElement>("data-border");
+            _dataBorder = root.Q<VisualElement>("container");
             flag = true;
 
             root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
             root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
             root.Q<Button>("findroom-btn").RegisterCallback<ClickEvent>(HandleFindRoom);
 
-            _playerData.OnCustomizingTemplate(_dataBorder);
+            root.Q<Button>("customizing-player-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChoosePlayer(e, _dataBorder));
+            root.Q<Button>("customizing-drink-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChooseDrink(e, _dataBorder));
         }
         
 

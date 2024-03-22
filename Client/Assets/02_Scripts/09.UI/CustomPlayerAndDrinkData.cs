@@ -1,4 +1,5 @@
 using DH;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,25 +7,40 @@ using UnityEngine.UIElements;
 namespace AH {
     public class CustomPlayerAndDrinkData : UI {
         [SerializeField] protected VisualTreeAsset chooseCustomizingTemplate;
+        [SerializeField] protected VisualTreeAsset customizingPlayerTemplate;
+        [SerializeField] protected VisualTreeAsset customizingDrinkTemplate;
 
         protected List<Button> drinksList = new List<Button>();
         protected List<Button> playerList = new List<Button>();
 
-        public void OnCustomizingTemplate(VisualElement _dataBorder) {
-            var template = chooseCustomizingTemplate.Instantiate().Q<VisualElement>("choose-player-or-drink-border");
+        public void HandleGoToChoosePlayer(ClickEvent evt, VisualElement addElement) {
+            var template = customizingPlayerTemplate.Instantiate().Q<VisualElement>("content");
+            addElement.Clear();
+            addElement.Add(template);
 
-            _dataBorder.Add(template);
-
-            root.Q<Button>("customizing-player-btn").RegisterCallback<ClickEvent>(HandleGoToChoosePlayer);
-            root.Q<Button>("customizing-drink-btn").RegisterCallback<ClickEvent>(HandleGoToChooseDrink);
-
+            EnterExitButton();
+            ClickPlayerButton();
         }
-        private void HandleGoToChooseDrink(ClickEvent evt) {
+        public void HandleGoToChooseDrink(ClickEvent evt, VisualElement addElement) {
+            var template = customizingDrinkTemplate.Instantiate().Q<VisualElement>("content");
+            addElement.Clear();
+            addElement.Add(template);
 
+            EnterExitButton();
+            ClickDrinkButton();
         }
-        private void HandleGoToChoosePlayer(ClickEvent evt) {
+        private void EnterExitButton() {
+            root.Q<VisualElement>("choose-this-btn").RegisterCallback<ClickEvent>(HandleChooseEvent);
+            root.Q<VisualElement>("back-btn").RegisterCallback<ClickEvent>(HandleExitEvent);
+        }
 
+        private void HandleChooseEvent(ClickEvent evt) {
+            Debug.Log("chose");
         }
+        private void HandleExitEvent(ClickEvent evt) {
+            Debug.Log("exit");
+        }
+
         private void ClickDrinkButton() {
             VisualElement drinkButtonRow = root.Q<VisualElement>(className: "drink-content");
             _lobbyMain.GetInputListData(drinkButtonRow, drinksList);

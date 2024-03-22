@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/09_UIToolkit/Uss/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
+    <ui:VisualElement name="content" style="flex-grow: 1; flex-direction: row; align-items: center; width: 100%; height: 100%;">
+        <ui:VisualElement name="data-border" style="width: 55%; height: 100%; background-color: rgba(0, 0, 0, 0); justify-content: space-between;">
+            <ui:VisualElement name="choose-player-or-drink-border" style="align-items: center; justify-content: center; flex-direction: row; flex-grow: 1;">
+                <ui:VisualElement name="drink-content" class="drink-content">
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="cola-btn" class="drink-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/drink/SodaCan_low_Soda_MAT_AlbedoTransparency%205.png?fileID=21300000&amp;guid=b0f7a788b075dc24fb4ae26202a59916&amp;type=3#SodaCan_low_Soda_MAT_AlbedoTransparency 5&apos;); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;" />
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="pinapple-btn" class="drink-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/drink/SodaCan_low_Soda_MAT_AlbedoTransparency.png?fileID=21300000&amp;guid=4c4697776c34c244bb77bc9ecbdc9650&amp;type=3#SodaCan_low_Soda_MAT_AlbedoTransparency&apos;);" />
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="cider-btn" class="drink-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/drink/SodaCan_low_Soda_MAT_AlbedoTransparency%202.png?fileID=21300000&amp;guid=e5d432e23f4e06d4a9b2705a63248098&amp;type=3#SodaCan_low_Soda_MAT_AlbedoTransparency 2&apos;);" />
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="orangi-btn" class="drink-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/drink/SodaCan_low_Soda_MAT_AlbedoTransparency%201.png?fileID=21300000&amp;guid=e2e07c6cc07700d4593188ffa682d37d&amp;type=3#SodaCan_low_Soda_MAT_AlbedoTransparency 1&apos;);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="button-content" style="flex-direction: row; justify-content: space-around; width: 100%;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="back-btn" text="뒤로가기" class="button" />
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="choose-this-btn" text="선택" enable-rich-text="false" class="button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
