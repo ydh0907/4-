@@ -53,13 +53,8 @@
     border-right-color: rgba(149, 149, 149, 0);
     border-top-color: rgba(149, 149, 149, 0);
     border-bottom-color: rgba(149, 149, 149, 0);
-    background-color: rgb(255, 206, 84);
     background-image: url('project://database/Assets/04_Sprites/Dark%20UI/32%20Light.png?fileID=21300000&guid=a689281f545979940b5cedad12ec31a8&type=3#32 Light');
     justify-content: flex-end;
-    border-top-left-radius: 35px;
-    border-top-right-radius: 35px;
-    border-bottom-right-radius: 35px;
-    border-bottom-left-radius: 35px;
     margin-top: 30px;
     margin-right: 30px;
     margin-bottom: 30px;
@@ -67,6 +62,7 @@
     top: 70px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .customizing-btn:hover {
