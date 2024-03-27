@@ -28,8 +28,8 @@ namespace PJH
 
         private void Join()
         {
-            _inputReader.AttackEvent += HandleAttackEvent;
             if (!IsOwner) return;
+            _inputReader.AttackEvent += HandleAttackEvent;
             _inputReader.MovementEvent += HandleMovementEvent;
             _inputReader.JumpEvent += HandleJumpEvent;
             _inputReader.RunEvent += HandleSprintEvent;
@@ -37,8 +37,8 @@ namespace PJH
 
         private void UnJoin()
         {
-            _inputReader.AttackEvent -= HandleAttackEvent;
             if (!IsOwner) return;
+            _inputReader.AttackEvent -= HandleAttackEvent;
             _inputReader.MovementEvent -= HandleMovementEvent;
             _inputReader.JumpEvent -= HandleJumpEvent;
             _inputReader.RunEvent -= HandleSprintEvent;
@@ -46,10 +46,9 @@ namespace PJH
 
         private void Update()
         {
-            UpdateAnimator();
-
             if (!IsOwner) return;
 
+            UpdateAnimator();
             CheckGround();
             CheckSlopeLimit();
             UpdateMoveDirection(_mainCamera.transform);
@@ -119,10 +118,10 @@ namespace PJH
         {
             if (!IsAttacking)
                 _animator.Play("Hit");
-            if (Health.instance != null)
+            if (_health != null)
             {
-                Health.instance.TakeDamage(damage);
-                if (Health.instance.CurrentHealth == 0) Death();
+                _health.TakeDamage(damage);
+                if (_health.CurrentHealth == 0) Death();
             }
         }
 
@@ -160,7 +159,7 @@ namespace PJH
             StopMove = false;
             gameObject.SetActive(true);
             _rigidbody.position = _respawnPos;
-            Health.instance.Reset();
+            _health.Reset();
         }
 
         public async void AddForce(Vector3 dir)

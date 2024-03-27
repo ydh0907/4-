@@ -65,14 +65,12 @@ namespace TestClient
         public void CreateRoom(string IP, string playerName)
         {
             if (connect) return;
-            Debug.Log($"Create Room {IP} : {playerName}");
             StartCoroutine(SendRoomUpdatePacket(IP, playerName, 1));
         }
 
         public void UpdateRoom(string IP, string playerName, int playerCount)
         {
             if (connect) return;
-            Debug.Log($"Update Room {IP} : {playerName}");
             StartCoroutine(SendRoomUpdatePacket(IP, playerName, (ushort)playerCount));
         }
 
@@ -111,14 +109,11 @@ namespace TestClient
             reload = false;
 
             callback?.Invoke(Rooms);
-
-            Debug.Log("Reroaded");
             DisconnectServer();
         }
 
         public void Delete(string nickname, string IP)
         {
-            Debug.Log($"Delete Room {IP} : {nickname}");
             StartCoroutine(Deleting(nickname, IP));
         }
 

@@ -53,6 +53,7 @@ namespace PJH
             _colliderHeight = _capsuleCollider.height;
 
             IsGrounded = true;
+            _health = GetComponent<Health>();
         }
 
         private void SetAnimatorMoveSpeed(MovementSpeed speed)
