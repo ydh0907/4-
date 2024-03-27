@@ -40,6 +40,11 @@ namespace AH {
         private void HandleExitEvent(ClickEvent evt) {
             Debug.Log("exit");
         }
+        private void GoToCustomPlayerData() {
+            var template = chooseCustomizingTemplate.Instantiate().Q<VisualElement>("content");
+            //addElement.Clear();
+            //addElement.Add(template);
+        }
 
         private void ClickDrinkButton() {
             VisualElement drinkButtonRow = root.Q<VisualElement>(className: "drink-content");
