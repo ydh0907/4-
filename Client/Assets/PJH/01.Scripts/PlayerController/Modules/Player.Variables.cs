@@ -9,7 +9,7 @@ namespace PJH
 
         #region Movement
 
-        [Header("Movement")] [SerializeField] private bool _rotateByWorld = false;
+        [Header("Movement")][SerializeField] private bool _rotateByWorld = false;
         [SerializeField] private bool _useContinuousSprint = true;
         [SerializeField] private bool _sprintOnlyFree = true;
 
@@ -19,7 +19,7 @@ namespace PJH
 
         #region Airborne
 
-        [Header("Airborne")] [SerializeField] private bool _jumpWithRigidbodyForce = false;
+        [Header("Airborne")][SerializeField] private bool _jumpWithRigidbodyForce = false;
         [SerializeField] private bool _jumpAndRotate = true;
         [SerializeField] private float _jumpTimer = 0.3f;
         [SerializeField] private float _jumpHeight = 4f;
@@ -31,10 +31,10 @@ namespace PJH
 
         #region Ground
 
-        [Header("Ground")] [SerializeField] private LayerMask _whatIsGround;
+        [Header("Ground")][SerializeField] private LayerMask _whatIsGround;
         [SerializeField] private float _groundMinDistance = 0.25f;
         [SerializeField] private float _groundMaxDistance = 0.5f;
-        [Range(30, 80)] [SerializeField] private float _slopeLimit = 75f;
+        [Range(30, 80)][SerializeField] private float _slopeLimit = 75f;
 
         #endregion
 
@@ -49,8 +49,11 @@ namespace PJH
         private Rigidbody _rigidbody;
         private Transform _model;
         private CapsuleCollider _capsuleCollider;
+        public CapsuleCollider CapsuleCollider => _capsuleCollider;
 
         public DamageCaster DamageCaster { get; private set; }
+
+        private Health _health;
 
         public Transform Model => _model;
 

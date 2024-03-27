@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PJH
@@ -11,17 +12,26 @@ namespace PJH
 
         private Player _owner;
 
-        private void Awake()
+        private void Start()
         {
-            _owner = transform.root.GetComponent<Player>();
             _collider = GetComponent<Collider>();
             EnableCollider(false);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!_owner) return;
-            if (!_owner.IsOwner) return;
+            if (!_owner)
+            {
+                _owner = transform.root.GetComponent<Player>();
+
+                if (!_owner)
+                {
+                    Debug.Log("Owner Not Found");
+                    return;
+                }
+            }
+            if (transform.root.GetHashCode() == other.transform.root.GetHashCode()) return;
+            if (!_owner.IsServer) return;
 
             if (other.TryGetComponent(out Player player))
             {
@@ -33,8 +43,7 @@ namespace PJH
 
             if (other.TryGetComponent(out Drink drink))
             {
-                drink.ApplyDamage(_damage, _bounceOff);
-                _owner.AddForce((-_owner.Model.transform.forward + new Vector3(0, 1.5f, 0)) * _bounceOff);
+                drink.ApplyDamage(_damage, _bounceOff, _owner.transform.position);
                 EnableCollider(false);
                 Debug.Log("Hit Cola");
             }
@@ -42,8 +51,8 @@ namespace PJH
 
         public void EnableCollider(bool enable)
         {
-            if (!_owner) return;
-            if (!_owner.IsOwner) return;
+            if (_owner == null) return;
+            if (!_owner.IsServer) return;
 
             _collider.enabled = enable;
             Debug.Log("On Collider " + enable);

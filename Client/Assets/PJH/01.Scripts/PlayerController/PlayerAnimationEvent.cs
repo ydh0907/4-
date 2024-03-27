@@ -22,7 +22,7 @@ public class PlayerAnimationEvent : MonoBehaviour
     private void EnableCollider(int enable)
     {
         if (!_player) return;
-        if (!_player.IsOwner) return;
+        if (!_player.IsServer) return;
 
         _player.DamageCaster.EnableCollider(Convert.ToBoolean(enable));
     }

@@ -2,12 +2,12 @@ using HB;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace PJH
 {
     public class Health : NetworkBehaviour
     {
-        public static Health instance = null;
 
         private NetworkVariable<int> _health = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
@@ -28,26 +28,14 @@ namespace PJH
         private bool _isDead = false;
 
         public UnityEvent<int, int, float> OnHealthChanged;
-
-        private HealthBar _healthBar;
-
-        private void Awake()
-        {
-            _healthBar = GetComponent<HealthBar>();
-            if (instance == null)
-            {
-                instance = this;
-            }
-
-            OnHealthChanged.AddListener(_healthBar.HandleHealthChanged);
-        }
-
         public override void OnNetworkSpawn()
         {
             if (IsServer)
             {
                 Reset();
             }
+
+            _health.OnValueChanged += HealthChangeHandle;
         }
 
         public void Reset()
@@ -74,10 +62,11 @@ namespace PJH
 
         private void ModifyHealth(int value)
         {
+            if (!IsServer) return;
+
             if (_isDead) return;
             int prevHealth = CurrentHealth;
             CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, MaxHealth);
-            HealthChangeHandle(prevHealth, CurrentHealth);
             Debug.Log("Hit");
             if (CurrentHealth == 0)
             {

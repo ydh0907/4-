@@ -12,7 +12,7 @@ public class RankingPodium : NetworkBehaviour {
 
         instance = this;
 
-        Debug.Log("Spawned");
+        Debug.Log("Podium Spawned");
     }
 
     public Transform[] GetPositions() {

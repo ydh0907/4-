@@ -25,10 +25,19 @@ namespace PJH
             transform.localPosition = pos;
         }
         
-        public void ApplyDamage(int damage, float bounceOff)
+        public void ApplyDamage(int damage, float bounceOff, Vector3 position)
         {
-            _owner.AddForce((-_owner.Model.transform.forward + new Vector3(0, 1.5f, 0)) * bounceOff);
             _owner.ApplyDamage(damage);
+            ApplyDamageClientRpc(damage, bounceOff, position);
+        }
+
+        [ClientRpc]
+        public void ApplyDamageClientRpc(int damage, float bounceOff, Vector3 position)
+        {
+            Debug.Log("Hit and Forced before");
+            if (!_owner.IsOwner) return;
+            Debug.Log("Hit and Forced after");
+            _owner.AddForce((transform.position - position).normalized * bounceOff);
         }
     }
 }
