@@ -96,10 +96,5 @@ public class SceneLoader : MonoSingleton<SceneLoader> {
         Load();
     }
 
-    [RuntimeInitializeOnLoadMethod]
-    private static void Initialize() {
-        //SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
-    }
-
     #endregion
 }
