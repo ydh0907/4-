@@ -26,6 +26,8 @@ namespace DH
 
         public void StartConnect(string Address)
         {
+            Debug.Log(Address);
+
             NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo(ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character));
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(Address, (ushort)9070, "0.0.0.0");
@@ -48,6 +50,8 @@ namespace DH
 
         private void OnConnected()
         {
+            Debug.Log("Connected");
+
             isConnect = null;
 
             onConnectSucceed?.Invoke();
@@ -55,6 +59,8 @@ namespace DH
 
         private void OnConnectFailed()
         {
+            Debug.Log("ConnectFailed");
+
             isConnect = null;
 
             onConnectFailed?.Invoke();

@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace PJH
 {
@@ -114,8 +116,10 @@ namespace PJH
         #endregion
 
 
-        public async void ApplyDamage(int damage)
+        public void ApplyDamage(int damage, float bounceOff, Vector3 position)
         {
+            ApplyDamageClientRpc(damage, bounceOff, position);
+
             if (!IsAttacking)
                 _animator.Play("Hit");
             if (_health != null)
@@ -125,14 +129,36 @@ namespace PJH
             }
         }
 
+        [ClientRpc]
+        public void ApplyDamageClientRpc(int damage, float bounceOff, Vector3 position)
+        {
+            Debug.Log("Hit and Forced before");
+            if (!IsOwner) return;
+            Debug.Log("Hit and Forced after");
+            AddForce((transform.position - position).normalized * bounceOff);
+        }
+
         public async void Faint()
         {
+            FaintClientRpc();
+        }
+
+        [ClientRpc]
+        private void FaintClientRpc()
+        {
+            if (!IsOwner) return;
+
             _rigidbody.velocity = Vector3.zero;
             _lockMovement = true;
             _lockRotation = true;
             StopMove = true;
             _inputMagnitude = 0;
-            await Task.Delay(500);
+            StartCoroutine(Wait(0.5f));
+        }
+
+        private IEnumerator Wait(float time)
+        {
+            yield return new WaitForSeconds(time);
             StopMove = false;
             _lockMovement = false;
             _lockRotation = false;
