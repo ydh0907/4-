@@ -45,5 +45,23 @@ namespace PJH
             if (context.started) RunEvent?.Invoke(true);
             if (context.canceled) RunEvent?.Invoke(false);
         }
+
+        public void OnMouseLock(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                switch (Cursor.lockState)
+                {
+                    case CursorLockMode.Locked:
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
+                        break;
+                    case CursorLockMode.None:
+                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
+                        break;
+                }
+            }
+        }
     }
 }
