@@ -13,37 +13,28 @@ namespace AH {
         protected List<Button> drinksList = new List<Button>();
         protected List<Button> playerList = new List<Button>();
 
-        public void HandleGoToChoosePlayer(ClickEvent evt, VisualElement addElement) {
-            var template = customizingPlayerTemplate.Instantiate().Q<VisualElement>("content");
-            addElement.Clear();
-            addElement.Add(template);
 
-            EnterExitButton();
+        public void HandleGoToChoosePlayer(ClickEvent evt, VisualElement addElement) {
+            InstantiateTemplate(customizingPlayerTemplate, addElement, "content");
+
+            EnterExitButton(addElement);
             ClickPlayerButton();
         }
         public void HandleGoToChooseDrink(ClickEvent evt, VisualElement addElement) {
-            var template = customizingDrinkTemplate.Instantiate().Q<VisualElement>("content");
-            addElement.Clear();
-            addElement.Add(template);
+            InstantiateTemplate(customizingDrinkTemplate, addElement, "content");
 
-            EnterExitButton();
+            EnterExitButton(addElement);
             ClickDrinkButton();
         }
-        private void EnterExitButton() {
-            root.Q<VisualElement>("choose-this-btn").RegisterCallback<ClickEvent>(HandleChooseEvent);
-            root.Q<VisualElement>("back-btn").RegisterCallback<ClickEvent>(HandleExitEvent);
+        private void EnterExitButton(VisualElement addElement) {
+            root.Q<VisualElement>("choose-this-btn").RegisterCallback<ClickEvent>((e) => GoToCustomPlayerData(e, addElement));
+            root.Q<VisualElement>("back-btn").RegisterCallback<ClickEvent>((e) => GoToCustomPlayerData(e, addElement));
+            _lobbyMain.GetNickName();
         }
 
-        private void HandleChooseEvent(ClickEvent evt) {
-            Debug.Log("chose");
-        }
-        private void HandleExitEvent(ClickEvent evt) {
-            Debug.Log("exit");
-        }
-        private void GoToCustomPlayerData() {
-            var template = chooseCustomizingTemplate.Instantiate().Q<VisualElement>("content");
-            //addElement.Clear();
-            //addElement.Add(template);
+        private void GoToCustomPlayerData(ClickEvent evt, VisualElement addElement) {
+            InstantiateTemplate(chooseCustomizingTemplate, addElement, "container");
+            _lobbyMain.CustomDataSetting();
         }
 
         private void ClickDrinkButton() {

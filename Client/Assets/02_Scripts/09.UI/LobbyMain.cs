@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
+
 
 namespace AH {
     public class LobbyMain : UI {
@@ -10,7 +12,7 @@ namespace AH {
         public VisualElement _dataBorder;
         private CustomPlayerAndDrinkData _playerData;
 
-        string nickname = "";
+        public string nickname = "´Ð³×ÀÓ";
         bool flag;
 
         protected override void Awake() {
@@ -26,11 +28,15 @@ namespace AH {
             root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
             root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
             root.Q<Button>("findroom-btn").RegisterCallback<ClickEvent>(HandleFindRoom);
+            CustomDataSetting();
+        }
 
+        public void CustomDataSetting() {
+            Debug.Log(nickname);
+            root.Q<TextField>("nickname-inputfeld").value = nickname;
             root.Q<Button>("customizing-player-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChoosePlayer(e, _dataBorder));
             root.Q<Button>("customizing-drink-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChooseDrink(e, _dataBorder));
         }
-        
 
         #region Handle
         private void HandleCreateRoom(ClickEvent evt) {
@@ -62,7 +68,9 @@ namespace AH {
             }
         }
         public string GetNickName() {
-            if (root.Q<TextField>("nickname-inputfeld") != null) nickname = root.Q<TextField>("nickname-inputfeld").text;
+            if (root.Q<TextField>("nickname-inputfeld") != null) {
+                nickname = root.Q<TextField>("nickname-inputfeld").text;
+            }
             return nickname;
         }
         #endregion
