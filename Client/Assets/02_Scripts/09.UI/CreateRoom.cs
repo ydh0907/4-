@@ -19,10 +19,7 @@ namespace AH {
         private int createRoomCount = 0;
 
         private void CreateRoomList(List<Room> room) {
-            var template = createRoomTemplate.Instantiate().Q<VisualElement>("container");
-
-            root.Clear();
-            root.Add(template);
+            var template = InstantiateTemplate(createRoomTemplate, root, "container");
 
             root.Q<Button>("refresh-btn").RegisterCallback<ClickEvent>(HandleRefresh);
             root.Q<Button>("enterRoom-btn").RegisterCallback<ClickEvent>(HandleEnterRoom);

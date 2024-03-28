@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/09_UIToolkit/Uss/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
-    <ui:VisualElement name="content" style="flex-grow: 1; flex-direction: row; align-items: center; width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/04_Sprites/UI/ChoiceBackGround_Can.png?fileID=21300000&amp;guid=6dcffbd152c363341a0ca6053ef23e36&amp;type=3#ChoiceBackGround_Can&apos;); -unity-background-image-tint-color: rgb(255, 255, 255);">
+    <ui:VisualElement name="content" style="flex-grow: 1; flex-direction: row; align-items: center; width: 100%; height: 100%; background-image: none; -unity-background-image-tint-color: rgb(255, 255, 255);">
         <ui:VisualElement name="data-border" style="width: 55%; height: 100%; background-color: rgba(0, 0, 0, 0); justify-content: space-between;">
             <ui:VisualElement name="choose-player-or-drink-border" style="align-items: center; justify-content: center; flex-direction: row; flex-grow: 1;">
                 <ui:VisualElement name="drink-content" class="drink-content">

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,6 +15,14 @@ namespace AH {
         }
         protected virtual void OnEnable() {
             root = _uiDocument.rootVisualElement;
+        }
+        protected VisualElement InstantiateTemplate(VisualTreeAsset treeAsset, VisualElement addRoot, string getName, bool isClear = true) {
+            var template = treeAsset.Instantiate().Q<VisualElement>(getName);
+            if (isClear) {
+                addRoot.Clear();
+            }
+            addRoot.Add(template);
+            return template;
         }
     }
 }

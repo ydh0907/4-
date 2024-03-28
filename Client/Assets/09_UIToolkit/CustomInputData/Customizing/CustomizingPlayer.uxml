@@ -2,7 +2,6 @@
     <Style src="project://database/Assets/09_UIToolkit/Uss/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
     <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row; align-items: center;">
         <ui:VisualElement name="data-border" style="width: 55%; height: 100%; background-color: rgba(0, 0, 0, 0); justify-content: space-between;">
-            <ui:TextField picking-mode="Ignore" value="닉네임" name="nickname-inputfeld" class="input-control" />
             <ui:VisualElement name="choose-player-or-drink-border" style="height: 1080px; align-items: center; justify-content: center; flex-direction: row; flex-grow: 1;">
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="customizing-player-btn" class="customizing-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/Card_Player.png?fileID=21300000&amp;guid=42816c4a9e50eae46825f16a678d7c47&amp;type=3#Card_Player&apos;);">
                     <ui:Label tabindex="-1" text="캐릭터 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 25px; color: rgb(0, 0, 0);" />
@@ -11,6 +10,7 @@
                     <ui:Label tabindex="-1" text="음료 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 25px; color: rgb(0, 0, 0);" />
                 </ui:Button>
             </ui:VisualElement>
+            <ui:TextField picking-mode="Ignore" value="닉네임" name="nickname-inputfeld" class="input-control" style="top: 30px; left: 185px;" />
         </ui:VisualElement>
         <ui:VisualElement name="system-border" style="flex-grow: 1; height: 100%; justify-content: space-between; align-items: flex-end;">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="backToTitle-btn" class="backToTitle-btn" />
