@@ -147,7 +147,7 @@ namespace PJH
         private void FaintClientRpc()
         {
             if (!IsOwner) return;
-
+            Debug.Log("Faint 0.5f");
             _rigidbody.velocity = Vector3.zero;
             _lockMovement = true;
             _lockRotation = true;
