@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b25c40ad-7b20-40fc-9952-5ae9a9e2c85d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DH/00.Scene/DH_TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DH/00.Scene/DH_TestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.GroundCheck.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.GroundCheck.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Setting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Setting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Update.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Update.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Variables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Modules/Player.Variables.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/PlayerAnimationEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/PlayerAnimationEvent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAnimator.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAttack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/03.Animations/PlayerAttack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Scenes/DH/DH_Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Scenes/DH/DH_Lobby.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CustomPlayerAndDrinkData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CustomPlayerAndDrinkData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/LobbyMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/LobbyMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/09_UIToolkit/CustomInputData/Customizing/CustomizingPlayer.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/09_UIToolkit/CustomInputData/Customizing/CustomizingPlayer.uxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +20,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/545885fff981424ba24fbd84a445d137175a00/55/2ec4b8c1/StyleBackground.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/Drink.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/DamageCaster.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" root0="FORCE_HIGHLIGHTING" />

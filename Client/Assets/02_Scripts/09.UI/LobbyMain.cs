@@ -2,6 +2,7 @@ using DH;
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
@@ -13,8 +14,9 @@ namespace AH {
         public VisualElement _dataBorder;
         private CustomPlayerAndDrinkData _playerData;
 
-        public string nickname = "´Ð³×ÀÓ";
+        public string nickname = "ï¿½Ð³ï¿½ï¿½ï¿½";
         bool flag;
+        [SerializeField] private List<Sprite> _characterSprites, _drinkSprites;
 
         protected override void Awake() {
             base.Awake();
@@ -38,6 +40,11 @@ namespace AH {
             nickNameField.RegisterCallback<ChangeEvent<string>>(OnNicknameChanged);
             root.Q<Button>("customizing-player-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChoosePlayer(e, _dataBorder));
             root.Q<Button>("customizing-drink-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChooseDrink(e, _dataBorder));
+            
+            root.Q<VisualElement>("DrinkImage").style.backgroundImage =
+                new StyleBackground(_drinkSprites[(byte)ConnectManager.Instance.cola]);
+            root.Q("CharacterImage").style.backgroundImage =
+                new StyleBackground(_characterSprites[(byte)ConnectManager.Instance.character]);
         }
 
         private void OnNicknameChanged(ChangeEvent<string> evt) {
