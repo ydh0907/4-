@@ -1,9 +1,9 @@
+using GM;
 using System;
 using System.Collections;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace PJH
 {
@@ -11,7 +11,6 @@ namespace PJH
     {
         public void StartInit()
         {
-            base.OnNetworkSpawn();
             Init();
             Join();
             SetStart();
@@ -22,7 +21,6 @@ namespace PJH
             base.OnNetworkDespawn();
             UnJoin();
         }
-
         private void SetStart()
         {
             if (_rigidbody.isKinematic) _rigidbody.isKinematic = false;
@@ -105,7 +103,7 @@ namespace PJH
         private void OnDrawGizmos()
         {
             if (_capsuleCollider == null) _capsuleCollider = GetComponent<CapsuleCollider>();
-            float radius = _capsuleCollider.radius * 0.9f;
+            float radius = _capsuleCollider.radius * .9f;
             Vector3 pos = transform.position + Vector3.up * (_capsuleCollider.radius);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(pos + (-Vector3.up * (_capsuleCollider.radius + _groundMaxDistance)), radius);
@@ -153,15 +151,18 @@ namespace PJH
             _lockRotation = true;
             StopMove = true;
             _inputMagnitude = 0;
-            StartCoroutine(Wait(0.5f));
+            StartCoroutine(Wait(0.5f, () =>
+            {
+                StopMove = false;
+                _lockMovement = false;
+                _lockRotation = false;
+            }));
         }
 
-        private IEnumerator Wait(float time)
+        private IEnumerator Wait(float time, Action callback)
         {
             yield return new WaitForSeconds(time);
-            StopMove = false;
-            _lockMovement = false;
-            _lockRotation = false;
+            callback?.Invoke();
         }
 
         private void Death()
@@ -170,9 +171,27 @@ namespace PJH
             _isDead = true;
             gameObject.SetActive(false);
             RespawnManager.Instance.Respawn(this);
+            DeathClientRpc();
+        }
+
+        [ClientRpc]
+        private void DeathClientRpc()
+        {
+            if (IsOwner) return;
+            if (_isDead) return;
+            _isDead = true;
+            gameObject.SetActive(false);
         }
 
         public void Respawn()
+        {
+            _rigidbody.position = MapManager.Instance.GetSpawnPosition();
+            _health.Reset();
+            RespawnClientRpc();
+        }
+
+        [ClientRpc]
+        public void RespawnClientRpc()
         {
             IsAttacking = false;
             IsJumping = false;
@@ -183,9 +202,10 @@ namespace PJH
             _lockMovement = false;
             _lockRotation = false;
             StopMove = false;
-            gameObject.SetActive(true);
-            _rigidbody.position = _respawnPos;
-            _health.Reset();
+            if (IsOwner)
+                gameObject.SetActive(true);
+            else
+                Wait(0.5f, () => gameObject.SetActive(true));
         }
 
         public async void AddForce(Vector3 dir)

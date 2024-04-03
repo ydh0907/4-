@@ -30,12 +30,16 @@ namespace PJH
             if (_direction.magnitude > 1f)
                 _direction.Normalize();
 
-            Vector3 targetPosition = (UseRootMotion ? _animator.rootPosition : _rigidbody.position) +
+            Vector3 targetPosition = (UseRootMotion ? _animator.rootPosition : transform.position) +
                                      _direction * ((StopMove ? 0 : _moveSpeed) * Time.fixedDeltaTime);
             Vector3 targetVelocity = (targetPosition - transform.position) / Time.fixedDeltaTime;
 
             bool useVerticalVelocity = true;
             if (useVerticalVelocity) targetVelocity.y = _rigidbody.velocity.y;
+
+
+            print(targetPosition);
+            print(targetVelocity);
             _rigidbody.velocity = targetVelocity;
         }
 

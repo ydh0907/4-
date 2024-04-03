@@ -1,13 +1,11 @@
 using AH;
-using HB;
-using PJH;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using TestClient;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using Player = PJH.Player;
 
@@ -143,6 +141,7 @@ namespace DH
             ReadyObjects.Instance.RemoveClientRpc();
 
             List<Vector3> temp = new List<Vector3>();
+            List<NetworkObjectReference> objects = new List<NetworkObjectReference>();
 
             foreach (var player in users)
             {
@@ -151,13 +150,16 @@ namespace DH
                 while (temp.Contains(rand))
                     rand = GM.MapManager.Instance.GetSpawnPosition();
 
+                Debug.Log(rand + " : Rand");
+
                 GameObject p = Instantiate(Player, rand, Quaternion.identity);
-                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Value.ID);
+                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Key);
 
                 NetworkObjectReference reference = p.GetComponent<NetworkObject>();
                 CreateCharacterClientRpc(player.Key, reference);
 
                 temp.Add(rand);
+                objects.Add(reference);
             }
 
             OnPlayerSpawnedClientRpc();
@@ -165,6 +167,33 @@ namespace DH
             GetComponent<NetworkServerTimer>().StartTimer();
 
             onGameStarted?.Invoke();
+
+            StartCoroutine(WaitAndSetPosition(temp, objects));
+        }
+
+        private IEnumerator WaitAndSetPosition(List<Vector3> temp, List<NetworkObjectReference> objects)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            for (int i = 0; i < objects.Count; i++)
+            {
+                NetworkObjectReference reference = objects[i];
+                Vector3 pos = temp[i];
+
+                SetPositionClientRpc(reference, pos);
+            }
+        }
+
+        [ClientRpc]
+        private void SetPositionClientRpc(NetworkObjectReference reference, Vector3 pos)
+        {
+            NetworkObject obj = reference;
+            if (obj.IsOwner)
+            {
+                obj.transform.position = pos;
+                Debug.Log("i own this");
+                Debug.Log(pos);
+            }
         }
 
         [ClientRpc]
@@ -221,7 +250,7 @@ namespace DH
                 {
                     if (obj.ClientId == list[i].ID)
                     {
-                        obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(NetworkManager.ServerClientId);
+                        obj.PlayerObject.GetComponent<NetworkObject>().RemoveOwnership();
                         obj.PlayerObject.transform.position = pos[i].position;
                         obj.PlayerObject.transform.rotation = pos[i].rotation;
                         obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(list[i].ID);
@@ -237,12 +266,6 @@ namespace DH
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-        }
-
-        [ClientRpc]
-        public void DeleteTransformClientRpc()
-        {
-            NetworkManager.ConnectedClients[NetworkManager.LocalClientId].PlayerObject.GetComponent<ClientNetworkTransform>().enabled = false;
         }
 
         public void ServerGameEnd()
