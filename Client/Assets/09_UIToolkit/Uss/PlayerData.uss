@@ -12,7 +12,7 @@
 .input-control > #unity-text-input {
     background-color: rgba(0, 0, 0, 0);
     -unity-text-align: middle-center;
-    font-size: 60px;
+    font-size: 80px;
     color: rgb(255, 255, 255);
     border-left-color: rgba(255, 255, 255, 0);
     border-right-color: rgba(255, 255, 255, 0);
@@ -20,6 +20,8 @@
     border-bottom-color: rgb(255, 255, 255);
     border-bottom-width: 10px;
     width: 115px;
+    -unity-font: resource('02.Font/HakgyoansimMonggeulmonggeulOTFR');
+    -unity-font-style: normal;
 }
 
 .button {
@@ -33,15 +35,15 @@
     height: 100px;
     color: rgb(0, 0, 0);
     -unity-font-definition: initial;
-    -unity-font: url('project://database/Assets/Resources/02.Font/PyeongChangPeace-Light.ttf?fileID=12800000&guid=143bf3abee24d7c4cbea0e9c3f14ff01&type=3#PyeongChangPeace-Light');
-    font-size: 40px;
+    -unity-font: resource('02.Font/HakgyoansimMonggeulmonggeulOTFR');
+    font-size: 50px;
     margin-bottom: 60px;
     transition-duration: 0.2s;
     transition-timing-function: ease-out-circ;
     margin-right: 100px;
     margin-left: 50px;
     -unity-background-image-tint-color: rgb(0, 0, 0);
-    -unity-font-style: bold;
+    -unity-font-style: normal;
 }
 
 .button:hover {
