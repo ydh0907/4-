@@ -3,11 +3,13 @@
     <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row; align-items: center;">
         <ui:VisualElement name="data-border" style="width: 55%; height: 100%; background-color: rgba(0, 0, 0, 0); justify-content: space-between;">
             <ui:VisualElement name="choose-player-or-drink-border" style="height: 1080px; align-items: center; justify-content: center; flex-direction: row; flex-grow: 1;">
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="customizing-player-btn" class="customizing-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/Card_Player.png?fileID=21300000&amp;guid=42816c4a9e50eae46825f16a678d7c47&amp;type=3#Card_Player&apos;);">
-                    <ui:Label tabindex="-1" text="캐릭터 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 40px; color: rgb(0, 0, 0); -unity-font-definition: initial; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;); bottom: 30px;" />
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="customizing-player-btn" class="customizing-btn" style="background-color: rgb(241, 119, 133);">
+                    <ui:VisualElement name="icon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/Icon_Player.png?fileID=21300000&amp;guid=b0b15e3b193863647b2a9a5058e7963c&amp;type=3#Icon_Player&apos;); height: 290px; width: 270px; top: 20px;" />
+                    <ui:Label tabindex="-1" text="캐릭터 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 40px; color: rgb(0, 0, 0); -unity-font-definition: initial; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;);" />
                 </ui:Button>
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="customizing-drink-btn" class="customizing-btn" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/Card_Can.png?fileID=21300000&amp;guid=f21efa21eb475fc44b5ef044e14b9cdb&amp;type=3#Card_Can&apos;);">
-                    <ui:Label tabindex="-1" text="음료 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 40px; color: rgb(0, 0, 0); bottom: 30px; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;); -unity-font-definition: initial;" />
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="customizing-drink-btn" class="customizing-btn" style="background-color: rgb(255, 206, 84);">
+                    <ui:VisualElement name="icon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/Icon_Can.png?fileID=21300000&amp;guid=425a0f45de9d2fa4ca70b1522ec7c2b6&amp;type=3#Icon_Can&apos;); height: 290px; width: 270px; top: 20px;" />
+                    <ui:Label tabindex="-1" text="음료 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 40px; color: rgb(0, 0, 0); -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;); -unity-font-definition: initial;" />
                 </ui:Button>
             </ui:VisualElement>
             <ui:TextField picking-mode="Ignore" value="닉네임" name="nickname-inputfeld" class="input-control" style="top: 30px; left: 185px;" />
