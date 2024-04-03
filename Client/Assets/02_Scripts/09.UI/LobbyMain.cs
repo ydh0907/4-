@@ -1,4 +1,5 @@
 using DH;
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
@@ -32,10 +33,15 @@ namespace AH {
         }
 
         public void CustomDataSetting() {
-            Debug.Log(nickname);
-            root.Q<TextField>("nickname-inputfeld").value = nickname;
+            var nickNameField = root.Q<TextField>("nickname-inputfeld");
+            nickNameField.value = nickname;
+            nickNameField.RegisterCallback<ChangeEvent<string>>(OnNicknameChanged);
             root.Q<Button>("customizing-player-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChoosePlayer(e, _dataBorder));
             root.Q<Button>("customizing-drink-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChooseDrink(e, _dataBorder));
+        }
+
+        private void OnNicknameChanged(ChangeEvent<string> evt) {
+            nickname = evt.newValue.ToString();
         }
 
         #region Handle
@@ -70,6 +76,7 @@ namespace AH {
         public string GetNickName() {
             if (root.Q<TextField>("nickname-inputfeld") != null) {
                 nickname = root.Q<TextField>("nickname-inputfeld").text;
+                Debug.Log(nickname);
             }
             return nickname;
         }
