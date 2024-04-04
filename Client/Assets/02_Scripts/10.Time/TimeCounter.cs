@@ -19,9 +19,10 @@ namespace AH {
             countText.text = startCount.ToString(); // 시작값을 바꾸고
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "", callback));
         }
+
+        public int startCount = 3;
         public void ResurrectionCountDown(Label countText, Action callback = null) {
-            int startCount = 3;
-            Debug.Log("start");
+            Debug.Log(countText);
 
             countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));

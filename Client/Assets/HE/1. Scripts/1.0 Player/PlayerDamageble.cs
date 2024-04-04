@@ -41,7 +41,6 @@ namespace HE
         {
             if(Enemy != ulong.MaxValue)
             {
-                NetworkGameManager.Instance.PlayerKillCountServerRpc(Enemy);
             }
         }
 

@@ -37,7 +37,7 @@ namespace HB
 
         public void Die()
         {
-            NetworkGameManager.Instance.PlayerKillCountServerRpc(Enemy);
+            //NetworkGameManager.Instance.PlayerKillCountServerRpc(Enemy);
             PlayerAttack.CurrentMentosCount = 0;
             SoundManager.Instance.Play("Effect/DieLaugh");
             StartCoroutine(nameof(PlayerRespawn));

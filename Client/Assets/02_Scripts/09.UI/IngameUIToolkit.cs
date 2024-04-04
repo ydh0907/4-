@@ -246,7 +246,7 @@ namespace AH
         { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
-
+            Debug.Log(counterPanel);
             _container.Clear();
             _container.Add(counterPanel);
 
@@ -284,18 +284,14 @@ namespace AH
 
         public void SetState()
         {
-            int i = 0;
+            List<PlayerInfo> list = new(NetworkGameManager.Instance.users.Values);
 
-            List<PlayerInfo> list = new();
-
-            foreach (var player in NetworkGameManager.Instance.users)
-                list.Add(player.Value);
-
-            foreach (var data in playerData)
+            if (playerData.Count < 1) return;
+            for (int i = 0; i < list.Count; i++)
             {
-                Label nickname = data.Q<Label>("nickname-txt");
-                VisualElement drinkIcon = data.Q<VisualElement>("drinkIcon");
-                Label killcount = data.Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
+                Label nickname = playerData[i].Q<Label>("nickname-txt");
+                VisualElement drinkIcon = playerData[i].Q<VisualElement>("drinkIcon");
+                Label killcount = playerData[i].Q<Label>("killCount-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
                 if (i < list.Count)
                 {
@@ -305,8 +301,6 @@ namespace AH
                     StyleBackground style = new StyleBackground(sprites[(int)user.Cola]);
                     drinkIcon.style.backgroundImage = style;
                     killcount.text = user.kill.ToString() + " Kill";
-
-                    i++;
                 }
                 else
                 {
@@ -315,12 +309,6 @@ namespace AH
                     killcount.text = "";
                 }
             }
-        }
-
-        [ClientRpc]
-        public void SetStateClientRpc()
-        {
-            SetState();
         }
 
         public void GameOver()
