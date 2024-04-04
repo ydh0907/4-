@@ -133,9 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 341532434}
   - component: {fileID: 341532435}
-  - component: {fileID: 341532436}
-  - component: {fileID: 341532438}
   - component: {fileID: 341532437}
+  - component: {fileID: 341532436}
   m_Layer: 0
   m_Name: UIDocument
   m_TagString: Untagged
@@ -172,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 9ec7cb9e98d0b464d89ecad0ac5467ec, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 09d54b9cda9c6f24e843a8fa8aa097c9, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 36ec50e6a9338e649adff1b1380981de, type: 3}
   m_SortingOrder: 0
 --- !u!114 &341532436
 MonoBehaviour:
@@ -183,12 +182,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 341532433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e6afd3bfe19c3438b63b1016d54183, type: 3}
+  m_Script: {fileID: 11500000, guid: 76350fae202c2134ab3f2a718f0db15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nickname: "\uBC15\uC544"
-  _characterSprites: []
-  _drinkSprites: []
+  _counter: {fileID: 341532437}
 --- !u!114 &341532437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,26 +195,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 341532433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6851a92eb15764bb918f41a93a14eb, type: 3}
+  m_Script: {fileID: 11500000, guid: a271334acdc4f6e4795759a775a8fcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chooseCustomizingTemplate: {fileID: 9197481963319205126, guid: 09d54b9cda9c6f24e843a8fa8aa097c9, type: 3}
-  customizingPlayerTemplate: {fileID: 9197481963319205126, guid: 920374af8a28b3b4ea40493d936d66fd, type: 3}
-  customizingDrinkTemplate: {fileID: 9197481963319205126, guid: c6913d5a89f414541a60091f429fadce, type: 3}
---- !u!114 &341532438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341532433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03216570719cc7445b4d027d17f1e2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  createRoomTemplate: {fileID: 9197481963319205126, guid: b9c6056f44d13aa4ba1181c50c125620, type: 3}
-  roomListBox: {fileID: 9197481963319205126, guid: 3ca77dd058f3e0643ae68bb54842bfb2, type: 3}
+  runningTime: 0
+  startCount: 3
 --- !u!1 &1280134897
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1280134899}
   - component: {fileID: 1280134898}
+  - component: {fileID: 1280134900}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -312,6 +295,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1280134900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280134897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1484153857
 GameObject:
   m_ObjectHideFlags: 0

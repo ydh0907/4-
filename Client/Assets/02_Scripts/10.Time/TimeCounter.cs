@@ -8,6 +8,7 @@ namespace AH {
     public class TimeCounter : MonoBehaviour {
         IngameUIToolkit ingameToolkit;
         [SerializeField] private int runningTime;
+        public int startCount = 3;
 
         private void Awake() {
             ingameToolkit = GetComponent<IngameUIToolkit>();
@@ -20,21 +21,20 @@ namespace AH {
             StartCoroutine(RoutineCountDown(countText, startCount, 3, "", callback));
         }
 
-        public int startCount = 3;
         public void ResurrectionCountDown(Label countText, Action callback = null) {
+            //countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
             Debug.Log(countText);
-
-            countText.text = $"{startCount}초 뒤 부활"; // 시작값을 바꾸고
-            StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활", callback));
+            Debug.Log(startCount);
+            StartCoroutine(RoutineCountDown(countText, startCount, 3, "초 뒤 부활"));
         }
-        public void PlayTimeCountDown(Label countText) {
+        public void InGameCountDown(Label countText) {
             int minutes = Mathf.FloorToInt(runningTime / 60);
             int seconds = Mathf.FloorToInt(runningTime % 60);
             countText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-            StartCoroutine(RoutinePlayCountDown(countText, runningTime));
+            StartCoroutine(RoutineInGameCountDown(countText, runningTime));
         }
-        IEnumerator RoutinePlayCountDown(Label countText, float runningTime) {
+        IEnumerator RoutineInGameCountDown(Label countText, float runningTime) {
             while(runningTime > 0) { // 기본값 180
                 runningTime -= 1;
 
