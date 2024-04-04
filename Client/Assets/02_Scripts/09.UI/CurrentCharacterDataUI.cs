@@ -20,8 +20,13 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
     private int _prevIdleIdx;
 
+
+    public static CurrentCharacterDataUI instance;
+
+
     private void Awake()
     {
+        instance = this;
         Transform drinkTrm = transform.Find("Drink");
         Transform characterTrm = transform.Find("Character");
 
