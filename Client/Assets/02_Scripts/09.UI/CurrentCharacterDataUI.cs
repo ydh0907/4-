@@ -43,6 +43,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
     private void Start()
     {
         StartCoroutine(RandomIdle());
+        ChangeCharacterData(ConnectManager.Instance.cola, ConnectManager.Instance.character, true);
     }
 
     private void Update()
@@ -89,9 +90,9 @@ public class CurrentCharacterDataUI : MonoBehaviour
     }
 
 
-    public void ChangeCharacterData(Cola cola, Character character)
+    public void ChangeCharacterData(Cola cola, Character character, bool immediate = false)
     {
-        if (cola != _currentDrinkType)
+        if (cola != _currentDrinkType || immediate)
         {
             if (_currentDrinkObject != null)
             {
@@ -103,7 +104,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
             _currentDrinkType = cola;
         }
 
-        if (character != _currentCharacterType)
+        if (character != _currentCharacterType || immediate)
         {
             if (_currentCharacterObject != null)
             {
