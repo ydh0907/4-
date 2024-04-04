@@ -1,34 +1,34 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/AH/09_UIToolkit/Ingame/PlayGame.uss?fileID=7433441132597879392&amp;guid=f7851507cebef19478ee356d8cb53083&amp;type=3#PlayGame" />
+    <Style src="project://database/Assets/09_UIToolkit/Uss/PlayGame.uss?fileID=7433441132597879392&amp;guid=f7851507cebef19478ee356d8cb53083&amp;type=3#PlayGame" />
     <ui:VisualElement name="container" style="flex-grow: 1; justify-content: space-between; align-items: flex-end;">
         <ui:VisualElement name="players-border" class="players-border">
             <ui:VisualElement name="player" class="parentPlayerBase">
                 <ui:Label tabindex="-1" text="nickName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nickname-txt" class="nickname-txt" />
-                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/player.png?fileID=21300000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(255, 194, 178); flex-direction: row;">
+                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/player.png?fileID=2800000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(255, 194, 178); flex-direction: row;">
                     <ui:VisualElement name="drinkIcon" class="playerIcon" />
                     <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="player" class="parentPlayerBase">
                 <ui:Label tabindex="-1" text="nickName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nickname-txt" class="nickname-txt" />
-                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/player.png?fileID=21300000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(255, 209, 102); flex-direction: row;">
+                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/player.png?fileID=2800000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(255, 209, 102); flex-direction: row;">
                     <ui:VisualElement name="drinkIcon" class="playerIcon" />
                     <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="timer" style="width: 400px; height: 145px; background-image: url(&apos;project://database/Assets/AH/04_Sprites/timer.png?fileID=21300000&amp;guid=a1bbd5aa8449fba409e1d478905072d8&amp;type=3#timer&apos;); align-items: center; justify-content: center;">
-                <ui:Label tabindex="-1" text="5 : 00" parse-escape-sequences="true" display-tooltip-when-elided="true" name="time-txt" style="color: rgb(0, 0, 0); -unity-text-align: middle-center; font-size: 90px; -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=630f7ad1107ef3f409dae609a2dc5193&amp;type=3#NotInter-Regular&apos;); -unity-font-style: bold;" />
+            <ui:VisualElement name="timer" style="width: 400px; height: 160px; background-image: url(&apos;project://database/Assets/04_Sprites/UI/timer.png?fileID=2800000&amp;guid=a1bbd5aa8449fba409e1d478905072d8&amp;type=3#timer&apos;); align-items: center; justify-content: center;">
+                <ui:Label tabindex="-1" text="5 : 00" parse-escape-sequences="true" display-tooltip-when-elided="true" name="time-txt" style="color: rgb(0, 0, 0); -unity-text-align: middle-center; font-size: 100px; -unity-font-definition: initial; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;); -unity-font-style: normal;" />
             </ui:VisualElement>
             <ui:VisualElement name="player" class="parentPlayerBase">
                 <ui:Label tabindex="-1" text="nickName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nickname-txt" class="nickname-txt" />
-                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/player.png?fileID=21300000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(198, 255, 155); flex-direction: row;">
+                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/player.png?fileID=2800000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(198, 255, 155); flex-direction: row;">
                     <ui:VisualElement name="drinkIcon" class="playerIcon" />
                     <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="player" class="parentPlayerBase">
                 <ui:Label tabindex="-1" text="nickName" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nickname-txt" class="nickname-txt" />
-                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/player.png?fileID=21300000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(146, 211, 251); flex-direction: row;">
+                <ui:VisualElement name="base-player" class="basePlayer" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/player.png?fileID=2800000&amp;guid=f55752f659e4b9148bb5f5f15aee3705&amp;type=3#player&apos;); -unity-background-image-tint-color: rgb(146, 211, 251); flex-direction: row;">
                     <ui:VisualElement name="drinkIcon" class="playerIcon" />
                     <ui:Label tabindex="-1" text="0 KILL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="killCount-txt" class="playerName-txt" />
                 </ui:VisualElement>
@@ -36,8 +36,8 @@
         </ui:VisualElement>
         <ui:VisualElement name="playerData" style="flex-grow: 1; justify-content: space-between; flex-direction: row; align-items: flex-end;">
             <ui:VisualElement name="itemIcon-border" style="width: 600px; height: 433px; flex-direction: row; align-items: flex-end; justify-content: flex-end;">
-                <ui:VisualElement name="bareHandedAttack" class="largeIcon" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/icons.png?fileID=1281315516&amp;guid=afc3dda97dddb8c41bbdd6ccb832371d&amp;type=3#icons_1&apos;);" />
-                <ui:VisualElement name="mantosAttack" class="smallIcon" style="background-image: url(&apos;project://database/Assets/AH/04_Sprites/icons.png?fileID=-454306153&amp;guid=afc3dda97dddb8c41bbdd6ccb832371d&amp;type=3#icons_0&apos;);" />
+                <ui:VisualElement name="bareHandedAttack" class="largeIcon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/icons.png?fileID=1281315516&amp;guid=afc3dda97dddb8c41bbdd6ccb832371d&amp;type=3#icons_1&apos;);" />
+                <ui:VisualElement name="mantosAttack" class="smallIcon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/icons.png?fileID=-454306153&amp;guid=afc3dda97dddb8c41bbdd6ccb832371d&amp;type=3#icons_0&apos;);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

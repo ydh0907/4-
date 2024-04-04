@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1e56e44904414d5419ae86beb53e9193
+guid: 1ebf8b887644b0445ae46b4cf8dd3dbe
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - KIMM_Bold
+  - Hakgyoansim MonggeulmonggeulOTF
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

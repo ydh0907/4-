@@ -453,6 +453,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: "\uB2C9\uB124\uC784"
+  _characterSprites:
+  - {fileID: 21300000, guid: b5008e5cd130a9b4eb8abeab1829048b, type: 3}
+  - {fileID: 21300000, guid: fafc8eaea01169b4f8c731efafdcfdfa, type: 3}
+  - {fileID: 21300000, guid: a99361a086887964991e587cf57dca99, type: 3}
+  - {fileID: 21300000, guid: 2fc16e9e49fbf5f40856ab745b883330, type: 3}
+  - {fileID: 21300000, guid: d1be3c5c355893c4b8c5ef35c99937b8, type: 3}
+  - {fileID: 21300000, guid: d881b661239c146478cc4be485261c59, type: 3}
+  - {fileID: 21300000, guid: 9d718de3c07721248a4bc697a4cddefa, type: 3}
+  - {fileID: 21300000, guid: ac54bb266d345b74d9b5e09ad5b50f5c, type: 3}
+  - {fileID: 21300000, guid: e3100d3eda2231a4daabfb530ce47a69, type: 3}
+  - {fileID: 21300000, guid: 1930dba0b778010428ab788c7645fa48, type: 3}
+  _drinkSprites:
+  - {fileID: 21300000, guid: 4c4697776c34c244bb77bc9ecbdc9650, type: 3}
+  - {fileID: 21300000, guid: e2e07c6cc07700d4593188ffa682d37d, type: 3}
+  - {fileID: 21300000, guid: e5d432e23f4e06d4a9b2705a63248098, type: 3}
+  - {fileID: 21300000, guid: b0f7a788b075dc24fb4ae26202a59916, type: 3}
 --- !u!114 &823230281
 MonoBehaviour:
   m_ObjectHideFlags: 0
