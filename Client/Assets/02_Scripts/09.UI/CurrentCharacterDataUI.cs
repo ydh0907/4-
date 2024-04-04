@@ -50,7 +50,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            transform.Rotate(0f, -Input.GetAxis("Mouse X") * _rotSpeed * Time.deltaTime, 0f, Space.World);
+            transform.Rotate(0f, -Input.GetAxis("Mouse X") * _rotSpeed, 0f, Space.World);
         }
 
         if (Input.GetMouseButtonUp(1))
