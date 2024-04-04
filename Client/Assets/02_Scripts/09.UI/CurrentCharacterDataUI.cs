@@ -5,17 +5,20 @@ using DH;
 using PJH;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class CurrentCharacterDataUI : MonoBehaviour
 {
     [SerializeField] private float _rotSpeed;
     private Dictionary<Cola, GameObject> _drinkObjects = new();
-    private Dictionary<Character, GameObject> _characterObjects = new();
+    private Dictionary<Character, Animator> _characterObjects = new();
 
     private GameObject _currentDrinkObject;
     private Cola _currentDrinkType;
-    private GameObject _currentCharacterObject;
+    private Animator _currentCharacterObject;
     private Character _currentCharacterType;
+
+    private int _prevIdleIdx;
 
     private void Awake()
     {
@@ -31,16 +34,20 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
         for (int i = 0; i < characterTrm.childCount; i++)
         {
-            GameObject character = characterTrm.GetChild(i).gameObject;
+            Animator character = characterTrm.GetChild(i).gameObject.GetComponent<Animator>();
             _characterObjects.Add((Character)i, character);
             character.gameObject.SetActive(false);
         }
     }
 
+    private void Start()
+    {
+        StartCoroutine(RandomIdle());
+    }
+
     private void Update()
     {
         ChangeCharacterData(ConnectManager.Instance.cola, ConnectManager.Instance.character);
-
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -60,6 +67,27 @@ public class CurrentCharacterDataUI : MonoBehaviour
         }
     }
 
+    private IEnumerator RandomIdle()
+    {
+        yield return new WaitUntil(() => _currentCharacterObject != null);
+        while (true)
+        {
+            yield return new WaitUntil(() => _currentCharacterObject.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
+            yield return new WaitForSeconds(Random.Range(3f, 6f));
+            int idleIdx = Random.Range(1, 3);
+            while (idleIdx == _prevIdleIdx)
+            {
+                idleIdx = Random.Range(1, 3);
+                yield return null;
+            }
+
+            _prevIdleIdx = idleIdx;
+            _currentCharacterObject.CrossFadeInFixedTime($"Idle{idleIdx}", .4f);
+            yield return null;
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
 
     public void ChangeCharacterData(Cola cola, Character character)
     {
@@ -67,11 +95,11 @@ public class CurrentCharacterDataUI : MonoBehaviour
         {
             if (_currentDrinkObject != null)
             {
-                _currentDrinkObject.SetActive(false);
+                _currentDrinkObject.gameObject.SetActive(false);
             }
 
             _currentDrinkObject = _drinkObjects[cola];
-            _currentDrinkObject.SetActive(true);
+            _currentDrinkObject.gameObject.SetActive(true);
             _currentDrinkType = cola;
         }
 
@@ -79,11 +107,12 @@ public class CurrentCharacterDataUI : MonoBehaviour
         {
             if (_currentCharacterObject != null)
             {
-                _currentCharacterObject.SetActive(false);
+                _currentCharacterObject.Play("Idle");
+                _currentCharacterObject.gameObject.SetActive(false);
             }
 
             _currentCharacterObject = _characterObjects[character];
-            _currentCharacterObject.SetActive(true);
+            _currentCharacterObject.gameObject.SetActive(true);
             _currentCharacterType = character;
         }
     }
