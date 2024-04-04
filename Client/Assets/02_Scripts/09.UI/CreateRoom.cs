@@ -27,7 +27,7 @@ namespace AH {
 
             int index = 0;
             createRoomList = template.Q<VisualElement>("unity-content-container");
-            for (int i = 0; i < createRoomCount; i++) { // »ý¼ºÇÒ roomBoxÀÇ °³¼ö ¹× »ý¼º
+            for (int i = 0; i < createRoomCount; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ roomBoxï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 var roomBoxTemplate = roomListBox.Instantiate().Q<VisualElement>("roomListBox");
 
                 var nickname = roomBoxTemplate.Q<Label>("ninkname-txt");
@@ -83,6 +83,7 @@ namespace AH {
         }
         private void HandleBackSceneButton(ClickEvent evt) {
             SceneManager.LoadScene("DH_Lobby");
+
         }
     }
 }
