@@ -246,7 +246,6 @@ namespace AH
         { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             var countText = counterPanel.Q<Label>("dit-txt");
-            Debug.Log(counterPanel);
             _container.Clear();
             _container.Add(counterPanel);
 
