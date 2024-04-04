@@ -1,3 +1,5 @@
+using AH;
+using DH;
 using GM;
 using System;
 using System.Collections;
@@ -9,6 +11,8 @@ namespace PJH
 {
     public partial class Player : NetworkBehaviour
     {
+        private Player harmer;
+
         public void StartInit()
         {
             Init();
@@ -114,9 +118,12 @@ namespace PJH
         #endregion
 
 
-        public void ApplyDamage(int damage, float bounceOff, Vector3 position)
+        public void ApplyDamage(int damage, float bounceOff, Vector3 position, Player harmer)
         {
-            ApplyDamageClientRpc(damage, bounceOff, position);
+            Vector3 dir = transform.position - position;
+            dir.Normalize();
+
+            this.harmer = harmer;
 
             if (!IsAttacking)
                 _animator.Play("Hit");
@@ -124,19 +131,20 @@ namespace PJH
             {
                 _health.TakeDamage(damage);
                 if (_health.CurrentHealth == 0) Death();
+                else AddForceClientRpc(bounceOff * dir, OwnerClientId);
             }
         }
 
         [ClientRpc]
-        public void ApplyDamageClientRpc(int damage, float bounceOff, Vector3 position)
+        private void AddForceClientRpc(Vector3 force, ulong id)
         {
-            Debug.Log("Hit and Forced before");
-            if (!IsOwner) return;
-            Debug.Log("Hit and Forced after");
-            AddForce((transform.position - position).normalized * bounceOff);
+            if (OwnerClientId == id)
+                AddForce(force);
+
+            _animator.Play("Hit");
         }
 
-        public async void Faint()
+        public void Faint()
         {
             FaintClientRpc();
         }
@@ -144,7 +152,7 @@ namespace PJH
         [ClientRpc]
         private void FaintClientRpc()
         {
-            if (!IsOwner) return;
+            _animator.Play("Hit");
             Debug.Log("Faint 0.5f");
             _rigidbody.velocity = Vector3.zero;
             _lockMovement = true;
@@ -168,8 +176,12 @@ namespace PJH
         private void Death()
         {
             if (_isDead) return;
-            _isDead = true;
-            gameObject.SetActive(false);
+
+            if (harmer)
+            {
+                NetworkGameManager.Instance.PlayerKillCount(harmer.OwnerClientId);
+            }
+
             RespawnManager.Instance.Respawn(this);
             DeathClientRpc();
         }
@@ -177,16 +189,30 @@ namespace PJH
         [ClientRpc]
         private void DeathClientRpc()
         {
-            if (IsOwner) return;
-            if (_isDead) return;
             _isDead = true;
             gameObject.SetActive(false);
+
+            if (IsOwner)
+                FindObjectOfType<IngameUIToolkit>().ResurrectionCounter();
         }
 
         public void Respawn()
         {
-            _rigidbody.position = MapManager.Instance.GetSpawnPosition();
+            Debug.Log("Respawn call");
+            transform.position = MapManager.Instance.GetSpawnPosition();
             _health.Reset();
+
+            IsAttacking = false;
+            IsJumping = false;
+            _isDead = false;
+            IsSprinting = false;
+            IsStrafing = false;
+            _input = Vector3.zero;
+            _lockMovement = false;
+            _lockRotation = false;
+            StopMove = false;
+            gameObject.SetActive(true);
+
             RespawnClientRpc();
         }
 
@@ -202,10 +228,7 @@ namespace PJH
             _lockMovement = false;
             _lockRotation = false;
             StopMove = false;
-            if (IsOwner)
-                gameObject.SetActive(true);
-            else
-                Wait(0.5f, () => gameObject.SetActive(true));
+            gameObject.SetActive(true);
         }
 
         public async void AddForce(Vector3 dir)

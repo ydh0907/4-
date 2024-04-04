@@ -47,6 +47,8 @@ public class SoundManager : MonoSingleton<SoundManager> {
             _audioSources[(int)Sound.Bgm].loop = true;
 
         }
+
+        RegulateSound(Sound.Bgm, 0);
     }
 
     /// <summary> Clear �Լ� �����

@@ -37,9 +37,6 @@ namespace PJH
             bool useVerticalVelocity = true;
             if (useVerticalVelocity) targetVelocity.y = _rigidbody.velocity.y;
 
-
-            print(targetPosition);
-            print(targetVelocity);
             _rigidbody.velocity = targetVelocity;
         }
 

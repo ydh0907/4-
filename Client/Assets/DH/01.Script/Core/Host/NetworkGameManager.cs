@@ -82,24 +82,21 @@ namespace DH
             NetworkServerApprovalManager.Instance.UserLogClientRpc();
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void PlayerKillCountServerRpc(ulong id)
+        public void PlayerKillCount(ulong id)
         {
             users[id].kill++;
-            SetValueServerRpc(id, users[id]);
-            FindFirstObjectByType<IngameUIToolkit>().SetStateClientRpc();
+            SetValue(id, users[id]);
         }
 
         [ServerRpc(RequireOwnership = false)]
         public void PlayerReadyServerRpc(ulong id, bool ready)
         {
             users[id].Ready = ready;
-            SetValueServerRpc(id, users[id]);
+            SetValue(id, users[id]);
             ReadyObjects.Instance.SetNicknameColorClientRpc();
         }
 
-        [ServerRpc(RequireOwnership = false)]
-        public void SetValueServerRpc(ulong Key, PlayerInfo Value)
+        public void SetValue(ulong Key, PlayerInfo Value)
         {
             users[Key] = Value;
             OnValueChangedClientRpc(Key, Value);
@@ -112,6 +109,8 @@ namespace DH
                 users.Remove(Key);
             else
                 users[Key] = Value;
+
+            FindFirstObjectByType<IngameUIToolkit>().SetState();
         }
 
         [ServerRpc]
@@ -232,13 +231,16 @@ namespace DH
             foreach (var player in users) list.Add(player.Value);
 
             PlayerInfo temp;
-            for (int i = 0; i < list.Count - 1; i++)
+            for (int j = 0; j < list.Count; j++)
             {
-                if (list[i].kill < list[i + 1].kill)
+                for (int i = 0; i < list.Count - 1; i++)
                 {
-                    temp = list[i];
-                    list[i] = list[i + 1];
-                    list[i + 1] = temp;
+                    if (list[i].kill < list[i + 1].kill)
+                    {
+                        temp = list[i];
+                        list[i] = list[i + 1];
+                        list[i + 1] = temp;
+                    }
                 }
             }
 
@@ -246,19 +248,22 @@ namespace DH
 
             for (int i = 0; i < list.Count; i++)
             {
-                foreach (Unity.Netcode.NetworkClient obj in NetworkManager.ConnectedClients.Values)
-                {
-                    if (obj.ClientId == list[i].ID)
-                    {
-                        obj.PlayerObject.GetComponent<NetworkObject>().RemoveOwnership();
-                        obj.PlayerObject.transform.position = pos[i].position;
-                        obj.PlayerObject.transform.rotation = pos[i].rotation;
-                        obj.PlayerObject.GetComponent<NetworkObject>().ChangeOwnership(list[i].ID);
-                    }
-                }
+                MoveClientOnEndClientRpc(pos[i].position, list[i].ID);
             }
 
             GameEndClientRpc();
+        }
+
+        [ClientRpc]
+        private void MoveClientOnEndClientRpc(Vector3 pos, ulong id)
+        {
+            NetworkObject obj = NetworkManager.Singleton.LocalClient.PlayerObject;
+            if (obj.OwnerClientId == id)
+            {
+                obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                obj.transform.position = pos;
+                obj.GetComponent<PJH.Player>().StopMove = true;
+            }
         }
 
         [ClientRpc]

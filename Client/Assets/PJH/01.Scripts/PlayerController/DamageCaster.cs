@@ -6,6 +6,7 @@ namespace PJH
 {
     public class DamageCaster : MonoBehaviour
     {
+        [SerializeField] AudioClip hitSound;
         [SerializeField] private int _damage;
         [SerializeField] private float _bounceOff = 4;
         private Collider _collider;
@@ -38,14 +39,16 @@ namespace PJH
                 player.Faint();
                 EnableCollider(false);
                 Debug.Log("Hit Player");
+                SoundManager.Instance.Play(hitSound);
                 return;
             }
 
             if (other.TryGetComponent(out Drink drink))
             {
-                drink.ApplyDamage(_damage, _bounceOff, _owner.transform.position);
+                drink.ApplyDamage(_damage, _bounceOff, _owner.transform.position, _owner);
                 EnableCollider(false);
                 Debug.Log("Hit Cola");
+                SoundManager.Instance.Play(hitSound);
             }
         }
 

@@ -25,9 +25,9 @@ namespace PJH
             transform.localPosition = pos;
         }
         
-        public void ApplyDamage(int damage, float bounceOff, Vector3 position)
+        public void ApplyDamage(int damage, float bounceOff, Vector3 position, Player harmer)
         {
-            _owner.ApplyDamage(damage, bounceOff, position);
+            _owner.ApplyDamage(damage, bounceOff, position, harmer);
         }
     }
 }

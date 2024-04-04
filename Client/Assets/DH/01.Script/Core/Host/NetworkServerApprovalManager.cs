@@ -128,7 +128,7 @@ namespace DH
 
             players.Remove(id);
 
-            NetworkGameManager.Instance.SetValueServerRpc(id, null);
+            NetworkGameManager.Instance.SetValue(id, null);
 
             ReadyObjects.Instance.SetCurrentCharactersClientRpc();
             ReadyObjects.Instance.SetNicknameColorClientRpc();

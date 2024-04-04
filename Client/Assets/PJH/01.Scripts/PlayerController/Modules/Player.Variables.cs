@@ -85,7 +85,7 @@ namespace PJH
 
         public bool IsGrounded { get; set; }
         public bool IsSprinting { get; set; }
-        public bool StopMove { get; private set; }
+        public bool StopMove { get; set; }
 
         public bool UseRootMotion { get; set; }
 
