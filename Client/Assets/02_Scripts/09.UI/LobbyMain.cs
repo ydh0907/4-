@@ -41,10 +41,6 @@ namespace AH {
             root.Q<Button>("customizing-player-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChoosePlayer(e, _dataBorder));
             root.Q<Button>("customizing-drink-btn").RegisterCallback<ClickEvent>((e) => _playerData.HandleGoToChooseDrink(e, _dataBorder));
             
-            root.Q<VisualElement>("DrinkImage").style.backgroundImage =
-                new StyleBackground(_drinkSprites[(byte)ConnectManager.Instance.cola]);
-            root.Q("CharacterImage").style.backgroundImage =
-                new StyleBackground(_characterSprites[(byte)ConnectManager.Instance.character]);
         }
 
         private void OnNicknameChanged(ChangeEvent<string> evt) {
