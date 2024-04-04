@@ -18,7 +18,6 @@ namespace AH
 
         public string nickname = "�г���";
         bool flag;
-        [SerializeField] private List<Sprite> _characterSprites, _drinkSprites;
 
         protected override void Awake()
         {
