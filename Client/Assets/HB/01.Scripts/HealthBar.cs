@@ -10,7 +10,7 @@ namespace HB
         [SerializeField]
         private Transform _barTransform;
 
-        public void HandleHealthChanged(int oldHealth, int newHealth, float ratio)
+        public void HandleHealthChanged(float oldHealth, float newHealth, float ratio)
         {
             ratio = Mathf.Clamp01(ratio);
             _barTransform.localScale = new Vector3(ratio, 1, 1);

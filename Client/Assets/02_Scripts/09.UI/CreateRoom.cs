@@ -1,4 +1,3 @@
-using AH;
 using DH;
 using Packets;
 using System.Collections.Generic;
@@ -7,8 +6,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace AH {
-    public class CreateRoom : UI {
+namespace AH
+{
+    public class CreateRoom : UI
+    {
         [SerializeField] protected VisualTreeAsset createRoomTemplate;
         [SerializeField] protected VisualTreeAsset roomListBox;
 
@@ -18,7 +19,8 @@ namespace AH {
         private Room SelectedRoom;
         private int createRoomCount = 0;
 
-        private void CreateRoomList(List<Room> room) {
+        private void CreateRoomList(List<Room> room)
+        {
             var template = InstantiateTemplate(createRoomTemplate, root, "container");
 
             root.Q<Button>("refresh-btn").RegisterCallback<ClickEvent>(HandleRefresh);
@@ -27,7 +29,8 @@ namespace AH {
 
             int index = 0;
             createRoomList = template.Q<VisualElement>("unity-content-container");
-            for (int i = 0; i < createRoomCount; i++) { // ������ roomBox�� ���� �� ����
+            for (int i = 0; i < createRoomCount; i++)
+            { // ������ roomBox�� ���� �� ����
                 var roomBoxTemplate = roomListBox.Instantiate().Q<VisualElement>("roomListBox");
 
                 var nickname = roomBoxTemplate.Q<Label>("ninkname-txt");
@@ -41,48 +44,60 @@ namespace AH {
                 ++index;
             }
         }
-        private void ChooseRoom(List<Room> room) {
-            for (int i = 0; i < createRoomList.childCount; i++) {
-                if (createRoomList[i] as Button != null) {
+        private void ChooseRoom(List<Room> room)
+        {
+            for (int i = 0; i < createRoomList.childCount; i++)
+            {
+                if (createRoomList[i] as Button != null)
+                {
                     roomList.Add(createRoomList[i] as Button);
                 }
             }
 
-            createRoomList.RegisterCallback<ClickEvent>(evt => {
+            createRoomList.RegisterCallback<ClickEvent>(evt =>
+            {
                 var dve = evt.target as Button;
-                if (dve != null) {
+                if (dve != null)
+                {
                     OnChooseRoom(roomList, dve);
 
                     SelectedRoom = room[roomList.IndexOf(dve)];
                 }
             });
         }
-        private void Refresh(List<Room> room) {
+        private void Refresh(List<Room> room)
+        {
             createRoomCount = room.Count;
             roomList.Clear();
             CreateRoomList(room);
             ChooseRoom(room);
         }
-        private void OnChooseRoom(List<Button> list, Button dve) {
-            foreach (var button in list) {
+        private void OnChooseRoom(List<Button> list, Button dve)
+        {
+            foreach (var button in list)
+            {
                 button.RemoveFromClassList("choose");
-                if (button == dve) {
+                if (button == dve)
+                {
                     button.AddToClassList("choose");
                 }
             }
         }
 
-        public void HandleRefresh(ClickEvent evt) {
+        public void HandleRefresh(ClickEvent evt)
+        {
             _lobbyMain.ButtonClick();
             SelectedRoom = null;
             Program.Instance.Reload(Refresh);
         }
-        private void HandleEnterRoom(ClickEvent evt) {
+        private void HandleEnterRoom(ClickEvent evt)
+        {
             _lobbyMain.ButtonClick();
             ConnectManager.Instance.StartClient(SelectedRoom.roomName, _lobbyMain.GetNickName());
         }
-        private void HandleBackSceneButton(ClickEvent evt) {
-            SceneManager.LoadScene("DH_Lobby");
+        private void HandleBackSceneButton(ClickEvent evt)
+        {
+            SceneManager.LoadScene(1);
 
         }
     }

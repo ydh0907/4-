@@ -49,11 +49,8 @@ namespace TestClient
             connector = new Connector(endPoint, serverSession);
             connector.StartConnect(endPoint);
 
-            yield return new WaitUntil(() =>
-            {
-                connect = connector.Connected;
-                return connect;
-            });
+            yield return new WaitUntil(() => connector.Connected);
+            connect = connector.Connected;
         }
 
         public void DisconnectServer()

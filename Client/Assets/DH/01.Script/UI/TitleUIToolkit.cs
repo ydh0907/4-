@@ -109,7 +109,7 @@ namespace DH {
         }
         private void HandleInputPlayerDataScene(ClickEvent evt) { // host
             ButtonClick();
-            SceneManager.LoadScene("DH_Lobby");
+            SceneManager.LoadScene(1);
         }
         private void ExitGame(ClickEvent evt) { // exit
             ButtonClick();

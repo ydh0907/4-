@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +11,7 @@ namespace PJH
         public event Action JumpEvent;
         public event Action<bool> RunEvent;
         public event Action AttackEvent;
+        public event Action UseMentosEvent;
         private Control _control;
 
         private void OnEnable()
@@ -32,7 +30,7 @@ namespace PJH
 
         public void OnJump(InputAction.CallbackContext context)
         {
-             if (context.started) JumpEvent?.Invoke();
+            if (context.started) JumpEvent?.Invoke();
         }
 
         public void OnAttack(InputAction.CallbackContext context)
@@ -62,6 +60,11 @@ namespace PJH
                         break;
                 }
             }
+        }
+
+        public void OnMentosUse(InputAction.CallbackContext context)
+        {
+            UseMentosEvent?.Invoke();
         }
     }
 }

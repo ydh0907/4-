@@ -28,7 +28,12 @@ namespace DH
         public Action onGameStarted = null;
         public Action onGameEnded = null;
 
+        public NetworkVariable<bool> IsOnGame = new(false);
+
         public static bool MatchingServerConnection = false;
+
+        [field: SerializeField] public int maxTime { get; private set; } = 90;
+        public NetworkVariable<int> currentTime = new(0);
 
         private void Awake()
         {
@@ -66,6 +71,7 @@ namespace DH
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            currentTime.Value = maxTime;
         }
 
         public void SyncPlayerList()
@@ -168,6 +174,23 @@ namespace DH
             onGameStarted?.Invoke();
 
             StartCoroutine(WaitAndSetPosition(temp, objects));
+
+            IsOnGame.Value = true;
+
+            StartCoroutine(StartTimerRoutine());
+        }
+
+        private IEnumerator StartTimerRoutine()
+        {
+            WaitForSeconds wait = new WaitForSeconds(1f);
+
+            while (currentTime.Value > 0)
+            {
+                yield return wait;
+                currentTime.Value -= 1;
+            }
+
+            GameResultSetting();
         }
 
         private IEnumerator WaitAndSetPosition(List<Vector3> temp, List<NetworkObjectReference> objects)
@@ -252,6 +275,7 @@ namespace DH
             }
 
             GameEndClientRpc();
+            IsOnGame.Value = false;
         }
 
         [ClientRpc]
@@ -283,16 +307,6 @@ namespace DH
         }
 
         public static string GetLocalIP() => Dns.GetHostAddresses(Dns.GetHostName())[1].ToString();
-
-        public override void OnNetworkDespawn()
-        {
-            base.OnNetworkDespawn();
-
-            if (MatchingServerConnection)
-            {
-                Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
-            }
-        }
 
         private bool CanQuit()
         {
