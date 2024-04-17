@@ -61,9 +61,6 @@ namespace DH
             {
                 users.Clear();
 
-                NetworkManager.Singleton.Shutdown();
-                Destroy(NetworkManager.Singleton.gameObject);
-
                 LoadSceneManager.Instance.LoadScene(2);
             }
         }
@@ -282,11 +279,14 @@ namespace DH
         private void MoveClientOnEndClientRpc(Vector3 pos, ulong id)
         {
             NetworkObject obj = NetworkManager.Singleton.LocalClient.PlayerObject;
+            Player player = obj.GetComponent<Player>();
             if (obj.OwnerClientId == id)
             {
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = pos;
-                obj.GetComponent<PJH.Player>().StopMove = true;
+                player.Model.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                player._lockMovement = true;
+                player._lockRotation = true;
             }
         }
 

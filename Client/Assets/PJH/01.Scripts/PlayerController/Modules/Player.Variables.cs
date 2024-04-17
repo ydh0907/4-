@@ -99,8 +99,8 @@ namespace PJH
         private float _jumpCounter;
         private float _groundDistance;
         private RaycastHit _groundHit;
-        private bool _lockMovement = false;
-        private bool _lockRotation = false;
+        public bool _lockMovement = false;
+        public bool _lockRotation = false;
         private Transform _rotateTarget;
         private Vector3 _input;
         private Vector3 _colliderCenter;
