@@ -22,12 +22,6 @@ namespace DH
 
         public UnityEvent onDisconnected = new();
 
-        private void Awake()
-        {
-            if (Instance != null) enabled = false;
-            Instance = this;
-        }
-
         public void StartConnect()
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += HostApproval;
@@ -36,7 +30,11 @@ namespace DH
 
             isConnect = NetworkManager.Singleton.StartHost();
 
-            StartCoroutine(WaitConnect());
+            if (isConnect == true)
+            {
+                OnConnected();
+            }
+            else OnConnectFailed();
         }
 
         private void HostApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
@@ -47,22 +45,11 @@ namespace DH
             NetworkManager.Singleton.ConnectionApprovalCallback -= HostApproval;
         }
 
-        private IEnumerator WaitConnect()
-        {
-            yield return new WaitWhile(() => isConnect == null);
-
-            if (isConnect == true)
-            {
-                OnConnected();
-            }
-            else OnConnectFailed();
-        }
-
         private void OnConnected()
         {
             isConnect = null;
 
-            LoadSceneManager.Instance.LoadScene(2, () =>
+            LoadSceneManager.Instance.LoadScene(3, () =>
             {
                 Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
                 Instantiate(Map).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);

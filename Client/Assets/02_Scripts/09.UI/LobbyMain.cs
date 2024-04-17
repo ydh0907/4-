@@ -1,7 +1,6 @@
 using DH;
 using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 
@@ -80,7 +79,7 @@ namespace AH
             }
 
             ButtonClick();
-            SceneManager.LoadScene(0);
+            LoadSceneManager.Instance.LoadScene(2);
         }
 
         #endregion

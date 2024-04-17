@@ -64,7 +64,7 @@ namespace DH
                 NetworkManager.Singleton.Shutdown();
                 Destroy(NetworkManager.Singleton.gameObject);
 
-                LoadSceneManager.Instance.LoadScene(1);
+                LoadSceneManager.Instance.LoadScene(2);
             }
         }
 
@@ -303,7 +303,7 @@ namespace DH
             Destroy(NetworkManager.Singleton?.gameObject);
 
             onGameEnded?.Invoke();
-            LoadSceneManager.Instance.LoadScene(1);
+            LoadSceneManager.Instance.LoadScene(2);
         }
 
         public static string GetLocalIP() => Dns.GetHostAddresses(Dns.GetHostName())[1].ToString();
