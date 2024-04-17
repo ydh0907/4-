@@ -63,8 +63,8 @@ namespace AH
             _container = root.Q<VisualElement>("lobby-container");
 
             if (isHost)
-            { // ÀÌ °ªÀº server¿¡¼­ ¹Þ´Â´Ù
-                HostLobbyPanel(); // ÇöÁ¦´Â È£½ºÅ©¿¡¼­ µé¾î°¨
+            { // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ serverï¿½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½
+                HostLobbyPanel(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¨
             }
             else
             {
@@ -121,7 +121,7 @@ namespace AH
             List<VisualElement> bgmList = new List<VisualElement>();
             List<VisualElement> effectList = new List<VisualElement>();
 
-            GetSoundVisualElementData(bgmList, bgmData); // »ý¼ºÇÒ ¶§¸¶´Ù °¡Á®¿Í¾ß ÇÔ
+            GetSoundVisualElementData(bgmList, bgmData); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ ï¿½ï¿½
             GetSoundVisualElementData(effectList, effectData);
             GetcurrentSoundData(bgmList, effectList);
 
@@ -214,7 +214,7 @@ namespace AH
             if (dve != null)
             {
                 if (!isReady)
-                { // ÁØºñ ¿Ï·á¸¦ ¾ÈÇÔ
+                { // ï¿½Øºï¿½ ï¿½Ï·á¸¦ ï¿½ï¿½ï¿½ï¿½
                     isReady = true;
                     NetworkGameManager.Instance.PlayerReadyServerRpc(NetworkManager.Singleton.LocalClientId, isReady);
                     dve.AddToClassList("isReady");
@@ -230,9 +230,9 @@ namespace AH
             Debug.Log($"Ready : {isReady}");
         }
 
-        // Ä«¿îÅÍ
+        // Ä«ï¿½ï¿½ï¿½ï¿½
         public void Counter(Action callback = null)
-        { // °ÔÀÓ ½ÃÀÛ½Ã Ä«¿îÆ® ´Ù¿î
+        { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û½ï¿½ Ä«ï¿½ï¿½Æ® ï¿½Ù¿ï¿½
             SoundManager.Instance.Clear();
 
             VisualElement counterPanel = countDownPanel.Instantiate().Q<VisualElement>("conuntdown-container");
@@ -242,17 +242,17 @@ namespace AH
             _counter.CountDown(countText, callback);
         }
         public void ResurrectionCounter(Action callback = null)
-        { // ºÎÈ° Ä«¿îÆ® ´Ù¿î
+        { // ï¿½ï¿½È° Ä«ï¿½ï¿½Æ® ï¿½Ù¿ï¿½
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
             _container.Clear();
             _container.Add(counterPanel);
             Label countText = counterPanel.Q<Label>("die-txt");
 
             _counter.ResurrectionCountDown(countText, callback);
-        } // ÇÃ·¹ÀÌ¾î ºÎÈ°
+        } // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½È°
 
         public void FinishCountDown()
-        { // ÁØºñ ¿Ï·á »óÅÂ ÈÄ °ÔÀÓ ½ÃÀÛ ´ë±â°¡ Á¾·á
+        { // ï¿½Øºï¿½ ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½â°¡ ï¿½ï¿½ï¿½ï¿½
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");
@@ -260,7 +260,7 @@ namespace AH
             bareHanded = template.Q<VisualElement>("bareHandedAttack");
 
             playerData.Clear();
-            // ÀÌ°÷À¸·Î Á¢±ÙÇÏ¿© °¢ ÇÃ·¹ÀÌ¾îº° µ¥ÀÌÅÍ¸¦ ³Ö¾îÁÜ
+            // ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾îº° ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½
             VisualElement basePlayerData = template.Q<VisualElement>(className: "players-border");
             for (int i = 0; i < basePlayerData.childCount; i++)
             {
@@ -272,9 +272,9 @@ namespace AH
 
             SetState();
 
-            timer = template.Q<Label>("time-txt"); // °ªÀ» °è¼ÓÇØ¼­ º¯°æÇÏ±â ¶§¹®¿¡ °¡Áö°í ÀÖÀ½
+            timer = template.Q<Label>("time-txt"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-            _counter.InGameCountDown(timer);
+            _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
@@ -290,7 +290,7 @@ namespace AH
             {
                 Label nickname = playerData[i].Q<Label>("nickname-txt");
                 VisualElement drinkIcon = playerData[i].Q<VisualElement>("drinkIcon");
-                Label killcount = playerData[i].Q<Label>("killCount-txt"); // °ªÀ» °è¼ÓÇØ¼­ º¯°æÇÏ±â ¶§¹®¿¡ °¡Áö°í ÀÖÀ½
+                Label killcount = playerData[i].Q<Label>("killCount-txt"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                 if (i < list.Count)
                 {
@@ -349,12 +349,12 @@ namespace AH
 
         // player
         public void ChangeMantosAttack()
-        { // ¸ÇÅä½º °ø°Ý
+        { // ï¿½ï¿½ï¿½ä½º ï¿½ï¿½ï¿½ï¿½
             mantos.AddToClassList("toLarge");
             bareHanded.AddToClassList("toSmall");
         }
         public void ChangeFistAttack()
-        { // ÁÖ¸Ô °ø°Ý
+        { // ï¿½Ö¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             mantos.RemoveFromClassList("toLarge");
             bareHanded.RemoveFromClassList("toSmall");
         }
