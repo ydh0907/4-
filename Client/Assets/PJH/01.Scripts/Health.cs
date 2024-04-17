@@ -34,7 +34,6 @@ namespace PJH
             {
                 Reset();
             }
-
             _health.OnValueChanged += HealthChangeHandle;
         }
 
