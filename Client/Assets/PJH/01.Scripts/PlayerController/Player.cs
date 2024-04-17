@@ -67,7 +67,7 @@ namespace PJH
 
         private void DecreaseHpByTime()
         {
-            ApplyDamage(Time.fixedDeltaTime * hpDecreaseTimeMultiplier, Vector3.zero, harmer, 0, false);
+            ApplyDamage(Time.fixedDeltaTime * (IsSprinting ? 2 : 1) * hpDecreaseTimeMultiplier, Vector3.zero, harmer, 0, false);
         }
 
         private void FixedUpdate()
