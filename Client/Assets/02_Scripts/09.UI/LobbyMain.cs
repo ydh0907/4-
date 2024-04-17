@@ -14,7 +14,7 @@ namespace AH
         public VisualElement _dataBorder;
         private CustomPlayerAndDrinkData _playerData;
 
-        public string nickname = "�г���";
+        public string nickname = "NickName";
         bool flag;
 
         protected override void Awake()
@@ -30,14 +30,15 @@ namespace AH
             _dataBorder = root.Q<VisualElement>("container");
             flag = true;
 
-            root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
-            root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
-            root.Q<Button>("findroom-btn").RegisterCallback<ClickEvent>(HandleFindRoom);
             CustomDataSetting();
         }
 
         public void CustomDataSetting()
         {
+            root.Q<Button>("backToTitle-btn").RegisterCallback<ClickEvent>(HandleBackTitleScene);
+            root.Q<Button>("create-btn").RegisterCallback<ClickEvent>(HandleCreateRoom);
+            root.Q<Button>("findroom-btn").RegisterCallback<ClickEvent>(HandleFindRoom);
+
             var nickNameField = root.Q<TextField>("nickname-inputfeld");
             nickNameField.value = nickname;
             nickNameField.RegisterCallback<ChangeEvent<string>>(OnNicknameChanged);

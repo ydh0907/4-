@@ -274,7 +274,7 @@ namespace AH
 
             timer = template.Q<Label>("time-txt"); // 값을 계속해서 변경하기 때문에 가지고 있음
 
-            _counter.InGameCountDown(timer);
+            _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
             SoundManager.Instance.Play(ingameBGM, Sound.Bgm);

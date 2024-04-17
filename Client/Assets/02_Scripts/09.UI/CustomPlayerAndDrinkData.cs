@@ -35,7 +35,8 @@ namespace AH
         {
             root.Q<VisualElement>("choose-this-btn")
                 .RegisterCallback<ClickEvent>((e) => GoToCustomPlayerData(e, addElement));
-            root.Q<VisualElement>("back-btn").RegisterCallback<ClickEvent>((e) => GoToCustomPlayerData(e, addElement));
+            root.Q<VisualElement>("back-btn")
+                .RegisterCallback<ClickEvent>((e) => GoToCustomPlayerData(e, addElement));
             _lobbyMain.GetNickName();
         }
 
