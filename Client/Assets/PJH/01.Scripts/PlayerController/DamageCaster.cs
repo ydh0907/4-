@@ -1,5 +1,3 @@
-using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PJH
@@ -7,14 +5,20 @@ namespace PJH
     public class DamageCaster : MonoBehaviour
     {
         [SerializeField] AudioClip hitSound;
-        [SerializeField] private int _damage;
+        [SerializeField] private int _damage = 10;
+        [SerializeField] private int _mentosDamage = 40;
         [SerializeField] private float _bounceOff = 4;
         private Collider _collider;
-
+        private GameObject mentosVisual;
         private Player _owner;
+
+        public int Damage => _damage;
+
+        public bool isMentosMode { get; private set; } = false;
 
         private void Start()
         {
+            mentosVisual = transform.Find("MentosVisual").gameObject;
             _collider = GetComponent<Collider>();
             EnableCollider(false);
         }
@@ -36,19 +40,35 @@ namespace PJH
 
             if (other.TryGetComponent(out Player player))
             {
-                player.Faint();
-                EnableCollider(false);
-                Debug.Log("Hit Player");
-                SoundManager.Instance.Play(hitSound);
+                FaintEnemy(player);
                 return;
             }
 
             if (other.TryGetComponent(out Drink drink))
             {
-                drink.ApplyDamage(_damage, _bounceOff, _owner.transform.position, _owner);
-                EnableCollider(false);
-                Debug.Log("Hit Cola");
-                SoundManager.Instance.Play(hitSound);
+                GiveDamageToEnemy(drink);
+            }
+        }
+
+        public void FaintEnemy(Player enemy)
+        {
+            enemy.Faint();
+            EnableCollider(false);
+            SoundManager.Instance.Play(hitSound);
+        }
+
+        public void GiveDamageToEnemy(Drink drink)
+        {
+            int damage = isMentosMode ? _mentosDamage : _damage;
+            Debug.Log(damage);
+
+            drink.ApplyDamage(damage, _bounceOff, _owner.transform.position, _owner);
+            EnableCollider(false);
+            SoundManager.Instance.Play(hitSound);
+            if (isMentosMode)
+            {
+                DisableMentosMode();
+                _owner.DisableMentosClientRpc();
             }
         }
 
@@ -58,7 +78,18 @@ namespace PJH
             if (!_owner.IsServer) return;
 
             _collider.enabled = enable;
-            Debug.Log("On Collider " + enable);
+        }
+
+        public void EnableMentosAttack()
+        {
+            isMentosMode = true;
+            mentosVisual.SetActive(true);
+        }
+
+        public void DisableMentosMode()
+        {
+            isMentosMode = false;
+            mentosVisual.SetActive(false);
         }
     }
 }

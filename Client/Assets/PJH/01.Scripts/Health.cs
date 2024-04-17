@@ -9,9 +9,9 @@ namespace PJH
     public class Health : NetworkBehaviour
     {
 
-        private NetworkVariable<int> _health = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<float> _health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-        public int CurrentHealth
+        public float CurrentHealth
         {
             get
             {
@@ -27,7 +27,7 @@ namespace PJH
 
         private bool _isDead = false;
 
-        public UnityEvent<int, int, float> OnHealthChanged;
+        public UnityEvent<float, float, float> OnHealthChanged;
         public override void OnNetworkSpawn()
         {
             if (IsServer)
@@ -45,30 +45,29 @@ namespace PJH
             HealthChangeHandle(MaxHealth, MaxHealth);
         }
 
-        private void HealthChangeHandle(int prev, int newValue)
+        private void HealthChangeHandle(float prev, float newValue)
         {
-            OnHealthChanged?.Invoke(prev, newValue, (float)newValue / MaxHealth);
+            OnHealthChanged?.Invoke(prev, newValue, newValue / MaxHealth);
         }
 
-        public void TakeDamage(int damageValue)
+        public void TakeDamage(float damageValue)
         {
             ModifyHealth(-damageValue);
         }
 
-        public void RestoreHealth(int healValue)
+        public void RestoreHealth(float healValue)
         {
             ModifyHealth(healValue);
         }
 
-        private void ModifyHealth(int value)
+        private void ModifyHealth(float value)
         {
             if (!IsServer) return;
 
             if (_isDead) return;
-            int prevHealth = CurrentHealth;
+            float prevHealth = CurrentHealth;
             CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, MaxHealth);
-            Debug.Log("Hit");
-            if (CurrentHealth == 0)
+            if (CurrentHealth <= Mathf.Epsilon)
             {
                 _isDead = true;
             }

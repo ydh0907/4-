@@ -201,6 +201,9 @@ MonoBehaviour:
   _groundMinDistance: 0.25
   _groundMaxDistance: 1
   _slopeLimit: 75
+  explosionPrefab: {fileID: 7633695683215810473, guid: 888a87227920b7f4eab4fa109713fa65, type: 3}
+  hpDecreaseTimeMultiplier: 2
+  mentosVisualPrefab: {fileID: 8921605906772756153, guid: 5f6abb290c4a62d49af1935b4cdd2d0c, type: 3}
 --- !u!114 &4692252287419594798
 MonoBehaviour:
   m_ObjectHideFlags: 0

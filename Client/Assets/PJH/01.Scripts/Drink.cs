@@ -27,7 +27,7 @@ namespace PJH
         
         public void ApplyDamage(int damage, float bounceOff, Vector3 position, Player harmer)
         {
-            _owner.ApplyDamage(damage, bounceOff, position, harmer);
+            _owner.ApplyDamage(damage, position, harmer, bounceOff);
         }
     }
 }

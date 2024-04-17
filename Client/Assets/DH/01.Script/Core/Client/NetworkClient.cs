@@ -30,8 +30,8 @@ namespace DH
 
             NetworkManager.Singleton.NetworkConfig.ConnectionData = NetworkServerApprovalManager.WriteApprovalData(new PlayerInfo(ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character));
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(Address, (ushort)9070, "0.0.0.0");
-            
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(Address, (ushort)9070);
+
             isConnect = NetworkManager.Singleton.StartClient();
 
             StartCoroutine(WaitConnect());
@@ -41,7 +41,7 @@ namespace DH
         {
             yield return new WaitWhile(() => isConnect == null);
 
-            if(isConnect == true)
+            if (isConnect == true)
             {
                 OnConnected();
             }
@@ -55,6 +55,8 @@ namespace DH
             isConnect = null;
 
             onConnectSucceed?.Invoke();
+
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnDisconnected;
         }
 
         private void OnConnectFailed()
@@ -66,9 +68,14 @@ namespace DH
             onConnectFailed?.Invoke();
         }
 
-        private void OnDisconnected()
+        private void OnDisconnected(ulong id)
         {
             isConnect = null;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            NetworkGameManager.Instance.ServerGameEnd();
 
             onDisconnected?.Invoke();
         }

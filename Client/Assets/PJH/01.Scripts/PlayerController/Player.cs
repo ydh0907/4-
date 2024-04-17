@@ -11,6 +11,9 @@ namespace PJH
 {
     public partial class Player : NetworkBehaviour
     {
+        [SerializeField] private GameObject explosionPrefab;
+        [SerializeField] private float hpDecreaseTimeMultiplier = 1f;
+
         private Player harmer;
 
         public void StartInit()
@@ -37,6 +40,7 @@ namespace PJH
             _inputReader.MovementEvent += HandleMovementEvent;
             _inputReader.JumpEvent += HandleJumpEvent;
             _inputReader.RunEvent += HandleSprintEvent;
+            _inputReader.UseMentosEvent += UseMentos;
         }
 
         private void UnJoin()
@@ -46,6 +50,7 @@ namespace PJH
             _inputReader.MovementEvent -= HandleMovementEvent;
             _inputReader.JumpEvent -= HandleJumpEvent;
             _inputReader.RunEvent -= HandleSprintEvent;
+            _inputReader.UseMentosEvent -= UseMentos;
         }
 
         private void Update()
@@ -60,8 +65,16 @@ namespace PJH
             ControlRotationType();
         }
 
+        private void DecreaseHpByTime()
+        {
+            ApplyDamage(Time.fixedDeltaTime * hpDecreaseTimeMultiplier, Vector3.zero, harmer, 0, false);
+        }
+
         private void FixedUpdate()
         {
+            if (IsServer)
+                DecreaseHpByTime();
+
             if (!IsOwner) return;
 
             ControlJumpBehaviour();
@@ -118,20 +131,21 @@ namespace PJH
         #endregion
 
 
-        public void ApplyDamage(int damage, float bounceOff, Vector3 position, Player harmer)
+        public void ApplyDamage(float damage, Vector3 position, Player harmer, float bounceOff, bool changeState = true)
         {
             Vector3 dir = transform.position - position;
             dir.Normalize();
 
             this.harmer = harmer;
 
-            if (!IsAttacking)
+            if (!IsAttacking && changeState)
                 _animator.Play("Hit");
+
             if (_health != null)
             {
                 _health.TakeDamage(damage);
-                if (_health.CurrentHealth == 0) Death();
-                else AddForceClientRpc(bounceOff * dir, OwnerClientId);
+                if (_health.CurrentHealth <= Mathf.Epsilon) Death();
+                else if (bounceOff > 0) AddForceClientRpc(bounceOff * dir, OwnerClientId);
             }
         }
 
@@ -153,13 +167,13 @@ namespace PJH
         private void FaintClientRpc()
         {
             _animator.Play("Hit");
-            Debug.Log("Faint 0.5f");
+            Debug.Log("Faint 1f");
             _rigidbody.velocity = Vector3.zero;
             _lockMovement = true;
             _lockRotation = true;
             StopMove = true;
             _inputMagnitude = 0;
-            StartCoroutine(Wait(0.5f, () =>
+            StartCoroutine(Wait(1f, () =>
             {
                 StopMove = false;
                 _lockMovement = false;
@@ -192,8 +206,10 @@ namespace PJH
             _isDead = true;
             gameObject.SetActive(false);
 
-            if (IsOwner)
+            if (IsOwner && NetworkGameManager.Instance.IsOnGame.Value)
                 FindObjectOfType<IngameUIToolkit>().ResurrectionCounter();
+
+            Instantiate(explosionPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         }
 
         public void Respawn()

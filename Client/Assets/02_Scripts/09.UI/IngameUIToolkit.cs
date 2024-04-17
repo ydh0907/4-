@@ -1,5 +1,4 @@
 using DH;
-using GM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -85,7 +84,7 @@ namespace AH
             _container.Add(hostPanel);
 
             hostPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
-            hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HaneldStartGame);
+            hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HandleStartGame);
             hostPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
         private void ClientLobbyPanel()
@@ -189,7 +188,7 @@ namespace AH
         }
 
         // lobby
-        private void HaneldStartGame(ClickEvent evt)
+        private void HandleStartGame(ClickEvent evt)
         {
             ButtonClick();
             if (!NetworkManager.Singleton.IsHost) return;
@@ -245,9 +244,9 @@ namespace AH
         public void ResurrectionCounter(Action callback = null)
         { // 부활 카운트 다운
             VisualElement counterPanel = deadCountDownPanel.Instantiate().Q<VisualElement>("resurrection-container");
-            var countText = counterPanel.Q<Label>("dit-txt");
             _container.Clear();
             _container.Add(counterPanel);
+            Label countText = counterPanel.Q<Label>("die-txt");
 
             _counter.ResurrectionCountDown(countText, callback);
         } // 플레이어 부활
@@ -260,6 +259,7 @@ namespace AH
             mantos = template.Q<VisualElement>("mantosAttack");
             bareHanded = template.Q<VisualElement>("bareHandedAttack");
 
+            playerData.Clear();
             // 이곳으로 접근하여 각 플레이어별 데이터를 넣어줌
             VisualElement basePlayerData = template.Q<VisualElement>(className: "players-border");
             for (int i = 0; i < basePlayerData.childCount; i++)
@@ -325,9 +325,6 @@ namespace AH
             template.Q<Button>("goLobby").RegisterCallback<ClickEvent>(HandleGoLobby);
 
             StartCoroutine(DrumRoutine(template));
-
-            if (isHost)
-                NetworkGameManager.Instance.GameResultSetting();
         }
         IEnumerator DrumRoutine(VisualElement template)
         {
