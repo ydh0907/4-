@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class CurrentCharacterDataUI : MonoBehaviour
 {
     [SerializeField] private float _rotSpeed;
+    [SerializeField] private LayerMask _whatIsCharacter;
     private Dictionary<Cola, GameObject> _drinkObjects = new();
     private Dictionary<Character, Animator> _characterObjects = new();
 
@@ -57,13 +58,17 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            if (IsMousePointerOnCharacter())
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
         if (Mouse.current.leftButton.isPressed || Mouse.current.rightButton.isPressed)
         {
-            transform.Rotate(0f, -Input.GetAxis("Mouse X") * _rotSpeed, 0f, Space.World);
+            if (!Cursor.visible)
+                transform.Rotate(0f, -Input.GetAxis("Mouse X") * _rotSpeed, 0f, Space.World);
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame || Mouse.current.rightButton.wasReleasedThisFrame)
@@ -71,6 +76,12 @@ public class CurrentCharacterDataUI : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    private bool IsMousePointerOnCharacter()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, 20f, _whatIsCharacter);
     }
 
     private IEnumerator RandomIdle()

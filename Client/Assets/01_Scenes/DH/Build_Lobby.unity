@@ -837,22 +837,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: "\uB2C9\uB124\uC784"
-  _characterSprites:
-  - {fileID: 21300000, guid: b5008e5cd130a9b4eb8abeab1829048b, type: 3}
-  - {fileID: 21300000, guid: fafc8eaea01169b4f8c731efafdcfdfa, type: 3}
-  - {fileID: 21300000, guid: a99361a086887964991e587cf57dca99, type: 3}
-  - {fileID: 21300000, guid: 2fc16e9e49fbf5f40856ab745b883330, type: 3}
-  - {fileID: 21300000, guid: d1be3c5c355893c4b8c5ef35c99937b8, type: 3}
-  - {fileID: 21300000, guid: d881b661239c146478cc4be485261c59, type: 3}
-  - {fileID: 21300000, guid: 9d718de3c07721248a4bc697a4cddefa, type: 3}
-  - {fileID: 21300000, guid: ac54bb266d345b74d9b5e09ad5b50f5c, type: 3}
-  - {fileID: 21300000, guid: e3100d3eda2231a4daabfb530ce47a69, type: 3}
-  - {fileID: 21300000, guid: 1930dba0b778010428ab788c7645fa48, type: 3}
-  _drinkSprites:
-  - {fileID: 21300000, guid: 4c4697776c34c244bb77bc9ecbdc9650, type: 3}
-  - {fileID: 21300000, guid: e2e07c6cc07700d4593188ffa682d37d, type: 3}
-  - {fileID: 21300000, guid: e5d432e23f4e06d4a9b2705a63248098, type: 3}
-  - {fileID: 21300000, guid: b0f7a788b075dc24fb4ae26202a59916, type: 3}
 --- !u!114 &823230281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307137662}
-  m_Layer: 0
+  - component: {fileID: 1307137663}
+  m_Layer: 9
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1167,6 +1152,27 @@ Transform:
   - {fileID: 431373489}
   m_Father: {fileID: 1421517566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1307137663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307137661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.82, y: 4.9, z: 1}
+  m_Center: {x: 0, y: 1.734528, z: 0}
 --- !u!1 &1421517564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotSpeed: 4
+  _whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!4 &1421517566
 Transform:
   m_ObjectHideFlags: 0
