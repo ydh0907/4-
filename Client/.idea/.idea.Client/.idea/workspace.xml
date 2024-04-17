@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b25c40ad-7b20-40fc-9952-5ae9a9e2c85d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CurrentCharacterDataUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CurrentCharacterDataUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/IngameUIToolkit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/IngameUIToolkit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Scenes/JH/PJH_TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Scenes/JH/PJH_TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/09_UIToolkit/main.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/09_UIToolkit/main.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
