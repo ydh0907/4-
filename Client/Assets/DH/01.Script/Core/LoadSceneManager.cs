@@ -9,12 +9,6 @@ namespace DH
     {
         public static LoadSceneManager Instance;
 
-        private void Awake()
-        {
-            if (Instance != null) enabled = false;
-            Instance = this;
-        }
-
         public void LoadScene(int id)
         {
             SceneManager.LoadScene(id);

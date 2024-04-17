@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 namespace DH
 {
@@ -9,6 +8,7 @@ namespace DH
 
         private NetworkHost m_NetworkHost;
         private NetworkClient m_NetworkClient;
+        private LoadSceneManager m_LoadSceneManager;
 
         public string nickname = "Unknown";
         public Cola cola = Cola.Cola;
@@ -16,13 +16,32 @@ namespace DH
 
         private void Awake()
         {
-            if (Instance != null) Destroy(Instance.gameObject);
+            if (Instance != null)
+            {
+                nickname = Instance.nickname;
+                cola = Instance.cola;
+                character = Instance.character;
+                Destroy(Instance.gameObject);
+            }
             Instance = this;
+            Debug.Log("Connect Manager Init");
 
             m_NetworkHost = GetComponent<NetworkHost>();
             m_NetworkClient = GetComponent<NetworkClient>();
+            m_LoadSceneManager = GetComponent<LoadSceneManager>();
+
+            NetworkHost.Instance = m_NetworkHost;
+            NetworkClient.Instance = m_NetworkClient;
+            LoadSceneManager.Instance = m_LoadSceneManager;
 
             DontDestroyOnLoad(gameObject);
+
+            LoadSceneManager.Instance.LoadScene(1);
+        }
+
+        private void OnDestroy()
+        {
+            Debug.Log("Connect Manager Destroy");
         }
 
         public void StartClient(string Address, string nickname)

@@ -1,7 +1,6 @@
 using Karin;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace DH {
@@ -109,7 +108,7 @@ namespace DH {
         }
         private void HandleInputPlayerDataScene(ClickEvent evt) { // host
             ButtonClick();
-            SceneManager.LoadScene(1);
+            LoadSceneManager.Instance.LoadScene(2);
         }
         private void ExitGame(ClickEvent evt) { // exit
             ButtonClick();

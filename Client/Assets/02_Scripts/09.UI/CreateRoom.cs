@@ -3,7 +3,6 @@ using Packets;
 using System.Collections.Generic;
 using TestClient;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace AH
@@ -97,8 +96,7 @@ namespace AH
         }
         private void HandleBackSceneButton(ClickEvent evt)
         {
-            SceneManager.LoadScene(1);
-
+            LoadSceneManager.Instance.LoadScene(2);
         }
     }
 }

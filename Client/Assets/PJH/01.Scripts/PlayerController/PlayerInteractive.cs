@@ -24,7 +24,7 @@ namespace PJH
                 {
                     DamageCaster.EnableMentosAttack();
                     EnableMentosServerRpc();
-                    mentosCount--;
+                    mentosCount = 0;
                 }
             }
         }

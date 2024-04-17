@@ -18,12 +18,6 @@ namespace DH
 
         public UnityEvent onDisconnected = new();
 
-        private void Awake()
-        {
-            if (Instance != null) enabled = false;
-            Instance = this;
-        }
-
         public void StartConnect(string Address)
         {
             Debug.Log(Address);
@@ -33,13 +27,6 @@ namespace DH
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(Address, (ushort)9070);
 
             isConnect = NetworkManager.Singleton.StartClient();
-
-            StartCoroutine(WaitConnect());
-        }
-
-        private IEnumerator WaitConnect()
-        {
-            yield return new WaitWhile(() => isConnect == null);
 
             if (isConnect == true)
             {
