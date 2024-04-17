@@ -55,18 +55,18 @@ public class CurrentCharacterDataUI : MonoBehaviour
     {
         ChangeCharacterData(ConnectManager.Instance.cola, ConnectManager.Instance.character);
 
-        if (Input.GetMouseButtonDown(1))
+        if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if (Input.GetMouseButton(1))
+        if (Mouse.current.leftButton.isPressed || Mouse.current.rightButton.isPressed)
         {
             transform.Rotate(0f, -Input.GetAxis("Mouse X") * _rotSpeed, 0f, Space.World);
         }
 
-        if (Input.GetMouseButtonUp(1))
+        if (Mouse.current.leftButton.wasReleasedThisFrame || Mouse.current.rightButton.wasReleasedThisFrame)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

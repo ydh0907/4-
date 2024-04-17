@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b25c40ad-7b20-40fc-9952-5ae9a9e2c85d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/01_Scenes/DH/DH_Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Scenes/DH/DH_Lobby.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CustomPlayerAndDrinkData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CustomPlayerAndDrinkData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/LobbyMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/LobbyMain.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/09_UIToolkit/CustomInputData/Customizing/CustomizingPlayer.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/09_UIToolkit/CustomInputData/Customizing/CustomizingPlayer.uxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CurrentCharacterDataUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CurrentCharacterDataUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/IngameUIToolkit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/IngameUIToolkit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +24,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/Drink.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/DamageCaster.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PJH/01.Scripts/PlayerController/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.7.0/InputSystem/InputSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.7.1/Components/NetworkRigidbody.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -60,6 +61,14 @@
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.14f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\_Github\Club\Club1\Client -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\_Github\Club\Club1\Client" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="독립실행형 플레이어" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Downloads/새 폴더 (2)\Client.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\bagj2\Downloads\새 폴더 (2)" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
@@ -103,6 +112,7 @@
       <updated>1710685000238</updated>
       <workItem from="1710685001434" duration="5161000" />
       <workItem from="1710767226193" duration="8339000" />
+      <workItem from="1713344350831" duration="373000" />
     </task>
     <servers />
   </component>
