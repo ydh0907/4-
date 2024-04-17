@@ -1121,7 +1121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307137662}
-  m_Layer: 0
+  - component: {fileID: 1307137663}
+  m_Layer: 9
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,6 +1152,27 @@ Transform:
   - {fileID: 431373489}
   m_Father: {fileID: 1421517566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1307137663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307137661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.82, y: 4.9, z: 1}
+  m_Center: {x: 0, y: 1.734528, z: 0}
 --- !u!1 &1421517564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotSpeed: 4
+  _whatIsCharacter:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!4 &1421517566
 Transform:
   m_ObjectHideFlags: 0
