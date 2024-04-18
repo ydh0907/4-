@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\GitHub\\4-\\Karin_Server\\Server\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|d:\\github\\4-\\karin_server\\server\\server\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|solutionrelative:server\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|d:\\github\\4-\\karin_server\\server\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{003909D1-956A-4B69-A9D4-7BA2E48BD9A9}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -50,11 +54,40 @@
       "DocumentGroups": [
         {
           "DockedWidth": 506,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "PacketHandler.cs",
+              "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\PacketHandler.cs",
+              "RelativeDocumentMoniker": "Server\\PacketHandler.cs",
+              "ToolTip": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\PacketHandler.cs",
+              "RelativeToolTip": "Server\\PacketHandler.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAuwDIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T11:02:50.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ClientSession.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\ClientSession.cs",
               "RelativeDocumentMoniker": "Server\\ClientSession.cs",
@@ -62,12 +95,11 @@
               "RelativeToolTip": "Server\\ClientSession.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-22T00:19:10.72Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-22T00:19:10.72Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PacketID.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Packet2\\PacketID.cs",
               "RelativeDocumentMoniker": "Packet2\\PacketID.cs",
@@ -79,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Server\\Program.cs",
@@ -87,12 +119,11 @@
               "RelativeToolTip": "Server\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-22T00:19:10.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-22T00:19:10.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "JobQueue.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\JobQueue.cs",
               "RelativeDocumentMoniker": "Karin.Network2\\JobQueue.cs",
@@ -104,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PacketUtillity.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Karin.Network2\\PacketUtillity.cs",
               "RelativeDocumentMoniker": "Karin.Network2\\PacketUtillity.cs",
@@ -116,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "S_RoomDeletePacket.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Packet2\\S_RoomDeletePacket.cs",
               "RelativeDocumentMoniker": "Packet2\\S_RoomDeletePacket.cs",
@@ -128,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "PacketManager.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\PacketManager.cs",
               "RelativeDocumentMoniker": "Client\\PacketManager.cs",
@@ -140,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "PacketHandler.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\PacketHandler.cs",
               "RelativeDocumentMoniker": "Client\\PacketHandler.cs",
@@ -152,7 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ServerSession.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\ServerSession.cs",
               "RelativeDocumentMoniker": "Client\\ServerSession.cs",
@@ -164,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\GitHub\\4-\\Karin_Server\\Server\\Client\\Program.cs",
               "RelativeDocumentMoniker": "Client\\Program.cs",
@@ -182,15 +213,7 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             }
           ]
         }

@@ -10,7 +10,7 @@ namespace DH
         private NetworkClient m_NetworkClient;
         private LoadSceneManager m_LoadSceneManager;
 
-        public string nickname = "Unknown";
+        public string nickname = "Nickname";
         public Cola cola = Cola.Cola;
         public Character character = Character.Beach;
 

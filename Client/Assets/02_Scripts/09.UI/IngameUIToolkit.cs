@@ -2,6 +2,7 @@ using DH;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TestClient;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -83,7 +84,7 @@ namespace AH
             VisualElement hostPanel = hostLobbyPanel.Instantiate().Q<VisualElement>("host-content");
             _container.Add(hostPanel);
 
-            hostPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
+            hostPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGameHost);
             hostPanel.Q<Button>("startgame-btn").RegisterCallback<ClickEvent>(HandleStartGame);
             hostPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
@@ -92,16 +93,24 @@ namespace AH
             VisualElement clientPanel = clientLobbyPanel.Instantiate().Q<VisualElement>("client-content");
             _container.Add(clientPanel);
 
-            clientPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGame);
+            clientPanel.Q<Button>("leaveGame-btn").RegisterCallback<ClickEvent>(HandleLeaveGameClient);
             clientPanel.Q<Button>("ready-btn").RegisterCallback<ClickEvent>(HandleReadyGame);
             clientPanel.Q<Button>("setting-btn").RegisterCallback<ClickEvent>(HandleSettingTemplate);
         }
 
-        private void HandleLeaveGame(ClickEvent evt)
+        private void HandleLeaveGameHost(ClickEvent evt)
+        {
+            ButtonClick();
+            Program.Instance.Delete(ConnectManager.Instance.nickname, DH.NetworkGameManager.GetLocalIP());
+            NetworkGameManager.Instance.ServerGameEnd();
+        }
+
+        private void HandleLeaveGameClient(ClickEvent evt)
         {
             ButtonClick();
             NetworkGameManager.Instance.ServerGameEnd();
         }
+
         private void HandleSettingTemplate(ClickEvent evt)
         {
             ButtonClick();

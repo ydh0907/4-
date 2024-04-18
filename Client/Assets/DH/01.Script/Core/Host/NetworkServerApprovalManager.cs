@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestClient;
 using Unity.Netcode;
 using UnityEngine;
-using TestClient;
 
 namespace DH
 {
@@ -43,7 +43,7 @@ namespace DH
             NetworkGameManager.Instance.SyncPlayerList();
             ReadyObjects.Instance.SetCurrentCharactersClientRpc();
             ReadyObjects.Instance.SetNicknameColorClientRpc();
-            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, NetworkGameManager.Instance.users.Count);
+            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
         }
 
         public override void OnNetworkDespawn()
@@ -88,6 +88,8 @@ namespace DH
             }
 
             isHandlingConnect = false;
+
+            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
 
             UserLog();
         }
@@ -134,6 +136,8 @@ namespace DH
             ReadyObjects.Instance.SetNicknameColorClientRpc();
 
             isHandlingConnect = false;
+
+            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
 
             UserLog();
         }

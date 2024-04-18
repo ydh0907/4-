@@ -2,7 +2,6 @@ using DH;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
 
 
 namespace AH
@@ -13,7 +12,11 @@ namespace AH
         public VisualElement _dataBorder;
         private CustomPlayerAndDrinkData _playerData;
 
-        public string nickname = "NickName";
+        public string nickname
+        {
+            get => ConnectManager.Instance.nickname;
+            set => ConnectManager.Instance.nickname = value;
+        }
         bool flag;
 
         protected override void Awake()
