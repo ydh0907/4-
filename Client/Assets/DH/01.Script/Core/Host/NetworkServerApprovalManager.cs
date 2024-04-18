@@ -146,8 +146,6 @@ namespace DH
             {
                 log += player.Key.ToString() + " : " + player.Value.Nickname + " : " + player.Value.Cola.ToString() + "\n";
             }
-
-            Debug.Log(log);
         }
 
         [ClientRpc]

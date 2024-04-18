@@ -72,13 +72,8 @@ namespace AH
 
         private void HandleBackTitleScene(ClickEvent evt)
         {
-            // host
-            if (NetworkManager.Singleton != null)
-            {
-                Destroy(NetworkManager.Singleton.gameObject);
-            }
-
             ButtonClick();
+            NetworkManager.Singleton.Shutdown();
             LoadSceneManager.Instance.LoadScene(2);
         }
 
@@ -102,7 +97,6 @@ namespace AH
             if (root.Q<TextField>("nickname-inputfeld") != null)
             {
                 nickname = root.Q<TextField>("nickname-inputfeld").text;
-                Debug.Log(nickname);
             }
 
             return nickname;

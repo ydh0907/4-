@@ -67,7 +67,9 @@ namespace PJH
 
         private void DecreaseHpByTime()
         {
-            ApplyDamage(Time.fixedDeltaTime * (IsSprinting ? 2 : 1) * hpDecreaseTimeMultiplier, Vector3.zero, harmer, 0, false);
+            if (NetworkGameManager.Instance)
+                if (NetworkGameManager.Instance.IsOnGame.Value)
+                    ApplyDamage(Time.fixedDeltaTime * (IsSprinting ? 2 : 1) * hpDecreaseTimeMultiplier, Vector3.zero, harmer, 0, false);
         }
 
         private void FixedUpdate()
@@ -214,8 +216,6 @@ namespace PJH
 
         public void Respawn()
         {
-            Debug.Log("Respawn call");
-            transform.position = MapManager.Instance.GetSpawnPosition();
             _health.Reset();
 
             IsAttacking = false;
@@ -235,6 +235,9 @@ namespace PJH
         [ClientRpc]
         public void RespawnClientRpc()
         {
+            if (IsOwner)
+                transform.position = MapManager.Instance.GetSpawnPosition();
+
             IsAttacking = false;
             IsJumping = false;
             _isDead = false;

@@ -60,7 +60,7 @@ namespace DH
             if (!NetworkManager.IsConnectedClient || !NetworkManager.IsListening)
             {
                 users.Clear();
-
+                NetworkManager.Shutdown();
                 LoadSceneManager.Instance.LoadScene(2);
             }
         }
@@ -210,8 +210,6 @@ namespace DH
             if (obj.IsOwner)
             {
                 obj.transform.position = pos;
-                Debug.Log("i own this");
-                Debug.Log(pos);
             }
         }
 
@@ -244,8 +242,7 @@ namespace DH
 
         public void GameResultSetting()
         {
-            if (IsServer)
-                Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+            Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
             List<PlayerInfo> list = new();
             foreach (var player in users) list.Add(player.Value);
@@ -285,6 +282,7 @@ namespace DH
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = pos;
                 player.Model.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                player.StopMove = true;
                 player._lockMovement = true;
                 player._lockRotation = true;
             }
@@ -299,10 +297,8 @@ namespace DH
 
         public void ServerGameEnd()
         {
-            NetworkManager.Singleton?.Shutdown();
-            Destroy(NetworkManager.Singleton?.gameObject);
-
             onGameEnded?.Invoke();
+            NetworkManager.Shutdown();
             LoadSceneManager.Instance.LoadScene(2);
         }
 
