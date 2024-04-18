@@ -1,3 +1,4 @@
+using DH;
 using System.Collections;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ namespace PJH
         private IEnumerator RespawnCoroutine(Player player)
         {
             yield return new WaitForSeconds(_respawnTime);
-            player.Respawn();
+            if (NetworkGameManager.Instance.IsOnGame.Value)
+                player.Respawn();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace DH
         public Action onGameEnded = null;
 
         public NetworkVariable<bool> IsOnGame = new(false);
+        public NetworkVariable<bool> IsGameEnd = new(false);
 
         public static bool MatchingServerConnection = false;
 
@@ -60,10 +61,7 @@ namespace DH
             if (!NetworkManager.IsConnectedClient || !NetworkManager.IsListening)
             {
                 users.Clear();
-
-                NetworkManager.Singleton.Shutdown();
-                Destroy(NetworkManager.Singleton.gameObject);
-
+                NetworkManager.Shutdown();
                 LoadSceneManager.Instance.LoadScene(2);
             }
         }
@@ -213,8 +211,6 @@ namespace DH
             if (obj.IsOwner)
             {
                 obj.transform.position = pos;
-                Debug.Log("i own this");
-                Debug.Log(pos);
             }
         }
 
@@ -247,8 +243,9 @@ namespace DH
 
         public void GameResultSetting()
         {
-            if (IsServer)
-                Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
+            IsOnGame.Value = false;
+            IsGameEnd.Value = true;
+            Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
             List<PlayerInfo> list = new();
             foreach (var player in users) list.Add(player.Value);
@@ -269,25 +266,37 @@ namespace DH
 
             Transform[] pos = RankingPodium.Instance.GetPositions();
 
+            foreach (Unity.Netcode.NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
+            {
+                var p = client.PlayerObject.GetComponent<Player>();
+                p.Respawn();
+            }
+
             for (int i = 0; i < list.Count; i++)
             {
                 MoveClientOnEndClientRpc(pos[i].position, list[i].ID);
             }
 
             GameEndClientRpc();
-            IsOnGame.Value = false;
         }
 
         [ClientRpc]
         private void MoveClientOnEndClientRpc(Vector3 pos, ulong id)
         {
             NetworkObject obj = NetworkManager.Singleton.LocalClient.PlayerObject;
+            Player player = obj.GetComponent<Player>();
             if (obj.OwnerClientId == id)
             {
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = pos;
-                obj.GetComponent<PJH.Player>().StopMove = true;
+                player.Model.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
+            player.StopMove = true;
+            player._lockMovement = true;
+            player._lockRotation = true;
+            player.Animator.SetFloat("InputMagnitude", 0);
+            player.transform.Find("HealthBar").gameObject.SetActive(false);
+            player.enabled = false;
         }
 
         [ClientRpc]
@@ -299,10 +308,8 @@ namespace DH
 
         public void ServerGameEnd()
         {
-            NetworkManager.Singleton?.Shutdown();
-            Destroy(NetworkManager.Singleton?.gameObject);
-
             onGameEnded?.Invoke();
+            NetworkManager.Shutdown();
             LoadSceneManager.Instance.LoadScene(2);
         }
 

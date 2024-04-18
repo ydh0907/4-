@@ -23,8 +23,8 @@ namespace DH
                 character = Instance.character;
                 Destroy(Instance.gameObject);
             }
+
             Instance = this;
-            Debug.Log("Connect Manager Init");
 
             m_NetworkHost = GetComponent<NetworkHost>();
             m_NetworkClient = GetComponent<NetworkClient>();
@@ -37,11 +37,6 @@ namespace DH
             DontDestroyOnLoad(gameObject);
 
             LoadSceneManager.Instance.LoadScene(1);
-        }
-
-        private void OnDestroy()
-        {
-            Debug.Log("Connect Manager Destroy");
         }
 
         public void StartClient(string Address, string nickname)

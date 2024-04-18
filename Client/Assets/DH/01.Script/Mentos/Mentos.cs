@@ -5,10 +5,12 @@ using UnityEngine;
 public class Mentos : NetworkBehaviour
 {
     private MentosSpawn spawner;
+    private Transform pos;
 
-    public void Init(MentosSpawn mentosSpawn)
+    public void Init(MentosSpawn mentosSpawn, Transform pos)
     {
         spawner = mentosSpawn;
+        this.pos = pos;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,15 +24,10 @@ public class Mentos : NetworkBehaviour
         }
     }
 
-    public override void OnNetworkSpawn()
-    {
-        Debug.Log("Mentos Spawned");
-    }
-
     public override void OnNetworkDespawn()
     {
         if (IsServer)
-            spawner.SetPositionState(transform);
+            spawner.SetPositionState(pos);
         base.OnNetworkDespawn();
     }
 }

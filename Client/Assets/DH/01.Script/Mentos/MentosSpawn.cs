@@ -68,9 +68,7 @@ public class MentosSpawn : NetworkBehaviour
 
         Mentos mentos = Instantiate(mentosPrefab, spawnPos, Quaternion.identity);
         mentos.GetComponent<NetworkObject>().Spawn();
-        mentos.Init(this);
-
-        Debug.Log("Spawn Mentos");
+        mentos.Init(this, trm);
     }
 
     public void SetPositionState(Transform trm)

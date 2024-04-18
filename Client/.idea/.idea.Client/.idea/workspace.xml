@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b25c40ad-7b20-40fc-9952-5ae9a9e2c85d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CurrentCharacterDataUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02_Scripts/09.UI/CurrentCharacterDataUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Scenes/DH/Build_Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Scenes/DH/Build_Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01_Scenes/DH/Build_Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01_Scenes/DH/Build_Lobby.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/06.VFX/VisualEffect/FootStep.vfx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/06.VFX/VisualEffect/FootStep.vfx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DH/01.Script/Player/PlayerRunEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DH/01.Script/Player/PlayerRunEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/New Universal Render Pipeline Asset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/New Universal Render Pipeline Asset.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PJH/04.Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PJH/04.Prefabs/Player.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +41,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "PJH",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
