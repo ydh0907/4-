@@ -54,6 +54,8 @@ namespace PJH
 
             IsGrounded = true;
             _health = GetComponent<Health>();
+            _cinemachineFreeLook.m_XAxis.Value = 0;
+            _cinemachineFreeLook.m_YAxis.Value = 1f;
         }
 
         private void SetAnimatorMoveSpeed(MovementSpeed speed)

@@ -8,19 +8,13 @@ namespace PJH
 {
     public class Health : NetworkBehaviour
     {
-
-        private NetworkVariable<float> _health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private NetworkVariable<float> _health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Server);
 
         public float CurrentHealth
         {
-            get
-            {
-                return _health.Value;
-            }
-            set
-            {
-                _health.Value = value;
-            }
+            get { return _health.Value; }
+            set { _health.Value = value; }
         }
 
         [field: SerializeField] public int MaxHealth { get; private set; } = 100;
@@ -28,6 +22,7 @@ namespace PJH
         private bool _isDead = false;
 
         public UnityEvent<float, float, float> OnHealthChanged;
+
         public override void OnNetworkSpawn()
         {
             if (IsServer)
