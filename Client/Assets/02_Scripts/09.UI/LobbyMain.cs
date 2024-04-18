@@ -74,7 +74,7 @@ namespace AH
         {
             ButtonClick();
             NetworkManager.Singleton.Shutdown();
-            LoadSceneManager.Instance.LoadScene(2);
+            LoadSceneManager.Instance.LoadScene(1);
         }
 
         #endregion
