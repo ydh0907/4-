@@ -8,8 +8,15 @@ public class Loading : MonoBehaviour {
     private float currentTime;
 
     private void Awake() {
+        DontDestroyOnLoad(transform.root.gameObject);
         rect = loadingImg.GetComponent<RectTransform>();
     }
+
+    private void OnDestroy()
+    {
+        
+    }
+
     private void Update() {
         currentTime += Time.deltaTime;
         float degrees = GetDegrees();
@@ -19,6 +26,7 @@ public class Loading : MonoBehaviour {
         }
         rect.rotation = Quaternion.Euler(0, 0, -degrees);
     }
+
     private float GetDegrees() {
         float degrees = Mathf.Lerp(0, 360, currentTime / 2);
         return degrees;

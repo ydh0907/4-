@@ -253,6 +253,8 @@ namespace AH
 
         public void FinishCountDown()
         { // �غ� �Ϸ� ���� �� ���� ���� ��Ⱑ ����
+            if (NetworkGameManager.Instance.IsGameEnd.Value) return;
+
             _container.Clear();
 
             var template = playPanel.Instantiate().Q<VisualElement>("container");

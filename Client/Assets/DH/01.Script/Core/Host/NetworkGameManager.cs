@@ -29,6 +29,7 @@ namespace DH
         public Action onGameEnded = null;
 
         public NetworkVariable<bool> IsOnGame = new(false);
+        public NetworkVariable<bool> IsGameEnd = new(false);
 
         public static bool MatchingServerConnection = false;
 
@@ -242,6 +243,8 @@ namespace DH
 
         public void GameResultSetting()
         {
+            IsOnGame.Value = false;
+            IsGameEnd.Value = true;
             Instantiate(Podium).GetComponent<NetworkObject>().SpawnWithOwnership(OwnerClientId);
 
             List<PlayerInfo> list = new();
@@ -263,13 +266,18 @@ namespace DH
 
             Transform[] pos = RankingPodium.Instance.GetPositions();
 
+            foreach (Unity.Netcode.NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
+            {
+                var p = client.PlayerObject.GetComponent<Player>();
+                p.Respawn();
+            }
+
             for (int i = 0; i < list.Count; i++)
             {
                 MoveClientOnEndClientRpc(pos[i].position, list[i].ID);
             }
 
             GameEndClientRpc();
-            IsOnGame.Value = false;
         }
 
         [ClientRpc]
@@ -282,10 +290,13 @@ namespace DH
                 obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 obj.transform.position = pos;
                 player.Model.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-                player.StopMove = true;
-                player._lockMovement = true;
-                player._lockRotation = true;
             }
+            player.StopMove = true;
+            player._lockMovement = true;
+            player._lockRotation = true;
+            player.Animator.SetFloat("InputMagnitude", 0);
+            player.transform.Find("HealthBar").gameObject.SetActive(false);
+            player.enabled = false;
         }
 
         [ClientRpc]

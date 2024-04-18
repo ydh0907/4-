@@ -52,6 +52,7 @@ namespace PJH
         public CapsuleCollider CapsuleCollider => _capsuleCollider;
 
         public DamageCaster DamageCaster { get; private set; }
+        public Animator Animator => _animator;
 
         private Health _health;
 
