@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PJH;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class PlayerRunEffect : MonoBehaviour
     [SerializeField] VisualEffect effect;
     private Player owner;
 
+    private bool _playing;
+
     private void Awake()
     {
         owner = GetComponent<Player>();
@@ -17,11 +20,16 @@ public class PlayerRunEffect : MonoBehaviour
     {
         if (owner.IsSprinting)
         {
-            if (!effect.isActiveAndEnabled)
+            if (!_playing)
+            {
+                _playing = true;
                 effect.Play();
+            }
         }
-        else
+        else if (_playing)
         {
+            _playing = false;
+
             effect.Stop();
         }
     }
