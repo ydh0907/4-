@@ -64,7 +64,8 @@ namespace PJH
 
         public void OnMentosUse(InputAction.CallbackContext context)
         {
-            UseMentosEvent?.Invoke();
+            if (context.started)
+                UseMentosEvent?.Invoke();
         }
     }
 }

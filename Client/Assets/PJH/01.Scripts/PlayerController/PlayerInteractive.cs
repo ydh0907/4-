@@ -21,7 +21,6 @@ namespace PJH
             {
                 if (!DamageCaster.isMentosMode)
                 {
-                    DamageCaster.EnableMentosAttack();
                     EnableMentosServerRpc();
                     mentosCount = 0;
 
@@ -30,7 +29,7 @@ namespace PJH
             }
             else if (DamageCaster.isMentosMode)
             {
-                DamageCaster.DisableMentosMode();
+                Debug.Log($"Mentos Count : {mentosCount}, on disable mentos");
                 DisableMentosServerRpc();
                 mentosCount++;
 
@@ -42,7 +41,7 @@ namespace PJH
         private void DisableMentosServerRpc()
         {
             DamageCaster.DisableMentosMode();
-            DisableMentosServerRpc();
+            DisableMentosClientRpc();
         }
 
         [ServerRpc]
@@ -55,7 +54,6 @@ namespace PJH
         [ClientRpc]
         public void EnableMentosClientRpc()
         {
-            if (IsOwner) return;
             DamageCaster.EnableMentosAttack();
         }
 
@@ -67,7 +65,6 @@ namespace PJH
                 IngameUIToolkit.instance.ChangeFistAttack();
             }
             DamageCaster.DisableMentosMode();
-            Debug.Log("Disable Mentos");
         }
     }
 }
