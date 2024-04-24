@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using AH;
+using System;
 
 namespace PJH
 {
@@ -27,6 +28,21 @@ namespace PJH
                     IngameUIToolkit.instance.ChangeMantosAttack();
                 }
             }
+            else if (DamageCaster.isMentosMode)
+            {
+                DamageCaster.DisableMentosMode();
+                DisableMentosServerRpc();
+                mentosCount++;
+
+                IngameUIToolkit.instance.ChangeFistAttack();
+            }
+        }
+
+        [ServerRpc]
+        private void DisableMentosServerRpc()
+        {
+            DamageCaster.DisableMentosMode();
+            DisableMentosServerRpc();
         }
 
         [ServerRpc]
