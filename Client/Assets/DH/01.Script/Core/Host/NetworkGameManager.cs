@@ -166,6 +166,7 @@ namespace DH
 
                 objects.Add(reference);
             }
+
             OnPlayerSpawnedClientRpc();
 
             StartCoroutine(StartTimerRoutine());
@@ -301,10 +302,13 @@ namespace DH
                 obj.transform.position = pos;
                 player.Model.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
+
             player.StopMove = true;
             player._lockMovement = true;
             player._lockRotation = true;
             player.Animator.SetFloat("InputMagnitude", 0);
+            player.Animator.SetBool("IsGrounded", true);
+            player.Animator.Play("Free Locomotion");
             player.HealthBar.SetActive(false);
             player.enabled = false;
         }
@@ -331,6 +335,7 @@ namespace DH
             {
                 QuitServerHandler.DeleteImmediately(ConnectManager.Instance.nickname, GetLocalIP());
             }
+
             return !MatchingServerConnection;
         }
     }
