@@ -1,3 +1,5 @@
+using Unity.Netcode;
+
 namespace PJH
 {
     public partial class Player
@@ -31,6 +33,14 @@ namespace PJH
             {
                 IsSprinting = false;
             }
+
+            SetSprintStateServerRpc(IsSprinting);
+        }
+
+        [ServerRpc]
+        private void SetSprintStateServerRpc(bool isSprint)
+        {
+            IsSprinting = isSprint;
         }
 
         private void Strafe(bool isStrafe)

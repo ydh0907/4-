@@ -9,6 +9,16 @@ namespace DH
     {
         public static LoadSceneManager Instance;
 
+        public void LoadSceneAsync(int id)
+        {
+            SceneManager.LoadSceneAsync(id);
+        }
+
+        public void LoadSceneAsync(string name)
+        {
+            SceneManager.LoadSceneAsync(name);
+        }
+
         public void LoadScene(int id)
         {
             SceneManager.LoadScene(id);
@@ -19,13 +29,13 @@ namespace DH
             SceneManager.LoadScene(name);
         }
 
-        public void LoadScene(int id, Action callback)
+        public void LoadSceneAsync(int id, Action callback)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(id);
             StartCoroutine(WaitCallback(operation, callback));
         }
 
-        public void LoadScene(string name, Action callback)
+        public void LoadSceneAsync(string name, Action callback)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(name);
             StartCoroutine(WaitCallback(operation, callback));

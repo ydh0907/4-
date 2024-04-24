@@ -53,6 +53,7 @@ namespace AH
                 if (runningTime <= 3)
                 {
                     SoundManager.Instance.Play("Effect/FinishTime");
+                    yield return new WaitForSeconds(1f);
                 }
 
                 yield return null;

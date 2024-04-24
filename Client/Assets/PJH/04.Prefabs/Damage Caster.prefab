@@ -66,7 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b6186d9e10b16478c6b4fce6cd5014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 8300000, guid: 498f8903598efce42968105a70dfa6e0, type: 3}
+  bodyHitSound: {fileID: 8300000, guid: 498f8903598efce42968105a70dfa6e0, type: 3}
+  drinkHitSound: {fileID: 8300000, guid: a6cda4ab5499a944d84c9fa6ef586a30, type: 3}
+  bodyHitParticle: {fileID: 1414394221559785860, guid: f3105d9e4a3e2f94bb6f3acf8acbdb66, type: 3}
+  drinkHitParticle: {fileID: 2020206574961571993, guid: 960f0bc93fac1134eaed2bcbe408fa84, type: 3}
   _damage: 15
   _mentosDamage: 45
   _bounceOff: 4

@@ -1,6 +1,7 @@
 using AH;
 using DH;
 using GM;
+using HB;
 using System;
 using System.Collections;
 using System.Threading.Tasks;
@@ -11,8 +12,14 @@ namespace PJH
 {
     public partial class Player : NetworkBehaviour
     {
+        [SerializeField] private AudioClip bodyHitSound;
+        [SerializeField] private AudioClip drinkHitSound;
+        [SerializeField] private ParticleSystem bodyHitParticle;
+        [SerializeField] private ParticleSystem drinkHitParticle;
         [SerializeField] private GameObject explosionPrefab;
+        [SerializeField] private AudioClip explosionSound;
         [SerializeField] private float hpDecreaseTimeMultiplier = 1f;
+        public GameObject HealthBar;
 
         private Player harmer;
 
@@ -21,6 +28,12 @@ namespace PJH
             Init();
             Join();
             SetStart();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            LoadingCanvasSingleton.Singleton.SetStateSceneLoader(false);
         }
 
         public override void OnNetworkDespawn()
@@ -65,11 +78,38 @@ namespace PJH
             ControlRotationType();
         }
 
+        private void OnEnable()
+        {
+            GetComponent<ClientNetworkTransform>().Interpolate = true;
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<ClientNetworkTransform>().Interpolate = false;
+        }
+
         private void DecreaseHpByTime()
         {
             if (NetworkGameManager.Instance)
                 if (NetworkGameManager.Instance.IsOnGame.Value)
                     ApplyDamage(Time.fixedDeltaTime * (IsSprinting ? 2 : 1) * hpDecreaseTimeMultiplier, Vector3.zero, harmer, 0, false);
+        }
+
+        [ClientRpc]
+        public void PlaySoundAndEffectClientRpc(bool isHitDrink)
+        {
+            Debug.Log("PlaySoundAndEffectClientRpc");
+
+            if (isHitDrink)
+            {
+                SoundManager.Instance.Play(drinkHitSound);
+                Instantiate(drinkHitParticle, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                SoundManager.Instance.Play(bodyHitSound);
+                Instantiate(bodyHitParticle, transform.position, Quaternion.identity);
+            }
         }
 
         private void FixedUpdate()
@@ -212,6 +252,7 @@ namespace PJH
                 FindObjectOfType<IngameUIToolkit>().ResurrectionCounter();
 
             Instantiate(explosionPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            SoundManager.Instance.Play(explosionSound);
         }
 
         public void Respawn()

@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 835882996584211488, guid: 913ff01dc05e05c41ad38d080cbace7d, type: 3}
+      propertyPath: nickname
+      value: Nickname
+      objectReference: {fileID: 0}
     - target: {fileID: 5404431798205144342, guid: 913ff01dc05e05c41ad38d080cbace7d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -443,19 +447,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6002096591423380236, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 8685920700067659714, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 8685920700067659714, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8685920700067659714, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1328929095}
   m_SourcePrefab: {fileID: 100100000, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
+--- !u!1 &1328929094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8685920700067659714, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
+  m_PrefabInstance: {fileID: 1328929093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1328929095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328929094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e338d0d9a1ee34a9a7cee13b93d111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsDisableOnLoad>k__BackingField: 1
 --- !u!1 &1669870854
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,33 +1,33 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Loading : MonoBehaviour {
+public class Loading : MonoBehaviour
+{
     public Image loadingImg;
 
     private RectTransform rect;
     private float currentTime;
 
-    private void Awake() {
-        DontDestroyOnLoad(transform.root.gameObject);
+    private void Awake()
+    {
         rect = loadingImg.GetComponent<RectTransform>();
     }
 
-    private void OnDestroy()
+    private void Update()
     {
-        
-    }
-
-    private void Update() {
         currentTime += Time.deltaTime;
         float degrees = GetDegrees();
-        if (degrees >= 360) {
+        if (degrees >= 360)
+        {
             currentTime = 0;
             degrees = GetDegrees();
         }
         rect.rotation = Quaternion.Euler(0, 0, -degrees);
     }
 
-    private float GetDegrees() {
+    private float GetDegrees()
+    {
         float degrees = Mathf.Lerp(0, 360, currentTime / 2);
         return degrees;
     }

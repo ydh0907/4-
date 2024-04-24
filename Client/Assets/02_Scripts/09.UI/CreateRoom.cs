@@ -70,6 +70,7 @@ namespace AH
             roomList.Clear();
             CreateRoomList(room);
             ChooseRoom(room);
+            CurrentCharacterDataUI.instance.gameObject.SetActive(false);
         }
         private void OnChooseRoom(List<Button> list, Button dve)
         {

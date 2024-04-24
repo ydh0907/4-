@@ -60,6 +60,7 @@ namespace AH
         private void HandleCreateRoom(ClickEvent evt)
         {
             ButtonClick();
+            LoadingCanvasSingleton.Singleton.SetStateSceneLoader(true);
             if (flag)
                 ConnectManager.Instance.StartHost(GetNickName());
             flag = false;
@@ -70,7 +71,6 @@ namespace AH
             ButtonClick();
             GetNickName();
             _createRoom.HandleRefresh(evt);
-            CurrentCharacterDataUI.instance.gameObject.SetActive(false);
         }
 
         private void HandleBackTitleScene(ClickEvent evt)

@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 2421843235834462775}
   - component: {fileID: 2270475447441844036}
   - component: {fileID: 444015820450112367}
-  - component: {fileID: 8090593027356916809}
   m_Layer: 0
   m_Name: NetworkGameManager
   m_TagString: Untagged
@@ -115,6 +114,14 @@ MonoBehaviour:
   - {fileID: 3086851485150638241, guid: 031a7e6cb81512147a2bbcfa53647765, type: 3}
   - {fileID: 5775118241034555793, guid: c3c5c82d620021c4f8d03433fdcc41da, type: 3}
   - {fileID: 5170871044077945100, guid: 3a4431f31d8d5184c9dbb9e98268247b, type: 3}
+  IsOnGame:
+    m_InternalValue: 0
+  IsGameEnd:
+    m_InternalValue: 0
+  <maxTime>k__BackingField: 30
+  _ingameBGM: {fileID: 0}
+  currentTime:
+    m_InternalValue: 0
 --- !u!114 &444015820450112367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,20 +136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHandlingConnect: 0
   ApprovalShutdown: 0
---- !u!114 &8090593027356916809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2714208593251620132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 609ffd2f07cb8154fb6f56bf999b6624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer:
-    m_InternalValue: 300
 --- !u!1 &2807087377809294096
 GameObject:
   m_ObjectHideFlags: 0

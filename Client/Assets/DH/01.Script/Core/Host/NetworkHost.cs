@@ -1,4 +1,3 @@
-using System.Collections;
 using TestClient;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -30,10 +29,7 @@ namespace DH
 
             isConnect = NetworkManager.Singleton.StartHost();
 
-            if (isConnect == true)
-            {
-                OnConnected();
-            }
+            if (isConnect == true) OnConnected();
             else OnConnectFailed();
         }
 
@@ -49,15 +45,15 @@ namespace DH
         {
             isConnect = null;
 
-            LoadSceneManager.Instance.LoadScene(3, () =>
+            LoadSceneManager.Instance.LoadSceneAsync(3, () =>
             {
                 Instantiate(NetworkGameManager).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
                 Instantiate(Map).GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
+                DH.NetworkGameManager.Instance.MakePlayerInstance(NetworkManager.Singleton.LocalClientId);
             });
 
             Program.Instance.CreateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname);
             DH.NetworkGameManager.MatchingServerConnection = true;
-
             onConnectSucceed?.Invoke();
         }
 

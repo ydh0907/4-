@@ -78,8 +78,9 @@ namespace DH
 
                 response.Approved = true;
                 response.CreatePlayerObject = false;
-            }
 
+                NetworkGameManager.Instance.MakePlayerInstance(request.ClientNetworkId);
+            }
             else
             {
                 Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Approval Failed");
@@ -137,7 +138,8 @@ namespace DH
 
             isHandlingConnect = false;
 
-            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
+            if (NetworkGameManager.MatchingServerConnection)
+                Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
 
             UserLog();
         }

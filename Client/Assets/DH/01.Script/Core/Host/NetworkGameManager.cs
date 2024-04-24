@@ -1,8 +1,11 @@
 using AH;
+using Cysharp.Threading.Tasks;
+using GM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using TestClient;
 using TMPro;
 using Unity.Netcode;
@@ -22,6 +25,7 @@ namespace DH
         [SerializeField] public List<GameObject> Drinks = new();
 
         public Dictionary<ulong, PlayerInfo> users = new();
+        public Dictionary<ulong, NetworkObject> p_NetObj = new();
 
         public Queue<Action> JopQueue = new Queue<Action>();
 
@@ -34,6 +38,7 @@ namespace DH
         public static bool MatchingServerConnection = false;
 
         [field: SerializeField] public int maxTime { get; private set; } = 90;
+        [SerializeField] private AudioClip _ingameBGM;
         public NetworkVariable<int> currentTime = new(0);
 
         private void Awake()
@@ -130,52 +135,55 @@ namespace DH
 
             IngameUIToolkit ingame = GameObject.Find("UIDocument").GetComponent<IngameUIToolkit>();
             ingame._container.Clear();
-            ingame.Counter();
+            ingame.Counter(() => LoadingCanvasSingleton.Singleton.SetStateSceneLoader(true));
         }
 
-        public void ServerGameStart()
+        public void MakePlayerInstance(ulong id)
+        {
+            Debug.Log("Added");
+            GameObject p = Instantiate(Player);
+            NetworkObject obj = p.GetComponent<NetworkObject>();
+            p.SetActive(false);
+
+            p_NetObj.Add(id, obj);
+        }
+
+        public async void ServerGameStart()
         {
             if (!IsServer) return;
 
-            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
-
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
-            ReadyObjects.Instance.RemoveClientRpc();
-
-            List<Vector3> temp = new List<Vector3>();
+            List<Vector3> temp = MapManager.Instance.GetSpawnList();
             List<NetworkObjectReference> objects = new List<NetworkObjectReference>();
 
             foreach (var player in users)
             {
-                Vector3 rand = GM.MapManager.Instance.GetSpawnPosition();
-
-                while (temp.Contains(rand))
-                    rand = GM.MapManager.Instance.GetSpawnPosition();
-
-                Debug.Log(rand + " : Rand");
-
-                GameObject p = Instantiate(Player, rand, Quaternion.identity);
-                p.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.Key);
-
-                NetworkObjectReference reference = p.GetComponent<NetworkObject>();
+                p_NetObj[player.Key].gameObject.SetActive(true);
+                p_NetObj[player.Key].SpawnAsPlayerObject(player.Key);
+                NetworkObjectReference reference = p_NetObj[player.Key];
                 CreateCharacterClientRpc(player.Key, reference);
 
-                temp.Add(rand);
                 objects.Add(reference);
             }
-
             OnPlayerSpawnedClientRpc();
 
-            GetComponent<NetworkServerTimer>().StartTimer();
+            StartCoroutine(StartTimerRoutine());
+            ReadyObjects.Instance.RemoveClientRpc();
 
-            onGameStarted?.Invoke();
+            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
 
             StartCoroutine(WaitAndSetPosition(temp, objects));
 
+            onGameStarted?.Invoke();
             IsOnGame.Value = true;
+            StartBGMClientRpc();
+        }
 
-            StartCoroutine(StartTimerRoutine());
+        [ClientRpc]
+        private void StartBGMClientRpc()
+        {
+            SoundManager.Instance.Play("01.Sounds/BGM/IngameBGM", Sound.Bgm);
         }
 
         private IEnumerator StartTimerRoutine()
@@ -274,20 +282,22 @@ namespace DH
 
             for (int i = 0; i < list.Count; i++)
             {
-                MoveClientOnEndClientRpc(pos[i].position, list[i].ID);
+                NetworkObject obj = NetworkManager.Singleton.ConnectedClients[list[i].ID].PlayerObject;
+                NetworkObjectReference NOF = obj;
+                MoveClientOnEndClientRpc(pos[i].position, NOF);
             }
 
             GameEndClientRpc();
         }
 
         [ClientRpc]
-        private void MoveClientOnEndClientRpc(Vector3 pos, ulong id)
+        private void MoveClientOnEndClientRpc(Vector3 pos, NetworkObjectReference nof)
         {
-            NetworkObject obj = NetworkManager.Singleton.LocalClient.PlayerObject;
+            NetworkObject obj = nof;
             Player player = obj.GetComponent<Player>();
-            if (obj.OwnerClientId == id)
+            if (obj.OwnerClientId == NetworkManager.LocalClientId)
             {
-                obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                obj.GetComponent<Rigidbody>().isKinematic = true;
                 obj.transform.position = pos;
                 player.Model.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
@@ -295,7 +305,7 @@ namespace DH
             player._lockMovement = true;
             player._lockRotation = true;
             player.Animator.SetFloat("InputMagnitude", 0);
-            player.transform.Find("HealthBar").gameObject.SetActive(false);
+            player.HealthBar.SetActive(false);
             player.enabled = false;
         }
 

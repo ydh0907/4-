@@ -35,8 +35,11 @@ namespace DH
             LoadSceneManager.Instance = m_LoadSceneManager;
 
             DontDestroyOnLoad(gameObject);
+        }
 
-            LoadSceneManager.Instance.LoadScene(1);
+        private void Start()
+        {
+            LoadSceneManager.Instance.LoadSceneAsync(1);
         }
 
         public void StartClient(string Address, string nickname)

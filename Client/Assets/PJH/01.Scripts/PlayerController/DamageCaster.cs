@@ -1,10 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace PJH
 {
     public class DamageCaster : MonoBehaviour
     {
-        [SerializeField] AudioClip hitSound;
         [SerializeField] private int _damage = 10;
         [SerializeField] private int _mentosDamage = 40;
         [SerializeField] private float _bounceOff = 4;
@@ -47,6 +47,7 @@ namespace PJH
             if (other.TryGetComponent(out Drink drink))
             {
                 GiveDamageToEnemy(drink);
+                return;
             }
         }
 
@@ -54,7 +55,7 @@ namespace PJH
         {
             enemy.Faint();
             EnableCollider(false);
-            SoundManager.Instance.Play(hitSound);
+            _owner.PlaySoundAndEffectClientRpc(false);
         }
 
         public void GiveDamageToEnemy(Drink drink)
@@ -64,12 +65,13 @@ namespace PJH
 
             drink.ApplyDamage(damage, _bounceOff, _owner.transform.position, _owner);
             EnableCollider(false);
-            SoundManager.Instance.Play(hitSound);
             if (isMentosMode)
             {
                 DisableMentosMode();
                 _owner.DisableMentosClientRpc();
             }
+
+            _owner.PlaySoundAndEffectClientRpc(true);
         }
 
         public void EnableCollider(bool enable)

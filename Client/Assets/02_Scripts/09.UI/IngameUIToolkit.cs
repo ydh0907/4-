@@ -24,8 +24,6 @@ namespace AH
 
         [SerializeField] private Sprite[] sprites;
 
-        [SerializeField] private AudioClip ingameBGM;
-
         [Header("CountDownPanels")]
         [SerializeField] private VisualTreeAsset deadCountDownPanel;
         [SerializeField] private VisualTreeAsset countDownPanel;
@@ -288,7 +286,6 @@ namespace AH
             _counter.PlayTimeCountDown(timer);
 
             _container.Add(template);
-            SoundManager.Instance.Play(ingameBGM, Sound.Bgm);
             //Health.instance.OnHealthChanged += OnChangeHealth;
         }
 
