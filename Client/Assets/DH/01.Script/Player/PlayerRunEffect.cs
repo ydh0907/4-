@@ -18,7 +18,7 @@ public class PlayerRunEffect : MonoBehaviour
 
     private void Update()
     {
-        if (owner.IsSprinting)
+        if (owner.IsSprinting && !owner.IsJumping)
         {
             if (!_playing)
             {
