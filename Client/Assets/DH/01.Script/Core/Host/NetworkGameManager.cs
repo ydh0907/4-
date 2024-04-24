@@ -5,12 +5,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using TestClient;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using Player = PJH.Player;
+using Random = UnityEngine.Random;
 
 namespace DH
 {
@@ -154,12 +154,15 @@ namespace DH
 
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
-            List<Vector3> temp = MapManager.Instance.GetSpawnList();
+            List<Vector3> pos = MapManager.Instance.GetSpawnList();
             List<NetworkObjectReference> objects = new List<NetworkObjectReference>();
 
             foreach (var player in users)
             {
                 p_NetObj[player.Key].gameObject.SetActive(true);
+                int index = Random.Range(0, pos.Count);
+                p_NetObj[player.Key].transform.position = pos[index];
+                pos.RemoveAt(index);
                 p_NetObj[player.Key].SpawnAsPlayerObject(player.Key);
                 NetworkObjectReference reference = p_NetObj[player.Key];
                 CreateCharacterClientRpc(player.Key, reference);
@@ -174,7 +177,7 @@ namespace DH
 
             Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
 
-            StartCoroutine(WaitAndSetPosition(temp, objects));
+            //StartCoroutine(WaitAndSetPosition(temp, objects));
 
             onGameStarted?.Invoke();
             IsOnGame.Value = true;
@@ -200,28 +203,28 @@ namespace DH
             GameResultSetting();
         }
 
-        private IEnumerator WaitAndSetPosition(List<Vector3> temp, List<NetworkObjectReference> objects)
-        {
-            yield return new WaitForSeconds(0.2f);
+        //private IEnumerator WaitAndSetPosition(List<Vector3> temp, List<NetworkObjectReference> objects)
+        //{
+        //    yield return new WaitForSeconds(0.2f);
 
-            for (int i = 0; i < objects.Count; i++)
-            {
-                NetworkObjectReference reference = objects[i];
-                Vector3 pos = temp[i];
+        //    for (int i = 0; i < objects.Count; i++)
+        //    {
+        //        NetworkObjectReference reference = objects[i];
+        //        Vector3 pos = temp[i];
 
-                SetPositionClientRpc(reference, pos);
-            }
-        }
+        //        SetPositionClientRpc(reference, pos);
+        //    }
+        //}
 
-        [ClientRpc]
-        private void SetPositionClientRpc(NetworkObjectReference reference, Vector3 pos)
-        {
-            NetworkObject obj = reference;
-            if (obj.IsOwner)
-            {
-                obj.transform.position = pos;
-            }
-        }
+        //[ClientRpc]
+        //private void SetPositionClientRpc(NetworkObjectReference reference, Vector3 pos)
+        //{
+        //    NetworkObject obj = reference;
+        //    if (obj.IsOwner)
+        //    {
+        //        obj.transform.position = pos;
+        //    }
+        //}
 
         [ClientRpc]
         private void OnPlayerSpawnedClientRpc()
