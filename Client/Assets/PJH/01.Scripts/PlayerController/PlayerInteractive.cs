@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using AH;
 
 namespace PJH
 {
@@ -15,9 +16,6 @@ namespace PJH
 
         public void UseMentos()
         {
-            if (!IsOwner) return;
-            if (DamageCaster.isMentosMode) return;
-
             if (mentosCount > 0)
             {
                 if (!DamageCaster.isMentosMode)
@@ -25,6 +23,8 @@ namespace PJH
                     DamageCaster.EnableMentosAttack();
                     EnableMentosServerRpc();
                     mentosCount = 0;
+
+                    IngameUIToolkit.instance.ChangeMantosAttack();
                 }
             }
         }
@@ -46,6 +46,10 @@ namespace PJH
         [ClientRpc]
         public void DisableMentosClientRpc()
         {
+            if (IsOwner)
+            {
+                IngameUIToolkit.instance.ChangeFistAttack();
+            }
             DamageCaster.DisableMentosMode();
             Debug.Log("Disable Mentos");
         }
