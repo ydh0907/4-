@@ -9,10 +9,12 @@ public class Dialogue : MonoBehaviour{
 
     private int index;
 
-    private void Start() {
+    private void OnEnable()
+    {
         textCompoment.text = string.Empty;
         StartDialogue();
     }
+
     private void StartDialogue() {
         index = Random.Range(0, lines.Length);
         textCompoment.text = lines[index].ToString();
