@@ -131,10 +131,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3482599845055961278, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
-      propertyPath: textSpeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4359168608405150423, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -215,6 +211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5194256492436538029, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1484153859}
     - target: {fileID: 8685920700067659714, guid: 6dda33cf6f163ea488c4a6cb6af4bd9c, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -403,7 +403,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
