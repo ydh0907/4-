@@ -36,8 +36,8 @@
         </ui:VisualElement>
         <ui:VisualElement name="playerData" style="flex-grow: 1; justify-content: space-between; flex-direction: row; align-items: flex-end;">
             <ui:VisualElement name="itemIcon-border" style="width: 600px; height: 433px; flex-direction: row; align-items: flex-end; justify-content: flex-end;">
-                <ui:VisualElement name="bareHandedAttack" class="largeIcon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/icons.png?fileID=1281315516&amp;guid=afc3dda97dddb8c41bbdd6ccb832371d&amp;type=3#icons_1&apos;);" />
-                <ui:VisualElement name="mantosAttack" class="smallIcon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/icons.png?fileID=-454306153&amp;guid=afc3dda97dddb8c41bbdd6ccb832371d&amp;type=3#icons_0&apos;);" />
+                <ui:VisualElement name="bareHandedAttack" class="largeIcon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/X_3.png?fileID=21300000&amp;guid=e41d529026f8aa9498b1ab0b231c3ab7&amp;type=3#X_3&apos;);" />
+                <ui:VisualElement name="mantosAttack" class="smallIcon" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/O_2.png?fileID=21300000&amp;guid=ce7fa420f2868ab41a95e8187a3bcf50&amp;type=3#O_2&apos;);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

@@ -308,7 +308,8 @@ MonoBehaviour:
   - "\uD301! \uC7A5\uC560\uBB3C\uC744 \uC62C\uB77C\uAC08 \uC218 \uC788\uC5B4\uC694"
   - "\uD301! \uBA58\uD1A0\uC2A4\uB294 \uBB34\uC9C0\uAC1C\uC0C9\uC774\uC5D0\uC694"
   - "\uD301! \uBA58\uD1A0\uC2A4\uB294 \uB098\uB220 \uBA39\uC5B4\uC694!"
-  textSpeed: 0.15
+  - "\uD301! e\uD0A4\uB85C \uBA58\uD1A0\uC2A4 \uACF5\uACA9\uC744 \uD560 \uC218 \uC788\uC5B4\uC694!"
+  waitTextSpeed: 0
 --- !u!114 &1006906385505791309
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour{
     public TextMeshProUGUI textCompoment;
     public string[] lines;
-    public float textSpeed;
+    public float waitTextSpeed;
 
     private int index;
 
@@ -15,12 +15,6 @@ public class Dialogue : MonoBehaviour{
     }
     private void StartDialogue() {
         index = Random.Range(0, lines.Length);
-        StartCoroutine(TypeLine());
-    }
-    IEnumerator TypeLine() {
-        foreach(char c in lines[index].ToCharArray()) {
-            textCompoment.text += c;
-            yield return new WaitForSeconds(textSpeed);
-        }
+        textCompoment.text = lines[index].ToString();
     }
 }
