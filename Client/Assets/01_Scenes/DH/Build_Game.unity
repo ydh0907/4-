@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Strategy: 1
   m_MaximumEffort: 4
   m_SmoothingTime: 0
-  m_Damping: 0
+  m_Damping: 0.5
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
 --- !u!114 &1114418837
@@ -1195,7 +1195,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4c4697776c34c244bb77bc9ecbdc9650, type: 3}
   - {fileID: 21300000, guid: e5d432e23f4e06d4a9b2705a63248098, type: 3}
   - {fileID: 21300000, guid: e2e07c6cc07700d4593188ffa682d37d, type: 3}
-  ingameBGM: {fileID: 8300000, guid: 64c9cb502dd7447409661ead67ec4a5b, type: 3}
   deadCountDownPanel: {fileID: 9197481963319205126, guid: 36ec50e6a9338e649adff1b1380981de, type: 3}
   countDownPanel: {fileID: 9197481963319205126, guid: 09b06c68b4b0c9f4bb5a9be1deaee09e, type: 3}
   hostLobbyPanel: {fileID: 9197481963319205126, guid: e4d2b4c6150600646b5e4fd0e5beec50, type: 3}
