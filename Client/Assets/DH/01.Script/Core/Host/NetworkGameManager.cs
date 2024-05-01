@@ -187,7 +187,7 @@ namespace DH
         [ClientRpc]
         private void StartBGMClientRpc()
         {
-            SoundManager.Instance.Play("01.Sounds/BGM/IngameBGM", Sound.Bgm);
+            SoundManager.Instance.Play("BGM/IngameBGM", Sound.Bgm);
         }
 
         private IEnumerator StartTimerRoutine()

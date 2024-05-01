@@ -19,6 +19,7 @@ namespace DH {
             SoundManager.Instance.Init();
         }
         private void OnEnable() {
+            Debug.Log("onenable");
             _root = _uiDocument.rootVisualElement;
             _root = _root.Q<VisualElement>("container");
 
