@@ -56,13 +56,13 @@ public class CurrentCharacterDataUI : MonoBehaviour
     private void Update()
     {
         ChangeCharacterData(ConnectManager.Instance.cola, ConnectManager.Instance.character);
-        if (Cursor.visible) _beforeHideMousePos = Mouse.current.position.value;
 
         if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame)
         {
             if (IsMousePointerOnCharacter())
             {
                 Cursor.visible = false;
+                _beforeHideMousePos = Mouse.current.position.value;
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
@@ -95,10 +95,11 @@ public class CurrentCharacterDataUI : MonoBehaviour
         {
             yield return new WaitUntil(() => _currentCharacterObject.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
             yield return new WaitForSeconds(Random.Range(3f, 6f));
-            int idleIdx = 0;
-            for (int i = 0; i < 30; i++)
+            int idleIdx = Random.Range(1, 5);
+            while (idleIdx == _prevIdleIdx)
             {
                 idleIdx = Random.Range(1, 5);
+                yield return null;
             }
 
             _prevIdleIdx = idleIdx;
