@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DH;
@@ -21,6 +22,8 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
 
     public static CurrentCharacterDataUI instance;
+
+    private Vector2 _beforeHideMousePos;
 
 
     private void Awake()
@@ -59,6 +62,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
             if (IsMousePointerOnCharacter())
             {
                 Cursor.visible = false;
+                _beforeHideMousePos = Mouse.current.position.value;
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
@@ -73,6 +77,8 @@ public class CurrentCharacterDataUI : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            Mouse.current.WarpCursorPosition(_beforeHideMousePos);
+            // Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -89,10 +95,10 @@ public class CurrentCharacterDataUI : MonoBehaviour
         {
             yield return new WaitUntil(() => _currentCharacterObject.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
             yield return new WaitForSeconds(Random.Range(3f, 6f));
-            int idleIdx = Random.Range(1, 3);
+            int idleIdx = Random.Range(1, 5);
             while (idleIdx == _prevIdleIdx)
             {
-                idleIdx = Random.Range(1, 3);
+                idleIdx = Random.Range(1, 5);
                 yield return null;
             }
 

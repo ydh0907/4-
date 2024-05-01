@@ -69,7 +69,7 @@ public class SoundManager : MonoSingleton<SoundManager> {
         }
         _audioClip.Clear();
     }
-    public void Play(AudioClip audioClip, Sound type = Sound.Effect, float pitch = 1.0f) {
+    public void Play(AudioClip audioClip, Sound type = Sound.Effect, float volum = 1f, float pitch = 1.0f) {
         if (audioClip == null) {
             return;
         }
@@ -79,12 +79,14 @@ public class SoundManager : MonoSingleton<SoundManager> {
                 audioSource.Stop();
             }
             audioSource.pitch = pitch;
+            audioSource.volume = volum;
             audioSource.clip = audioClip;
             audioSource.Play();
         }
         else if (type == Sound.Effect) {
             AudioSource audioSource = _audioSources[(int)(Sound.Effect)];
             audioSource.pitch = pitch;
+            audioSource.volume = volum;
             audioSource.PlayOneShot(audioClip);
         }
     }
@@ -97,7 +99,7 @@ public class SoundManager : MonoSingleton<SoundManager> {
     /// <param name="pitch">��� �ӵ�</param>
     public void Play(string path, Sound type = Sound.Effect, float pitch = 1.0f) {
         AudioClip audioClip = GetOrAddAudioClip(path, type);
-        Play(audioClip, type, pitch);
+        Play(audioClip, type);
     }
 
     private AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect) {

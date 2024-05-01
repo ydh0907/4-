@@ -249,7 +249,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -708,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e6afd3bfe19c3438b63b1016d54183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobbyBGM: {fileID: 8300000, guid: 65258f6a191a96347936a35c4fce765d, type: 3}
 --- !u!114 &823230281
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using DH;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 
@@ -11,6 +12,9 @@ namespace AH
         private CreateRoom _createRoom;
         public VisualElement _dataBorder;
         private CustomPlayerAndDrinkData _playerData;
+
+        [Header("SOUND")]
+        [SerializeField] private AudioClip lobbyBGM;
 
         public string nickname
         {
@@ -33,6 +37,7 @@ namespace AH
             flag = true;
 
             CustomDataSetting();
+            SoundManager.Instance.Play(lobbyBGM, Sound.Bgm);
         }
 
         public void CustomDataSetting()
