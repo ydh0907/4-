@@ -118,7 +118,7 @@ MonoBehaviour:
     m_InternalValue: 0
   IsGameEnd:
     m_InternalValue: 0
-  <maxTime>k__BackingField: 90
+  <maxTime>k__BackingField: 180
   _ingameBGM: {fileID: 8300000, guid: 64c9cb502dd7447409661ead67ec4a5b, type: 3}
   currentTime:
     m_InternalValue: 0
