@@ -239,10 +239,9 @@ namespace PJH
             }
 
             RespawnManager.Instance.Respawn(this);
-            if (NetworkGameManager.Instance.IsOnGame.Value)
-                FindObjectOfType<IngameUIToolkit>().ResurrectionCounter();
-            GetComponent<ClientNetworkTransform>().Interpolate = false;
             DeathClientRpc();
+
+            GetComponent<ClientNetworkTransform>().Interpolate = false;
         }
 
         [ClientRpc]
@@ -251,20 +250,19 @@ namespace PJH
             _isDead = true;
             gameObject.SetActive(false);
 
+            if (IsOwner && NetworkGameManager.Instance.IsOnGame.Value)
+                FindObjectOfType<IngameUIToolkit>().ResurrectionCounter();
+
             Instantiate(explosionPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             SoundManager.Instance.Play(explosionSound);
+
+            GetComponent<ClientNetworkTransform>().Interpolate = false;
         }
 
         public void Respawn()
         {
-            transform.position = MapManager.Instance.GetSpawnPosition();
             _health.Reset();
-            RespawnClientRpc();
-        }
 
-        [ClientRpc]
-        public void RespawnClientRpc()
-        {
             IsAttacking = false;
             IsJumping = false;
             _isDead = false;
@@ -274,8 +272,30 @@ namespace PJH
             _lockMovement = false;
             _lockRotation = false;
             StopMove = false;
-            GetComponent<ClientNetworkTransform>().Interpolate = true;
             gameObject.SetActive(true);
+
+            RespawnClientRpc();
+            GetComponent<ClientNetworkTransform>().Interpolate = true;
+        }
+
+        [ClientRpc]
+        public void RespawnClientRpc()
+        {
+            if (IsOwner)
+                transform.position = MapManager.Instance.GetSpawnPosition();
+
+            IsAttacking = false;
+            IsJumping = false;
+            _isDead = false;
+            IsSprinting = false;
+            IsStrafing = false;
+            _input = Vector3.zero;
+            _lockMovement = false;
+            _lockRotation = false;
+            StopMove = false;
+            gameObject.SetActive(true);
+
+            GetComponent<ClientNetworkTransform>().Interpolate = true;
         }
 
         public async void AddForce(Vector3 dir)
