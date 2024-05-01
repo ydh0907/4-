@@ -135,7 +135,7 @@ namespace DH
 
             IngameUIToolkit ingame = GameObject.Find("UIDocument").GetComponent<IngameUIToolkit>();
             ingame._container.Clear();
-            ingame.Counter(() => LoadingCanvasSingleton.Singleton.SetStateSceneLoader(true));
+            ingame.Counter();
         }
 
         public void MakePlayerInstance(ulong id)
