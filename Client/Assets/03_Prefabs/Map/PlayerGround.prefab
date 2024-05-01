@@ -122,7 +122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5642939109638153478
 Transform:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6910337195765788743
 Transform:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4996040143011887091
 Transform:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7061942329319648783
 Transform:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6435155300779089754
 Transform:
   m_ObjectHideFlags: 0
@@ -493,7 +493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6112229390533349992
 Transform:
   m_ObjectHideFlags: 0
@@ -546,7 +546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4695863636427932336
 Transform:
   m_ObjectHideFlags: 0
@@ -634,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1197524967491316102
 Transform:
   m_ObjectHideFlags: 0
@@ -740,7 +740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5929305340717966355
 Transform:
   m_ObjectHideFlags: 0
@@ -793,7 +793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9048005254126101161
 Transform:
   m_ObjectHideFlags: 0
@@ -1037,7 +1037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5596102650159635661
 Transform:
   m_ObjectHideFlags: 0
@@ -1121,7 +1121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3604616658268818646
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,7 +1227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8034824606715154962
 Transform:
   m_ObjectHideFlags: 0
@@ -1539,7 +1539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4369926462393149965
 Transform:
   m_ObjectHideFlags: 0
@@ -1592,7 +1592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3202757989668592756
 Transform:
   m_ObjectHideFlags: 0
@@ -2005,7 +2005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4879805089786386912
 Transform:
   m_ObjectHideFlags: 0
@@ -2058,7 +2058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1712965270012273502
 Transform:
   m_ObjectHideFlags: 0
@@ -2450,7 +2450,6 @@ Transform:
   - {fileID: 8005678544218509555}
   - {fileID: 2574310800784224488}
   - {fileID: 536710406245580284}
-  - {fileID: 7854872977054684970}
   - {fileID: 3125006990522783258}
   m_Father: {fileID: 6292002099175265761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4006,7 +4005,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -4664,6 +4663,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4729947576952580620, guid: 1873cdb799a4c3e48afb928dadfc2c6d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6910337195765788743}
+    - targetCorrespondingSourceObject: {fileID: 4729947576952580620, guid: 1873cdb799a4c3e48afb928dadfc2c6d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7854872977054684970}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8646770109612595231, guid: 1873cdb799a4c3e48afb928dadfc2c6d, type: 3}
       insertIndex: -1
@@ -4691,7 +4693,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -5061,7 +5063,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3817698155832763612}
+    m_TransformParent: {fileID: 8956025338582751520}
     m_Modifications:
     - target: {fileID: 820422604041449604, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_Name
@@ -5073,15 +5075,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.7
+      value: 1.4166666
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.83333325
       objectReference: {fileID: 0}
     - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7
+      value: 1.4166666
       objectReference: {fileID: 0}
     - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.379693
+      value: -2.9669225
       objectReference: {fileID: 0}
     - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5089,7 +5095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.5547805
+      value: -5.8289833
       objectReference: {fileID: 0}
     - target: {fileID: 4411807835831239319, guid: d3b2aae5296944745b28517b518a05c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6529,7 +6535,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
