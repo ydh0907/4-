@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/09_UIToolkit/Uss/Title.uss?fileID=7433441132597879392&amp;guid=239daa97be206bb45b8985b74d03c919&amp;type=3#Title" />
     <Style src="project://database/Assets/09_UIToolkit/Uss/Setting.uss?fileID=7433441132597879392&amp;guid=0ebfa25a7f450c24d8f0f504ae090514&amp;type=3#Setting" />
-    <ui:VisualElement name="title-container" class="title-container" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/image%201.png?fileID=21300000&amp;guid=b032e618bd261f34c93f2d12e83e49a3&amp;type=3#image 1&apos;);">
+    <ui:VisualElement name="title-container" class="title-container" style="background-image: url(&apos;project://database/Assets/04_Sprites/UI/title.png?fileID=21300000&amp;guid=435e75dc8988536409cd698e6f294fdb&amp;type=3#title&apos;);">
         <ui:Label tabindex="-1" text="Sparkling Splash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" style="text-shadow: 15px 50px 0 rgb(255, 0, 207); color: rgb(241, 255, 0);" />
         <ui:Label tabindex="-1" text="last can standing" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title-txt" class="title-txt" style="text-shadow: 15px 50px 0 rgb(242, 255, 0); font-size: 90px; color: rgb(255, 0, 207);" />
         <ui:VisualElement name="low-border" style="height: 820px; flex-direction: row;">
