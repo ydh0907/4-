@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 979248984
+  GlobalObjectIdHash: 2258812330
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  _groundMinDistance: 0.25
+  _groundMinDistance: 0.17
   _groundMaxDistance: 1
   _slopeLimit: 75
   _lockMovement: 0
