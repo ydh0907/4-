@@ -200,6 +200,7 @@ namespace DH
                 currentTime.Value -= 1;
             }
 
+            SoundManager.Instance.Clear();
             GameResultSetting();
         }
 
@@ -297,8 +298,6 @@ namespace DH
         [ClientRpc]
         private void MoveClientOnEndClientRpc(Vector3 pos, NetworkObjectReference nof)
         {
-            SoundManager.Instance.Clear();
-
             NetworkObject obj = nof;
             Player player = obj.GetComponent<Player>();
             if (obj.OwnerClientId == NetworkManager.LocalClientId)

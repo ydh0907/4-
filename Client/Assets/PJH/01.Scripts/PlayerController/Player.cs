@@ -145,6 +145,7 @@ namespace PJH
         {
             if (IsAttacking) return;
             if (_isDead) return;
+            if (StopMove) return;
             IsAttacking = true;
             _animator.CrossFadeInFixedTime("Attack", .1f);
         }
