@@ -203,6 +203,20 @@ namespace PJH
 
         public void Faint()
         {
+            _animator.Play("Hit");
+            Debug.Log("Faint 1f");
+            _rigidbody.velocity = Vector3.zero;
+            _lockMovement = true;
+            _lockRotation = true;
+            StopMove = true;
+            _inputMagnitude = 0;
+            StartCoroutine(Wait(1f, () =>
+            {
+                StopMove = false;
+                _lockMovement = false;
+                _lockRotation = false;
+                IsAttacking = false;
+            }));
             FaintClientRpc();
         }
 
@@ -253,7 +267,11 @@ namespace PJH
             gameObject.SetActive(false);
 
             if (IsOwner && NetworkGameManager.Instance.IsOnGame.Value)
-                FindObjectOfType<IngameUIToolkit>().ResurrectionCounter();
+                FindObjectOfType<IngameUIToolkit>().ResurrectionCounter(() =>
+                {
+                    if (DamageCaster.isMentosMode)
+                        IngameUIToolkit.instance.ChangeMantosAttack();
+                });
 
             Instantiate(explosionPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             SoundManager.Instance.Play(explosionSound);
@@ -286,8 +304,6 @@ namespace PJH
             if (IsOwner)
             {
                 transform.position = MapManager.Instance.GetSpawnPosition();
-                if (DamageCaster.isMentosMode)
-                    IngameUIToolkit.instance.ChangeMantosAttack();
             }
 
             IsAttacking = false;
