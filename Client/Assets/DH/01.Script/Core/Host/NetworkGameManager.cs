@@ -148,7 +148,7 @@ namespace DH
             p_NetObj.Add(id, obj);
         }
 
-        public async void ServerGameStart()
+        public void ServerGameStart()
         {
             if (!IsServer) return;
 
@@ -173,21 +173,10 @@ namespace DH
             OnPlayerSpawnedClientRpc();
 
             StartCoroutine(StartTimerRoutine());
-            ReadyObjects.Instance.RemoveClientRpc();
 
-            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
-
-            //StartCoroutine(WaitAndSetPosition(temp, objects));
-
-            onGameStarted?.Invoke();
             IsOnGame.Value = true;
-            StartBGMClientRpc();
-        }
-
-        [ClientRpc]
-        private void StartBGMClientRpc()
-        {
-            SoundManager.Instance.Play("BGM/IngameBGM", Sound.Bgm);
+            onGameStarted?.Invoke();
+            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
         }
 
         private IEnumerator StartTimerRoutine()
@@ -239,6 +228,9 @@ namespace DH
             {
                 player.StartInit();
             }
+
+            ReadyObjects.Instance.Remove();
+            SoundManager.Instance.Play("BGM/IngameBGM", Sound.Bgm);
         }
 
         [ClientRpc]

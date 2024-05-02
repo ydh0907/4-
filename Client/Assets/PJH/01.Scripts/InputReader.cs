@@ -35,7 +35,7 @@ namespace PJH
 
         public void OnAttack(InputAction.CallbackContext context)
         {
-            AttackEvent?.Invoke();
+            if (context.started) AttackEvent?.Invoke();
         }
 
         public void OnRun(InputAction.CallbackContext context)

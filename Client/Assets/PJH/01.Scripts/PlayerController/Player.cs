@@ -221,6 +221,7 @@ namespace PJH
                 StopMove = false;
                 _lockMovement = false;
                 _lockRotation = false;
+                IsAttacking = false;
             }));
         }
 
@@ -283,7 +284,11 @@ namespace PJH
         public void RespawnClientRpc()
         {
             if (IsOwner)
+            {
                 transform.position = MapManager.Instance.GetSpawnPosition();
+                if (DamageCaster.isMentosMode)
+                    IngameUIToolkit.instance.ChangeMantosAttack();
+            }
 
             IsAttacking = false;
             IsJumping = false;

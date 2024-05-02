@@ -17,7 +17,15 @@ namespace PJH
 
         public void UseMentos()
         {
-            if (mentosCount > 0)
+            if (DamageCaster.isMentosMode)
+            {
+                Debug.Log($"Mentos Count : {mentosCount}, on disable mentos");
+                DisableMentosServerRpc();
+                mentosCount = 1;
+
+                IngameUIToolkit.instance.ChangeFistAttack();
+            }
+            else if (mentosCount > 0)
             {
                 if (!DamageCaster.isMentosMode)
                 {
@@ -26,14 +34,6 @@ namespace PJH
 
                     IngameUIToolkit.instance.ChangeMantosAttack();
                 }
-            }
-            else if (DamageCaster.isMentosMode)
-            {
-                Debug.Log($"Mentos Count : {mentosCount}, on disable mentos");
-                DisableMentosServerRpc();
-                mentosCount++;
-
-                IngameUIToolkit.instance.ChangeFistAttack();
             }
         }
 
