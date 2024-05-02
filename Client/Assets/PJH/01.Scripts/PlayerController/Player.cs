@@ -331,6 +331,7 @@ namespace PJH
             StopMove = false;
             _lockMovement = false;
             _lockRotation = false;
+            IsAttacking = false;
         }
     }
 }
