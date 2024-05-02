@@ -126,7 +126,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
             _currentDrinkObject.transform.localPosition = new Vector3(0, -0.002089481f, -0.004531645f);
 
 
-            _currentCharacterObject.transform.localRotation = Quaternion.identity;
+            _currentDrinkObject.transform.localRotation = Quaternion.identity;
             _currentDrinkType = cola;
         }
 
@@ -142,7 +142,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
             _currentCharacterObject.gameObject.SetActive(true);
             _currentDrinkObject.transform.SetParent(_bodies[(int)character]);
             _currentDrinkObject.transform.localPosition = new Vector3(0, -0.002089481f, -0.004531645f);
-            _currentCharacterObject.transform.localRotation = Quaternion.identity;
+            _currentDrinkObject.transform.localRotation = Quaternion.identity;
 
             _currentCharacterType = character;
         }
