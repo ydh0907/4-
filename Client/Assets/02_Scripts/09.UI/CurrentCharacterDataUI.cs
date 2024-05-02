@@ -56,13 +56,13 @@ public class CurrentCharacterDataUI : MonoBehaviour
     private void Update()
     {
         ChangeCharacterData(ConnectManager.Instance.cola, ConnectManager.Instance.character);
-
+        if (Cursor.visible)
+            _beforeHideMousePos = Mouse.current.position.value;
         if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame)
         {
             if (IsMousePointerOnCharacter())
             {
                 Cursor.visible = false;
-                _beforeHideMousePos = Mouse.current.position.value;
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
@@ -75,6 +75,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
         if (Mouse.current.leftButton.wasReleasedThisFrame || Mouse.current.rightButton.wasReleasedThisFrame)
         {
+            if (Cursor.visible) return;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Mouse.current.WarpCursorPosition(_beforeHideMousePos);
