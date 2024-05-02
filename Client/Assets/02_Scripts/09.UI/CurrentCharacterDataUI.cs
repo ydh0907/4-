@@ -10,6 +10,7 @@ public class CurrentCharacterDataUI : MonoBehaviour
 {
     [SerializeField] private float _rotSpeed;
     [SerializeField] private LayerMask _whatIsCharacter;
+    [SerializeField] private Transform[] _bodies;
     private Dictionary<Cola, GameObject> _drinkObjects = new();
     private Dictionary<Character, Animator> _characterObjects = new();
 
@@ -110,7 +111,6 @@ public class CurrentCharacterDataUI : MonoBehaviour
         }
     }
 
-
     public void ChangeCharacterData(Cola cola, Character character, bool immediate = false)
     {
         if (cola != _currentDrinkType || immediate)
@@ -122,6 +122,11 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
             _currentDrinkObject = _drinkObjects[cola];
             _currentDrinkObject.gameObject.SetActive(true);
+            _currentDrinkObject.transform.SetParent(_bodies[(int)character]);
+            _currentDrinkObject.transform.localPosition = new Vector3(0, -0.002089481f, -0.004531645f);
+
+
+            _currentCharacterObject.transform.localRotation = Quaternion.identity;
             _currentDrinkType = cola;
         }
 
@@ -135,6 +140,10 @@ public class CurrentCharacterDataUI : MonoBehaviour
 
             _currentCharacterObject = _characterObjects[character];
             _currentCharacterObject.gameObject.SetActive(true);
+            _currentDrinkObject.transform.SetParent(_bodies[(int)character]);
+            _currentDrinkObject.transform.localPosition = new Vector3(0, -0.002089481f, -0.004531645f);
+            _currentCharacterObject.transform.localRotation = Quaternion.identity;
+
             _currentCharacterType = character;
         }
     }
