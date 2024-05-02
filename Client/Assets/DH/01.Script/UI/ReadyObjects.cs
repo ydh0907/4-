@@ -70,8 +70,7 @@ public class ReadyObjects : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void RemoveClientRpc()
+    public void Remove()
     {
         foreach (var d in Dummys)
         {
