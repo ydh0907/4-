@@ -16,17 +16,9 @@ namespace AH {
         private Room SelectedRoom;
         private int createRoomCount = 0;
 
-        private DragScrollView _dragView;
-
-        protected override void Awake() {
-            base.Awake();
-            _dragView = GetComponent<DragScrollView>();
-        }
-
         private void CreateRoomList(List<Room> room) {
             var template = InstantiateTemplate(createRoomTemplate, root, "container");
 
-            _dragView.SettingScrollView("roomList", true);
             root.Q<Button>("refresh-btn").RegisterCallback<ClickEvent>(HandleRefresh);
             root.Q<Button>("enterRoom-btn").RegisterCallback<ClickEvent>(HandleEnterRoom);
             root.Q<Button>("back-btn").RegisterCallback<ClickEvent>(HandleBackSceneButton);
