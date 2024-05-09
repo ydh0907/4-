@@ -99,7 +99,7 @@ namespace AH
         private void HandleLeaveGameHost(ClickEvent evt)
         {
             ButtonClick();
-            Program.Instance.Delete(ConnectManager.Instance.nickname, DH.NetworkGameManager.GetLocalIP());
+            Program.Instance.Delete(ConnectManager.Instance.nickname, DH.NetworkGameManager.GetJoinCode());
             NetworkGameManager.Instance.ServerGameEnd();
         }
 

@@ -1,3 +1,4 @@
+using Unity.Services.Authentication;
 using UnityEngine;
 
 namespace DH
@@ -9,6 +10,8 @@ namespace DH
         private NetworkHost m_NetworkHost;
         private NetworkClient m_NetworkClient;
         private LoadSceneManager m_LoadSceneManager;
+        private AuthManager m_AuthManager;
+        private LobbyManager m_LobbyManager;
 
         public string nickname = "Nickname";
         public Cola cola = Cola.Cola;
@@ -29,16 +32,23 @@ namespace DH
             m_NetworkHost = GetComponent<NetworkHost>();
             m_NetworkClient = GetComponent<NetworkClient>();
             m_LoadSceneManager = GetComponent<LoadSceneManager>();
+            m_AuthManager = GetComponent<AuthManager>();
+            m_LobbyManager = GetComponent<LobbyManager>();
 
             NetworkHost.Instance = m_NetworkHost;
             NetworkClient.Instance = m_NetworkClient;
             LoadSceneManager.Instance = m_LoadSceneManager;
+            AuthManager.Instance = m_AuthManager;
+            LobbyManager.Instance = m_LobbyManager;
 
             DontDestroyOnLoad(gameObject);
         }
 
-        private void Start()
+        private async void Start()
         {
+            await AuthManager.Instance.Authorization();
+            Debug.Log(AuthenticationService.Instance.IsAuthorized && AuthenticationService.Instance.IsSignedIn);
+            Debug.Log(AuthenticationService.Instance.PlayerId);
             LoadSceneManager.Instance.LoadSceneAsync(1);
         }
 

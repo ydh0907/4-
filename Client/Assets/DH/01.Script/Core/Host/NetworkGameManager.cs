@@ -140,7 +140,6 @@ namespace DH
 
         public void MakePlayerInstance(ulong id)
         {
-            Debug.Log("Added");
             GameObject p = Instantiate(Player);
             NetworkObject obj = p.GetComponent<NetworkObject>();
             p.SetActive(false);
@@ -176,7 +175,7 @@ namespace DH
 
             IsOnGame.Value = true;
             onGameStarted?.Invoke();
-            Program.Instance.Delete(ConnectManager.Instance.nickname, GetLocalIP());
+            Program.Instance.Delete(ConnectManager.Instance.nickname, GetJoinCode());
         }
 
         private IEnumerator StartTimerRoutine()
@@ -323,13 +322,13 @@ namespace DH
             LoadSceneManager.Instance.LoadScene(2);
         }
 
-        public static string GetLocalIP() => Dns.GetHostAddresses(Dns.GetHostName())[1].ToString();
+        public static string GetJoinCode() => NetworkHost.Instance.JoinCode;
 
         private bool CanQuit()
         {
             if (!QuitServerHandler.QuitDeletingFlag)
             {
-                QuitServerHandler.DeleteImmediately(ConnectManager.Instance.nickname, GetLocalIP());
+                QuitServerHandler.DeleteImmediately(ConnectManager.Instance.nickname, GetJoinCode());
             }
 
             return !MatchingServerConnection;

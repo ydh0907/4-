@@ -43,7 +43,7 @@ namespace DH
             NetworkGameManager.Instance.SyncPlayerList();
             ReadyObjects.Instance.SetCurrentCharactersClientRpc();
             ReadyObjects.Instance.SetNicknameColorClientRpc();
-            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
+            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname, players.Count);
         }
 
         public override void OnNetworkDespawn()
@@ -90,7 +90,7 @@ namespace DH
 
             isHandlingConnect = false;
 
-            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
+            Program.Instance.UpdateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname, players.Count);
 
             UserLog();
         }
@@ -139,7 +139,7 @@ namespace DH
             isHandlingConnect = false;
 
             if (NetworkGameManager.MatchingServerConnection)
-                Program.Instance.UpdateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname, players.Count);
+                Program.Instance.UpdateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname, players.Count);
 
             UserLog();
         }

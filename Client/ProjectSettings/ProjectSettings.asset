@@ -940,10 +940,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: d0887a85-f305-44b5-abf8-19f1bd848d68
+  cloudProjectId: 8d0809da-4262-4962-be2d-c7ebb7577e6a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Client 2023-11-01_18-27-29
+  projectName: Client
   organizationId: ydohee0907
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

@@ -1,4 +1,4 @@
-using Unity.Netcode;
+using System.Collections;
 using UnityEngine;
 
 namespace PJH
@@ -16,7 +16,7 @@ namespace PJH
 
         public bool isMentosMode { get; private set; } = false;
 
-        private void Start()
+        private void Awake()
         {
             mentosVisual = transform.Find("MentosVisual").gameObject;
             _collider = GetComponent<Collider>();
@@ -31,7 +31,6 @@ namespace PJH
 
                 if (!_owner)
                 {
-                    Debug.Log("Owner Not Found");
                     return;
                 }
             }
@@ -49,6 +48,11 @@ namespace PJH
                 GiveDamageToEnemy(drink);
                 return;
             }
+        }
+
+        private IEnumerator Test()
+        {
+            yield return null;
         }
 
         public void FaintEnemy(Player enemy)

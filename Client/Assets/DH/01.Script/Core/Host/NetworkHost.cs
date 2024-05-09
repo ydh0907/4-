@@ -1,6 +1,12 @@
+using System;
 using TestClient;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Relay;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,14 +24,47 @@ namespace DH
 
         public UnityEvent onConnectFailed = new();
         public UnityEvent onConnectSucceed = new();
-
         public UnityEvent onDisconnected = new();
 
-        public void StartConnect()
+        public string JoinCode;
+        private Allocation allocation;
+
+        public async void StartConnect()
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += HostApproval;
 
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("127.0.0.1", (ushort)9070, "0.0.0.0");
+            while (true)
+            {
+                try
+                {
+                    allocation = await Relay.Instance.CreateAllocationAsync(4);
+                    break;
+                }
+                catch(Exception ex)
+                {
+                    Debug.LogException(ex);
+                    continue;
+                }
+            }
+
+            while (true)
+            {
+                try
+                {
+                    JoinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
+                    Debug.Log(JoinCode);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                    continue;
+                }
+            }
+
+            UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            RelayServerData relayData = new RelayServerData(allocation, "dtls");
+            transport.SetRelayServerData(relayData);
 
             isConnect = NetworkManager.Singleton.StartHost();
 
@@ -52,7 +91,7 @@ namespace DH
                 DH.NetworkGameManager.Instance.MakePlayerInstance(NetworkManager.Singleton.LocalClientId);
             });
 
-            Program.Instance.CreateRoom(DH.NetworkGameManager.GetLocalIP(), ConnectManager.Instance.nickname);
+            Program.Instance.CreateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname);
             DH.NetworkGameManager.MatchingServerConnection = true;
             onConnectSucceed?.Invoke();
         }
