@@ -29,6 +29,7 @@ namespace AH {
         private void HandleOnPointerDown(PointerDownEvent evt) {
             _lastMousePos = evt.localPosition;
             evt.StopPropagation();
+            Debug.Log("down");
         }
         private void HandleOnPointerMove(PointerMoveEvent evt, bool isVertical) {
             if (evt.isPrimary && evt.pressedButtons == 1) { // 기본 보인터이냐? 누르고 있냐?
@@ -43,9 +44,11 @@ namespace AH {
 
                 evt.StopPropagation();
             }
+            Debug.Log("drag");
         }
         private void HandleOnPointerUp(PointerUpEvent evt) {
             evt.StopPropagation();
+            Debug.Log("up");
         }
     }
 }

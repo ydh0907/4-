@@ -86,7 +86,7 @@ public class SoundManager : MonoSingleton<SoundManager> {
         else if (type == Sound.Effect) {
             AudioSource audioSource = _audioSources[(int)(Sound.Effect)];
             audioSource.pitch = pitch;
-            audioSource.volume = volum;
+            //audioSource.volume = volum;
             audioSource.PlayOneShot(audioClip);
         }
     }
