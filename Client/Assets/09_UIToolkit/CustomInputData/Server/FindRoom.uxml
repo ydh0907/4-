@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/AH/09_UIToolkit/InputData/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
+    <Style src="project://database/Assets/09_UIToolkit/Uss/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
     <ui:VisualElement name="container" style="flex-grow: 1; align-items: center;">
         <ui:VisualElement name="border" style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: center;">
-            <ui:ScrollView name="roomList" elasticity="0.91" elastic-animation-interval-ms="71" vertical-scroller-visibility="AlwaysVisible" scroll-deceleration-rate="100" mode="Vertical" class="roomList" style="flex-direction: column;" />
+            <ui:ScrollView name="roomList" elasticity="0.91" elastic-animation-interval-ms="71" vertical-scroller-visibility="Hidden" scroll-deceleration-rate="100" mode="Vertical" horizontal-scroller-visibility="Hidden" class="roomList" style="flex-direction: column;" />
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="refresh-btn" class="refresh-btn" />
         </ui:VisualElement>
         <ui:VisualElement name="content" style="flex-direction: row; width: 100%; justify-content: center;">

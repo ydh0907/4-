@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 823230280}
   - component: {fileID: 823230283}
   - component: {fileID: 823230284}
+  - component: {fileID: 823230285}
   m_Layer: 0
   m_Name: UIDocument
   m_TagString: Untagged
@@ -799,6 +800,18 @@ MonoBehaviour:
   chooseCustomizingTemplate: {fileID: 9197481963319205126, guid: 09d54b9cda9c6f24e843a8fa8aa097c9, type: 3}
   customizingPlayerTemplate: {fileID: 9197481963319205126, guid: 920374af8a28b3b4ea40493d936d66fd, type: 3}
   customizingDrinkTemplate: {fileID: 9197481963319205126, guid: c6913d5a89f414541a60091f429fadce, type: 3}
+--- !u!114 &823230285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823230279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27261e5e826cf39468879098189c2b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1028195952
 PrefabInstance:
   m_ObjectHideFlags: 0
