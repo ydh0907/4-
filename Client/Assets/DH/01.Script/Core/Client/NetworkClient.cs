@@ -74,9 +74,7 @@ namespace DH
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-
-            NetworkGameManager.Instance.ServerGameEnd();
-
+            LoadSceneManager.Instance.LoadScene(2);
             onDisconnected?.Invoke();
         }
     }
