@@ -12,7 +12,7 @@
                     <ui:Label tabindex="-1" text="음료 선택" parse-escape-sequences="true" display-tooltip-when-elided="true" name="txt" style="font-size: 40px; color: rgb(0, 0, 0); -unity-font-definition: initial; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;);" />
                 </ui:Button>
             </ui:VisualElement>
-            <ui:TextField picking-mode="Ignore" value="닉네임" name="nickname-inputfeld" class="input-control" style="top: 30px; left: 185px;" />
+            <ui:TextField picking-mode="Ignore" value="닉네임" name="nickname-inputfeld" max-length="8" class="input-control" style="top: 30px; left: 185px;" />
         </ui:VisualElement>
         <ui:VisualElement name="system-border" style="flex-grow: 1; height: 100%; justify-content: space-between; align-items: flex-end;">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="backToTitle-btn" class="backToTitle-btn" style="background-color: rgb(255, 255, 255); border-top-left-radius: 65px; border-top-right-radius: 65px; border-bottom-right-radius: 65px; border-bottom-left-radius: 65px;" />

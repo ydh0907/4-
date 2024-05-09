@@ -57,7 +57,7 @@ namespace AH
 
         private void OnNicknameChanged(ChangeEvent<string> evt)
         {
-            nickname = evt.newValue.ToString();
+            nickname = evt.newValue;
         }
 
         #region Handle
