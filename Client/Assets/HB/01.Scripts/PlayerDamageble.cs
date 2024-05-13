@@ -52,7 +52,6 @@ namespace HB
 
         IEnumerator PlayerRespawn() // 리스폰
         {
-            Debug.Log("respawn wait");
             IngameUIToolkit.instance.ResurrectionCounter();
             CinemachineFreeLook.Priority = -1; // 카메라 이동
             transform.position = new Vector3(0, 0, -10);
@@ -62,7 +61,6 @@ namespace HB
             CinemachineFreeLook.Priority = 1; // 원래대로 돌려줌
             Health.instance.RestoreHealth(100);
             transform.position = MapManager.Instance.GetSpawnPosition(); // 스폰 포인트 지정
-            Debug.Log("end");
         }
     }
 }

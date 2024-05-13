@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using TestClient;
 using Unity.Netcode;
-using UnityEngine;
 
 namespace DH
 {
@@ -30,20 +29,19 @@ namespace DH
             {
                 players.Add(NetworkManager.Singleton.LocalClientId, new PlayerInfo(NetworkManager.Singleton.LocalClientId, ConnectManager.Instance.nickname, ConnectManager.Instance.cola, ConnectManager.Instance.character, true));
 
-                UserLog();
-
                 NetworkManager.Singleton.ConnectionApprovalCallback += ConnectApproval;
                 NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectHandling;
                 NetworkManager.Singleton.OnClientConnectedCallback += ConnectedCallback;
             }
         }
 
-        private void ConnectedCallback(ulong obj)
+        private void ConnectedCallback(ulong clientId)
         {
             NetworkGameManager.Instance.SyncPlayerList();
             ReadyObjects.Instance.SetCurrentCharactersClientRpc();
             ReadyObjects.Instance.SetNicknameColorClientRpc();
             Program.Instance.UpdateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname, players.Count);
+            NetworkGameManager.Instance.MakePlayerInstance(clientId);
         }
 
         public override void OnNetworkDespawn()
@@ -74,25 +72,17 @@ namespace DH
             {
                 players.Add(request.ClientNetworkId, new PlayerInfo(request.ClientNetworkId, info.Nickname, info.Cola, info.Char));
 
-                Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Connected");
-
                 response.Approved = true;
                 response.CreatePlayerObject = false;
-
-                NetworkGameManager.Instance.MakePlayerInstance(request.ClientNetworkId);
             }
             else
             {
-                Debug.Log(info.Nickname + ":" + request.ClientNetworkId + " Approval Failed");
-
                 response.Approved = false;
             }
 
             isHandlingConnect = false;
 
             Program.Instance.UpdateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname, players.Count);
-
-            UserLog();
         }
 
         public static PlayerInfo ReadApprovalData(byte[] payload)
@@ -140,31 +130,6 @@ namespace DH
 
             if (NetworkGameManager.MatchingServerConnection)
                 Program.Instance.UpdateRoom(DH.NetworkGameManager.GetJoinCode(), ConnectManager.Instance.nickname, players.Count);
-
-            UserLog();
-        }
-
-        public void UserLog()
-        {
-            string log = "";
-
-            foreach (var player in players)
-            {
-                log += player.Key.ToString() + " : " + player.Value.Nickname + " : " + player.Value.Cola.ToString() + "\n";
-            }
-        }
-
-        [ClientRpc]
-        public void UserLogClientRpc()
-        {
-            string log = "";
-
-            foreach (var player in players)
-            {
-                log += player.Key.ToString() + " : " + player.Value.Nickname + " : " + player.Value.Cola.ToString() + "\n";
-            }
-
-            Debug.Log(log);
         }
     }
 }

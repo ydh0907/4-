@@ -19,7 +19,6 @@ namespace PJH
         {
             if (DamageCaster.isMentosMode)
             {
-                Debug.Log($"Mentos Count : {mentosCount}, on disable mentos");
                 DisableMentosServerRpc();
                 mentosCount = 1;
 

@@ -33,7 +33,6 @@ namespace HB
         public void StartKnockback(Vector3 hitDirection, Vector3 constantForceDirection, float inputDirection)
         {
             StartCoroutine(KnockbackAction(hitDirection, constantForceDirection, inputDirection));
-            Debug.Log("KnockbackActionStart");
         }
 
         private IEnumerator KnockbackAction(Vector3 hitDirection, Vector3 constantForceDirection, float inputDirection)

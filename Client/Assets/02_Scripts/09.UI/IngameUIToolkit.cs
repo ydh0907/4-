@@ -233,8 +233,6 @@ namespace AH
                     dve.RemoveFromClassList("isReady");
                 }
             }
-
-            Debug.Log($"Ready : {isReady}");
         }
 
         // ī����

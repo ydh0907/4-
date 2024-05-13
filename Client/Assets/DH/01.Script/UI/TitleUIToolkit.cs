@@ -113,7 +113,6 @@ namespace DH {
         private void ExitGame(ClickEvent evt) { // exit
             ButtonClick();
             Application.Quit();
-            Debug.Log("QUIT");
         }
         private void ButtonClick() {
             SoundManager.Instance.Play("Effect/Button click");

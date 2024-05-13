@@ -40,7 +40,7 @@ namespace DH
                     allocation = await Relay.Instance.CreateAllocationAsync(4);
                     break;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Debug.LogException(ex);
                     continue;

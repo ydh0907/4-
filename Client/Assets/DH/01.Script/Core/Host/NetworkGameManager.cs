@@ -3,6 +3,7 @@ using GM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TestClient;
 using TMPro;
 using Unity.Netcode;
@@ -85,8 +86,6 @@ namespace DH
             {
                 OnValueChangedClientRpc(player.Key, player.Value);
             }
-
-            NetworkServerApprovalManager.Instance.UserLogClientRpc();
         }
 
         public void PlayerKillCount(ulong id)
@@ -140,8 +139,7 @@ namespace DH
         {
             GameObject p = Instantiate(Player);
             NetworkObject obj = p.GetComponent<NetworkObject>();
-            p.SetActive(false);
-
+            p.gameObject.SetActive(false);
             p_NetObj.Add(id, obj);
         }
 
@@ -152,22 +150,23 @@ namespace DH
             NetworkServerApprovalManager.Instance.ApprovalShutdown = true;
 
             List<Vector3> pos = MapManager.Instance.GetSpawnList();
+            List<ulong> players = users.Keys.ToList();
             List<NetworkObjectReference> objects = new List<NetworkObjectReference>();
 
-            foreach (var player in users)
+            foreach (var player in players)
             {
-                p_NetObj[player.Key].gameObject.SetActive(true);
+                p_NetObj[player].gameObject.SetActive(true);
                 int index = Random.Range(0, pos.Count);
-                p_NetObj[player.Key].transform.position = pos[index];
+                p_NetObj[player].transform.position = pos[index];
                 pos.RemoveAt(index);
-                p_NetObj[player.Key].SpawnAsPlayerObject(player.Key);
-                NetworkObjectReference reference = p_NetObj[player.Key];
-                CreateCharacterClientRpc(player.Key, reference);
-
+                p_NetObj[player].SpawnAsPlayerObject(player);
+                NetworkObjectReference reference = p_NetObj[player];
                 objects.Add(reference);
             }
 
-            OnPlayerSpawnedClientRpc();
+            CreateCharacterClientRpc(players.ToArray(), objects.ToArray());
+
+            OnPlayerSpawnedClientRpc(objects.ToArray());
 
             StartCoroutine(StartTimerRoutine());
 
@@ -214,9 +213,13 @@ namespace DH
         //}
 
         [ClientRpc]
-        private void OnPlayerSpawnedClientRpc()
+        private void OnPlayerSpawnedClientRpc(NetworkObjectReference[] reference)
         {
-            Player[] players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+            List<Player> players = reference.Select(x =>
+            {
+                NetworkObject player = x;
+                return player.GetComponent<Player>();
+            }).ToList();
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -231,16 +234,19 @@ namespace DH
         }
 
         [ClientRpc]
-        private void CreateCharacterClientRpc(ulong id, NetworkObjectReference reference)
+        private void CreateCharacterClientRpc(ulong[] id, NetworkObjectReference[] reference)
         {
-            PlayerInfo player = users[id];
-            NetworkObject networkObject = reference;
-            GameObject p = networkObject.gameObject;
+            for (int i = 0; i < id.Length; i++)
+            {
+                PlayerInfo player = users[id[i]];
+                NetworkObject networkObject = reference[i];
+                GameObject p = networkObject.gameObject;
 
-            Instantiate(Characters[(int)player.Char], p.transform);
-            Instantiate(Drinks[(int)player.Cola], p.transform);
+                Instantiate(Characters[(int)player.Char], p.transform);
+                Instantiate(Drinks[(int)player.Cola], p.transform);
 
-            p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
+                p.transform.Find("Nickname").GetComponent<TextMeshPro>().text = player.Nickname;
+            }
         }
 
         public void GameResultSetting()
@@ -317,6 +323,7 @@ namespace DH
         {
             onGameEnded?.Invoke();
             NetworkManager.Shutdown();
+            MatchingServerConnection = false;
             LoadSceneManager.Instance.LoadScene(2);
         }
 

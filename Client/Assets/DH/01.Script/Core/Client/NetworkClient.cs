@@ -54,7 +54,6 @@ namespace DH
 
         private void OnConnected()
         {
-            Debug.Log("Connected");
             isConnect = null;
             onConnectSucceed?.Invoke();
             NetworkManager.Singleton.OnClientDisconnectCallback += OnDisconnected;
@@ -62,7 +61,6 @@ namespace DH
 
         private void OnConnectFailed()
         {
-            Debug.Log("ConnectFailed");
             LoadingCanvasSingleton.Singleton.SetStateSceneLoader(false);
             isConnect = null;
             onConnectFailed?.Invoke();

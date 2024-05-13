@@ -97,8 +97,6 @@ namespace PJH
         [ClientRpc]
         public void PlaySoundAndEffectClientRpc(bool isHitDrink)
         {
-            Debug.Log("PlaySoundAndEffectClientRpc");
-
             if (isHitDrink)
             {
                 SoundManager.Instance.Play(drinkHitSound);
@@ -204,7 +202,6 @@ namespace PJH
         public void Faint()
         {
             _animator.Play("Hit");
-            Debug.Log("Faint 1f");
             _rigidbody.velocity = Vector3.zero;
             _lockMovement = true;
             _lockRotation = true;
@@ -224,7 +221,6 @@ namespace PJH
         private void FaintClientRpc()
         {
             _animator.Play("Hit");
-            Debug.Log("Faint 1f");
             _rigidbody.velocity = Vector3.zero;
             _lockMovement = true;
             _lockRotation = true;

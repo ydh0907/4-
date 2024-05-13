@@ -106,7 +106,7 @@ public class SoundManager : MonoSingleton<SoundManager> {
         if (path.Contains("01.Sounds/") == false) {
             path = $"01.Sounds/{path}";
         }
-        //Debug.Log(path);
+
         AudioClip audioClip = null;
 
         if (type == Sound.Bgm) {

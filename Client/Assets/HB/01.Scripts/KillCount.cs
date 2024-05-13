@@ -25,7 +25,6 @@ namespace HB
             killCount.Value += 1;
 
             SoundManager.Instance.Play("Kill");
-            Debug.Log($"{health.name}, {killCount.Value}");
         }
 
         public override void OnNetworkDespawn()

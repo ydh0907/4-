@@ -11,8 +11,6 @@ public class RankingPodium : NetworkBehaviour {
         base.OnNetworkSpawn();
 
         instance = this;
-
-        Debug.Log("Podium Spawned");
     }
 
     public Transform[] GetPositions() {

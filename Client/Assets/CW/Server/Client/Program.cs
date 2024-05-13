@@ -13,7 +13,6 @@ namespace TestClient
 {
     public class Program : MonoBehaviour
     {
-        public static Queue<string> messages = new Queue<string>();
         public static Connector connector;
         public static ServerSession serverSession;
 
@@ -31,14 +30,6 @@ namespace TestClient
                 DontDestroyOnLoad(this);
             }
             else Destroy(this);
-        }
-
-        private void Update()
-        {
-            if (messages.Count > 0)
-            {
-                Debug.Log(messages.Dequeue());
-            }
         }
 
         private IEnumerator ServerConnect()

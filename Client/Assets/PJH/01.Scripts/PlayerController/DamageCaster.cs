@@ -65,7 +65,6 @@ namespace PJH
         public void GiveDamageToEnemy(Drink drink)
         {
             int damage = isMentosMode ? _mentosDamage : _damage;
-            Debug.Log(damage);
 
             drink.ApplyDamage(damage, _bounceOff, _owner.transform.position, _owner);
             EnableCollider(false);

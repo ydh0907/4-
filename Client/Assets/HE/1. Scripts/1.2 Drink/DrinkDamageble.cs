@@ -64,8 +64,6 @@ namespace HE
             {
                 Transform rootParent = other.gameObject.transform.root;
                 string lastReaderName = rootParent.gameObject.name;
-
-                Debug.Log(lastReaderName);
             }
         }
     }

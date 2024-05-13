@@ -29,11 +29,9 @@ namespace AH {
         }
         private void HandleOnPointerDown(PointerDownEvent evt, List<VisualElement> roomList) {
             foreach(var room in roomList) {
-                Debug.Log(room);
                 if(evt.currentTarget == room || evt.currentTarget == _content) {
                     _lastMousePos = evt.localPosition;
                     evt.StopPropagation();
-                    Debug.Log("down");
                 }
             }
         }
@@ -50,11 +48,9 @@ namespace AH {
 
                 evt.StopPropagation();
             }
-            Debug.Log("drag");
         }
         private void HandleOnPointerUp(PointerUpEvent evt) {
             evt.StopPropagation();
-            Debug.Log("up");
         }
     }
 }

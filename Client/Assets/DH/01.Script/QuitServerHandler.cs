@@ -31,9 +31,5 @@ public class QuitServerHandler
         s_RoomDeletePacket.makerName = nickname;
         s_RoomDeletePacket.roomName = IP;
         session.Send(s_RoomDeletePacket.Serialize());
-
-        while (QuitDeletingFlag && NetworkGameManager.MatchingServerConnection) { }
-
-        Debug.Log("Room Deleted");
     }
 }
