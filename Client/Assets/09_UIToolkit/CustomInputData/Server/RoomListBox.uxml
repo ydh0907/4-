@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/09_UIToolkit/Uss/PlayerData.uss?fileID=7433441132597879392&amp;guid=05b2260b9292614439aa948ff6aa9cf3&amp;type=3#PlayerData" />
-    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="roomListBox" class="roomContainer" style="width: 99%;">
-        <ui:Label tabindex="-1" text="닉네임" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="ninkname-txt" style="font-size: 95px; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;); -unity-font-definition: initial; -unity-font-style: normal; margin-left: 200px;" />
-        <ui:Label tabindex="-1" text="1 / 4" parse-escape-sequences="true" display-tooltip-when-elided="true" name="peopleCount" style="font-size: 80px; -unity-font: resource(&apos;02.Font/HakgyoansimMonggeulmonggeulOTFR&apos;); -unity-font-definition: initial; -unity-font-style: bold; margin-right: 150px;" />
-    </ui:Button>
-</ui:UXML>

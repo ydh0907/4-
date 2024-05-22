@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/AH/09_UIToolkit/Sound/Setting.uss?fileID=7433441132597879392&amp;guid=0ebfa25a7f450c24d8f0f504ae090514&amp;type=3#Setting" />
-    <Style src="project://database/Assets/AH/09_UIToolkit/Title/Title.uss?fileID=7433441132597879392&amp;guid=239daa97be206bb45b8985b74d03c919&amp;type=3#Title" />
-    <ui:VisualElement name="container" style="flex-grow: 1; align-items: center; justify-content: center;" />
-</ui:UXML>
