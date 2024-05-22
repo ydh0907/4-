@@ -1,3 +1,12 @@
+# only script add
+/[Aa]ssets/
+!/[Aa]ssets/02_Scripts/
+!/[Aa]ssets/DH/01.Script/
+!/[Aa]ssets/GM/01_Script/
+!/[Aa]ssets/HB/01.Scripts/
+!/[Aa]ssets/HE/1. Scripts/
+!/[Aa]ssets/PJH/01.Scripts/
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
