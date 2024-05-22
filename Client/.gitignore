@@ -19,6 +19,11 @@
 ![Aa]ssets/PJH/01.Scripts/
 ![Aa]ssets/PJH/01.Scripts/**
 
+/.idea/
+/[Pp]ackages/
+/[Pp]rojectSettings/
+/[Uu]IElementsSchema/
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
