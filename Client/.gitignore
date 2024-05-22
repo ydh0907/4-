@@ -1,11 +1,23 @@
 # only script add
-/[Aa]ssets/
-!/[Aa]ssets/02_Scripts/
-!/[Aa]ssets/DH/01.Script/
-!/[Aa]ssets/GM/01_Script/
-!/[Aa]ssets/HB/01.Scripts/
-!/[Aa]ssets/HE/1. Scripts/
-!/[Aa]ssets/PJH/01.Scripts/
+[Aa]ssets/**
+
+![Aa]ssets/02_Scripts/
+![Aa]ssets/02_Scripts/**
+![Aa]ssets/DH/
+![Aa]ssets/DH/01.Script/
+![Aa]ssets/DH/01.Script/**
+![Aa]ssets/GM/
+![Aa]ssets/GM/01_Script/
+![Aa]ssets/GM/01_Script/**
+![Aa]ssets/HB/
+![Aa]ssets/HB/01.Scripts/
+![Aa]ssets/HB/01.Scripts/**
+![Aa]ssets/HE/
+![Aa]ssets/HE/1. Scripts/
+![Aa]ssets/HE/1. Scripts/**
+![Aa]ssets/PJH/
+![Aa]ssets/PJH/01.Scripts/
+![Aa]ssets/PJH/01.Scripts/**
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
